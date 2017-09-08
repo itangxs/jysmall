@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.AdminLogsMapper">
+	<select id="queryAdminLogs" resultType="java.util.Map">
+		SELECT al.id          AS id,
+		       al.admin_id    AS adminId,
+		       au.realname    AS name,
+		       al.info        AS info,
+		       al.oper_type   AS action,
+		       al.ip_addr     AS IP,
+		       al.create_time AS time
+		FROM   admin_log al
+		       JOIN admin_user au
+		         ON al.admin_id = au.id
+		ORDER  BY create_time DESC
+	</select>
+</mapper>

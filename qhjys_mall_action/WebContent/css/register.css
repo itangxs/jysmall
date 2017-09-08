@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* content
+-------------------------------------------------- */
+#n3{width:1200px; height:80px; background:#fb7b10; margin:0 auto;}
+#content-login{width:1200px;height:500px; background:#f2f2f2; margin:0 auto;}
+#content-login-main{width:1200px; height:410px; margin:0 auto; background:#ffffff; border:5px solid #e8e8e8;}
+#content-login-main-l{width:500px; height:410px; float:left; background:url(../images/login-l.jpg);}
+#content-login-main-r{width:600px; height:410px; float:left;}
+#n7{width:600px; height:80px;}
+#c-login-main{width:600px; height:300px; position:relative;}
+#c-login-but{width:600px; height:30px;}
+#footer-login{width:1000px; height:120px; margin:0 auto;}
+#n4{margin:1px auto; width:600px; font-size:12px; line-height:30px; float:right; text-align:right;}
+#n5{width:1000px; height:35px; margin:0 auto;}
+#n6{width:1000px; height:20px; margin:0 auto; padding-top:10px;}
+#n4 a{ padding:0 1px; color:#333}
+#copy-login{width:1000px; font-size:12px; line-height:22px; height:30px; padding-top:0px; text-align:right;}
+#forml{width:120px;height:116px; float:left; background:url(../images/forml.jpg);}
+
+/* jysmall-regsiter
+-------------------------------------------------- */
+#regtext{width:1200px; height:150px; margin:0 auto;}
+#regtextm{width:1190px;height:130px;margin:10px auto;text-align:left;line-height:20px;color:#666;background:none repeat scroll 0 0 #f2f2f2;padding-left:10px;}
+#zslc{width:1200px; height:36px; background:url(../images/zslc.jpg) no-repeat center; margin:0 auto;}
+#regmain{width:1200px; height:430px; margin:0 auto;}
+#regmaint{width:1200px; height:auto; margin:0 auto; text-align:left; padding-top:30px;}
+#regmaintext{width:400px; height:30px;text-align:left;}
+
+.wrapper{width:1200px;margin:0 auto 50px;text-align:center;}
+.left{float:left;}
+.right{float:right;}
+.clearfix:after{content:".";display:block;clear:both;font-size:0;overflow:hidden;height:0;}
+.clearfix{zoom:1;}
+/* zcform */
+.zcform{margin:30px 0 0 320px;}
+.zcform p{margin-bottom:10px;}
+.zcform a{ color:#ff7702;}
+.zcform p.last{margin-left:250px;font-size:16px;}
+.zcform p.last input{ cursor:pointer;}
+.zcform label{display:block;float:left;height:35px;line-height:35px;color:#F00;text-indent:10px;}
+.zcform label.one{width:150px;height:33px;text-align:right;color:#000;padding-right:10px;}
+.zcform label.one1{width:150px;height:33px;text-align:left;color:#959595;}
+.zcform input{float:left;font-size:16px;font-family:"微软雅黑";color:#666;}
+.zcform select{width:83px;height:30px;float:left;margin-right:3px;}
+.zcform .submit{background:none repeat scroll 0 0 #f93;color:#fff;cursor:pointer;font-size:20px;letter-spacing:4px;margin-left:135px;border:1px solid #ccc;height:46px;text-indent:10px;width:280px;}
+
+.submit2{border:1px solid #ccc;width:280px;height:46px;text-indent:10px;}
+.zcform .submit2{margin-left:110px;background:#44b5df;font-size:16px;letter-spacing:4px;color:#fff;cursor:pointer;}
+
+.submit3{border:1px solid #ccc;width:200px;height:46px;text-indent:10px;}
+.zcform .submit3{margin-left:150px;background:#cccccc;font-size:16px;letter-spacing:4px;color:#fff;cursor:pointer;}
+
+#registerwz{width:1200px; height:160px; background:#f2f2f2; margin:0 auto;}
+
+.input{border:1px solid #ccc;width:250px;height:30px;text-indent:10px;}
+.identifying_code{height:30px;width:180px;_line-height:46px;text-indent:10px;border:1px solid #ccc;}
+.get_code{height:34px;width:90px;margin-left:10px;border:1px solid #ccc;cursor:pointer;}
+.agreement{margin-left:90px;height:30px;line-height:30px;font-size:12px;}
+.agreement input{display:block;line-height:30px;height:12px;margin:8px 8px 0 5px;border:none;width:12px;}
+
+#nn{width:1200px; height:3px; margin:0 auto; background:#CCC; }
+#register-menu1{width:1200px; height:90px; margin:0 auto; margin-top:10px; background:url(../images/rzlc01.jpg) no-repeat;}
+#register-menu{width:1200px; height:90px; margin:0 auto; margin-top:10px; background:url(../images/rzlc02.jpg) no-repeat;}
+#register-menu2{width:1200px; height:90px; margin:0 auto; margin-top:10px; background:url(../images/rzlc03.jpg) no-repeat;}

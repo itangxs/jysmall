@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.CouponsVirifyVoMapper">
+	<resultMap id="BaseResultMap" type="cn.qhjys.mall.vo.system.CouponsVirifyVo">
+		<result column="openId" property="openId" jdbcType="VARCHAR" />
+		<result column="nickName" property="nickName" jdbcType="VARCHAR" />
+		<result column="rank" property="rank" jdbcType="VARCHAR" />
+		<result column="verifyTime" property="verifyTime" jdbcType="TIMESTAMP" />
+		<result column="lotterName" property="lotterName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getCouponsVirifyVoByOpenId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+
+
+		SELECT
+		cv.verify_time as verifyTime,
+		ci.open_id as openId,
+		sl.lottery_name as lotterName,
+		li.nick_name as nickName,
+		ci.rank as rank
+		FROM
+		coupons_virify cv ,
+		coupons_info ci,
+		store_lottery sl,
+		lottery_info
+		as li,
+		weixin_userinfo wx
+		WHERE
+		1=1
+
+		AND cv.store_id = wx.store_id
+		AND cv.coupons_id = ci.id
+		AND ci.`status`=1
+		AND ci.lottery_id = sl.id
+		AND wx.store_id is NOT NULL
+		AND li.open_id = ci.open_id
+
+
+		AND wx.open_id ='${openid}'
+		group by cv.verify_time
+		ORDER BY cv.verify_time DESC
+
+
+
+
+
+		<!-- SELECT cv.verify_time as verifyTime, ci.open_id as openId, sl.lottery_name 
+			as lotterName FROM coupons_virify cv , coupons_info ci, store_lottery sl, 
+			weixin_userinfo wx WHERE wx.store_id!=NULL AND ci.`status`!=0 AND wx.open_id 
+			= '${openid}' -->
+	</select>
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.CardDeliveryCountVoMapper" >
+
+	<select id="queryCardDeliveryCount" resultType="cn.qhjys.mall.vo.system.CardDeliveryCountVo">
+		SELECT 
+			ct.coupon_cfg as couponCfg,
+			ct.store_name as storeName,
+			ct.store_id as storeId,
+			ct.name as name,
+			SUM(cd.card_receive_true) as cardReciveTrue,
+			SUM(cd.card_receive_display) as cardReciveDisplay,
+			cd.count_date as countDate,
+			SUM(cd.write_off) as writeOff
+		FROM 
+		card_delivery_count cd LEFT JOIN 
+			 card_coupon_template ct   on cd.card_template_id=ct.id
+		WHERE 1=1
+		<if test="storeName != null"> 
+		 	 AND ct.store_name like CONCAT('%',#{storeName},'%')
+		 </if>
+		<if test="storeId != null">
+		 	 AND ct.store_id = #{storeId}
+		 </if>
+		<if test="couponCfg != null">
+		 	 AND ct.coupon_cfg = #{couponCfg,jdbcType=INTEGER}
+		</if>
+		<if test="startDate != null and startDate != ''">
+			 AND DATE_FORMAT(cd.count_date,'%Y-%m-%d') &gt;= #{startDate}
+		</if>
+ 		<if test="endDate != null and endDate != ''">
+			 AND DATE_FORMAT(cd.count_date,'%Y-%m-%d') &lt;=#{endDate}
+		</if>
+		 GROUP BY cd.card_template_id
+		 ORDER BY cd.card_template_id desc
+	</select>
+	
+	<select id="queryDeliverData" resultType="cn.qhjys.mall.vo.system.CardDeliveryCountVo">
+		select
+		 cd.deliver_type as deliverType,  
+		 si.name as storeName,
+		 cd.id as id,
+		 si.id as storeId,
+		 SUM(cd.card_push_display)/4 as cardPushDisplay,
+		 SUM(cd.card_push_true)/4 as cardPushTrue,
+		 SUM(cd.card_receive_display) as cardReciveDisplay,
+		 SUM(cd.card_receive_true) as cardReciveTrue,
+		 SUM(cd.card_share_display)/4 as cardShareDisplay,
+		 SUM(cd.card_share_true)/4 as cardShareTrue,
+		 SUM(cd.card_share_receive_display) as cardShareReciveDisplay,
+		 SUM(cd.card_share_receive_true) as cardShareReciveTrue,
+		 cd.count_date as countDate
+		 FROM
+		 card_delivery_count cd 
+		 LEFT JOIN 
+		 store_info si
+		 ON 
+		 cd.seller_id=si.seller_id
+		 WHERE 1=1
+		 <if test="storeName != null"> 
+		 	 AND si.name like CONCAT('%',#{storeName},'%')
+		 </if>
+		<if test="storeId != null">
+		 	 AND si.id = #{storeId}
+		 </if>
+		 <if test="deliverType != null">
+		 	 AND cd.deliver_type = #{deliverType,jdbcType=INTEGER}
+		 </if>
+		 <if test="startDate != null and startDate != ''">
+			 AND DATE_FORMAT(cd.count_date,'%Y-%m-%d') &gt;= #{startDate}
+		</if>
+ 		<if test="endDate != null and endDate != ''">
+			 AND DATE_FORMAT(cd.count_date,'%Y-%m-%d') &lt;=#{endDate}
+		</if>
+		 GROUP BY cd.deliver_type,cd.seller_id
+		 ORDER BY cd.count_date desc
+	</select>
+	<select id="queryValiData" resultType="cn.qhjys.mall.vo.system.CardDeliveryCountVo">
+	SELECT 
+		cc.template_coupon_cfg as couponCfg,
+		cc.store_name as storeName,
+		cc.store_id as storeId,
+		cc.`code` as code,
+		DATE_FORMAT(cc.validate_date,'%Y-%m-%d %H:%i') as valiDate,
+		cc.template_coupon_name as name,
+		fi.nick_name as nickName
+	FROM 
+	card_coupon cc 
+	LEFT JOIN fq_user_info fi on fi.id=cc.user_id
+	WHERE status_cfg = 1
+		<if test="storeName != null"> 
+		 	 AND cc.store_name like CONCAT('%',#{storeName},'%')
+		</if>
+		<if test="storeId != null">
+		 	 AND cc.store_id = #{storeId}
+		</if>  
+		<if test="couponCfg != null">
+		 	 AND cc.template_coupon_cfg = #{couponCfg,jdbcType=INTEGER}
+		</if>
+		 ORDER BY cc.id desc
+	</select>
+</mapper>

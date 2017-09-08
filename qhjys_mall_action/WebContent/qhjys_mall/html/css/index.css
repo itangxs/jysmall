@@ -1,0 +1,87 @@
+/*banner*/
+.banner { width: 952px; height:400px; padding:0 0 0 238px;  margin:0 auto; position: relative; overflow:hidden; }
+
+/*数字按钮样式*/
+.banner .num { overflow:hidden; height: 25px; position: absolute; bottom:12px; left: 260px; zoom:1; z-index:3 }
+.banner .num li { width: 25px; height: 25px; line-height: 25px; text-align: center; font-weight: 400; font-family: "微软雅黑", Arial; color: #FFFFFF; background: #444444; margin-right: 10px; border-radius:50%; cursor:pointer; float: left; }
+.banner .num li.on { background: #FF7700; } /*当前项*/
+
+/*上一个  下一个*/
+.banner .prev,
+.banner .next { display: none; width: 40px; height: 100px; background: url(../images/btn.png) no-repeat; position: absolute; top: 115px;}
+.banner .prev { left: 238px; }
+.banner .next { right: 275px; background-position: right }
+
+.index_banner{ width:1190px; height:400px; margin:0 auto; position:relative;}
+/*index 左侧菜单*/
+.indexleft_menu{ width:238px; height:400px; background:#fafafa; position:absolute; left:0; top:0; z-index:3;}
+.indexleft_menu ul li{ border-bottom:1px solid #e7e7e7; border-right:1px solid #e7e7e7; padding:0 14px 0 14px; background:url(../images/ico_index.png) no-repeat;background-position:180px -1000px; height:56px; line-height:20px;}
+.indexleft_menu ul li:hover{ background:#fff; border-right:1px solid #fff;}
+.indexleft_menu .current{background:#fff; border-right:1px solid #fff;}
+
+.indexleft_menu ul li h2{ float:left; background-image:url(../images/ico_index.png); background-repeat:no-repeat; width:25px; height:30px; margin-right:10px;}
+.indexleft_menu ul li .shipin{ background-position:-18px -3px;}
+.indexleft_menu ul li .dianying{ background-position:-18px -40px;}
+.indexleft_menu ul li .gouwu{ background-position:-18px -79px;}
+.indexleft_menu ul li .lvyou{ background-position:-18px -121px;}
+.indexleft_menu ul li .xiuxianyule{ background-position:-18px -158px;}
+.indexleft_menu ul li .liren{ background-position:-18px -195px;}
+.indexleft_menu ul li .shenghuofuwu{ background-position:-18px -230px;}
+.indexleft_menu ul li h1{ float:left; font-size:12px; font-weight:normal;}
+.indexleft_menu ul li h1 .menu{ font-size:16px; font-weight:bold; margin-top:8px;}
+.indexleft_menu ul li h1 .menu1{ font-size:12px; overflow:hidden; width:172px; height:20px;}
+.indexleft_menu ul li h1 .menu1 a{ color:#a2a2a2; margin-right:5px;}
+.indexleft_menu ul li h1 .menu1 a:hover{ color:#ff8c00; text-decoration:underline;}
+
+/*index 左侧菜单 弹出*/
+.indexleftmenu_tanchu{ width:951px; height:398px; background:#fff; border-top:1px solid #e7e7e7; border-right:1px solid #e7e7e7; border-bottom:1px solid #e7e7e7; position:absolute; left:238px; top:0; z-index:10;}
+.indexleftmenu_tanchu ul{ float:left; width:670px; padding:20px;}
+.indexleftmenu_tanchu ul li{ clear:both;border-bottom:1px dashed #e7e7e7;}
+.indexleftmenu_tanchu ul li h1{ float:left; width:80px; text-align:right; font-size:16px; padding:10px 20px 10px 0;line-height:22px; color:#ccc;}
+.indexleftmenu_tanchu ul li h2{ float:left; width:570px; text-align:left; font-size:14px; font-weight:400; padding:10px 0 10px 0; line-height:22px; color:#ccc;}
+.indexleftmenu_tanchu ul li h2 a{ margin:0 10px;}
+
+.indexleftmenu_tanchu .tanchuadv{ float:right; width:160px; padding:10px 20px;}
+.indexleftmenu_tanchu .tanchuadv img{ margin-bottom:5px; border:1px solid #E8E8E8; width:160px; height:120px;}
+
+/*index banner上登陆*/
+.indexright_login{ background:url(../images/top_loginbg.png) repeat; width:230px; padding:20px; height:270px; position:absolute; right:5px; top:30px; z-index:1; }
+.indexright_login img{ float:left; border:1px solid #ddd; padding:2px; height:54px; margin-right:10px; background:#fff;}
+.indexright_login h1{ font-size:14px; color:#d5d5d5; height:75px; font-weight:normal;}
+.indexright_login h1 span{ font-size:18px; color:#fff;}
+
+.indexright_login input{ width:218px; height:35px; line-height:35px; background:#fff; color:#989898; border:1px solid #ccc; margin-bottom:17px; padding:0 5px;}
+.indexright_login .anniu{width:228px; height:35px; background:#ff8c00; color:#fff;border:1px solid #ff8c00; font-size:16px;font-weight:800; line-height:35px;}
+.indexright_login p{ text-align:center;}
+.indexright_login a{color:#fff;}
+.indexloignafter em{ color:#fff; line-height:35px; display:block;}
+.indexloignafter span{ color:#ff8c00; font-size:20px;}
+.indexloignafter .tixian{ background:#4bb4db;color:#fff; border:1px solid #4bb4db;margin-left:5px;padding:6px 20px; border-radius:3px;display:inline-block; font-size:14px;}
+.indexloignafter .tixian:hover{background:#1face1;}
+
+/*index 推荐分类title*/
+.index_type{}
+.index_type .title{ border-bottom:3px solid #ff8c00; margin-top:20px; padding:0 0 8px 40px; line-height:30px; font-size:16px;}
+.index_type .title b{ font-size:24px; font-weight:normal;}
+.index_type_titlebg1,.index_type_titlebg2,.index_type_titlebg3,.index_type_titlebg4,.index_type_titlebg5,.index_type_titlebg6,.index_type_titlebg7{background:url(../images/ico_index.png) no-repeat; }
+.index_type_titlebg1{ background-position:-16px -275px;}
+.index_type_titlebg2{ background-position:-16px -320px;}
+.index_type_titlebg3{ background-position:-16px -360px;}
+.index_type_titlebg4{ background-position:-16px -400px;}
+.index_type_titlebg5{ background-position:-16px -443px;}
+.index_type_titlebg6{ background-position:-16px -483px;}
+.index_type_titlebg7{ background-position:-16px -523px;}
+
+/*index 推荐分类列表*/
+.index_type_list{ border:1px solid #eee; background:#FFF;}
+.index_type_list .adv{ float:left; margin-right:20px;}
+.index_type_list .adv img{ width:237px; height:310px;}
+.index_type_list ul li{ float:left; width:280px; padding:20px 12px 10px 12px; height:280px;}
+.index_type_list ul li:hover{ background:#F0F0F0;}
+.index_type_list ul li img{ width:280px; height:186px; margin-bottom:10px;}
+
+.index_type_list h1,.index_type_list h2,.index_type_list h3{ font-weight: normal; font-size:14px; line-height:25px; height:25px; overflow:hidden;}
+.index_type_list h1 a{color:#000}
+.index_type_list h3{ color:#ff6639}
+.index_type_list h3 em{ font-size:22px;}
+.index_type_list h3 span{font-size:14px; color:#999; text-decoration:line-through;}

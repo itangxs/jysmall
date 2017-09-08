@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.RegisterActivityMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.RegisterActivity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="begin_time" property="beginTime" jdbcType="DATE" />
+    <result column="end_time" property="endTime" jdbcType="DATE" />
+    <result column="common_coupon" property="commonCoupon" jdbcType="INTEGER" />
+    <result column="store_coupon" property="storeCoupon" jdbcType="INTEGER" />
+    <result column="enabled" property="enabled" jdbcType="BIT" />
+    <result column="coupon_validity" property="couponValidity" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, begin_time, end_time, common_coupon, store_coupon, enabled, coupon_validity
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.RegisterActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from register_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from register_activity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from register_activity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.RegisterActivityExample" >
+    delete from register_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.RegisterActivity" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into register_activity (begin_time, end_time, common_coupon, 
+      store_coupon, enabled, coupon_validity
+      )
+    values (#{beginTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{commonCoupon,jdbcType=INTEGER}, 
+      #{storeCoupon,jdbcType=INTEGER}, #{enabled,jdbcType=BIT}, #{couponValidity,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.RegisterActivity" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into register_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="commonCoupon != null" >
+        common_coupon,
+      </if>
+      <if test="storeCoupon != null" >
+        store_coupon,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="couponValidity != null" >
+        coupon_validity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="commonCoupon != null" >
+        #{commonCoupon,jdbcType=INTEGER},
+      </if>
+      <if test="storeCoupon != null" >
+        #{storeCoupon,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="couponValidity != null" >
+        #{couponValidity,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.RegisterActivityExample" resultType="java.lang.Integer" >
+    select count(*) from register_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update register_activity
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.beginTime != null" >
+        begin_time = #{record.beginTime,jdbcType=DATE},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=DATE},
+      </if>
+      <if test="record.commonCoupon != null" >
+        common_coupon = #{record.commonCoupon,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeCoupon != null" >
+        store_coupon = #{record.storeCoupon,jdbcType=INTEGER},
+      </if>
+      <if test="record.enabled != null" >
+        enabled = #{record.enabled,jdbcType=BIT},
+      </if>
+      <if test="record.couponValidity != null" >
+        coupon_validity = #{record.couponValidity,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update register_activity
+    set id = #{record.id,jdbcType=BIGINT},
+      begin_time = #{record.beginTime,jdbcType=DATE},
+      end_time = #{record.endTime,jdbcType=DATE},
+      common_coupon = #{record.commonCoupon,jdbcType=INTEGER},
+      store_coupon = #{record.storeCoupon,jdbcType=INTEGER},
+      enabled = #{record.enabled,jdbcType=BIT},
+      coupon_validity = #{record.couponValidity,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.RegisterActivity" >
+    update register_activity
+    <set >
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="commonCoupon != null" >
+        common_coupon = #{commonCoupon,jdbcType=INTEGER},
+      </if>
+      <if test="storeCoupon != null" >
+        store_coupon = #{storeCoupon,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="couponValidity != null" >
+        coupon_validity = #{couponValidity,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.RegisterActivity" >
+    update register_activity
+    set begin_time = #{beginTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE},
+      common_coupon = #{commonCoupon,jdbcType=INTEGER},
+      store_coupon = #{storeCoupon,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=BIT},
+      coupon_validity = #{couponValidity,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

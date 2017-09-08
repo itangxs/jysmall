@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.FqClerkVoMapper" >
+   
+   <select id="queryFqClerkVo" resultType="cn.qhjys.mall.vo.system.FqClerkVo">
+   		SELECT 
+   			c.id  AS clerkId,
+   			t.branch_id  AS branchId,
+   			t.branch_name AS branchName,
+   			c.team_id AS teamId,
+   			c.team_name AS teamName,
+   			c.clerk AS clerkName,
+   			c.phone_num AS phoneNum,
+   			c.work_date AS workDate,
+   			c.commission AS commission,
+   			c.create_time AS createTime
+   			FROM 
+   				fq_clerk c
+   			LEFT JOIN
+   				fq_team t
+   			ON
+   				c.team_id=t.id
+   		 <where>
+			 <trim prefixOverrides="and" >
+				 <if test="id != null">
+				 	 AND c.id = #{id}
+				 </if>
+				 <if test="branchName != null">
+				 	 AND t.branch_name = #{branchName}
+				 </if>
+				 <if test="teamName != null">
+				 	 AND c.team_name = #{teamName}
+				 </if>
+				 <if test="clerk != null">
+				 	 AND c.clerk = #{clerk}
+				 </if>
+				 <if test="phoneNum != null">
+				 	 AND c.phone_num = #{phoneNum}
+				 </if>
+				 <if test="startTime != null">
+				 	 AND c.create_time &gt;= #{startTime}
+				 </if>
+				 <if test="endTime != null">
+				 	 AND c.create_time &lt;= #{endTime}
+				 </if>
+			 </trim>
+		 </where>
+		 order by c.create_time desc
+   </select>
+     
+   <select id="getFqClerkVo" resultType="cn.qhjys.mall.vo.system.FqClerkVo">
+   		SELECT 
+   			c.id  AS clerkId,
+   			t.branch_id  AS branchId,
+   			t.branch_name AS branchName,
+   			c.team_id AS teamId,
+   			c.team_name AS teamName,
+   			c.clerk AS clerkName,
+   			c.phone_num AS phoneNum,
+   			c.work_date AS workDate,
+   			c.commission AS commission,
+   			c.create_time AS createTime
+   			FROM 
+   				fq_clerk c
+   			LEFT JOIN
+   				fq_team t
+   			ON
+   				c.team_id=t.id
+   		 <where>
+			 <if test="clerkId != null">
+			 	 AND c.id = #{clerkId}
+			 </if>
+		 </where>
+   </select>
+   
+   <select id="getClerkAndStore" resultType="cn.qhjys.mall.vo.system.FqClerkVo">
+   		SELECT 
+   			c.id  AS clerkId,
+   			t.branch_id  AS branchId,
+   			t.branch_name AS branchName,
+   			c.team_id AS teamId,
+   			c.team_name AS teamName,
+   			c.clerk AS clerkName,
+   			s.province AS provinceId,
+   			pi.name AS provinceName,
+   			s.city AS cityId,
+   			ci.name AS cityName
+   			FROM 
+   				store_info s
+   			LEFT JOIN
+   				fq_clerk c
+   			ON
+   				s.clerk_id=c.id
+   			LEFT JOIN
+   				fq_team t
+   			ON
+   				c.team_id=t.id
+   			LEFT JOIN
+   				province_info pi
+   			ON
+   				s.province=pi.id
+   			LEFT JOIN
+   				city_info ci
+   			ON
+   				s.city=ci.id
+   		 <where>
+			 <if test="storeId != null">
+			 	 AND s.id = #{storeId}
+			 </if>
+		 </where>
+   </select>
+</mapper>

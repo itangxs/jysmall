@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.UserProdBrowsedMapper">
+
+	<delete id="deleteExceedBrowsed">
+		DELETE FROM user_browsed
+		WHERE id NOT IN (SELECT id
+			FROM (SELECT * FROM user_browsed
+				WHERE user_id=#{userId,jdbcType=BIGINT}
+				ORDER BY create_time DESC LIMIT #{size,jdbcType=INTEGER})
+			AS _table
+		)
+	</delete>
+
+</mapper>

@@ -1,0 +1,79 @@
+@charset "utf-8";
+body{ margin:0px; padding:0px; font-family:"微软雅黑", Verdana,Arial,Tahoma; font-size:14px; color:#666; line-height:24px;}
+ul,li,p,dl,dd,dt,h1,h2,h3,h4,h5,h6,i,a,em,span,form,input{ margin:0px; padding:0px; font-style:normal; font-family:"微软雅黑",Verdana,Arial,Tahoma,Arial;}
+ul,li{ list-style:none;}
+img{ border:none; margin:0px; padding:0px; line-height:0px;}
+a{ color:#686868; text-decoration:none;}
+a:hover{ color:#fb784b; text-decoration:none;}
+.clear{ clear:both;}
+
+/*input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0; 
+}
+input[type="number"]{-moz-appearance:textfield;}*/
+
+/*cashierdesk*/
+.cashierbox{ width:720px; margin:0 auto;  background:#fb784b; border:6px solid #fb784b; border-radius:3px; position:relative; z-index:10000; position:relative;}
+.cashierbox .title{ background:url(/images/seller/cashier_fantuan.png) no-repeat 8px 3px #fb784b; height:45px; line-height:38px; color:#fff; position:relative; padding:0 0 0 50px; font-size:16px;}
+{}
+.cashierbox .closewindow{ position:absolute; right:15px; bottom:12px; color:#fff; font-size:26px; line-height:30px; background:none; display:inline-block; vertical-align:middle; color:#fff;}
+.cashierbox .closewindow:hover{ color:#fff;}
+.cashierbox .textred{ color:#fb784b;}
+.cashiercontent{ border-radius:2px 2px 0 0; background:#fff; height:330px;}
+.cashierform{ padding:30px 30px 0px 30px; width:300px; float:left;}
+.cashierform .inputbox{ position:relative;}
+.cashierform .input1{ width:198px; height:70px; line-height:70px; border:1px solid #ccc; padding:0px 15px 0px 85px; color:#828182; margin-bottom:33px;}
+.cashierform .input2{width:198px; height:46px; line-height:46px; border:1px solid #ccc; padding:0px 15px 0px 85px; color:#828182; margin-bottom:5px;}
+.cashierform .skje{ position:absolute; left:15px; top:0px; line-height:70px; color:#828182;}
+.cashierform .skm{ position:absolute; left:15px; top:0px; line-height:46px; color:#828182;}
+
+.zfddbutton{ display:block; width:156px; height:40px; line-height:40px; background:#fb784b; border:1px solid #fd6936; color:#fff; text-align:center; border-radius:1px; margin-top:65px;}
+.zfddbutton span{ border-top:1px solid #fe9b79; display:block; width:156px;}
+.zfddbutton:hover{ background:#fd6936; color:#fff;}
+
+.cashierbox .tablebox{ padding-top:10px; background:#fff; }
+.cashierbox .tablebox th{ background:#f9f9f9; border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5; text-align:center; height:46px; line-height:46px;}
+.cashierbox .tablebox td{border-bottom:1px solid #f2f2f2; height:46px; line-height:46px; text-align:center; color:#888;}
+.cashierbox .tablebox .tdw230{ width:230px;}
+.cashierbox .tablebox .alignleft{ text-align:left; padding:0 0 0 45px;}
+
+.cashierbox .one,
+.cashierbox .two,
+.cashierbox .three{ display: inline-block; vertical-align:middle; width:18px; height:18px; line-height:18px; border-radius:2px;margin-right:15px; text-align:center; font-size:12px; color:#fff;}
+.cashierbox .one{ background:#fb784b;}
+.cashierbox .two{ background:#ffa027;}
+.cashierbox .three{ background:#ffbf1e;}
+.cashierbox .imgc{ vertical-align:middle; display: inline-block;}
+
+.keyboardbox{ position:relative; float:left;}
+
+.cashierdesklogo{position:fixed; top:10px; right:10px; z-index:1000; margin-bottom:0px;}
+/*支付成功弹出*/
+
+.zfcgcontent{  background:#000; height:340px; width:720px;-moz-opacity:0.3;opacity:.30;filter:alpha(opacity=30); position:absolute; top:45px; left:0; z-index:1005;}
+.zfcgcontent1{ margin:0 auto; height:340px; position:absolute; top:45px; left:0; width:720px;}
+.zfcg_tanchubox{ padding-top:30px;}
+.zfcg_tanchu{ width:350px; margin:0 auto; border:1px solid #dcdcdc; border-radius:3px; background:#fff;}
+.zfcg_tanchu .title{ background:#3eb936; color:#fff; height:35px; line-height:35px; text-align:left; padding:0 0 0 10px;}
+.zfcg_tanchu .nr{ text-align:center; padding:40px 0 30px 0; color:#9b9b9c;}
+.zfcg_tanchu .closediv{ background:#f5f5f5; height:40px; text-align:center; margin: 0 auto;}
+.zfcg_tanchu .anniu{ display:inline-block; margin-top:7px; width:60px; background:#fff; border:1px solid #ccc; border-radius:2px; color:#666; height:25px; line-height:25px; text-align: center;}
+.zfcg_tanchu .textbluecg{ color:#3eb936; font-size:18px; }
+.zfcg_tanchu .textredcg{ color:#fb784b; padding:30px 0 10px 0;}
+.zfcg_tanchu .zhifugou{ background:url(/images/seller/zhifugou.png) no-repeat left center; width:26px; height:26px; display:inline-block; vertical-align:middle; margin-right:10px;}
+.jindudonghua{ margin:0 auto; text-align:center; padding-top:100px; z-index:1007; position:relative;}
+.jindudonghua img{ width:100px;}
+
+.notopentext{ padding:15px 20px 15px 25px; color:#6d6d6d;}
+.notopentext .red{ color:#fb784b;}
+.zfcg_tanchu .img350{ width:350px;}
+
+
+/*弹出层*/
+.black_overlay{display:none;position: fixed;top:0%;left:0%;width:100%;height:100%;background-color:black;z-index:1001;-moz-opacity:0.6;opacity:.60;filter:alpha(opacity=60);}
+.white_content_desk{display:none;position:fixed;top:10%;left:0%;width:100%; z-index:1002;overflow:auto; background: none; border:none;}
+.white_content_desk1{position:fixed;top:16%;left:0%;width:100%; z-index:1200;overflow:auto; background: none; border:none;}
+.white_content_desk2{position:fixed;top:18%;left:0%;width:100%; z-index:1200;overflow:auto; background: none; border:none;}
+

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.AuthenticationChnnelMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.AuthenticationChnnel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="bank_name_id" property="bankNameId" jdbcType="INTEGER" />
+    <result column="pay_channel_id" property="payChannelId" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="resp_code" property="respCode" jdbcType="VARCHAR" />
+    <result column="resp_desc" property="respDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="apply_id" property="applyId" jdbcType="VARCHAR" />
+    <result column="chnl_state" property="chnlState" jdbcType="VARCHAR" />
+    <result column="xy_merchant_num" property="xyMerchantNum" jdbcType="VARCHAR" />
+    <result column="xy_bank_key" property="xyBankKey" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, store_id, bank_name_id, pay_channel_id, state, resp_code, resp_desc, create_time, 
+    apply_id, chnl_state, xy_merchant_num, xy_bank_key
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from authentication_chnnel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="listByState" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication_chnnel
+    where state = #{state,jdbcType=BIGINT}
+  </select>
+  <select id="findByApplyId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication_chnnel
+    where apply_id = #{applyId}
+  </select>
+  <select id="findByStoreIdAndBankIdAndPayChannelAndState" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication_chnnel
+    where store_id = #{storeId} and bank_name_id = #{bankNameId} and pay_channel_id = #{payChannelId} and state = #{state}
+  </select>
+  <select id="findByIsValidAuthentication" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication_chnnel
+    where store_id = #{storeId} and bank_name_id = #{bankNameId} and pay_channel_id = #{payChannelId} and (state = #{state} or state = #{state1})
+  </select>
+  <select id="findByStoreIdAndCountIsSuccess" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication_chnnel
+    where store_id = #{storeId} and bank_name_id = #{bankNameId} and state = #{state} and (pay_channel_id = 1 or pay_channel_id = 2) 
+  </select>
+  <select id="findByXyyqAuthcationInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication_chnnel
+    where store_id = #{storeId} and bank_name_id = #{bankNameId} and state = #{state} and pay_channel_id = 3 
+  </select>
+  
+  <select id="findByStoreId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication_chnnel
+    where store_id = #{storeId} and state = 2
+  </select>
+  
+  <select id="findByXyAuthcationInfo" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select 
+    <include refid="Base_Column_List" />
+    from authentication_chnnel
+    where store_id = #{storeId} and bank_name_id = 2
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from authentication_chnnel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.AuthenticationChnnel" >
+    insert into authentication_chnnel (id, store_id, bank_name_id, 
+      pay_channel_id, state, resp_code, 
+      resp_desc, create_time, apply_id, 
+      chnl_state, xy_merchant_num, xy_bank_key
+      )
+    values (#{id,jdbcType=BIGINT}, #{storeId,jdbcType=BIGINT}, #{bankNameId,jdbcType=INTEGER}, 
+      #{payChannelId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{respCode,jdbcType=VARCHAR}, 
+      #{respDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{applyId,jdbcType=VARCHAR}, 
+      #{chnlState,jdbcType=VARCHAR}, #{xyMerchantNum,jdbcType=VARCHAR}, #{xyBankKey,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.AuthenticationChnnel" >
+    insert into authentication_chnnel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="bankNameId != null" >
+        bank_name_id,
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="respCode != null" >
+        resp_code,
+      </if>
+      <if test="respDesc != null" >
+        resp_desc,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="applyId != null" >
+        apply_id,
+      </if>
+      <if test="chnlState != null" >
+        chnl_state,
+      </if>
+      <if test="xyMerchantNum != null" >
+        xy_merchant_num,
+      </if>
+      <if test="xyBankKey != null" >
+        xy_bank_key,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="bankNameId != null" >
+        #{bankNameId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelId != null" >
+        #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="respCode != null" >
+        #{respCode,jdbcType=VARCHAR},
+      </if>
+      <if test="respDesc != null" >
+        #{respDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyId != null" >
+        #{applyId,jdbcType=VARCHAR},
+      </if>
+      <if test="chnlState != null" >
+        #{chnlState,jdbcType=VARCHAR},
+      </if>
+      <if test="xyMerchantNum != null" >
+        #{xyMerchantNum,jdbcType=VARCHAR},
+      </if>
+      <if test="xyBankKey != null" >
+        #{xyBankKey,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.AuthenticationChnnel" >
+    update authentication_chnnel
+    <set >
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="bankNameId != null" >
+        bank_name_id = #{bankNameId,jdbcType=INTEGER},
+      </if>
+      <if test="payChannelId != null" >
+        pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="respCode != null" >
+        resp_code = #{respCode,jdbcType=VARCHAR},
+      </if>
+      <if test="respDesc != null" >
+        resp_desc = #{respDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyId != null" >
+        apply_id = #{applyId,jdbcType=VARCHAR},
+      </if>
+      <if test="chnlState != null" >
+        chnl_state = #{chnlState,jdbcType=VARCHAR},
+      </if>
+      <if test="xyMerchantNum != null" >
+        xy_merchant_num = #{xyMerchantNum,jdbcType=VARCHAR},
+      </if>
+      <if test="xyBankKey != null" >
+        xy_bank_key = #{xyBankKey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.AuthenticationChnnel" >
+    update authentication_chnnel
+    set store_id = #{storeId,jdbcType=BIGINT},
+      bank_name_id = #{bankNameId,jdbcType=INTEGER},
+      pay_channel_id = #{payChannelId,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      resp_code = #{respCode,jdbcType=VARCHAR},
+      resp_desc = #{respDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      apply_id = #{applyId,jdbcType=VARCHAR},
+      chnl_state = #{chnlState,jdbcType=VARCHAR},
+      xy_merchant_num = #{xyMerchantNum,jdbcType=VARCHAR},
+      xy_bank_key = #{xyBankKey,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

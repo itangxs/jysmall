@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.TaskQuestionMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.TaskQuestion" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="task_id" property="taskId" jdbcType="BIGINT" />
+    <result column="question_title" property="questionTitle" jdbcType="VARCHAR" />
+    <result column="question_time" property="questionTime" jdbcType="INTEGER" />
+    <result column="question_content" property="questionContent" jdbcType="VARCHAR" />
+    <result column="question_type" property="questionType" jdbcType="TINYINT" />
+    <result column="max_answer" property="maxAnswer" jdbcType="INTEGER" />
+    <result column="question_no" property="questionNo" jdbcType="INTEGER" />
+    <result column="answer_type" property="answerType" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, task_id, question_title, question_time, question_content, question_type, max_answer, 
+    question_no, answer_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.TaskQuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_question
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from task_question
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.TaskQuestionExample" >
+    delete from task_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.TaskQuestion" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into task_question (task_id, question_title, question_time, 
+      question_content, question_type, max_answer, 
+      question_no, answer_type)
+    values (#{taskId,jdbcType=BIGINT}, #{questionTitle,jdbcType=VARCHAR}, #{questionTime,jdbcType=INTEGER}, 
+      #{questionContent,jdbcType=VARCHAR}, #{questionType,jdbcType=TINYINT}, #{maxAnswer,jdbcType=INTEGER}, 
+      #{questionNo,jdbcType=INTEGER}, #{answerType,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.TaskQuestion" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into task_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="questionTitle != null" >
+        question_title,
+      </if>
+      <if test="questionTime != null" >
+        question_time,
+      </if>
+      <if test="questionContent != null" >
+        question_content,
+      </if>
+      <if test="questionType != null" >
+        question_type,
+      </if>
+      <if test="maxAnswer != null" >
+        max_answer,
+      </if>
+      <if test="questionNo != null" >
+        question_no,
+      </if>
+      <if test="answerType != null" >
+        answer_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="questionTitle != null" >
+        #{questionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTime != null" >
+        #{questionTime,jdbcType=INTEGER},
+      </if>
+      <if test="questionContent != null" >
+        #{questionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null" >
+        #{questionType,jdbcType=TINYINT},
+      </if>
+      <if test="maxAnswer != null" >
+        #{maxAnswer,jdbcType=INTEGER},
+      </if>
+      <if test="questionNo != null" >
+        #{questionNo,jdbcType=INTEGER},
+      </if>
+      <if test="answerType != null" >
+        #{answerType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.TaskQuestionExample" resultType="java.lang.Integer" >
+    select count(*) from task_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task_question
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=BIGINT},
+      </if>
+      <if test="record.questionTitle != null" >
+        question_title = #{record.questionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questionTime != null" >
+        question_time = #{record.questionTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionContent != null" >
+        question_content = #{record.questionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questionType != null" >
+        question_type = #{record.questionType,jdbcType=TINYINT},
+      </if>
+      <if test="record.maxAnswer != null" >
+        max_answer = #{record.maxAnswer,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionNo != null" >
+        question_no = #{record.questionNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.answerType != null" >
+        answer_type = #{record.answerType,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task_question
+    set id = #{record.id,jdbcType=BIGINT},
+      task_id = #{record.taskId,jdbcType=BIGINT},
+      question_title = #{record.questionTitle,jdbcType=VARCHAR},
+      question_time = #{record.questionTime,jdbcType=INTEGER},
+      question_content = #{record.questionContent,jdbcType=VARCHAR},
+      question_type = #{record.questionType,jdbcType=TINYINT},
+      max_answer = #{record.maxAnswer,jdbcType=INTEGER},
+      question_no = #{record.questionNo,jdbcType=INTEGER},
+      answer_type = #{record.answerType,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.TaskQuestion" >
+    update task_question
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="questionTitle != null" >
+        question_title = #{questionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTime != null" >
+        question_time = #{questionTime,jdbcType=INTEGER},
+      </if>
+      <if test="questionContent != null" >
+        question_content = #{questionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null" >
+        question_type = #{questionType,jdbcType=TINYINT},
+      </if>
+      <if test="maxAnswer != null" >
+        max_answer = #{maxAnswer,jdbcType=INTEGER},
+      </if>
+      <if test="questionNo != null" >
+        question_no = #{questionNo,jdbcType=INTEGER},
+      </if>
+      <if test="answerType != null" >
+        answer_type = #{answerType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.TaskQuestion" >
+    update task_question
+    set task_id = #{taskId,jdbcType=BIGINT},
+      question_title = #{questionTitle,jdbcType=VARCHAR},
+      question_time = #{questionTime,jdbcType=INTEGER},
+      question_content = #{questionContent,jdbcType=VARCHAR},
+      question_type = #{questionType,jdbcType=TINYINT},
+      max_answer = #{maxAnswer,jdbcType=INTEGER},
+      question_no = #{questionNo,jdbcType=INTEGER},
+      answer_type = #{answerType,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,1 @@
+$(document).ready(function(){});function setTab(a,d){var c=document.getElementById("menu"+a).getElementsByTagName("li");var b=document.getElementById("main"+a).getElementsByTagName("ul");for(i=0;i<c.length;i++){c[i].className=i==d?"hover":"";b[i].style.display=i==d?"block":"none"}};

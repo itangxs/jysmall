@@ -1,0 +1,1 @@
+String.prototype.trim=function(){return Trim(this)};function LTrim(b){var a;for(a=0;a<b.length;a++){if(b.charAt(a)!=" "&&b.charAt(a)!=" "){break}}b=b.substring(a,b.length);return b}function RTrim(b){var a;for(a=b.length-1;a>=0;a--){if(b.charAt(a)!=" "&&b.charAt(a)!=" "){break}}b=b.substring(0,a+1);return b}function Trim(a){return LTrim(RTrim(a))};

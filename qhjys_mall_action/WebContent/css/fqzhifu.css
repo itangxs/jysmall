@@ -1,0 +1,300 @@
+/*
+ * By jasonshan@tencent.com
+ * date 2013.9.18
+ * v  1.0
+ * 适配首页样式
+ */
+/*reset*/
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea,select,label,article,aside,footer,header,menu,nav,section,time,audio,video {
+  margin:0;  padding:0;}
+article,aside,footer,header,hgroup,nav,section,audio,canvas,video,img {display: block;}
+body {font-size: 100%; font-family:arial,Helvetica,STHeiti,Droid Sans Fallback; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;   -webkit-tap-highlight-color:rgba(0,0,0,0); background:#fff;}
+textarea {resize: none;}
+iframe,img {border:0;}
+ul,ol {list-style:none;}
+ul{list-style-type:none;}
+input,select,textarea {outline: 0;-webkit-user-modify: read-write-plaintext-only;}
+input {/*-webkit-appearance: none;*/}
+a{text-decoration: none; color:#333;}
+.clear{clear:both;}
+.blue{ color: #2980b9;}
+.red{ color:#f6696a;}
+*html body{ height:100%}
+input[type="button"], input[type="submit"], input[type="reset"] {
+-webkit-appearance: none;outline:none;}
+textarea {-webkit-appearance: none;} 
+
+.wrapper{ width:100%; margin:0 auto;}
+.index_img img{max-width:100%; height:auto; margin:0px auto;}
+
+
+.probox{ padding:10px; margin:0 auto;}
+.probox ul li{ width:100%; height:100%; border-bottom:1px solid #ddd; padding:10px 0;}
+.probox .proimg{ float:left; width:30%;}
+.probox .proimg img{ width:100%; height:80px; border-radius:3px;}
+.probox .centerinfo{ float:left; height:100%; width:70%;position:relative; }
+.probox .centerinfo .zhekoutext{ position:absolute; right:0px; top:0px; color:#f6696a; font-size:0.9375em; text-align:right;}
+.probox .centerinfo .zhekoutext b{ font-size:1.3em;}
+.probox .centerinfo h1{ font-size:1.0625em; width:49%; height:16px; line-height:16px; overflow:hidden; margin:10px 5px 8px 5px; color:#525252; overflow:hidden;}
+.probox .centerinfo h2{width:65%; font-size:0.9375em; font-weight:normal; color:#999; margin:0 5px; line-height:15px; overflow:hidden;}
+.probox a.buttondd,.probox a.buttonddgreen{color:#fff; border-radius:3px; padding:0 7px; height:35px; line-height:35px; text-align:center; font-size:1.125em; display:inline-block; margin-left:1px;}
+.probox a.buttondd {background:#f6696a;}
+.probox a.buttonddgreen {background:#2fc9ab; margin-top:10px;}
+
+.probox .orderbutton{ float:left; width:15%;}
+.probox .orderbutton a{color:#fff; border-radius:3px; background:#f6696a; padding:12px 0; text-align:center; font-size:1.125em; display:block;}
+
+#search{position:relative;width:100%;margin:0 auto; z-index:1000; font-size:1.0625em;}
+#search .box{border-bottom:1px solid #d5d5d5;background:url(../images/arr.png) no-repeat right 10px #f5f5f5;}
+#search form{margin:0 10px;height:40px;}
+#search .select{ display:block;color:#525252;width:100%;height:40px;cursor:pointer;line-height:40px;}
+#search .sub{position:absolute;top:41px;left:0px;color:#525252;width:100%; background:#f5f5f5;display:none;}
+#search .sub li{ float:left; height:35px; text-indent:10px; line-height:35px; font-size:1.0625em; cursor:pointer;border-bottom:1px dotted #ddd; width:50%;}
+
+
+.loadbox{ width:100%; margin:0 auto; text-align:center; background:#eee; height:40px; line-height:40px; color:#999; font-size:1.0625em;}
+.loadbox a{ color:#999; display:block;}
+
+.orderdetail{ padding:10px 10px 0px 10px; margin:0 auto;}
+.orderdetailbox{ background:#fff; border-bottom:1px solid #f1f1f1; border-bottom:none;}
+.orderdetailbox ul li{padding:10px 0px;color:#777; line-height:30px; border-bottom:1px solid #f1f1f1; font-size:1.0625em; position:relative;}
+.orderdetailbox ul li .right{ position:absolute; right:0px; display:inline-block; color:#525252; }
+.orderdetailbox ul ul li{ float:left; width:50%; border:none; padding:0; line-height:30px; overflow:hidden; height:30px;}
+.orderdetailbox .arr{ font-size:1.2em; margin-right:3px; font-weight:bold;}
+.orderbottombox{background:#f5f5f5; padding:10px;}
+.orderbottombox .shifu{border:1px solid #ededed; background:#fff; border-radius:3px; margin:10px 0; height:40px; line-height:40px; color:#666; font-size:1.0625em; text-align:center;}
+.paybutton a{ display:block; background:#ff6666; border-radius:3px; height:40px; line-height:40px; color:#fff; text-align:center;}
+.orderbuttonbox{ position:relative; height:40px; width:100%;}
+.orderbuttonbox .button1{ position:absolute; left:0; width:48%;}
+.orderbuttonbox .button2{ position:absolute; right:0; width:48%;}
+.orderbuttonbox .button1 a,.orderbuttonbox .button2 a{ background: url(../images/gou33.png) no-repeat center 10px #fff;border:1px solid #ededed; border-radius:3px; display:inline-block; width:100%; text-indent:2em; text-align:center; height:40px; line-height:40px; font-size:1.0625em; color:#777;}
+.orderbuttonbox .button1 a.current,.orderbuttonbox .button2 a.current{ background: url(../images/gou22.png) no-repeat center 10px #fff;color:#ff6666;}
+/*sellerdetail*/
+.sellertop{ font-size:1.0625em; padding:10px;}
+.sellertop .lineh25{ line-height:1.5em; font-size:1.125em;}
+.sellertop ul{ margin:5px 0 10px 0;}
+.sellertop ul li{ float:left; width:50%; line-height:1.8em; color:#888;}
+.sellertop .greentext{ color:#2fc9ab; font-size:1.125em; margin-left:10px;}
+.sellerbutton{ position: relative; height:50px;}
+.sellerbutton .buttongreen{ width:47%; position:absolute; left:0; top:0; text-align:center; background:#2fc9ab; height:40px; line-height:40px; color:#fff; border-radius:3px;}
+.sellerbutton .buttonred{ width:47%; position:absolute; right:0; top:0; text-align:center; background:#f6696a; height:40px; line-height:40px; color:#fff; border-radius:3px;}
+
+.selleraddress{ border-top:2px solid #efefef;border-bottom:5px solid #efefef;padding:15px 10px; font-size:1.0625em;}
+.selleraddress .arr-wz{ width:20px;}
+.selleraddress .arr-wz img{ width:18px;}
+.selleraddress .arr-tel{width:25px; padding:0 0 0 10px; border-left:1px solid #efefef;}
+.selleraddress .arr-tel img{ width:20px;}
+.selleraddress .address{ line-height:1.5em; color:#313131; padding-right:5px;}
+.selleraddress table{ background:none;}
+
+.sellerinfo{ padding:10px 10px 20px 10px; font-size:1.0625em; line-height:1.8em; color:#777;}
+.sellerinfo .listimg li{ float:left; width:33.3%; margin:0 auto; text-align:center; margin-bottom:10px;}
+.sellerinfo .listimg li img{ width:95%; max-height:90px; margin:0 auto;}
+.sellerinfo .title{ color:#333; margin-bottom:5px; font-size:1.125em;}
+.topbk{margin-bottom:65px; border-top:5px solid #efefef;}
+
+/*online order*/
+.onlinebottom{ position:fixed; bottom:0; width:100%; z-index:1000000; height:60px; line-height:60px; background:#fff;border-top:1px solid #efefef;}
+.onlinebottom .left{ position:relative; text-align:left; width:70%; color:#f6696a;}
+.onlinebottom .left h1{ font-weight:normal; font-size:1.125em;}
+.onlinebottom .left img{ height:25px; display:inline-block; vertical-align:middle; margin:0 10px;}
+.onlinebottom .left .price{ position:absolute; right:10px; top:0px; font-size:1.125em;}
+.onlinebottom a.buttomred{ position:absolute; right:0; bottom:0; display:inline-block; width:30%; height:60px; line-height:60px; font-size:1.125em; color:#fff; background:#f6696a; text-align:center;}
+
+.iframe_left{ float:left; width:30%; font-size:0.9375em; overflow:auto; position:fixed; top:0; left:0; height:100%;background:#e4e4e4;}
+.iframe_left ul li{ background:#e4e4e4; border-left:3px solid #e4e4e4; border-bottom:1px solid #d1d1d1; height:55px; line-height:55px;}
+
+.iframe_left ul li:hover{ background:#ffffff; border-left:3px solid #f6696a; border-bottom:1px solid #e4e4e4;}
+.iframe_left .current{background:#ffffff;border-left:3px solid #f6696a; border-bottom:1px solid #e4e4e4;}
+.iframe_left a{ color:#666; height:55px; line-height:55px; display: block;padding:0 0 0 5px;}
+.iframe_left a:hover{ color:#f6696a;}
+.iframe_right{ float:left;width:70%;overflow:auto;position:fixed; height:100%; left:30%; top:0;}
+.foodlist{width:100%;}
+.mbottom60{margin-bottom:60px;}
+.foodlist .title{ background:#edeef1; padding:10px 10px; font-size:1.0625em; color:#444;}
+.foodlist ul li{ padding:10px; border-bottom:1px solid #efefef; font-size:1.0625em; color:#595959; position:relative; min-height:60px;}
+.foodlist ul li:hover{ background:#f6f7fb;}
+.foodlist .current{ background:#f6f7fb;}
+.foodlist .gou{ float:left; width:12%; }
+.foodlist .gou .nochoice{ background:url(../images/gou1.png) no-repeat center center;}
+.foodbox .textbox{ float:left; width:55%; margin-top:5px;}
+.foodbox .textbox1{ position:absolute; bottom:15px; color:#a5a5a7;}
+.foodbox .textbox2{ height:25px; line-height:25px; overflow:hidden;}
+.foodbox .textbox10{ float:left; width:34%; margin-top:0px; font-size:1.0625em;}
+.foodbox .textbox11{ color:#a5a5a7; padding:0 0 0 5px;}
+.foodbox .textbox12{ height:40px; line-height:20px; margin-bottom:10px; padding:0 0 0 5px; overflow:hidden;}
+.foodbox .proimg{ float:left; width:33%;}
+.foodbox .proimg img{ width:99%; height:65px; border-radius:3px;}
+.foodbox .aligncenter{ text-align:center;}
+.addbuy{ float:left; width:33%; margin-top:20px; text-align:right;}
+.addbuy .add{ display:inline-block; background:#fff; border:1px solid #ddd; border-radius:11px; width:23px; height:23px; line-height:18px; color:#f6696a; font-size:1.4em; text-align:center;}
+.addbuy .number{ background:none; border:0; height:23px; width:15px; line-height:23px; text-align:center;}
+.floatred{float:left; width:67%; margin-top:20px; color:#f6696a; font-size:1.125em;}
+/**/
+.description{ line-height:1.8em;}
+.description img{ width:100%; max-width:100%;}
+.cartlist{ padding:10px; border-bottom:1px solid #ddd;}
+
+/*infomod*/
+.infomod{}
+.infomodbox{padding:10px; border-bottom:1px solid #f1f1f1; font-size:1.0625em; color:#525252;}
+.infomodbox .left{ float:left; width:26%; line-height:35px;}
+.infomodbox .right{ float:left; width:74%; background:#fff; position:relative;}
+.infomodbox .weishu li{ float:left; width:29%; height:35px; line-height:35px; text-align:center; margin:5px 1.5% 5px 1.5%; border-radius:3px; background:#f5f5f5; border:1px solid #eaeaea; }
+.infomodbox .weishu li:hover{ background:#ff6666; border:1px solid #f26060; color:#fff;}
+.infomodbox .weishu .current{ background:#ff6666; border:1px solid #f26060; color:#fff;}
+.infomodbox .weishu .icon{ width: 12px; height: 12px; display:inline-block; vertical-align:middle;
+				background-image: url(../images/qt.png);
+				background-repeat: no-repeat;
+				background-position: 0 0;
+				-webkit-background-size:12px 12px;
+				-moz-background-size:12px 12px;
+				-o-background-size:12px 12px;
+				background-size:12px 12px;
+				margin: 0px auto; margin-right:5px;}
+.infomodbox .weishuinput{ padding:0 3%; width:90%; border:1px solid #e0e0e0; color:#666; border-radius:3px; background:#fff; height:35px; line-height:35px; font-size:1.125em; }				
+.infomodbox .date{ background:#f5f5f5; border:1px solid #e0e0e0;border-radius:3px; position:relative;}
+.infomodbox .date li{ float:left; width:24%; height:60px; padding:10px 0 0 0; line-height:25px; text-align:center; border-right:1px solid #e0e0e0;}
+.infomodbox .date li:hover{color:#ff6666;}
+.infomodbox .date .current{color:#ff6666;}
+.infomodbox .date .noline{ border:none;}
+.infomodbox .dateinput{ border:none; color:#ff6666; line-height:35px;}
+.infomodbox .datebg{ position:absolute; left:5px; top:5px; background:#95979c; color:#fff; text-align:center; border-radius:3px; width:25%; height:50px; padding:10px 0 0 0;}
+.infomodbox .datebg .icon{ width: 20px; height: 20px;
+				background-image: url(../images/date.png);
+				background-repeat: no-repeat;
+				background-position: 0 0;
+				-webkit-background-size:20px 20px;
+				-moz-background-size:20px 20px;
+				-o-background-size:20px 20px;
+				background-size:20px 20px;
+				margin: 0px auto; margin-bottom:5px;}
+
+.infomodbox .inputname{ border:none; background:none; width:90%; height:35px; line-height:35px; color:#888; font-size:1.125em;}
+
+
+/*info nav*/
+.infoshijianbox{border-bottom:1px solid #f1f1f1;}
+.infoshijianbox .left{float:left; width:27%; line-height:35px;background:#dedede; text-align:center; height:150px; padding:10px 0 0 0;}
+.infoshijianbox .right{ float:left; width:73%; background:#fff; height:150px; overflow:auto;}
+.infoshijianbox .shijian li{ float:left; width:30%; height:35px; line-height:35px; text-align:center; margin:5px 0.6%; border-radius:30px; background:#fff; border:1px solid #eaeaea; font-size:1.0625em;}
+/*.infoshijianbox .shijian li:hover{ background:#fff; border:1px solid #ff6666; color:#ff6666;}*/
+.infoshijianbox .shijian .current{ background:#fff; border:1px solid #ff6666; color:#ff6666;}
+#tags {width: 100%; height:50px; margin-bottom:10px;}   
+#tags li {width:82%; height:40px; line-height:40px; border-radius:5px; text-align:center; background:#fff; margin:0 auto; margin-bottom:10px;}   
+#reviewsWrite{ margin-top:20px;font-family: Verdana;}   
+#tags li a {text-decoration:none;display:inline-block; color:#525252;width:82%; font-size:16px;}   
+#tags li a:hover{background:#ff6666;}   
+#tags li.emptyTag {background: none transparent scroll repeat 0% 0%; width: 4px}   
+#tags li.selectTag a {background:#ff6666; color:#fff;}   
+#tags li.selectTag{background:#ff6666; font-weight:800;}   
+.tagContent {display: none; color:: #474747; padding:10px; text-align:left; border-radius:0 5px 5px 5px;font-family: Verdana, Arial;}   
+#tagContent div.selectTag { display:block;} 
+
+.orderlistbox{ border-bottom:1px solid #dbdbdb; padding:10px; position:relative; font-size:1.0625em; line-height:35px;}
+.orderlistbox .left{ width:73%; overflow:hidden;}
+.orderlistbox .right{ position:absolute; right:10px; top:10px; text-align:right;width:26%;}
+.orderlistbox .h25,.orderlistbox .fgray{ height:35px; overflow:hidden;}
+.orderlistbox .fgray{ color:#b1b1b1;}
+.orderlistbox .f30red{ font-size:1.05em; color:#f6696a;}
+.orderlistbox .f20red{ font-size:1.0625em; margin-right:5px; color:#f6696a;}
+.orderlistbox .f30{ font-size:1.05em;}
+.orderlistbox .f20{ font-size:1.0625em; margin-right:5px;}
+.orderlistbox a.buttonred{ display:inline-block; width:100%; height:35px; line-height:35px; font-size:1.125em; color:#fff; background:#f6696a; text-align:center;border-radius:5px;}
+.orderlistbox a.buttongray{ display:inline-block; width:100%; height:33px; line-height:33px; font-size:1.125em; color:#cdcdcd; background:#fff; text-align:center;border-radius:5px; border:1px solid #b1b1b1;}
+
+
+/*飞券点餐*/
+.clearfix{ clear:both;}
+.wholebg{width:100%; height:auto; position:fixed; z-index:0; bottom:0; left:0;}
+.wholebg img{ width:100%;}
+.whole{ width:100%; margin:0 auto;}
+.store-tc {width:100%; margin:0 auto; text-align:center;font-size:1em; color:#999;}
+.store-tc .imgico{ width:20%; height:auto; margin:0 auto; margin-top:80px; margin-bottom:15px;}
+.store-detail{ position:relative; z-index:1;}
+.store-detail .imgmall{ width:100%; height:210px;}
+.store-box{ position:relative; z-index:2;}
+.store-title{ font-size:54px; width:74%; background-color:#f6696a; position:absolute; top:130px; left:50%; margin-left:-37%; text-align:center;color:white; border-radius:48px; line-height:200%; z-index:4;}
+.store-address{ position:absolute; top:190px; left:0; z-index:3;
+ border-bottom:6px solid #eee; color:#333;
+    width: 100%; height:auto; padding:25px 0 15px 0;
+    background-image: url(../images/weixin/address-bg.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;
+}
+.store-address .icon{ float:left; display:inline-block; vertical-align: middle;  width:17px; height:20px; margin-right:10px;
+    background-image: url(../images/weixin/address-icon.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:17px 20px;
+    -moz-background-size:17px 20px;
+    -o-background-size:17px 20px;
+    background-size:17px 20px;}
+.store-address .ptext{ padding:0 0 0;}	
+.store-address p{ font-size:48px; padding:0 20px;}
+.online-box{ width:65%; margin:30% auto 0; height:100%;}
+.online-order{ float:left; width:40%;}
+.online-order a{background:url(../images/weixin/dc-icon.png) no-repeat center top; background-size:100%; padding-top:106%; width:100%; display:block; text-align:center; font-size:50px;}
+.online-pay{ float:right; width:40%;}
+.online-pay a{background:url(../images/weixin/zf-icon.png) no-repeat center top; background-size:100%; padding-top:106%; width:100%; display:block; text-align:center; font-size:50px;}
+
+.black_overlay{ display:none;position:absolute; left:0; top:0; z-index:10;width:100%; height:100%;background-color:rgba(0,0,0,0.5);filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000, endcolorstr=#7F000000);}
+.white-box{ margin:42% auto;width:62%;position:relative;}
+.tc-tips{ width:100%;}
+.white-box p{width:30%;height:26%;position:absolute;bottom:18%; left:50%; margin-left:-15%;}
+.white-box .close-btn{width:100%;height:100%;display:block;}
+
+
+@media (max-width:960px){		
+       .store-title{ font-size:40px;} 
+	   .store-address p{ font-size:36px;}
+	   .online-box a{ font-size:38px;}
+}
+@media (max-width:800px){		
+       .store-title{ font-size:32px;} 
+	   .store-address p{ font-size:28px;}
+	   .online-box a{ font-size:30px;}
+}
+
+@media (max-width:680px){		
+       .store-title{ font-size:28px;} 
+	   .store-address p{ font-size:24px;}
+	   .online-box a{ font-size:26px;}
+}
+@media (max-width:580px){		
+       .store-title{ font-size:24px;} 
+	   .store-address p{ font-size:20px;}
+	   .online-box a{ font-size:22px;}
+}
+@media (max-width:500px){		
+       .store-title{ font-size:22px;} 
+	   .store-address p{ font-size:18px;}
+	   .online-box a{ font-size:20px;}
+}
+@media (max-width:440px){		
+       .store-title{ font-size:20px;} 
+	   .store-address p{ font-size:16px;}
+	   .online-box a{ font-size:18px;}
+}
+@media (max-width:420px){		
+       .store-title{ font-size:18px;} 
+	   .store-address p{ font-size:14px;}
+	   .online-box a{ font-size:16px;}
+}
+
+@media (max-width:375px){		
+       .store-title{ font-size:16px;} 
+	   .store-address p{ font-size:14px;}
+	   .online-box a{ font-size:14px;}
+}
+
+@media (max-width:320px){		
+       .store-title{ font-size:16px;width:84%;margin-left:-42%;} 
+	   .store-address p{ font-size:12px;}
+	   .online-box{margin:32% auto 0;}
+	   .online-box a{ font-size:14px;}
+}

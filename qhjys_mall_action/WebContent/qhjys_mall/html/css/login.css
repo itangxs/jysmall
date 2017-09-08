@@ -1,0 +1,26 @@
+.loginlogo{ width:980px; margin:0 auto; padding:20px 0 40px 0;}
+.loginlogo span{ float:right; margin-top:20px;}
+.login{ width:390px; margin:0 auto; background:url(../images/login.jpg) no-repeat left 0; height:380px; padding:0 0 0 590px;}
+.login .input1,.login .input2{width:270px; height:35px; border:1px solid #aaa9a3; line-height:35px; border-radius:3px; padding:0 0 0 30px; color:#aeaeae; }
+.login .input1{ background:url(../images/ico-jt.png) no-repeat 5px -990px #fff;}
+.login .input2{ background:url(../images/ico-jt.png) no-repeat 5px -1039px #fff;}
+.login p{ height:35px; padding:5px 0;}
+.login .anniu{ width:300px; height:35px; background:#ff8522; color:#fff; border:1px solid #ff8522; border-radius:3px; line-height:35px; font-size:16px;}
+.login em{ float:right; padding:0 88px 0 0;}
+
+.bottomlogin,.registration,.registration-xieyi{ width:980px; margin:0 auto;}
+.bottomlogin h1{ height:50px; line-height:50px; border-top:1px solid #ddd; border-bottom:1px solid #ddd; font-size:14px; background:url(../images/ico-jt.png) no-repeat right -934px; margin-top:50px; color:#eee;}
+.bottomlogin h1 a{ margin:0 20px;}
+.bottomlogin h1 span{ float:right;}
+
+
+.registration h1{ font-size:14px; margin-bottom:15px;}
+.registration h1 i{ width:100px; margin-right:15px; display:inline-block; text-align:right;}
+.registration h1 .inputkk{ width:260px; height:25px; line-height:25px; border:1px solid #ddd; border-radius:3px;}
+.registration-xieyi{ padding:20px 0;border-top:1px solid #ddd; }
+.registration-xieyi p{ text-indent:2em; padding-bottom:20px;}
+.registration-xieyi h1{ font-size:18px; padding:0 0 20px 0;}
+.mimazhuangtai{ margin:10px 0 0 118px;}
+.mimazhuangtai ul li{ float:left; width:87px; height:20px; line-height:20px; background:#eeede5;border-right:1px solid #fff; color:#fff; text-align:center;}
+.mimazhuangtai .ruored{ background:#ff7e17;}
+

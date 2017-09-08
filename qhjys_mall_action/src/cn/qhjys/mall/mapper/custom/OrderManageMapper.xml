@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.OrderManageMapper">
+
+	<select id="getOrderVoByOrder" resultType="cn.qhjys.mall.vo.OrderVo">
+		SELECT ord.id          AS orderId,
+		       ord.order_no    AS orderNo,
+		       ord.user_id     AS userId,
+		       ord.integral    AS integral,
+		       ord.totamt      AS totamt,
+		       ord.expfare     AS expFare,
+		       ord.deliv_id    AS delivId,
+		       ord.pay_id      AS payId,
+		       ord.create_time AS orderDate,
+		       ord.deliv_date  AS delivDate,
+		       ord.coupon_id   AS couponId,
+		       det.status      AS status
+		FROM   order_info ord
+		       JOIN order_detail det
+		         ON ord.id = det.order_id
+		WHERE ord.id = #{orderId,jdbcType=BIGINT}
+			AND ord.user_id = #{userId,jdbcType=BIGINT}
+			GROUP BY ord.id
+	</select>
+
+	<select id="queryOrderList" resultType="cn.qhjys.mall.vo.OrderVo">
+		SELECT ord.id AS orderId,
+			ord.order_no AS orderNo,
+			ord.user_id AS userId,
+			ord.integral AS integral,
+			ord.totamt AS totamt,
+			ord.expfare AS expFare,
+			ord.create_time AS orderDate,
+			det.status AS status
+		FROM order_info ord
+			JOIN order_detail det
+			ON ord.id = det.order_id
+		<where>
+			ord.user_id = #{userId,jdbcType=BIGINT}
+			<if test="status != null">
+				AND
+				<foreach collection="status" open="(" close=")" index="i" item="item">
+					<if test="i != 0">OR </if>det.status=#{item,jdbcType=TINYINT}
+				</foreach>
+			</if>
+		</where>
+			GROUP BY ord.id
+			ORDER BY ord.create_time DESC
+	</select>
+
+	<select id="getOrderDetail" resultType="cn.qhjys.mall.vo.OrderDetailVo">
+		SELECT det.id AS detailId,
+			det.detail_no AS detailNo,
+			ord.user_id AS userId,
+			det.order_id AS orderId,
+			pro.id AS prodId,
+			pro.name AS prodName,
+			Substring_index(pro.images, "|", 1) AS prodImage,
+			pro.end_date AS prodEndDate,
+			pro.unit_price AS unitPrice,
+			det.pay_price AS payPric,
+			pro.prod_type AS prodType,
+			pro.store_id AS storeId,
+			det.quantity AS quantity,
+			det.total_price AS moneny,
+			det.express AS express,
+			det.express_id AS expressId,
+			det.seller_id AS sellerId,
+			det.apply_time AS process,
+			det.retime AS retime,
+			ord.create_time AS orderDate,
+			det.status AS status,
+		    sto.name AS stoName,
+			sto.id AS stoId,
+			sto.images AS stoImg
+		FROM order_detail det
+			JOIN order_info ord
+			ON det.order_id = ord.id
+			 LEFT JOIN product_info pro
+		         ON det.prod_id = pro.id
+					LEFT JOIN store_info sto 
+						ON det.store_id = sto.id
+			
+		<where>
+			1=1
+			<if test="detailId != null">
+				AND det.id = #{detailId,jdbcType=BIGINT}
+			</if>
+			<if test="userId != null">
+				AND ord.user_id = #{userId,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
+	<select id="queryOrderDetail" resultType="cn.qhjys.mall.vo.OrderDetailVo">
+		SELECT ord.id                              AS orderId,
+		       ord.order_no                        AS orderNo,
+		       det.id                              AS detailId,
+		       det.detail_no                       AS detailNo,
+		       pro.id                              AS prodId,
+		       pro.name                            AS prodName,
+		       pro.store_id 					   AS storeId,
+		       pro.category_id 					   AS category,
+		       pro.prod_type                       AS prodType,
+		       Substring_index(pro.images, "|", 1) AS prodImage,
+		       pro.end_date                        AS prodEndDate,
+		       pro.unit_price                      AS unitPrice,
+		       det.pay_price                       AS payPric,
+		       det.quantity                        AS quantity,
+		       det.total_price                     AS moneny,
+		       det.express_id                      AS express,
+		       det.apply_time                      AS process,
+		       det.retime                          AS retime,
+		       det.status                          AS status,
+		       sto.name AS stoName,
+			   sto.id AS stoId,
+			   Substring_index(sto.images, ",", 1) AS stoImg
+		FROM   order_detail det
+		       JOIN order_info ord
+		         ON det.order_id = ord.id
+		        LEFT JOIN product_info pro
+		         ON det.prod_id = pro.id
+					LEFT JOIN store_info sto 
+						ON det.store_id = sto.id
+		        
+		<where>
+			1=1
+			<if test="orderId != null">
+				AND det.order_id = #{orderId,jdbcType=BIGINT}
+			</if>
+			<if test="userId != null">
+				AND ord.user_id = #{userId,jdbcType=BIGINT}
+			</if>
+			<if test="status != null">
+				AND
+				<foreach collection="status" open="(" close=")" index="i" item="item">
+					<if test="i != 0">OR </if>det.status=#{item,jdbcType=TINYINT}
+				</foreach>
+			</if>
+		</where>
+		ORDER BY det.create_time DESC
+	</select>
+	<select id="queryOrderDetailList" resultType="cn.qhjys.mall.vo.OrderDetailVo">
+		SELECT det.id AS detailId,
+			det.detail_no AS detailNo,
+			det.order_id AS orderId,
+			pro.id AS prodId,
+			pro.name AS prodName,
+			pro.prod_type AS prodType,
+			COALESCE(Substring_index(pro.images, "|", 1),Substring_index(sto.images, ",", 1)) AS prodImage,
+			pro.end_date AS prodEndDate,
+			pro.store_id AS storeId,
+			pro.unit_price AS unitPrice,
+			det.pay_price AS payPric,
+			det.quantity AS quantity,
+			det.total_price AS moneny,
+			det.express_id AS express,
+			det.apply_time AS process,
+			det.retime AS retime,
+			det.status AS status,
+			sto.name AS stoName,
+			sto.id AS stoId,
+			Substring_index(sto.images, ",", 1) AS stoImg,
+			pro.category_id AS category
+		FROM order_detail det
+			LEFT JOIN order_info ord
+			ON det.order_id = ord.id
+			LEFT JOIN product_info pro
+			ON det.prod_id = pro.id
+			LEFT JOIN store_info sto 
+			ON det.store_id = sto.id
+		<where>
+			1=1
+			<if test="userId != null">
+				AND ord.user_id = #{userId,jdbcType=BIGINT}
+			</if>
+			<if test="status != null">
+				AND
+				<foreach collection="status" open="(" close=")" index="i" item="item">
+					<if test="i != 0">OR </if>det.status=#{item,jdbcType=TINYINT}
+				</foreach>
+			</if>
+		</where>
+		ORDER BY det.create_time DESC
+	</select>
+	<select id="getNotReceiptOrder" resultType="int">
+		SELECT
+			Count(o.id)
+		FROM order_detail o
+			JOIN order_info i ON o.order_id = i.id
+			JOIN product_info p ON o.prod_id = p.id
+			JOIN user_info u ON i.user_id = u.id
+		<where>
+			o.enabled=1 AND o.status=2 AND p.prod_type=2
+			AND o.seller_id=#{sellerId}
+			<if test="detailNo != null and detailNo !=''">
+				AND o.detail_no = #{detailNo}
+			</if>
+			<if test="productName != null and productName !=''">
+				AND p.name = #{productName}
+			</if>
+			<if test="startTime != null and startTime !=''">
+				AND i.create_time >= #{startTime}
+			</if>
+			<if test="endTime != null and endTime !=''">
+				AND #{endTime} >= i.create_time
+			</if>
+			<if test="orStatus != null">
+				AND<foreach collection="orStatus" open="(" close=")" index="i" item="item">
+					<if test="i != 0">OR</if> o.status=#{item,jdbcType=TINYINT}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	
+	<select id="searchOrderListBySellerId" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.OrderDetailVo">
+		SELECT o.id AS detailId,
+			o.detail_no AS detailNo,
+			o.order_id AS orderId,
+			p.id AS prodId,
+			p.name AS prodName,
+			p.images AS prodImage,
+			p.prod_type AS prodType,
+			p.end_date AS prodEndDate,
+			p.unit_price AS unitPrice,
+			o.pay_price AS payPric,
+			u.username AS userName,
+			o.quantity AS quantity,
+			o.express_id AS expressId,
+			o.total_price AS moneny,
+			i.create_time AS orderDate,
+			o.status AS status,
+			s.status AS	reStatus
+		FROM order_detail o
+			JOIN order_info i
+			ON o.order_id = i.id
+			JOIN product_info p
+			ON o.prod_id = p.id
+			JOIN user_info u
+			ON i.user_id = u.id
+			LEFT JOIN schedule_info s
+			ON o.id = s.detail_id
+		<where>
+			o.enabled = 1 
+			AND o.seller_id=#{sellerId}
+			<if test="detailNo != null and detailNo !=''">
+				AND o.detail_no = #{detailNo}
+			</if>
+			<if test="productName != null and productName !=''">
+				AND p.name like CONCAT('%',#{productName},'%') 
+			</if>
+			<if test="startTime != null and startTime !=''">
+				AND i.create_time >= #{startTime}
+			</if>
+			<if test="endTime != null and endTime !=''">
+				AND #{endTime} >= i.create_time
+			</if>
+			<if test="orStatus != null">
+				AND
+				<foreach collection="orStatus" open="(" close=")" index="i" item="item">
+					<if test="i != 0">OR</if>
+					o.status=#{item,jdbcType=TINYINT}
+				</foreach>
+			</if>
+	  		<if test="userName != null and userName !=''">
+		  		AND u.username = #{userName} 
+		  	</if>
+			<if test="status != null">
+				AND
+				<foreach collection="status" open="(" close=")" index="i" item="item">
+					<if test="i != 0">OR</if>
+					s.status=#{item,jdbcType=TINYINT}
+				</foreach>
+			</if>
+		</where>
+		ORDER BY o.create_time DESC
+	</select>
+	<select id="queryRefundListBySellerId" resultType="cn.qhjys.mall.vo.RefundVo">
+		SELECT r.id AS id,
+			o.id AS orderId,
+			o.detail_no AS orderNo,
+			u.username AS name,
+			r.refund_price AS price,
+			r.status AS status,
+			o.`status` AS orderStatus
+		FROM order_detail o
+			JOIN user_refund r
+			ON o.id = r.detail_id
+			JOIN user_info u
+			ON r.user_id = u.id
+		WHERE o.seller_id = #{sellerId}
+		<if test="detailNo != null and detailNo !=''">
+			AND o.detail_no = #{detailNo}
+		</if>
+		<if test="orderStatus != null and orderStatus != ''">
+			AND o.status=#{orderStatus,jdbcType=TINYINT}
+		</if>
+		ORDER BY o.id desc
+	</select>
+	<select id="queryOrderListByAdmin" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.OrderDetailVo">
+		SELECT ord.id AS orderId,
+			ord.order_no AS orderNo,
+			det.id AS detailId,
+			det.detail_no AS detailNo,
+			ord.user_id AS userId,
+			u.username AS userName,
+			p.unit_price AS unitPrice,
+			det.pay_price AS payPric,
+			det.total_price AS moneny,
+			ord.create_time AS orderDate,
+			det.status AS status,
+			p.name AS prodName,
+			s.name AS storeName
+		FROM order_info ord
+			JOIN order_detail det
+			ON ord.id = det.order_id
+			JOIN user_info u
+			ON ord.user_id = u.id
+			JOIN product_info p
+			ON det.prod_id = p.id
+			JOIN store_info s
+			ON p.store_id = s.id
+		<where>
+			1=1
+			<if test="orderNo != null and orderNo != ''">
+				AND ord.order_no = #{orderNo}
+			</if>
+			<if test="detailNo != null and detailNo != ''">
+				AND det.detail_no = #{detailNo}
+			</if>
+			<if test="status != null">
+				AND det.status = #{status,jdbcType=TINYINT}
+			</if>
+			<if test="storeName != null and storeName != ''">
+				AND s.name = #{storeName}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND u.username = #{userName}
+			</if>
+			<if test="begin != null and begin != ''">
+				AND ord.create_time >= #{begin}
+			</if>
+			<if test="ending != null and ending != ''">
+				AND  #{ending} >= ord.create_time 
+			</if>
+		</where>
+		ORDER BY ord.create_time DESC
+	</select>
+	
+	<select id="queryProdSumNumByProdId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+		SELECT IFNULL(SUM(d.quantity),0) FROM order_detail d
+		JOIN order_info o ON d.order_id=o.id
+		WHERE d.status NOT IN (1,6,9)
+		AND d.prod_id=#{prodId,jdbcType=BIGINT}
+		AND o.user_id=#{userId,jdbcType=BIGINT}
+	</select>
+	
+	<select id="queryOrderDetaiVoByProdIdAndUserId" resultType="cn.qhjys.mall.vo.OrderDetailVo">
+		SELECT det.id                            AS detailId,
+		       det.detail_no                     AS detailNo,
+		       o.user_id                         AS userId,
+		       p.id                              AS prodId,
+		       p.name                            AS prodName,
+		       Substring_index(p.images, "|", 1) AS prodImage,
+		       p.end_date                        AS prodEndDate,
+		       p.unit_price                      AS unitPrice,
+		       det.pay_price                     AS payPric,
+		       p.prod_type                       AS prodType,
+		       det.quantity                      AS quantity,
+		       det.total_price                   AS moneny,
+		       det.express_id                    AS express,
+		       det.apply_time                    AS process,
+		       det.retime                        AS retime,
+		       o.create_time                     AS orderDate,
+		       det.status                        AS status
+		FROM   order_detail det
+		       JOIN product_info p
+		         ON det.prod_id = p.id
+		       JOIN order_info o
+		         ON det.order_id = o.id
+		         where o.user_id=#{userId,jdbcType=BIGINT} AND det.prod_id = #{prodId,jdbcType=BIGINT} and det.status =#{status,jdbcType=INTEGER}
+	</select>
+
+	<select id="queryOvertimeOrder" resultType="java.lang.Long">
+		SELECT DISTINCT o.id FROM   order_info o
+		JOIN order_detail d ON o.id = d.order_id
+		WHERE  d.status = 1 <![CDATA[AND TIMESTAMPDIFF(HOUR, o.create_time, Now()) > 24]]>
+	</select>
+
+	<select id="getUserOrderPriceSum" resultType="java.util.Map"> 
+		SELECT SUM(o.totamt) AS total,COUNT(DISTINCT o.id) AS number FROM order_info o
+			JOIN order_detail d ON o.id = d.order_id
+		WHERE  o.user_id = #{userId,jdbcType=BIGINT}
+			<![CDATA[AND o.create_time >= #{begin,jdbcType=DATE}]]>
+			AND d.status != 1 AND d.status != 5
+			AND d.status != 6 AND d.status != 9
+			AND o.enabled = 1 AND d.enabled = 1
+	</select>
+</mapper>

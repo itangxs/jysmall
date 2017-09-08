@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<context id="Mysql" defaultModelType="flat">
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- 数据库配置 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.1.9:3306/qhjys_mall?useUnicode=true&amp;characterEncoding=utf8" userId="root"
+			password="root" />
+
+		<!-- false,把DECIMAL和 NUMERIC类型解析为 Integer; true,把DECIMAL和NUMERIC类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+
+		<!-- 生成model的位置 -->
+		<javaModelGenerator targetPackage="cn.qhjys.mall.entity" targetProject="qhjys_mall">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- 生成xml的位置 -->
+		<sqlMapGenerator targetPackage="cn.qhjys.mall.mapper" targetProject="qhjys_mall">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<!-- 生成mapper的位置 -->
+		<javaClientGenerator targetPackage="cn.qhjys.mall.mapper" targetProject="qhjys_mall" type="XMLMAPPER" />
+		
+
+		<!-- 活动总表 
+		<table tableName="message_info">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="type" javaType="java.lang.Integer" />
+			<columnOverride column="seen" javaType="java.lang.Integer" />
+			<columnOverride column="status" javaType="java.lang.Integer"/>
+		</table>
+		<table tableName="fq_store">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="fq_cuisine">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="fq_location">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="fq_order">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="fq_order_detail">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="fq_product">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="fq_rebate">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="fq_user_info">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>-->
+		
+		<table tableName="fq_financial_support">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+	
+		
+		
+	</context>
+</generatorConfiguration>

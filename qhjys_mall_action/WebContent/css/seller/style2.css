@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0;font-family:"微软雅黑"; font-size:14px;}
+ul{ list-style-type:none;}
+
+a{ text-decoration:none;}
+body{ background-color:#404040;}
+.center{ width:482px; height:656px; background:url(../images/phone.png) no-repeat top right;margin-left:auto; margin-right:auto; position:relative;}
+dl{width:120px; height:84px; border-radius:10px; margin-top:80px;}
+dl dd{ margin-bottom:28px;}
+.image_text{ background-color:#46b54a; border-radius:2px 2px 0 0; color:white;}
+.main_body{ background-color:white; border-radius:0 0 2px 2px; color:black;}
+dl a{padding:14px 0px; width:100px; padding-left:15px; padding-right:15px;}
+.close{ background-color:white; border-radius:2px; width:64px; margin-top:380px; text-align:center; padding:14px 15px;}
+.close a{ color:black;}
+.phone_content{ width:287px; height:509px;  position:absolute; right:17px; top:77px; background-color:#f3f3f3;}
+.top_nav{height:40px; background-color:#323232; text-align:center; line-height:40px; color:white;}
+.content{width:256px; height:278px; border:1px #e8e8eb solid; margin:15px auto; background-color:white;}
+
+.content li{ margin-bottom:10px; margin-left:10px; margin-top:5px;}
+.title{color:#4e4f4e;}
+.time{color:#959595; font-size:12px; }
+li span{ color:#4c6bab;font-size:12px;}
+.line{ width:238px; height:1px ; background-color:#e8e8eb;}
+.next{ height:38px; width:238px; background:url(../images/change.png) no-repeat right 5px;}
+.next a{ color:#1d221d;}

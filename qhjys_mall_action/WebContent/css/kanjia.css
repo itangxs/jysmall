@@ -1,0 +1,82 @@
+/*
+ * By jasonshan@tencent.com
+ * date 2013.9.18
+ * v  1.0
+ * 适配首页样式
+ */
+/*reset*/
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea,select,label,article,aside,footer,header,menu,nav,section,time,audio,video {
+  margin:0;  padding:0;}
+article,aside,footer,header,hgroup,nav,section,audio,canvas,video,img {display: block;}
+body {font-size: 100%; font-family:arial,Helvetica,STHeiti,Droid Sans Fallback; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;   -webkit-tap-highlight-color:rgba(0,0,0,0); background:#ffe9bd;}
+textarea {resize: none;}
+iframe,img {border:0;}
+ul,ol {list-style:none;}
+input,select,textarea {outline: 0;-webkit-user-modify: read-write-plaintext-only;}
+input {/*-webkit-appearance: none;*/}
+a{text-decoration: none; color:#333333;}
+body,.global{background: #f0eff4;}
+.global{/*min-width: 320px;*/width: 100%; overflow: hidden;}
+.clear{clear:both;}
+.blue{ color: #2980b9;}
+.red{ color:#e83135;}
+*html body{ height:100%}
+
+.wrapper{ width:100%; height:100%; margin:0 auto; background-color:#ffe9bd; font-size:0.9em;}
+.index_img img{max-width:100%; height:auto; margin:0px auto;}
+
+.index_guize{width:100%; height:auto; margin:0 auto; color:#252525; background:#fff;}
+.index_guize_nr{ padding:0px 15px 20px 15px; line-height:1.7em;}
+
+
+
+.fenxiangbox{ }
+.fenxiangbg{ width:100%; height:100%; background:#000;filter:alpha(opacity=70);  
+      -moz-opacity:0.7;  
+      -khtml-opacity: 0.7;  
+      opacity: 0.7; position:fixed; top:0; left:0; z-index:1;}
+.fenxiangtanchu{width:100%; text-align:right; position:fixed; top:0; z-index:2;}	  
+
+
+
+.probox{ padding:10px 10px 20px 10px; position:relative;}
+.proinfo .pline{ padding:10px 10px 0 10px; line-height:1.5em;}
+.proinfo .price{padding:0 10px 0 10px;}
+.proinfo .price span{ float:right;}
+.buttonbox{ height:55px; margin-top:10px;}
+.buttonbox ul li{ float:left; width:50%;}
+.buttonbox a{display:block; background:#f2ab15; border:1px solid #e5a00f; border-radius:4px; text-align:center; color:#fff; font-weight:800; height:40px; line-height:40px;}
+.buttonbox .mleft{ margin-left:5px;}
+.buttonbox .mright{ margin-right:5px;}
+.buttonduihuan a{ display:block; background:#f2ab15; border:1px solid #e5a00f; border-radius:4px; height:40px; line-height:40px; text-align:center; color:#fff;font-weight:800;}
+.kanjiabox{display:block; background:#ea3a3d; border:1px solid #d72b2e; height:18px; line-height:18px; border-radius:50px; text-align:center; color:#fff; margin:8px 0;}
+
+.kanlist{ padding:0 10px 10px 10px;}
+.kanlist ul li{ border-bottom:1px solid #eee; height:50px; padding:6px 0; color:#666;}
+.kanlist .right{ float:right; line-height:50px; color:#999;}
+.kanlist img{ width:50px; height:50px; border-radius:25px; display:inline-block; vertical-align:middle; margin-right:5px;}
+
+.tanchubox{width:80%; margin:0 auto; position:relative; background:#fff; text-align:center;}
+.tanchu{width:100%; background:#fff; border-radius:3px;  position:absolute; bottom:0; z-index:1; text-align:center; font-size:1em;  border:1px solid #e0e0e0;}
+.ico-cuo img{ width:20px; height:auto; display:inline-block; vertical-align:middle; margin-right:5px;}
+.tishitext{ padding:25px 10px; text-align:center; color:#666; line-height:1.7em;}
+.tanchu .title{ text-align:left; padding:0 10px; height:35px; line-height:35px; background:#f3f3f3; color:#777;}
+.tanchu .title span{ float:right; font-size:1.8em;}
+.img11{ width:70%; margin:0 auto; padding:0 0 10px 0; text-align:center;}
+
+/*tabs*/
+.m-tabs{ border-bottom:1px solid #dcdcdc; height:41px; margin-bottom:10px;}
+.m-tabs a { float:left; display:inline; height:40px; line-height:40px; text-align:center; text-decoration:none; margin-bottom:-2px; width:50%;}
+.m-tabs a:hover {border-bottom:2px solid #f6696a;  color:#e83135;}
+.m-tabs a.tabaction{color:#e83135; border-bottom:2px solid #fb784b; font-weight:800;}
+  
+#tags {width: 100%; border-bottom:1px solid #dcdcdc; height:41px; margin-bottom:10px;}   
+#tags li {FLOAT: left; height:40px; line-height:40px; text-align:center; text-decoration:none; margin-bottom:-2px; width:50%;}   
+#reviewsWrite{ margin-top:20px;font-family: Verdana;}   
+#tags li a {text-decoration:none;}   
+#tags li a:hover{color:#e83135; }   
+#tags li.emptyTag {background: none transparent scroll repeat 0% 0%; width: 4px}   
+#tags li.selectTag a {background:#fff;border-bottom: none;color:#e83135;}   
+#tags li.selectTag{color:#e83135; border-bottom:2px solid #fb784b; font-weight:800;}   
+.tagContent {display: none; COLOR: #474747; PADDING: 10px; text-align:left; border-radius:0 5px 5px 5px;font-family: Verdana, Arial;}   
+#tagContent div.selectTag {DISPLAY: block}   

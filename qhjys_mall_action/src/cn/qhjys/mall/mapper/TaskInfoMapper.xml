@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.TaskInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.TaskInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="task_type" property="taskType" jdbcType="TINYINT" />
+    <result column="task_from" property="taskFrom" jdbcType="VARCHAR" />
+    <result column="task_level" property="taskLevel" jdbcType="TINYINT" />
+    <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="off_shelf" property="offShelf" jdbcType="TIMESTAMP" />
+    <result column="task_total" property="taskTotal" jdbcType="DECIMAL" />
+    <result column="task_fulfil" property="taskFulfil" jdbcType="DECIMAL" />
+    <result column="plan_time" property="planTime" jdbcType="VARCHAR" />
+    <result column="fulfil_reward" property="fulfilReward" jdbcType="DECIMAL" />
+    <result column="unfulfil_reward" property="unfulfilReward" jdbcType="DECIMAL" />
+    <result column="images" property="images" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="project" property="project" jdbcType="VARCHAR" />
+    <result column="project_url" property="projectUrl" jdbcType="VARCHAR" />
+    <result column="project_pass" property="projectPass" jdbcType="VARCHAR" />
+    <result column="info_url" property="infoUrl" jdbcType="VARCHAR" />
+    <result column="info_name" property="infoName" jdbcType="VARCHAR" />
+    <result column="bgimg" property="bgimg" jdbcType="VARCHAR" />
+    <result column="bgcolor" property="bgcolor" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.qhjys.mall.entity.TaskInfo" extends="BaseResultMap" >
+    <result column="task_detail" property="taskDetail" jdbcType="LONGVARCHAR" />
+    <result column="fulfil_detail" property="fulfilDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, task_name, task_type, task_from, task_level, begin_time, end_time, off_shelf, 
+    task_total, task_fulfil, plan_time, fulfil_reward, unfulfil_reward, images, status, 
+    create_time, project, project_url, project_pass, info_url, info_name, bgimg, bgcolor
+  </sql>
+  <sql id="Blob_Column_List" >
+    task_detail, fulfil_detail
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.qhjys.mall.entity.TaskInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from task_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.TaskInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from task_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from task_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.TaskInfoExample" >
+    delete from task_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.TaskInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into task_info (task_name, task_type, task_from, 
+      task_level, begin_time, end_time, 
+      off_shelf, task_total, task_fulfil, 
+      plan_time, fulfil_reward, unfulfil_reward, 
+      images, status, create_time, 
+      project, project_url, project_pass, 
+      info_url, info_name, bgimg, 
+      bgcolor, task_detail, fulfil_detail
+      )
+    values (#{taskName,jdbcType=VARCHAR}, #{taskType,jdbcType=TINYINT}, #{taskFrom,jdbcType=VARCHAR}, 
+      #{taskLevel,jdbcType=TINYINT}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{offShelf,jdbcType=TIMESTAMP}, #{taskTotal,jdbcType=DECIMAL}, #{taskFulfil,jdbcType=DECIMAL}, 
+      #{planTime,jdbcType=VARCHAR}, #{fulfilReward,jdbcType=DECIMAL}, #{unfulfilReward,jdbcType=DECIMAL}, 
+      #{images,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{project,jdbcType=VARCHAR}, #{projectUrl,jdbcType=VARCHAR}, #{projectPass,jdbcType=VARCHAR}, 
+      #{infoUrl,jdbcType=VARCHAR}, #{infoName,jdbcType=VARCHAR}, #{bgimg,jdbcType=VARCHAR}, 
+      #{bgcolor,jdbcType=VARCHAR}, #{taskDetail,jdbcType=LONGVARCHAR}, #{fulfilDetail,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.TaskInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into task_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="taskType != null" >
+        task_type,
+      </if>
+      <if test="taskFrom != null" >
+        task_from,
+      </if>
+      <if test="taskLevel != null" >
+        task_level,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="offShelf != null" >
+        off_shelf,
+      </if>
+      <if test="taskTotal != null" >
+        task_total,
+      </if>
+      <if test="taskFulfil != null" >
+        task_fulfil,
+      </if>
+      <if test="planTime != null" >
+        plan_time,
+      </if>
+      <if test="fulfilReward != null" >
+        fulfil_reward,
+      </if>
+      <if test="unfulfilReward != null" >
+        unfulfil_reward,
+      </if>
+      <if test="images != null" >
+        images,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="project != null" >
+        project,
+      </if>
+      <if test="projectUrl != null" >
+        project_url,
+      </if>
+      <if test="projectPass != null" >
+        project_pass,
+      </if>
+      <if test="infoUrl != null" >
+        info_url,
+      </if>
+      <if test="infoName != null" >
+        info_name,
+      </if>
+      <if test="bgimg != null" >
+        bgimg,
+      </if>
+      <if test="bgcolor != null" >
+        bgcolor,
+      </if>
+      <if test="taskDetail != null" >
+        task_detail,
+      </if>
+      <if test="fulfilDetail != null" >
+        fulfil_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=TINYINT},
+      </if>
+      <if test="taskFrom != null" >
+        #{taskFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="taskLevel != null" >
+        #{taskLevel,jdbcType=TINYINT},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offShelf != null" >
+        #{offShelf,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskTotal != null" >
+        #{taskTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="taskFulfil != null" >
+        #{taskFulfil,jdbcType=DECIMAL},
+      </if>
+      <if test="planTime != null" >
+        #{planTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fulfilReward != null" >
+        #{fulfilReward,jdbcType=DECIMAL},
+      </if>
+      <if test="unfulfilReward != null" >
+        #{unfulfilReward,jdbcType=DECIMAL},
+      </if>
+      <if test="images != null" >
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="project != null" >
+        #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="projectUrl != null" >
+        #{projectUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="projectPass != null" >
+        #{projectPass,jdbcType=VARCHAR},
+      </if>
+      <if test="infoUrl != null" >
+        #{infoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="infoName != null" >
+        #{infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="bgimg != null" >
+        #{bgimg,jdbcType=VARCHAR},
+      </if>
+      <if test="bgcolor != null" >
+        #{bgcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDetail != null" >
+        #{taskDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fulfilDetail != null" >
+        #{fulfilDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.TaskInfoExample" resultType="java.lang.Integer" >
+    select count(*) from task_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskName != null" >
+        task_name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskType != null" >
+        task_type = #{record.taskType,jdbcType=TINYINT},
+      </if>
+      <if test="record.taskFrom != null" >
+        task_from = #{record.taskFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskLevel != null" >
+        task_level = #{record.taskLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.beginTime != null" >
+        begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offShelf != null" >
+        off_shelf = #{record.offShelf,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.taskTotal != null" >
+        task_total = #{record.taskTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.taskFulfil != null" >
+        task_fulfil = #{record.taskFulfil,jdbcType=DECIMAL},
+      </if>
+      <if test="record.planTime != null" >
+        plan_time = #{record.planTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fulfilReward != null" >
+        fulfil_reward = #{record.fulfilReward,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unfulfilReward != null" >
+        unfulfil_reward = #{record.unfulfilReward,jdbcType=DECIMAL},
+      </if>
+      <if test="record.images != null" >
+        images = #{record.images,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.project != null" >
+        project = #{record.project,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectUrl != null" >
+        project_url = #{record.projectUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectPass != null" >
+        project_pass = #{record.projectPass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoUrl != null" >
+        info_url = #{record.infoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoName != null" >
+        info_name = #{record.infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bgimg != null" >
+        bgimg = #{record.bgimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bgcolor != null" >
+        bgcolor = #{record.bgcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskDetail != null" >
+        task_detail = #{record.taskDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.fulfilDetail != null" >
+        fulfil_detail = #{record.fulfilDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update task_info
+    set id = #{record.id,jdbcType=BIGINT},
+      task_name = #{record.taskName,jdbcType=VARCHAR},
+      task_type = #{record.taskType,jdbcType=TINYINT},
+      task_from = #{record.taskFrom,jdbcType=VARCHAR},
+      task_level = #{record.taskLevel,jdbcType=TINYINT},
+      begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      off_shelf = #{record.offShelf,jdbcType=TIMESTAMP},
+      task_total = #{record.taskTotal,jdbcType=DECIMAL},
+      task_fulfil = #{record.taskFulfil,jdbcType=DECIMAL},
+      plan_time = #{record.planTime,jdbcType=VARCHAR},
+      fulfil_reward = #{record.fulfilReward,jdbcType=DECIMAL},
+      unfulfil_reward = #{record.unfulfilReward,jdbcType=DECIMAL},
+      images = #{record.images,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      project = #{record.project,jdbcType=VARCHAR},
+      project_url = #{record.projectUrl,jdbcType=VARCHAR},
+      project_pass = #{record.projectPass,jdbcType=VARCHAR},
+      info_url = #{record.infoUrl,jdbcType=VARCHAR},
+      info_name = #{record.infoName,jdbcType=VARCHAR},
+      bgimg = #{record.bgimg,jdbcType=VARCHAR},
+      bgcolor = #{record.bgcolor,jdbcType=VARCHAR},
+      task_detail = #{record.taskDetail,jdbcType=LONGVARCHAR},
+      fulfil_detail = #{record.fulfilDetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task_info
+    set id = #{record.id,jdbcType=BIGINT},
+      task_name = #{record.taskName,jdbcType=VARCHAR},
+      task_type = #{record.taskType,jdbcType=TINYINT},
+      task_from = #{record.taskFrom,jdbcType=VARCHAR},
+      task_level = #{record.taskLevel,jdbcType=TINYINT},
+      begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      off_shelf = #{record.offShelf,jdbcType=TIMESTAMP},
+      task_total = #{record.taskTotal,jdbcType=DECIMAL},
+      task_fulfil = #{record.taskFulfil,jdbcType=DECIMAL},
+      plan_time = #{record.planTime,jdbcType=VARCHAR},
+      fulfil_reward = #{record.fulfilReward,jdbcType=DECIMAL},
+      unfulfil_reward = #{record.unfulfilReward,jdbcType=DECIMAL},
+      images = #{record.images,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      project = #{record.project,jdbcType=VARCHAR},
+      project_url = #{record.projectUrl,jdbcType=VARCHAR},
+      project_pass = #{record.projectPass,jdbcType=VARCHAR},
+      info_url = #{record.infoUrl,jdbcType=VARCHAR},
+      info_name = #{record.infoName,jdbcType=VARCHAR},
+      bgimg = #{record.bgimg,jdbcType=VARCHAR},
+      bgcolor = #{record.bgcolor,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.TaskInfo" >
+    update task_info
+    <set >
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        task_type = #{taskType,jdbcType=TINYINT},
+      </if>
+      <if test="taskFrom != null" >
+        task_from = #{taskFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="taskLevel != null" >
+        task_level = #{taskLevel,jdbcType=TINYINT},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offShelf != null" >
+        off_shelf = #{offShelf,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskTotal != null" >
+        task_total = #{taskTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="taskFulfil != null" >
+        task_fulfil = #{taskFulfil,jdbcType=DECIMAL},
+      </if>
+      <if test="planTime != null" >
+        plan_time = #{planTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fulfilReward != null" >
+        fulfil_reward = #{fulfilReward,jdbcType=DECIMAL},
+      </if>
+      <if test="unfulfilReward != null" >
+        unfulfil_reward = #{unfulfilReward,jdbcType=DECIMAL},
+      </if>
+      <if test="images != null" >
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="project != null" >
+        project = #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="projectUrl != null" >
+        project_url = #{projectUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="projectPass != null" >
+        project_pass = #{projectPass,jdbcType=VARCHAR},
+      </if>
+      <if test="infoUrl != null" >
+        info_url = #{infoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="infoName != null" >
+        info_name = #{infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="bgimg != null" >
+        bgimg = #{bgimg,jdbcType=VARCHAR},
+      </if>
+      <if test="bgcolor != null" >
+        bgcolor = #{bgcolor,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDetail != null" >
+        task_detail = #{taskDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fulfilDetail != null" >
+        fulfil_detail = #{fulfilDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.qhjys.mall.entity.TaskInfo" >
+    update task_info
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=TINYINT},
+      task_from = #{taskFrom,jdbcType=VARCHAR},
+      task_level = #{taskLevel,jdbcType=TINYINT},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      off_shelf = #{offShelf,jdbcType=TIMESTAMP},
+      task_total = #{taskTotal,jdbcType=DECIMAL},
+      task_fulfil = #{taskFulfil,jdbcType=DECIMAL},
+      plan_time = #{planTime,jdbcType=VARCHAR},
+      fulfil_reward = #{fulfilReward,jdbcType=DECIMAL},
+      unfulfil_reward = #{unfulfilReward,jdbcType=DECIMAL},
+      images = #{images,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      project = #{project,jdbcType=VARCHAR},
+      project_url = #{projectUrl,jdbcType=VARCHAR},
+      project_pass = #{projectPass,jdbcType=VARCHAR},
+      info_url = #{infoUrl,jdbcType=VARCHAR},
+      info_name = #{infoName,jdbcType=VARCHAR},
+      bgimg = #{bgimg,jdbcType=VARCHAR},
+      bgcolor = #{bgcolor,jdbcType=VARCHAR},
+      task_detail = #{taskDetail,jdbcType=LONGVARCHAR},
+      fulfil_detail = #{fulfilDetail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.TaskInfo" >
+    update task_info
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=TINYINT},
+      task_from = #{taskFrom,jdbcType=VARCHAR},
+      task_level = #{taskLevel,jdbcType=TINYINT},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      off_shelf = #{offShelf,jdbcType=TIMESTAMP},
+      task_total = #{taskTotal,jdbcType=DECIMAL},
+      task_fulfil = #{taskFulfil,jdbcType=DECIMAL},
+      plan_time = #{planTime,jdbcType=VARCHAR},
+      fulfil_reward = #{fulfilReward,jdbcType=DECIMAL},
+      unfulfil_reward = #{unfulfilReward,jdbcType=DECIMAL},
+      images = #{images,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      project = #{project,jdbcType=VARCHAR},
+      project_url = #{projectUrl,jdbcType=VARCHAR},
+      project_pass = #{projectPass,jdbcType=VARCHAR},
+      info_url = #{infoUrl,jdbcType=VARCHAR},
+      info_name = #{infoName,jdbcType=VARCHAR},
+      bgimg = #{bgimg,jdbcType=VARCHAR},
+      bgcolor = #{bgcolor,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

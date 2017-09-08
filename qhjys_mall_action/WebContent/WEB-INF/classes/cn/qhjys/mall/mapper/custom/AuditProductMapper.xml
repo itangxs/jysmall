@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.AuditProductMapper">
+	<select id="queryAuditProductList" resultType="cn.qhjys.mall.vo.system.AuditProductVo" parameterType="java.util.Map">
+		SELECT p.id          AS productId,
+		       p.name        AS productName,
+		       st.name       AS storeName,
+		       p.unit_price  AS unitPrice,
+		       p.orig_price  AS origPrice,
+		       p.create_time AS createTime,
+		       p.end_date    AS endDate,
+		       p.off_shelf   AS offDate,
+		       p.status      AS status
+		FROM   product_info p,
+		       store_info st
+		<where>
+			 p.store_id = st.id
+			 <if test="productName != null and productName != ''">
+			 	AND (p.`name` like CONCAT('%',#{productName},'%'))
+			 </if>
+			 <if test="storeName != null and storeName != ''">
+				AND (st.name like CONCAT('%',#{storeName},'%'))
+			 </if>
+			 <if test="startPrice != null">
+			 	AND　p.unit_price >= #{startPrice}
+			 </if>
+			 <if test="endPrice != null">
+			 	AND endPrice >= p.unit_price
+			 </if>
+			 <if test="startTime != null and startTime != ''">
+			 	AND DATE_FORMAT(p.create_time,'%Y-%m-%d') >= #{startTime}
+			 </if>
+ 			 <if test="endTime != null and endTime != ''">
+				AND #{endTime} >= DATE_FORMAT(p.create_time,'%Y-%m-%d')
+			</if>
+			<if test="status != null">
+				AND
+				<foreach collection="status" open="(" close=")" index="i" item="item">
+					<if test="i != 0">OR </if>p.`status`=#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	<update id="updateAuditProduct" parameterType="java.util.Map">
+		UPDATE product_info SET `status` = #{status} 
+		<where>
+			<foreach collection="ids" open="(" close=")" index="i" item="item">
+				<if test="i != 0">OR </if>id=#{item}
+			</foreach>
+		</where>
+	</update>
+</mapper>

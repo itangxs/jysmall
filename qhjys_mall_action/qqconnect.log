@@ -1,0 +1,160 @@
+1108 DEBUG [2017-07-20 09:33:22]  >> Content-Length: 659
+1108 DEBUG [2017-07-20 09:33:22]  >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+1108 DEBUG [2017-07-20 09:33:22]  >> Host: gzwkzftest.cmbc.com.cn
+1108 DEBUG [2017-07-20 09:33:22]  >> Connection: Keep-Alive
+1108 DEBUG [2017-07-20 09:33:22]  >> User-Agent: Apache-HttpClient/4.5 (Java/1.7.0_17)
+1108 DEBUG [2017-07-20 09:33:22]   >> "requestNo=20170720093321525bXXieZpNvSJ5rCD&version=V2.0&productId=0115&transId=10&merNo=850440059441318&orderDate=20170720&orderNo=MA2017072009332100325004&returnUrl=111&notifyUrl=https%3A%2F%2Fwww.baidu.com&transAmt=1&commodityName=test&storeId=S_001&terminalId=T_001&userid=&signature=BsVEvQIR8ev8upbZnjdAl%2FYjd5%2B2KpGOi8F4bjEU9i%2FNtCZGVIBQRLXMvTiemoO0kmadTly3%2FeRKD6mAFWEg8r%2FrspyZg1EolsUqqmilaD%2FX9%2FUTloCm6AFMZ9rxnCQW9%2FQ78PvS6idyNEDLae0mLnwplbdRtotIRcL3kePj%2F%2FoFT%2Bc7IR8fuPKCdtIiS9HIRGse3x4LOnPJpizmHLG46EsUJEDzDJtuxjJQdvLBCLjjYh1f9luVsYRlBgmArL6ufSjrSDH3Y8RH6eMHRlvVDXJeLzyPzApehk2kY69AvPlGJQeYYARD48gYm6S1SQJPRG%2FcdBPqTivxB7OPb2BNlQ%3D%3D"
+2216 DEBUG [2017-07-20 09:33:23]   << "HTTP/1.1 200 OK[\r][\n]"
+2216 DEBUG [2017-07-20 09:33:23]   << "Server: Apache-Coyote/1.1[\r][\n]"
+2216 DEBUG [2017-07-20 09:33:23]   << "Content-Type: text/html;charset=UTF-8[\r][\n]"
+2216 DEBUG [2017-07-20 09:33:23]   << "Transfer-Encoding: chunked[\r][\n]"
+2231 DEBUG [2017-07-20 09:33:23]   << "Date: Thu, 20 Jul 2017 01:31:29 GMT[\r][\n]"
+2231 DEBUG [2017-07-20 09:33:23]   << "Connection: Keep-Alive[\r][\n]"
+2231 DEBUG [2017-07-20 09:33:23]   << "Set-Cookie: JSESSIONID=9D8B30B700B40B77B396C9A08A073EC7; Path=/payment-gate-web/; HttpOnly[\r][\n]"
+2231 DEBUG [2017-07-20 09:33:23]   << "Set-Cookie: BIGipServerDLWG-GZwukazhifu_443_pool=767034309.20480.0000; path=/[\r][\n]"
+2231 DEBUG [2017-07-20 09:33:23]   << "[\r][\n]"
+2231 DEBUG [2017-07-20 09:33:23]  Receiving response: HTTP/1.1 200 OK
+2231 DEBUG [2017-07-20 09:33:23]  << HTTP/1.1 200 OK
+2231 DEBUG [2017-07-20 09:33:23]  << Server: Apache-Coyote/1.1
+2231 DEBUG [2017-07-20 09:33:23]  << Content-Type: text/html;charset=UTF-8
+2231 DEBUG [2017-07-20 09:33:23]  << Transfer-Encoding: chunked
+2231 DEBUG [2017-07-20 09:33:23]  << Date: Thu, 20 Jul 2017 01:31:29 GMT
+2231 DEBUG [2017-07-20 09:33:23]  << Connection: Keep-Alive
+2231 DEBUG [2017-07-20 09:33:23]  << Set-Cookie: JSESSIONID=9D8B30B700B40B77B396C9A08A073EC7; Path=/payment-gate-web/; HttpOnly
+2231 DEBUG [2017-07-20 09:33:23]  << Set-Cookie: BIGipServerDLWG-GZwukazhifu_443_pool=767034309.20480.0000; path=/
+2231 DEBUG [2017-07-20 09:33:23]  Cookie accepted [JSESSIONID="9D8B30B700B40B77B396C9A08A073EC7", version:0, domain:gzwkzftest.cmbc.com.cn, path:/payment-gate-web/, expiry:null]
+2231 DEBUG [2017-07-20 09:33:23]  Cookie accepted [BIGipServerDLWG-GZwukazhifu_443_pool="767034309.20480.0000", version:0, domain:gzwkzftest.cmbc.com.cn, path:/, expiry:null]
+2231 DEBUG [2017-07-20 09:33:23]  Connection can be kept alive indefinitely
+2247 DEBUG [2017-07-20 09:33:23]   << "28e[\r][\n]"
+2247 DEBUG [2017-07-20 09:33:23]   << "commodityName=test&merNo=850440059441318&notifyUrl=https://www.baidu.com&orderDate=20170720&orderNo=MA2017072009332100325004&productId=0115&requestNo=20170720093321525bXXieZpNvSJ5rCD&respCode=40004&respDesc=[0xe5][0x8f][0x82][0xe6][0x95][0xb0][0xe6][0x97][0xa0][0xe6][0x95][0x88]&returnUrl=111&storeId=S_001&terminalId=T_001&transAmt=1&transId=10&version=V2.0&signature=aCDNpM+83ZovIu3gn2wy9/kOncW/lwBIOrzJgEJhvt+hG6YHXFPpNMx+gvP3LuwGMFNr+wE1dMX6CX9qo4cBNCn22MpMGH1giOWFt0hXVFAk482CyTFmtgXzMAzwB92zu97WFqwUQYcdSvY6PjMipsMBsCw+rS3QeJjdPSI4NkIDM8gPLdEvtaCyLagojKTKAxqWouqa3DoiK88JkNlDldLWAXBNEDW2z7Uf4+mCGhTTHfvJl9Kf1FmF3B8YOQFZRB7PIDlTiMUTUWS++Dryyy1sVMdwhRSYdjO4bamgU5iE78B5yOd+p2aQQwVTWllGS+zXfc+jHK6KuFpS+EkyVA=="
+2247 DEBUG [2017-07-20 09:33:23]   << "[\r][\n]"
+2247 DEBUG [2017-07-20 09:33:23]   << "0[\r][\n]"
+2247 DEBUG [2017-07-20 09:33:23]   << "[\r][\n]"
+2247 DEBUG [2017-07-20 09:33:23]  Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@57e4bfbe
+2247 DEBUG [2017-07-20 09:33:23]  Connection can be kept alive indefinitely
+2247 INFO  [2017-07-20 09:33:23]  >>>>>>>>>>>>>>>>>>响应数据=>commodityName=test&merNo=850440059441318&notifyUrl=https://www.baidu.com&orderDate=20170720&orderNo=MA2017072009332100325004&productId=0115&requestNo=20170720093321525bXXieZpNvSJ5rCD&respCode=40004&respDesc=参数无效&returnUrl=111&storeId=S_001&terminalId=T_001&transAmt=1&transId=10&version=V2.0&signature=aCDNpM+83ZovIu3gn2wy9/kOncW/lwBIOrzJgEJhvt+hG6YHXFPpNMx+gvP3LuwGMFNr+wE1dMX6CX9qo4cBNCn22MpMGH1giOWFt0hXVFAk482CyTFmtgXzMAzwB92zu97WFqwUQYcdSvY6PjMipsMBsCw+rS3QeJjdPSI4NkIDM8gPLdEvtaCyLagojKTKAxqWouqa3DoiK88JkNlDldLWAXBNEDW2z7Uf4+mCGhTTHfvJl9Kf1FmF3B8YOQFZRB7PIDlTiMUTUWS++Dryyy1sVMdwhRSYdjO4bamgU5iE78B5yOd+p2aQQwVTWllGS+zXfc+jHK6KuFpS+EkyVA==
+2263 INFO  [2017-07-20 09:33:23]  >>>>>>>>响应信息=>40004-参数无效
+0    INFO  [2017-07-20 09:42:21]  >>>>>>>>>>>>>>>>>>组装签名串=>{commodityName=test, merNo=850440059441318, notifyUrl=https://www.baidu.com, orderDate=20170720, orderNo=MA2017072009422100326257, productId=0115, requestNo=201707200942213843plGLIRNTOfsJiX, returnUrl=111, storeId=S_001, terminalId=T_001, transAmt=0.01, transId=10, userid=18373551095, version=V2.0}
+354  INFO  [2017-07-20 09:42:21]  >>>>>>>>>>>>>>>>>>签名参数=>VX3H/kotaRdOS6eMkokrsCLYfZwgLxHm+JdFqE4yfEYYjQ1FEpcpPmXpAsPLrN/3BZBwOzDx9B9apEeltJfGHwj6f14tUes6OlnF0AcuLZ5cFbqpp27sH8t8Rtn9lVnrrBnzE0OJPpnd93ImO4IrkEt5S1WZtt5YLp6P+7kP2kAnMGW3POytVTpyWW4KNPWXTYyr/G2htORd14U8gRQc7HpN2RlksJX7bquj7RD/6N1+N3P/S2U5/28C/4g70o7CJ24LgNJEScttWQdca6RHCJguj0MxYeQ3Dj/sEBKibbdgFSLUC5kEhWSrs4toPsXbBfuZAiO9NdVdbgbxWctJ6A==
+621  DEBUG [2017-07-20 09:42:22]  Get connection for route {s}->https://gzwkzftest.cmbc.com.cn:443
+761  DEBUG [2017-07-20 09:42:22]  Connecting to gzwkzftest.cmbc.com.cn:443
+965  DEBUG [2017-07-20 09:42:22]  CookieSpec selected: default
+981  DEBUG [2017-07-20 09:42:22]  Auth cache not set in the context
+981  DEBUG [2017-07-20 09:42:22]  Target auth state: UNCHALLENGED
+981  DEBUG [2017-07-20 09:42:22]  Proxy auth state: UNCHALLENGED
+981  DEBUG [2017-07-20 09:42:22]  Attempt 1 to execute request
+981  DEBUG [2017-07-20 09:42:22]  Sending request: POST /payment-gate-web/gateway/api/backTransReq HTTP/1.1
+981  DEBUG [2017-07-20 09:42:22]   >> "POST /payment-gate-web/gateway/api/backTransReq HTTP/1.1[\r][\n]"
+981  DEBUG [2017-07-20 09:42:22]   >> "Content-Length: 671[\r][\n]"
+981  DEBUG [2017-07-20 09:42:22]   >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+981  DEBUG [2017-07-20 09:42:22]   >> "Host: gzwkzftest.cmbc.com.cn[\r][\n]"
+981  DEBUG [2017-07-20 09:42:22]   >> "Connection: Keep-Alive[\r][\n]"
+981  DEBUG [2017-07-20 09:42:22]   >> "User-Agent: Apache-HttpClient/4.5 (Java/1.7.0_17)[\r][\n]"
+981  DEBUG [2017-07-20 09:42:22]   >> "[\r][\n]"
+981  DEBUG [2017-07-20 09:42:22]  >> POST /payment-gate-web/gateway/api/backTransReq HTTP/1.1
+981  DEBUG [2017-07-20 09:42:22]  >> Content-Length: 671
+981  DEBUG [2017-07-20 09:42:22]  >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+981  DEBUG [2017-07-20 09:42:22]  >> Host: gzwkzftest.cmbc.com.cn
+981  DEBUG [2017-07-20 09:42:22]  >> Connection: Keep-Alive
+981  DEBUG [2017-07-20 09:42:22]  >> User-Agent: Apache-HttpClient/4.5 (Java/1.7.0_17)
+981  DEBUG [2017-07-20 09:42:22]   >> "requestNo=201707200942213843plGLIRNTOfsJiX&version=V2.0&productId=0115&transId=10&merNo=850440059441318&orderDate=20170720&orderNo=MA2017072009422100326257&returnUrl=111&notifyUrl=https%3A%2F%2Fwww.baidu.com&transAmt=0.01&commodityName=test&storeId=S_001&terminalId=T_001&userid=18373551095&signature=VX3H%2FkotaRdOS6eMkokrsCLYfZwgLxHm%2BJdFqE4yfEYYjQ1FEpcpPmXpAsPLrN%2F3BZBwOzDx9B9apEeltJfGHwj6f14tUes6OlnF0AcuLZ5cFbqpp27sH8t8Rtn9lVnrrBnzE0OJPpnd93ImO4IrkEt5S1WZtt5YLp6P%2B7kP2kAnMGW3POytVTpyWW4KNPWXTYyr%2FG2htORd14U8gRQc7HpN2RlksJX7bquj7RD%2F6N1%2BN3P%2FS2U5%2F28C%2F4g70o7CJ24LgNJEScttWQdca6RHCJguj0MxYeQ3Dj%2FsEBKibbdgFSLUC5kEhWSrs4toPsXbBfuZAiO9NdVdbgbxWctJ6A%3D%3D"
+1105 DEBUG [2017-07-20 09:42:22]   << "HTTP/1.1 200 OK[\r][\n]"
+1122 DEBUG [2017-07-20 09:42:22]   << "Server: Apache-Coyote/1.1[\r][\n]"
+1122 DEBUG [2017-07-20 09:42:22]   << "Content-Type: text/html;charset=UTF-8[\r][\n]"
+1122 DEBUG [2017-07-20 09:42:22]   << "Transfer-Encoding: chunked[\r][\n]"
+1122 DEBUG [2017-07-20 09:42:22]   << "Date: Thu, 20 Jul 2017 01:40:28 GMT[\r][\n]"
+1122 DEBUG [2017-07-20 09:42:22]   << "Connection: Keep-Alive[\r][\n]"
+1122 DEBUG [2017-07-20 09:42:22]   << "Set-Cookie: BIGipServerDLWG-GZwukazhifu_443_pool=767034309.20480.0000; path=/[\r][\n]"
+1122 DEBUG [2017-07-20 09:42:22]   << "[\r][\n]"
+1122 DEBUG [2017-07-20 09:42:22]  Receiving response: HTTP/1.1 200 OK
+1122 DEBUG [2017-07-20 09:42:22]  << HTTP/1.1 200 OK
+1122 DEBUG [2017-07-20 09:42:22]  << Server: Apache-Coyote/1.1
+1122 DEBUG [2017-07-20 09:42:22]  << Content-Type: text/html;charset=UTF-8
+1122 DEBUG [2017-07-20 09:42:22]  << Transfer-Encoding: chunked
+1122 DEBUG [2017-07-20 09:42:22]  << Date: Thu, 20 Jul 2017 01:40:28 GMT
+1122 DEBUG [2017-07-20 09:42:22]  << Connection: Keep-Alive
+1122 DEBUG [2017-07-20 09:42:22]  << Set-Cookie: BIGipServerDLWG-GZwukazhifu_443_pool=767034309.20480.0000; path=/
+1122 DEBUG [2017-07-20 09:42:22]  Cookie accepted [BIGipServerDLWG-GZwukazhifu_443_pool="767034309.20480.0000", version:0, domain:gzwkzftest.cmbc.com.cn, path:/, expiry:null]
+1138 DEBUG [2017-07-20 09:42:22]  Connection can be kept alive indefinitely
+1138 DEBUG [2017-07-20 09:42:22]   << "166[\r][\n]"
+1138 DEBUG [2017-07-20 09:42:22]   << "returnUrl=111&respCode=9998&orderDate=20170720&userid=18373551095&respDesc=[0xe5][0xad][0x97][0xe6][0xae][0xb5][transAmt][0xe7][0xb1][0xbb][0xe5][0x9e][0x8b][0xe9][0x9d][0x9e][0xe6][0xb3][0x95],[0xe9][0x9c][0x80][0xe4][0xbc][0xa0][0xe5][0x85][0xa5][Long][0xe7][0xb1][0xbb][0xe5][0x9e][0x8b]&commodityName=test&transAmt=0.01&version=V2.0&productId=0115&terminalId=T_001&orderNo=MA2017072009422100326257&requestNo=201707200942213843plGLIRNTOfsJiX&transId=10&notifyUrl=https://www.baidu.com&storeId=S_001&merNo=850440059441318"
+1138 DEBUG [2017-07-20 09:42:22]   << "[\r][\n]"
+1153 DEBUG [2017-07-20 09:42:22]   << "0[\r][\n]"
+1153 DEBUG [2017-07-20 09:42:22]   << "[\r][\n]"
+1153 DEBUG [2017-07-20 09:42:22]  Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@6ae88006
+1153 DEBUG [2017-07-20 09:42:22]  Connection can be kept alive indefinitely
+1153 INFO  [2017-07-20 09:42:22]  >>>>>>>>>>>>>>>>>>响应数据=>returnUrl=111&respCode=9998&orderDate=20170720&userid=18373551095&respDesc=字段[transAmt]类型非法,需传入[Long]类型&commodityName=test&transAmt=0.01&version=V2.0&productId=0115&terminalId=T_001&orderNo=MA2017072009422100326257&requestNo=201707200942213843plGLIRNTOfsJiX&transId=10&notifyUrl=https://www.baidu.com&storeId=S_001&merNo=850440059441318
+1153 INFO  [2017-07-20 09:42:22]  >>>>>>>>响应信息=>9998-字段[transAmt]类型非法,需传入[Long]类型
+0    INFO  [2017-07-20 09:43:20]  >>>>>>>>>>>>>>>>>>组装签名串=>{commodityName=test, merNo=850440059441318, notifyUrl=https://www.baidu.com, orderDate=20170720, orderNo=MA2017072009432000330019, productId=0115, requestNo=20170720094320837UftCHE52FBWbNXL, returnUrl=111, storeId=S_001, terminalId=T_001, transAmt=1, transId=10, userid=18373551095, version=V2.0}
+422  INFO  [2017-07-20 09:43:21]  >>>>>>>>>>>>>>>>>>签名参数=>d3rCkGEU1vrgznFldir6/LvMFx6QFLHfMXU567f/USJDf6oM+owet5x3kBwWgzZMgC5GfgwAxaEyd/kYPRAeqNamYEw2x7kQHkwE+au1zlWiPcd4y9+NgNMcR2rY0WHL4dLFaPgtiMhhFa/HSF8NFKjxAY14RU0jYITMf20OwoK2hNCDEG8JBSlAjvUwTNAsGy7YHc4rFPCzWP9hqe1L5JgEG2Et+4P42NoJzGZEy4a9ZF2kMx5FLNJDeUUHAx8sX8wBXvuIr5Ptk+sJ8qkc76deU2+zNbCiiL1eHX+AoTlBvXbOIT0GM46vUcm112jIWAnvDVJrM9FSIgRMIfeWQA==
+688  DEBUG [2017-07-20 09:43:21]  Get connection for route {s}->https://gzwkzftest.cmbc.com.cn:443
+848  DEBUG [2017-07-20 09:43:21]  Connecting to gzwkzftest.cmbc.com.cn:443
+1052 DEBUG [2017-07-20 09:43:21]  CookieSpec selected: default
+1052 DEBUG [2017-07-20 09:43:21]  Auth cache not set in the context
+1052 DEBUG [2017-07-20 09:43:21]  Target auth state: UNCHALLENGED
+1052 DEBUG [2017-07-20 09:43:21]  Proxy auth state: UNCHALLENGED
+1052 DEBUG [2017-07-20 09:43:21]  Attempt 1 to execute request
+1052 DEBUG [2017-07-20 09:43:21]  Sending request: POST /payment-gate-web/gateway/api/backTransReq HTTP/1.1
+1052 DEBUG [2017-07-20 09:43:21]   >> "POST /payment-gate-web/gateway/api/backTransReq HTTP/1.1[\r][\n]"
+1052 DEBUG [2017-07-20 09:43:21]   >> "Content-Length: 668[\r][\n]"
+1052 DEBUG [2017-07-20 09:43:21]   >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+1052 DEBUG [2017-07-20 09:43:21]   >> "Host: gzwkzftest.cmbc.com.cn[\r][\n]"
+1052 DEBUG [2017-07-20 09:43:21]   >> "Connection: Keep-Alive[\r][\n]"
+1052 DEBUG [2017-07-20 09:43:21]   >> "User-Agent: Apache-HttpClient/4.5 (Java/1.7.0_17)[\r][\n]"
+1052 DEBUG [2017-07-20 09:43:21]   >> "[\r][\n]"
+1052 DEBUG [2017-07-20 09:43:21]  >> POST /payment-gate-web/gateway/api/backTransReq HTTP/1.1
+1052 DEBUG [2017-07-20 09:43:21]  >> Content-Length: 668
+1052 DEBUG [2017-07-20 09:43:21]  >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+1052 DEBUG [2017-07-20 09:43:21]  >> Host: gzwkzftest.cmbc.com.cn
+1052 DEBUG [2017-07-20 09:43:21]  >> Connection: Keep-Alive
+1052 DEBUG [2017-07-20 09:43:21]  >> User-Agent: Apache-HttpClient/4.5 (Java/1.7.0_17)
+1052 DEBUG [2017-07-20 09:43:21]   >> "requestNo=20170720094320837UftCHE52FBWbNXL&version=V2.0&productId=0115&transId=10&merNo=850440059441318&orderDate=20170720&orderNo=MA2017072009432000330019&returnUrl=111&notifyUrl=https%3A%2F%2Fwww.baidu.com&transAmt=1&commodityName=test&storeId=S_001&terminalId=T_001&userid=18373551095&signature=d3rCkGEU1vrgznFldir6%2FLvMFx6QFLHfMXU567f%2FUSJDf6oM%2Bowet5x3kBwWgzZMgC5GfgwAxaEyd%2FkYPRAeqNamYEw2x7kQHkwE%2Bau1zlWiPcd4y9%2BNgNMcR2rY0WHL4dLFaPgtiMhhFa%2FHSF8NFKjxAY14RU0jYITMf20OwoK2hNCDEG8JBSlAjvUwTNAsGy7YHc4rFPCzWP9hqe1L5JgEG2Et%2B4P42NoJzGZEy4a9ZF2kMx5FLNJDeUUHAx8sX8wBXvuIr5Ptk%2BsJ8qkc76deU2%2BzNbCiiL1eHX%2BAoTlBvXbOIT0GM46vUcm112jIWAnvDVJrM9FSIgRMIfeWQA%3D%3D"
+2017 DEBUG [2017-07-20 09:43:22]   << "HTTP/1.1 200 OK[\r][\n]"
+2017 DEBUG [2017-07-20 09:43:22]   << "Server: Apache-Coyote/1.1[\r][\n]"
+2017 DEBUG [2017-07-20 09:43:22]   << "Content-Type: text/html;charset=UTF-8[\r][\n]"
+2017 DEBUG [2017-07-20 09:43:22]   << "Transfer-Encoding: chunked[\r][\n]"
+2017 DEBUG [2017-07-20 09:43:22]   << "Date: Thu, 20 Jul 2017 01:41:29 GMT[\r][\n]"
+2017 DEBUG [2017-07-20 09:43:22]   << "Connection: Keep-Alive[\r][\n]"
+2017 DEBUG [2017-07-20 09:43:22]   << "Set-Cookie: JSESSIONID=1D0322633C83929329FB6DE2A36DABCF; Path=/payment-gate-web/; HttpOnly[\r][\n]"
+2017 DEBUG [2017-07-20 09:43:22]   << "Set-Cookie: BIGipServerDLWG-GZwukazhifu_443_pool=767034309.20480.0000; path=/[\r][\n]"
+2017 DEBUG [2017-07-20 09:43:22]   << "[\r][\n]"
+2033 DEBUG [2017-07-20 09:43:22]  Receiving response: HTTP/1.1 200 OK
+2033 DEBUG [2017-07-20 09:43:22]  << HTTP/1.1 200 OK
+2033 DEBUG [2017-07-20 09:43:22]  << Server: Apache-Coyote/1.1
+2033 DEBUG [2017-07-20 09:43:22]  << Content-Type: text/html;charset=UTF-8
+2033 DEBUG [2017-07-20 09:43:22]  << Transfer-Encoding: chunked
+2033 DEBUG [2017-07-20 09:43:22]  << Date: Thu, 20 Jul 2017 01:41:29 GMT
+2033 DEBUG [2017-07-20 09:43:22]  << Connection: Keep-Alive
+2033 DEBUG [2017-07-20 09:43:22]  << Set-Cookie: JSESSIONID=1D0322633C83929329FB6DE2A36DABCF; Path=/payment-gate-web/; HttpOnly
+2033 DEBUG [2017-07-20 09:43:22]  << Set-Cookie: BIGipServerDLWG-GZwukazhifu_443_pool=767034309.20480.0000; path=/
+2033 DEBUG [2017-07-20 09:43:22]  Cookie accepted [JSESSIONID="1D0322633C83929329FB6DE2A36DABCF", version:0, domain:gzwkzftest.cmbc.com.cn, path:/payment-gate-web/, expiry:null]
+2033 DEBUG [2017-07-20 09:43:22]  Cookie accepted [BIGipServerDLWG-GZwukazhifu_443_pool="767034309.20480.0000", version:0, domain:gzwkzftest.cmbc.com.cn, path:/, expiry:null]
+2033 DEBUG [2017-07-20 09:43:22]  Connection can be kept alive indefinitely
+2065 DEBUG [2017-07-20 09:43:22]   << "2a1[\r][\n]"
+2065 DEBUG [2017-07-20 09:43:22]   << "commodityName=test&merNo=850440059441318&notifyUrl=https://www.baidu.com&orderDate=20170720&orderNo=MA2017072009432000330019&productId=0115&requestNo=20170720094320837UftCHE52FBWbNXL&respCode=40004&respDesc=[0xe5][0x8f][0x82][0xe6][0x95][0xb0][0xe6][0x97][0xa0][0xe6][0x95][0x88]&returnUrl=111&storeId=S_001&terminalId=T_001&transAmt=1&transId=10&userid=18373551095&version=V2.0&signature=Jsf4bPYeHRJzPc7Rt7ZtPFMCNRWYXhKfyVqNoy+r7ikeJJwHWSCWBOFEd9ik9+q0KKC0T0jQtDBwbSTDLOMtWPwFw/eLfc9ubXOnxw6g0fpM0LuF58EBmFS6q4zjobdCfd5HFp1lKf/w62Z+r9dly2lg6/cfT2ogLBnHdSqt2WEO25hslrNMH/8PIwZDRtoHosYXcDnZPUeHmWCT8UaZasZnTASwWJT3k1BWNUnPKFNAMofNQmtAwLPtGMpQowLQsZMaIznZuT/GyPxnVfZIMjDyu1TXb7mERsPp4+eEZ4RwvW9m5EpbPw0jlY0XbD4zM77MZGeX00trh/dB2w+i0w=="
+2065 DEBUG [2017-07-20 09:43:22]   << "[\r][\n]"
+2065 DEBUG [2017-07-20 09:43:22]   << "0[\r][\n]"
+2065 DEBUG [2017-07-20 09:43:22]   << "[\r][\n]"
+2065 DEBUG [2017-07-20 09:43:22]  Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@57e4bfbe
+2065 DEBUG [2017-07-20 09:43:22]  Connection can be kept alive indefinitely
+2065 INFO  [2017-07-20 09:43:22]  >>>>>>>>>>>>>>>>>>响应数据=>commodityName=test&merNo=850440059441318&notifyUrl=https://www.baidu.com&orderDate=20170720&orderNo=MA2017072009432000330019&productId=0115&requestNo=20170720094320837UftCHE52FBWbNXL&respCode=40004&respDesc=参数无效&returnUrl=111&storeId=S_001&terminalId=T_001&transAmt=1&transId=10&userid=18373551095&version=V2.0&signature=Jsf4bPYeHRJzPc7Rt7ZtPFMCNRWYXhKfyVqNoy+r7ikeJJwHWSCWBOFEd9ik9+q0KKC0T0jQtDBwbSTDLOMtWPwFw/eLfc9ubXOnxw6g0fpM0LuF58EBmFS6q4zjobdCfd5HFp1lKf/w62Z+r9dly2lg6/cfT2ogLBnHdSqt2WEO25hslrNMH/8PIwZDRtoHosYXcDnZPUeHmWCT8UaZasZnTASwWJT3k1BWNUnPKFNAMofNQmtAwLPtGMpQowLQsZMaIznZuT/GyPxnVfZIMjDyu1TXb7mERsPp4+eEZ4RwvW9m5EpbPw0jlY0XbD4zM77MZGeX00trh/dB2w+i0w==
+2065 INFO  [2017-07-20 09:43:22]  >>>>>>>>响应信息=>40004-参数无效
+0    INFO  [2017-07-24 09:37:56]  >>>>>>>>>>>>>>>>>>组装签名串=>{orderDate=20170724, orderNo=20170724093756, requestNo=20170724093756889, transId=04, version=V2.0}
+176  INFO  [2017-07-24 09:37:57]  >>>>>>>>>>>>>>>>>>签名参数=>Tln1ISno8Sw0nasNbE9t1aDmXErYKiYqxahxiiUG4Wwrh2ogQI24B9+eBumIqD/c+rr2DopmkRbhLuonF1llXhQGJatOZW4pYly8mRHz4Uz0Xd/CJDEvd8+QKYF1Q3Oz3iQaM0KPFUP9g83pKC1cGgiCOlwXdYnJkknVfI68N5+mCK8kxcl0dZY3dPV9GS8VOnY55YQTtmpk2KyR6HlCqvWoFTQUx6Eww3q+qPtA5hyu6MSGAjDGJXgj25pZfj1sUXj8bCCiMv20FxZeOx56HlxMvqXTFhRzIaSjsVZpfKYVV0HLSFUqS9gVM/SHvgxUvfyEv0iW6VWskCPqniBf6g==
+0    INFO  [2017-07-24 09:39:01]  >>>>>>>>>>>>>>>>>>组装签名串=>{merNo=850440059441318, orderDate=20170724, orderNo=20170724093901, requestNo=20170724093901661, transId=04, version=V2.0}
+165  INFO  [2017-07-24 09:39:01]  >>>>>>>>>>>>>>>>>>签名参数=>E7rzkq0difQpyiFaa7/t+tnoC/LVEbHEhiJzHHlpYCIFwD+jmBbCjTznVSgJmq/H0yt2clIYKJQ5fROKtu+dqYmlf8lz1NcYyDgKAol/+DJhm3onCT/o3VA95M7GPgoAfD5xw+wSbhTvjrI5/HIqny/ekZV1vfeOnWREqvO4ubu923ogTXUbh0EzLVBr8sFIIyYXtJxDqE27JC1earStobk87wNMgpjmjyHg3c2fa4NytLyEVPfHgLNNqCFY1IyfCIM2QGJlikq14rpSE/wdl+LNLtg+Q0gdAzgTJT/55ZYYaFgbQnRptTA5hEjdW0jKRptVQzS1rrKjYbZ+kXv42g==
+0    INFO  [2017-07-24 09:39:44]  >>>>>>>>>>>>>>>>>>组装签名串=>{commodityName=test, merNo=850440059441318, notifyUrl=https://www.baidu.com, orderDate=20170724, orderNo=MA201707240939440043371, productId=0115, requestNo=201707240939449501HGWEgBBfWEIzsM, returnUrl=111, storeId=S_001, terminalId=T_001, transAmt=1, transId=10, userid=18373551095, version=V2.0}
+169  INFO  [2017-07-24 09:39:45]  >>>>>>>>>>>>>>>>>>签名参数=>Hw/UEisPsqk1DfpwBWQRWrTq3XlfAtXKoqh23pRBxqKkRYXCAcon4VbUemuZIhKepicT9x5IKn5QSot97+69qFF8b9zogRcGhc0nN+Z3vYxtM51/ApQ1x/anbLTcgSPaq+KHuSHuLQX/auVhAuO9QiW1x8uS/LECu635xlY/+YW9dhpmM9Loq67cKbKc0v70m3RBpPxT/hlf3eWLxywLX0lNh6iqPEtCvAWktXdww2c4d9KLCFcNu93NmE4iO/SeNufIgBQKNPP0mKrEX5NiNSoOLUmvLhRIKjeX2Zs3PquU0DgALC3/2Ma713JS21AIufNEjOmBY8Gn+zeu6WYSWA==
+0    INFO  [2017-07-24 09:40:11]  >>>>>>>>>>>>>>>>>>组装签名串=>{merNo=850440059441318, orderDate=20170724, orderNo=20170724094011, requestNo=20170724094011204, transId=04, version=V2.0}
+158  INFO  [2017-07-24 09:40:11]  >>>>>>>>>>>>>>>>>>签名参数=>dwhFlzM2A9pgXgjJWkuq6csIjEd5IQt9rCJcpIX9q3jyN7QASRsWqCgkomsjT4C03Ac60G0OOXTHkpinw845LxHt42MyD1BzxExHkNGGVr/1+s4uhhCbQ/msBkUajQxEyKizLgY013K11FV376+prFOjZmNs0sYFMBCb9f0gVx5shsmLKvRlVm2ihaKtyuCrIIH7c55hpfTC9Cjri5ByVku8Ko7yzb1mkFI0w4pUQicalsjla/yo8GzYF2msAXepVXUbQA4YEvTIJxJCFlUgdMANRbnpSlqM1rG0m4pjseau5CmGK50p8KACXp4ww20whT1riXdJWfSZg9lROfQDzA==
+0    INFO  [2017-07-24 09:40:57]  >>>>>>>>>>>>>>>>>>组装签名串=>{commodityName=test, merNo=850440059441318, notifyUrl=https://www.baidu.com, orderDate=20170724, orderNo=MA2017072409405700496229, productId=0115, requestNo=20170724094057067952RafSztGk7ZQI, returnUrl=111, storeId=S_001, terminalId=T_001, transAmt=1, transId=10, userid=18373551095, version=V2.0}
+160  INFO  [2017-07-24 09:40:57]  >>>>>>>>>>>>>>>>>>签名参数=>YqeYg2dMBa+Z9pWzDHuo963A0QutQDE4+6rjiFbEUy7TuDZRxPehc4DoofigF4nkEcxEHKIKp/OxopbURUFviM3JIjmYAB6/oRWZ3q6Wg5JmvtaCJ+ya6c9iCDVigNeSD+xF6WLOc1y6ruKcyfjHqcu+tostfsb6e6C90f6NZlqLod3ugK04sQBNpV5cGVWv+265V2sApDanhuDb2YME+b94YxL8j8n5WTTz/IvK3HQ05v5C29NI1vm8qEEL6PW8Z9Wrz4FWcoTw5cSaIV9nEFogobtRUBnxx3GWm88qg80yyt4Tw5VThn33UX0EF2FXM8tXN3USeXJBpvLvvRm/cw==
+0    INFO  [2017-07-24 09:43:09]  >>>>>>>>>>>>>>>>>>组装签名串=>{commodityName=test, merNo=850440059441318, notifyUrl=https://www.baidu.com, orderDate=20170724, orderNo=MA201707240943090042559, productId=0115, requestNo=20170724094309068kAD0ljRGvPEzKyK, returnUrl=111, storeId=S_001, terminalId=T_001, transAmt=1, transId=10, userid=18373551095, version=V2.0}
+164  INFO  [2017-07-24 09:43:09]  >>>>>>>>>>>>>>>>>>签名参数=>CfP935lFCHo25Mta3nLslBxeyjM0+1HFRSbWGPBDNtInb9g0ReebKn5EpKqfZGmjXRrzHRUgFSba4uswfSYGh116yF/L4Tu63MS/ELM/UKGjZvsOt+leXfO2+FPHpK7BlRXiW7fsBLKY9spM7IFt0Z1E72UEAZxfwE+q/jkq+rjer3TqEHkDrp53X98KNE8MPIh1gFaQhxznFESEKyxko7tUtYT94WbpN0Ffpn42lpIVYmxWgEiMnJjAr6vCh/1CVvimT8Lq5ar7zNYI7ptG7Q6wxFb3d1erYwgdb0VevCOG84VKquQPcMBxWSQr7eoo/JAss7lW3SLVDWYqgD6i+Q==
+0    INFO  [2017-07-25 11:48:35]  >>>>>>>>>>>>>>>>>>组装签名串=>{merNo=850440059441318, requestNo=20170725114835556rGGnjMkbb184zHt, transId=09, version=V2.0}
+144  ERROR [2017-07-25 11:48:35]  --商户余额查询接口请求失败--
+0    INFO  [2017-07-25 11:50:57]  >>>>>>>>>>>>>>>>>>组装签名串=>{merNo=MIIEpAIBAAKCAQEAgdn1Ym7fJiL9oN3K6Mat0LSdCVM/E0Pt8tAJap+CuX7jkcn7C/nx5pJUskyIukhcSyLx5sqsoUIYSOQDTEYHGNb9znbbskgvuPXKuV5crsHbUuFkfE5VYICB3Cui71EsQvL68Lvz9VeuCeSrIAAnrq1FXoTMOXiqV8Niw1TOwnlM494H8B0Oo+wKy5Ax5MceNWjCw8d/vhZv7vR9z4a4Gc3TNoT+jJNs9ABG0Z3zEdo6y1f/9FRPT5KTYln2RzseyaYSxpv82XD1CWFx8RL/n/4MUuNJ1u7gQB5B1gRQnDcm43iIit5kfmfRvTjZI4QCoGR3g5oldkfUBLXfyqhsawIDAQABAoIBAEzmY6gzuPvA5SuLrktEvlNHY2jOYCBsrlKKWclHRgfM2cDROVfSYiwGpRoisSaBDAeDXncruCiYGAGy5zEYl8NiL1VClsFydrC2/6Pf+kuUiur+iKAFVBKeiEl3njrUe736YBqJdOTrVCqPvbhp3xZXjyl2w+uVRmxLTgYYB4qroNB6XyIs2Er3Seem13/pFUM+nHFaFoX6qdqnlfYQGSPMioN8gl1hXGpMusXdATmyaS3xYgozCh4/pY5YqdwJkXCvP5oOHLoDhC/2kZ7K3DLIGejsDZ6TyyRNnu++h3CCdmjO2u8t9FV2y7eFOhYLFmx6RmoXH7tdo+2Lnm5nekECgYEA+fBFpEQ08KFgxEbRgo45Vm9wpjKeOabZYF5uHZCPmDT+Inr7AGFIZ+perMIRMPElIkBXYOr9OzEmxQsRhG1pIPisZKHP86pugMOoz+WciwFcltW5kzdWBXyaCWqbNyFmLapP1fqYrgYatpGTwm7qMSy4IeKlK1sHP5hp6LHbjXkCgYEAhQAiAju5S+Rqr5yC9UNKOwqDvFHnLwf0YAabvhufxhWwYljD60QYbjRxvCGZAZ2BEyiMYA/FR9/8Y69xO378P4yjI+KW2sYo2qumNPCMXE89kOvNgyh3QcO/uGx7jAssvie8ylJe3AtDd+S+9dzavr+uAQOfFhwCImzGTlxG5AMCgYEAldQye1mj/shPEPp/J+uIdcdSWV8ouNjLoNia3EBHxG+oFRVyGHU5CYpW/OtNkPBOWW0GtIPKEEzTt/V9p8xK5EgOWDkkRybZHXmtXguAP1guoAE5QQZAHAPo91If//mWnjNlrpmOI2xnYSB92mXRIG91ZmLOruHfw4DjpGnSeskCgYARWfEV5YDJG+WnP33+TWcTyM1i9jR4+EqzdGlBJg10JEQ8sGPu/5VIW2MzLhbuFQRP4Yxew+/y7o/Y2XymTGzQRaLK/ba8l/mgfaBTa8aEDHp1u622HMNiOw16G/0KSjLuI/UHWDOz9Ww56gfXv5ZyKEOlMjnBAqpsn1BHzNYazQKBgQD4/yMNzs4p6tG7QrZZR35nPz9Mm9xT31vEljFmy8dGCBP/WnGBVwy8ZcAgI+qqql91iktY6EjITG8rIv7AzjqlNgUXWNOADWQKSbrKtqMJ6mqWXsfbWLPS6q5FVoopwMhC8P47D18ZhbjYrZnz5itW8+fWv6+WCAyh99v14h4GKA==, requestNo=20170725115057796lhHGbwUGFcq5CHy, transId=09, version=V2.0}
+146  ERROR [2017-07-25 11:50:57]  --商户余额查询接口请求失败--
+0    INFO  [2017-07-25 11:53:26]  >>>>>>>>>>>>>>>>>>组装签名串=>{merNo=850440059441318, requestNo=20170725115326224UcAqnoJ0RndF6TV, transId=09, version=V2.0}
+1    INFO  [2017-07-25 11:53:26]  >>>>>>>>>>>>>>>>>>私钥地址=>E:/workspace/qhjys_mall_action/WebContent/WEB-INF/classes/MIIEpAIBAAKCAQEAgdn1Ym7fJiL9oN3K6Mat0LSdCVM/E0Pt8tAJap+CuX7jkcn7C/nx5pJUskyIukhcSyLx5sqsoUIYSOQDTEYHGNb9znbbskgvuPXKuV5crsHbUuFkfE5VYICB3Cui71EsQvL68Lvz9VeuCeSrIAAnrq1FXoTMOXiqV8Niw1TOwnlM494H8B0Oo+wKy5Ax5MceNWjCw8d/vhZv7vR9z4a4Gc3TNoT+jJNs9ABG0Z3zEdo6y1f/9FRPT5KTYln2RzseyaYSxpv82XD1CWFx8RL/n/4MUuNJ1u7gQB5B1gRQnDcm43iIit5kfmfRvTjZI4QCoGR3g5oldkfUBLXfyqhsawIDAQABAoIBAEzmY6gzuPvA5SuLrktEvlNHY2jOYCBsrlKKWclHRgfM2cDROVfSYiwGpRoisSaBDAeDXncruCiYGAGy5zEYl8NiL1VClsFydrC2/6Pf+kuUiur+iKAFVBKeiEl3njrUe736YBqJdOTrVCqPvbhp3xZXjyl2w+uVRmxLTgYYB4qroNB6XyIs2Er3Seem13/pFUM+nHFaFoX6qdqnlfYQGSPMioN8gl1hXGpMusXdATmyaS3xYgozCh4/pY5YqdwJkXCvP5oOHLoDhC/2kZ7K3DLIGejsDZ6TyyRNnu++h3CCdmjO2u8t9FV2y7eFOhYLFmx6RmoXH7tdo+2Lnm5nekECgYEA+fBFpEQ08KFgxEbRgo45Vm9wpjKeOabZYF5uHZCPmDT+Inr7AGFIZ+perMIRMPElIkBXYOr9OzEmxQsRhG1pIPisZKHP86pugMOoz+WciwFcltW5kzdWBXyaCWqbNyFmLapP1fqYrgYatpGTwm7qMSy4IeKlK1sHP5hp6LHbjXkCgYEAhQAiAju5S+Rqr5yC9UNKOwqDvFHnLwf0YAabvhufxhWwYljD60QYbjRxvCGZAZ2BEyiMYA/FR9/8Y69xO378P4yjI+KW2sYo2qumNPCMXE89kOvNgyh3QcO/uGx7jAssvie8ylJe3AtDd+S+9dzavr+uAQOfFhwCImzGTlxG5AMCgYEAldQye1mj/shPEPp/J+uIdcdSWV8ouNjLoNia3EBHxG+oFRVyGHU5CYpW/OtNkPBOWW0GtIPKEEzTt/V9p8xK5EgOWDkkRybZHXmtXguAP1guoAE5QQZAHAPo91If//mWnjNlrpmOI2xnYSB92mXRIG91ZmLOruHfw4DjpGnSeskCgYARWfEV5YDJG+WnP33+TWcTyM1i9jR4+EqzdGlBJg10JEQ8sGPu/5VIW2MzLhbuFQRP4Yxew+/y7o/Y2XymTGzQRaLK/ba8l/mgfaBTa8aEDHp1u622HMNiOw16G/0KSjLuI/UHWDOz9Ww56gfXv5ZyKEOlMjnBAqpsn1BHzNYazQKBgQD4/yMNzs4p6tG7QrZZR35nPz9Mm9xT31vEljFmy8dGCBP/WnGBVwy8ZcAgI+qqql91iktY6EjITG8rIv7AzjqlNgUXWNOADWQKSbrKtqMJ6mqWXsfbWLPS6q5FVoopwMhC8P47D18ZhbjYrZnz5itW8+fWv6+WCAyh99v14h4GKA==
+125  ERROR [2017-07-25 11:53:26]  --商户余额查询接口请求失败--

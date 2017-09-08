@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.FqStoreRateVoMapper" >
+
+	<select id="queryFqStoreRateVo" resultType="cn.qhjys.mall.vo.system.FqStoreRateVo">
+		select 
+			id as id,
+			rate_name as rateName,
+			admin_username as adminUserName,
+			wechat_base_rate as wechatBaseRate,
+			wechat_append_rate as wechatAppendRate,
+			wechat_append_money as wechatAppendMoney,
+			alipay_base_rate as alipayBaseRate,
+			alipay_append_rate as alipayAppendRate,
+			alipay_append_money as alipayAppendMoney,
+			qqpay_base_rate as qqpayBaseRate,
+			qqpay_append_rate as qqpayAppendRate,
+			qqpay_append_money as qqpayAppendMoney,
+			create_time as createTime
+			from
+			fq_store_rate
+		WHERE 1=1
+		<if test="rateName != null"> 
+		 	 AND rate_name like CONCAT('%',#{rateName},'%')
+		 </if>
+		 <if test="startTime != null">
+		 	 AND create_time &gt;= #{startTime,jdbcType=DATE}
+		 </if>
+		 <if test="endTime != null">
+		 	 AND create_time &lt;= #{endTime,jdbcType=DATE}
+		 </if>
+		ORDER BY create_time DESC
+	</select>
+</mapper>

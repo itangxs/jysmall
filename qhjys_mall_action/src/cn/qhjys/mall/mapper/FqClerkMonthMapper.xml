@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.FqClerkMonthMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.FqClerkMonth" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="clerk_time" property="clerkTime" jdbcType="DATE" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="branch_id" property="branchId" jdbcType="BIGINT" />
+    <result column="branch_name" property="branchName" jdbcType="VARCHAR" />
+    <result column="team_id" property="teamId" jdbcType="BIGINT" />
+    <result column="team_name" property="teamName" jdbcType="VARCHAR" />
+    <result column="clerk_id" property="clerkId" jdbcType="BIGINT" />
+    <result column="clerk_name" property="clerkName" jdbcType="VARCHAR" />
+    <result column="count_month" property="countMonth" jdbcType="VARCHAR" />
+    <result column="signed_num" property="signedNum" jdbcType="INTEGER" />
+    <result column="effective_num" property="effectiveNum" jdbcType="INTEGER" />
+    <result column="total_money" property="totalMoney" jdbcType="DECIMAL" />
+    <result column="cash_money" property="cashMoney" jdbcType="DECIMAL" />
+    <result column="clerk_money" property="clerkMoney" jdbcType="DECIMAL" />
+    <result column="team_money" property="teamMoney" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, clerk_time, province_id, province_name, city_id, city_name, branch_id, branch_name, 
+    team_id, team_name, clerk_id, clerk_name, count_month, signed_num, effective_num, 
+    total_money, cash_money, clerk_money, team_money, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.FqClerkMonthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fq_clerk_month
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fq_clerk_month
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fq_clerk_month
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.FqClerkMonthExample" >
+    delete from fq_clerk_month
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.FqClerkMonth" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fq_clerk_month (clerk_time, province_id, province_name, 
+      city_id, city_name, branch_id, 
+      branch_name, team_id, team_name, 
+      clerk_id, clerk_name, count_month, 
+      signed_num, effective_num, total_money, 
+      cash_money, clerk_money, team_money, 
+      create_time)
+    values (#{clerkTime,jdbcType=DATE}, #{provinceId,jdbcType=BIGINT}, #{provinceName,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=BIGINT}, #{cityName,jdbcType=VARCHAR}, #{branchId,jdbcType=BIGINT}, 
+      #{branchName,jdbcType=VARCHAR}, #{teamId,jdbcType=BIGINT}, #{teamName,jdbcType=VARCHAR}, 
+      #{clerkId,jdbcType=BIGINT}, #{clerkName,jdbcType=VARCHAR}, #{countMonth,jdbcType=VARCHAR}, 
+      #{signedNum,jdbcType=INTEGER}, #{effectiveNum,jdbcType=INTEGER}, #{totalMoney,jdbcType=DECIMAL}, 
+      #{cashMoney,jdbcType=DECIMAL}, #{clerkMoney,jdbcType=DECIMAL}, #{teamMoney,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.FqClerkMonth" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fq_clerk_month
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clerkTime != null" >
+        clerk_time,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="branchId != null" >
+        branch_id,
+      </if>
+      <if test="branchName != null" >
+        branch_name,
+      </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+      <if test="teamName != null" >
+        team_name,
+      </if>
+      <if test="clerkId != null" >
+        clerk_id,
+      </if>
+      <if test="clerkName != null" >
+        clerk_name,
+      </if>
+      <if test="countMonth != null" >
+        count_month,
+      </if>
+      <if test="signedNum != null" >
+        signed_num,
+      </if>
+      <if test="effectiveNum != null" >
+        effective_num,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+      <if test="cashMoney != null" >
+        cash_money,
+      </if>
+      <if test="clerkMoney != null" >
+        clerk_money,
+      </if>
+      <if test="teamMoney != null" >
+        team_money,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clerkTime != null" >
+        #{clerkTime,jdbcType=DATE},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        #{branchId,jdbcType=BIGINT},
+      </if>
+      <if test="branchName != null" >
+        #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamId != null" >
+        #{teamId,jdbcType=BIGINT},
+      </if>
+      <if test="teamName != null" >
+        #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkId != null" >
+        #{clerkId,jdbcType=BIGINT},
+      </if>
+      <if test="clerkName != null" >
+        #{clerkName,jdbcType=VARCHAR},
+      </if>
+      <if test="countMonth != null" >
+        #{countMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="signedNum != null" >
+        #{signedNum,jdbcType=INTEGER},
+      </if>
+      <if test="effectiveNum != null" >
+        #{effectiveNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cashMoney != null" >
+        #{cashMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="clerkMoney != null" >
+        #{clerkMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="teamMoney != null" >
+        #{teamMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.FqClerkMonthExample" resultType="java.lang.Integer" >
+    select count(*) from fq_clerk_month
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fq_clerk_month
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.clerkTime != null" >
+        clerk_time = #{record.clerkTime,jdbcType=DATE},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="record.provinceName != null" >
+        province_name = #{record.provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityId != null" >
+        city_id = #{record.cityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.cityName != null" >
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchId != null" >
+        branch_id = #{record.branchId,jdbcType=BIGINT},
+      </if>
+      <if test="record.branchName != null" >
+        branch_name = #{record.branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teamId != null" >
+        team_id = #{record.teamId,jdbcType=BIGINT},
+      </if>
+      <if test="record.teamName != null" >
+        team_name = #{record.teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clerkId != null" >
+        clerk_id = #{record.clerkId,jdbcType=BIGINT},
+      </if>
+      <if test="record.clerkName != null" >
+        clerk_name = #{record.clerkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countMonth != null" >
+        count_month = #{record.countMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signedNum != null" >
+        signed_num = #{record.signedNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.effectiveNum != null" >
+        effective_num = #{record.effectiveNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalMoney != null" >
+        total_money = #{record.totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cashMoney != null" >
+        cash_money = #{record.cashMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.clerkMoney != null" >
+        clerk_money = #{record.clerkMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.teamMoney != null" >
+        team_money = #{record.teamMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fq_clerk_month
+    set id = #{record.id,jdbcType=BIGINT},
+      clerk_time = #{record.clerkTime,jdbcType=DATE},
+      province_id = #{record.provinceId,jdbcType=BIGINT},
+      province_name = #{record.provinceName,jdbcType=VARCHAR},
+      city_id = #{record.cityId,jdbcType=BIGINT},
+      city_name = #{record.cityName,jdbcType=VARCHAR},
+      branch_id = #{record.branchId,jdbcType=BIGINT},
+      branch_name = #{record.branchName,jdbcType=VARCHAR},
+      team_id = #{record.teamId,jdbcType=BIGINT},
+      team_name = #{record.teamName,jdbcType=VARCHAR},
+      clerk_id = #{record.clerkId,jdbcType=BIGINT},
+      clerk_name = #{record.clerkName,jdbcType=VARCHAR},
+      count_month = #{record.countMonth,jdbcType=VARCHAR},
+      signed_num = #{record.signedNum,jdbcType=INTEGER},
+      effective_num = #{record.effectiveNum,jdbcType=INTEGER},
+      total_money = #{record.totalMoney,jdbcType=DECIMAL},
+      cash_money = #{record.cashMoney,jdbcType=DECIMAL},
+      clerk_money = #{record.clerkMoney,jdbcType=DECIMAL},
+      team_money = #{record.teamMoney,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.FqClerkMonth" >
+    update fq_clerk_month
+    <set >
+      <if test="clerkTime != null" >
+        clerk_time = #{clerkTime,jdbcType=DATE},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        branch_id = #{branchId,jdbcType=BIGINT},
+      </if>
+      <if test="branchName != null" >
+        branch_name = #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamId != null" >
+        team_id = #{teamId,jdbcType=BIGINT},
+      </if>
+      <if test="teamName != null" >
+        team_name = #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkId != null" >
+        clerk_id = #{clerkId,jdbcType=BIGINT},
+      </if>
+      <if test="clerkName != null" >
+        clerk_name = #{clerkName,jdbcType=VARCHAR},
+      </if>
+      <if test="countMonth != null" >
+        count_month = #{countMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="signedNum != null" >
+        signed_num = #{signedNum,jdbcType=INTEGER},
+      </if>
+      <if test="effectiveNum != null" >
+        effective_num = #{effectiveNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cashMoney != null" >
+        cash_money = #{cashMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="clerkMoney != null" >
+        clerk_money = #{clerkMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="teamMoney != null" >
+        team_money = #{teamMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.FqClerkMonth" >
+    update fq_clerk_month
+    set clerk_time = #{clerkTime,jdbcType=DATE},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=BIGINT},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      branch_id = #{branchId,jdbcType=BIGINT},
+      branch_name = #{branchName,jdbcType=VARCHAR},
+      team_id = #{teamId,jdbcType=BIGINT},
+      team_name = #{teamName,jdbcType=VARCHAR},
+      clerk_id = #{clerkId,jdbcType=BIGINT},
+      clerk_name = #{clerkName,jdbcType=VARCHAR},
+      count_month = #{countMonth,jdbcType=VARCHAR},
+      signed_num = #{signedNum,jdbcType=INTEGER},
+      effective_num = #{effectiveNum,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=DECIMAL},
+      cash_money = #{cashMoney,jdbcType=DECIMAL},
+      clerk_money = #{clerkMoney,jdbcType=DECIMAL},
+      team_money = #{teamMoney,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

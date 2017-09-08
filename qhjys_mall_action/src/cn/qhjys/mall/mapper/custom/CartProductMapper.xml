@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.CartProductMapper">
+	<select id="queryCartByUser" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.CartProdVo">
+		SELECT c.user_id                         AS userId,
+		       p.id                              AS prodId,
+		       p.name                            AS prodName,
+		       p.title                           AS prodShort,
+		       Substring_index(p.images, "|", 1) AS prodImg,
+		       p.prod_type                       AS prodType,
+		       c.prod_price                      AS prodPrice,
+		       c.prod_num                        AS prodNum,
+		       c.create_time                        AS createTime,
+		       p.max_pay                         AS maxPay,
+		       p.prod_stock                      AS prodStock,
+		       p.store_id AS stoId,
+		       s.id                        AS storeId,
+		       p.unit_price						 AS unitPrice,
+		       s.name 							 AS storeName,
+		       s.images							 AS storeImg
+		       
+		FROM   cart_info c
+		       LEFT JOIN product_info p
+		         ON c.prod_id = p.id 
+					 LEFT JOIN store_info s
+						 ON c.store_id = s.id
+		       
+		WHERE   c.user_id =  #{userId,jdbcType=BIGINT} AND  (p.status = 2
+		       AND p.enabled = 1  <![CDATA[AND (p.off_shelf IS NULL OR p.off_shelf >= NOW()) OR (s.enabled = 1 AND s.status =2 )]]>) 
+		       
+		       
+	</select>
+
+	<select id="hasSellProduct" parameterType="java.lang.Long" resultType="java.lang.Long">
+		SELECT COUNT(p.id) FROM product_info p
+		WHERE p.status = 2 AND p.enabled = 1
+			<![CDATA[AND (p.off_shelf IS NULL OR p.off_shelf >= NOW())]]>
+			AND p.id = #{prodId,jdbcType=BIGINT}
+	</select>
+
+	<select id="selectCouponByUser" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.CouponVo">
+		SELECT c.id           AS id,
+		       c.name         AS name,
+		       c.user_id      AS userId,
+		       c.store_id     AS storeId,
+		       s.name         AS storeName,
+		       c.prod_id      AS prodId,
+		       c.coupon_id    AS couponId,
+		       c.amount       AS amount,
+		       c.required     AS required,
+		       c.order_id     AS orderId,
+		       c.expire_time  AS expireTime,
+		       c.consume      AS consume,
+		       c.consume_ip   AS consumeIp,
+		       c.consume_time AS consumeTime
+		FROM   coupon_info c
+		       LEFT JOIN store_info s
+		         ON c.store_id = s.id
+		WHERE  user_id = #{userId,jdbcType=BIGINT}
+		       AND expire_time >= NOW()
+		       AND consume = 0
+	</select>
+
+	<select id="selectCartProdStoreByUser" parameterType="java.lang.Long"  resultType="java.lang.Long">
+		SELECT DISTINCT p.store_id
+		FROM   cart_info c
+		       JOIN product_info p
+		         ON c.prod_id = p.id
+		WHERE  c.user_id = #{userId,jdbcType=BIGINT}
+	</select>
+
+	<select id="selectCouponByExample" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.CouponVo">
+		SELECT id           AS id,
+		       name         AS name,
+		       user_id      AS userId,
+		       store_id     AS storeId,
+		       prod_id      AS prodId,
+		       coupon_id    AS couponId,
+		       amount       AS amount,
+		       required     AS required,
+		       order_id     AS orderId,
+		       expire_time  AS expireTime,
+		       consume      AS consume,
+		       consume_ip   AS consumeIp,
+		       consume_time AS consumeTime
+		FROM   coupon_info
+		WHERE  user_id = #{userId,jdbcType=BIGINT}
+		       AND consume = 0
+		       AND expire_time >= NOW()
+		       <if test="stores.size() > 0">
+		       		AND store_id IN
+		       		<foreach collection="stores" item="item" open="(" close=")" separator="," >#{item}</foreach>
+		       </if>
+	</select>
+
+</mapper>

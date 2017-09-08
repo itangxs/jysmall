@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.FqStoreRateMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.FqStoreRate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="rate_name" property="rateName" jdbcType="VARCHAR" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="admin_username" property="adminUsername" jdbcType="VARCHAR" />
+    <result column="wechat_base_rate" property="wechatBaseRate" jdbcType="DECIMAL" />
+    <result column="wechat_append_rate" property="wechatAppendRate" jdbcType="DECIMAL" />
+    <result column="wechat_append_money" property="wechatAppendMoney" jdbcType="DECIMAL" />
+    <result column="alipay_base_rate" property="alipayBaseRate" jdbcType="DECIMAL" />
+    <result column="alipay_append_rate" property="alipayAppendRate" jdbcType="DECIMAL" />
+    <result column="alipay_append_money" property="alipayAppendMoney" jdbcType="DECIMAL" />
+    <result column="qqpay_base_rate" property="qqpayBaseRate" jdbcType="DECIMAL" />
+    <result column="qqpay_append_rate" property="qqpayAppendRate" jdbcType="DECIMAL" />
+    <result column="qqpay_append_money" property="qqpayAppendMoney" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, rate_name, admin_id, admin_username, wechat_base_rate, wechat_append_rate, wechat_append_money, 
+    alipay_base_rate, alipay_append_rate, alipay_append_money, qqpay_base_rate, qqpay_append_rate, 
+    qqpay_append_money, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.FqStoreRateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fq_store_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fq_store_rate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fq_store_rate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.FqStoreRateExample" >
+    delete from fq_store_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.FqStoreRate" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fq_store_rate (rate_name, admin_id, admin_username, 
+      wechat_base_rate, wechat_append_rate, wechat_append_money, 
+      alipay_base_rate, alipay_append_rate, alipay_append_money, 
+      qqpay_base_rate, qqpay_append_rate, qqpay_append_money, 
+      create_time)
+    values (#{rateName,jdbcType=VARCHAR}, #{adminId,jdbcType=BIGINT}, #{adminUsername,jdbcType=VARCHAR}, 
+      #{wechatBaseRate,jdbcType=DECIMAL}, #{wechatAppendRate,jdbcType=DECIMAL}, #{wechatAppendMoney,jdbcType=DECIMAL}, 
+      #{alipayBaseRate,jdbcType=DECIMAL}, #{alipayAppendRate,jdbcType=DECIMAL}, #{alipayAppendMoney,jdbcType=DECIMAL}, 
+      #{qqpayBaseRate,jdbcType=DECIMAL}, #{qqpayAppendRate,jdbcType=DECIMAL}, #{qqpayAppendMoney,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.FqStoreRate" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fq_store_rate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rateName != null" >
+        rate_name,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="adminUsername != null" >
+        admin_username,
+      </if>
+      <if test="wechatBaseRate != null" >
+        wechat_base_rate,
+      </if>
+      <if test="wechatAppendRate != null" >
+        wechat_append_rate,
+      </if>
+      <if test="wechatAppendMoney != null" >
+        wechat_append_money,
+      </if>
+      <if test="alipayBaseRate != null" >
+        alipay_base_rate,
+      </if>
+      <if test="alipayAppendRate != null" >
+        alipay_append_rate,
+      </if>
+      <if test="alipayAppendMoney != null" >
+        alipay_append_money,
+      </if>
+      <if test="qqpayBaseRate != null" >
+        qqpay_base_rate,
+      </if>
+      <if test="qqpayAppendRate != null" >
+        qqpay_append_rate,
+      </if>
+      <if test="qqpayAppendMoney != null" >
+        qqpay_append_money,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rateName != null" >
+        #{rateName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="adminUsername != null" >
+        #{adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatBaseRate != null" >
+        #{wechatBaseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="wechatAppendRate != null" >
+        #{wechatAppendRate,jdbcType=DECIMAL},
+      </if>
+      <if test="wechatAppendMoney != null" >
+        #{wechatAppendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayBaseRate != null" >
+        #{alipayBaseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayAppendRate != null" >
+        #{alipayAppendRate,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayAppendMoney != null" >
+        #{alipayAppendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="qqpayBaseRate != null" >
+        #{qqpayBaseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="qqpayAppendRate != null" >
+        #{qqpayAppendRate,jdbcType=DECIMAL},
+      </if>
+      <if test="qqpayAppendMoney != null" >
+        #{qqpayAppendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.FqStoreRateExample" resultType="java.lang.Integer" >
+    select count(*) from fq_store_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fq_store_rate
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.rateName != null" >
+        rate_name = #{record.rateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminUsername != null" >
+        admin_username = #{record.adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechatBaseRate != null" >
+        wechat_base_rate = #{record.wechatBaseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wechatAppendRate != null" >
+        wechat_append_rate = #{record.wechatAppendRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wechatAppendMoney != null" >
+        wechat_append_money = #{record.wechatAppendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.alipayBaseRate != null" >
+        alipay_base_rate = #{record.alipayBaseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.alipayAppendRate != null" >
+        alipay_append_rate = #{record.alipayAppendRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.alipayAppendMoney != null" >
+        alipay_append_money = #{record.alipayAppendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.qqpayBaseRate != null" >
+        qqpay_base_rate = #{record.qqpayBaseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.qqpayAppendRate != null" >
+        qqpay_append_rate = #{record.qqpayAppendRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.qqpayAppendMoney != null" >
+        qqpay_append_money = #{record.qqpayAppendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fq_store_rate
+    set id = #{record.id,jdbcType=BIGINT},
+      rate_name = #{record.rateName,jdbcType=VARCHAR},
+      admin_id = #{record.adminId,jdbcType=BIGINT},
+      admin_username = #{record.adminUsername,jdbcType=VARCHAR},
+      wechat_base_rate = #{record.wechatBaseRate,jdbcType=DECIMAL},
+      wechat_append_rate = #{record.wechatAppendRate,jdbcType=DECIMAL},
+      wechat_append_money = #{record.wechatAppendMoney,jdbcType=DECIMAL},
+      alipay_base_rate = #{record.alipayBaseRate,jdbcType=DECIMAL},
+      alipay_append_rate = #{record.alipayAppendRate,jdbcType=DECIMAL},
+      alipay_append_money = #{record.alipayAppendMoney,jdbcType=DECIMAL},
+      qqpay_base_rate = #{record.qqpayBaseRate,jdbcType=DECIMAL},
+      qqpay_append_rate = #{record.qqpayAppendRate,jdbcType=DECIMAL},
+      qqpay_append_money = #{record.qqpayAppendMoney,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.FqStoreRate" >
+    update fq_store_rate
+    <set >
+      <if test="rateName != null" >
+        rate_name = #{rateName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="adminUsername != null" >
+        admin_username = #{adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatBaseRate != null" >
+        wechat_base_rate = #{wechatBaseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="wechatAppendRate != null" >
+        wechat_append_rate = #{wechatAppendRate,jdbcType=DECIMAL},
+      </if>
+      <if test="wechatAppendMoney != null" >
+        wechat_append_money = #{wechatAppendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayBaseRate != null" >
+        alipay_base_rate = #{alipayBaseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayAppendRate != null" >
+        alipay_append_rate = #{alipayAppendRate,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayAppendMoney != null" >
+        alipay_append_money = #{alipayAppendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="qqpayBaseRate != null" >
+        qqpay_base_rate = #{qqpayBaseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="qqpayAppendRate != null" >
+        qqpay_append_rate = #{qqpayAppendRate,jdbcType=DECIMAL},
+      </if>
+      <if test="qqpayAppendMoney != null" >
+        qqpay_append_money = #{qqpayAppendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.FqStoreRate" >
+    update fq_store_rate
+    set rate_name = #{rateName,jdbcType=VARCHAR},
+      admin_id = #{adminId,jdbcType=BIGINT},
+      admin_username = #{adminUsername,jdbcType=VARCHAR},
+      wechat_base_rate = #{wechatBaseRate,jdbcType=DECIMAL},
+      wechat_append_rate = #{wechatAppendRate,jdbcType=DECIMAL},
+      wechat_append_money = #{wechatAppendMoney,jdbcType=DECIMAL},
+      alipay_base_rate = #{alipayBaseRate,jdbcType=DECIMAL},
+      alipay_append_rate = #{alipayAppendRate,jdbcType=DECIMAL},
+      alipay_append_money = #{alipayAppendMoney,jdbcType=DECIMAL},
+      qqpay_base_rate = #{qqpayBaseRate,jdbcType=DECIMAL},
+      qqpay_append_rate = #{qqpayAppendRate,jdbcType=DECIMAL},
+      qqpay_append_money = #{qqpayAppendMoney,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

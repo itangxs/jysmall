@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+.memberright .tanchubutton {position: absolute;top: 20px;right: 20px;background: #F93;font-size: 13px;color: #fff;cursor: pointer;width: 100px;height: 35px;border: none;}
+.con-email4{ margin-right:20px;}
+.status{margin:0 auto;height:22px;display:inline-block; width:84px;}
+
+.start{ position:relative; width:22px; height:22px; float:left;}
+.pause{ position:relative; width:22px; height:22px; float:left; margin-left:9px;}
+.end{ position:relative; width:22px; height:22px; float:left; margin-left:9px;}
+.start-btn1{ width:22px; height:22px; position:absolute; left:0; top:0;}
+.start-btn2{ width:22px; height:22px; position:absolute; left:0; top:0;}
+.pause-btn1{width:22px; height:22px; position:absolute; left:0; top:0;}
+.pause-btn2{width:22px; height:22px; position:absolute; left:0; top:0;}
+.end-btn1{width:22px; height:22px; position:absolute; left:0; top:0;}
+.end-btn2{width:22px; height:22px; position:absolute; left:0; top:0;}
+
+#delete{ width:99px;height:27px; background-color:#63a0cd; border:none;color:white; font-size:16px;}
+
+
+.member_myorder table{ width:928px; margin-top:10px;}
+.member_myorder td{ border-bottom:1px solid #eee;padding:5px 0;}
+.member_myorder th{ background:#f7f6ed; line-height:30px; border-bottom:1px solid #eee; text-align:center;padding:5px 0;}
+.member_myorder .td80{ width:80px; text-align:center;}
+.member_myorder .td130{ width:130px; text-align:center;}
+.member_myorder .td200{ width:240px; text-align:center;}
+.submit8{height:30px;background:#64a1ce;color:#FFF; cursor:pointer;}
+
+
+
+

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.CouponInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.CouponInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="prod_id" property="prodId" jdbcType="BIGINT" />
+    <result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="required" property="required" jdbcType="DECIMAL" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="expire_time" property="expireTime" jdbcType="TIMESTAMP" />
+    <result column="consume" property="consume" jdbcType="BIT" />
+    <result column="consume_ip" property="consumeIp" jdbcType="VARCHAR" />
+    <result column="consume_time" property="consumeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, user_id, store_id, prod_id, coupon_id, amount, required, order_id, expire_time, 
+    consume, consume_ip, consume_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.CouponInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from coupon_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from coupon_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from coupon_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.CouponInfoExample" >
+    delete from coupon_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.CouponInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coupon_info (name, user_id, store_id, 
+      prod_id, coupon_id, amount, 
+      required, order_id, expire_time, 
+      consume, consume_ip, consume_time
+      )
+    values (#{name,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{storeId,jdbcType=BIGINT}, 
+      #{prodId,jdbcType=BIGINT}, #{couponId,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+      #{required,jdbcType=DECIMAL}, #{orderId,jdbcType=BIGINT}, #{expireTime,jdbcType=TIMESTAMP}, 
+      #{consume,jdbcType=BIT}, #{consumeIp,jdbcType=VARCHAR}, #{consumeTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.CouponInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coupon_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="prodId != null" >
+        prod_id,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="required != null" >
+        required,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="expireTime != null" >
+        expire_time,
+      </if>
+      <if test="consume != null" >
+        consume,
+      </if>
+      <if test="consumeIp != null" >
+        consume_ip,
+      </if>
+      <if test="consumeTime != null" >
+        consume_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="prodId != null" >
+        #{prodId,jdbcType=BIGINT},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="required != null" >
+        #{required,jdbcType=DECIMAL},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consume != null" >
+        #{consume,jdbcType=BIT},
+      </if>
+      <if test="consumeIp != null" >
+        #{consumeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeTime != null" >
+        #{consumeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.CouponInfoExample" resultType="java.lang.Integer" >
+    select count(*) from coupon_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update coupon_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.storeId != null" >
+        store_id = #{record.storeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.prodId != null" >
+        prod_id = #{record.prodId,jdbcType=BIGINT},
+      </if>
+      <if test="record.couponId != null" >
+        coupon_id = #{record.couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.required != null" >
+        required = #{record.required,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.expireTime != null" >
+        expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.consume != null" >
+        consume = #{record.consume,jdbcType=BIT},
+      </if>
+      <if test="record.consumeIp != null" >
+        consume_ip = #{record.consumeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumeTime != null" >
+        consume_time = #{record.consumeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update coupon_info
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      store_id = #{record.storeId,jdbcType=BIGINT},
+      prod_id = #{record.prodId,jdbcType=BIGINT},
+      coupon_id = #{record.couponId,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      required = #{record.required,jdbcType=DECIMAL},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
+      consume = #{record.consume,jdbcType=BIT},
+      consume_ip = #{record.consumeIp,jdbcType=VARCHAR},
+      consume_time = #{record.consumeTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.CouponInfo" >
+    update coupon_info
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="prodId != null" >
+        prod_id = #{prodId,jdbcType=BIGINT},
+      </if>
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="required != null" >
+        required = #{required,jdbcType=DECIMAL},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="expireTime != null" >
+        expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consume != null" >
+        consume = #{consume,jdbcType=BIT},
+      </if>
+      <if test="consumeIp != null" >
+        consume_ip = #{consumeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeTime != null" >
+        consume_time = #{consumeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.CouponInfo" >
+    update coupon_info
+    set name = #{name,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      store_id = #{storeId,jdbcType=BIGINT},
+      prod_id = #{prodId,jdbcType=BIGINT},
+      coupon_id = #{couponId,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      required = #{required,jdbcType=DECIMAL},
+      order_id = #{orderId,jdbcType=BIGINT},
+      expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      consume = #{consume,jdbcType=BIT},
+      consume_ip = #{consumeIp,jdbcType=VARCHAR},
+      consume_time = #{consumeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

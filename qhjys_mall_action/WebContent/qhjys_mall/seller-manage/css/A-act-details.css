@@ -1,0 +1,63 @@
+@charset "utf-8";
+
+body{ margin:0; color:#646464;}
+*{ font-family:"微软雅黑";}
+.content p,h1,h2{ margin:0;}
+
+button{ margin:0; padding:0;}
+img{ display:block; margin:0;}
+
+/*清除浮动影响*/
+.clearfix{ clear:both;}
+
+/*内容容器*/
+.content{ margin-top:38px; width:100%;}
+
+/*隐形辅助框*/
+.contact-box{ width:100%;line-height:32px;}
+.contact-box1{width:100%;margin:30px 0;}
+.contact-box2{width:100%;margin-bottom:50px; position:relative;}
+.contact-box3{width:100%; margin:60px 0 60px 0; position:relative;}
+
+
+
+/*内容左部分属性*/
+.left-part{ width:100px; float:left;}
+.left-part label{ float:right;font-weight:bold;}
+.left-part h2{ float:right; font-size:18px; font-weight:bold;color:#5e5e5e;}
+
+/*内容右部分部分属性*/
+.right-part{ width:814px; float:right;}
+.right-part span{ line-height:32px;font-size:16px;}
+.right-part p{line-height:32px;}
+
+
+
+/*微信抽奖次数*/
+.lottery span{ font-size:18px;color:#f4696e; font-weight:bold;}
+.lottery .number{width:68px; height:30px;border:1px #cccccc solid;}
+
+/*概率设定*/
+.setting1{ margin:20px 0 30px 0;}
+.setting1 .set01{ float:left;}
+.setting1 .set03{ float:left; margin-left:80px;}
+.setting1 label{ float:left; line-height:32px; font-size:14px; font-weight:bold;}
+.setting1 span{font-size:14px;}
+.setting1{ margin:20px 0 30px 0;}
+.setting2 .set02{ float:left;}
+.setting2 .set04{ float:left; margin-left:80px;}
+.setting2 label{ float:left; line-height:32px; font-size:14px; font-weight:bold;}
+.setting2 span{font-size:14px;}
+
+/*报表*/
+.contact-box3 p{ position:absolute;left:210px; top:36px;}
+.contact-box3 .memberright{ border:1px #edefee solid; width:900px;padding-left:0;overflow:hidden;}
+.contact-box3 .member_myorder img{ width:30px; height:30px; margin:0 auto;}
+
+
+
+
+/*确认、取消*/
+.contact-box3 #affirm{ width:154px; height:44px; background:#fa9722; color:white;border:none; font-size:18px;margin:0 160px 0 5px;}
+.contact-box3 #cancel{width:154px; height:44px; background:#64a1ce; color:white;border:none; font-size:18px;}
+

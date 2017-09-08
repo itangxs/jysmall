@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.FqStoreVoMapper">
+	<resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.FqStore">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="store_name" property="storeName" jdbcType="VARCHAR" />
+		<result column="store_logo" property="storeLogo" jdbcType="VARCHAR" />
+		<result column="activity_info" property="activityInfo"
+			jdbcType="VARCHAR" />
+		<result column="store_info" property="storeInfo" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="traffic_begin_time" property="trafficBeginTime"
+			jdbcType="VARCHAR" />
+		<result column="traffic_end_time" property="trafficEndTime"
+			jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="proportion" property="proportion" jdbcType="INTEGER" />
+		<result column="location_id" property="locationId" jdbcType="BIGINT" />
+		<result column="cuisine_id" property="cuisineId" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="seller_id" property="sellerId" jdbcType="BIGINT" />
+		<result column="store_rebate" property="storeRebate" jdbcType="DECIMAL" />
+		<result column="store_image" property="storeImage" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="FqStoreVoMap" type="cn.qhjys.mall.vo.FqStoreVo"
+		extends="BaseResultMap">
+		<result column="rebate_num" property="rebateNum" jdbcType="DECIMAL" />
+		<result column="rebate_id" property="rebateId" jdbcType="BIGINT" />
+	</resultMap>
+
+	<select id="selectByExample" parameterType="java.lang.Long"
+		resultMap="FqStoreVoMap">
+		SELECT rs.rebate_id AS rebate_id, COALESCE(rs.rebate,10) AS rebate_num,s.* FROM fq_store s LEFT
+		JOIN (SELECT fp.store_id AS store_id,COUNT(fp.id) AS product_num FROM
+		fq_product fp WHERE fp.`status` = 1 GROUP BY fp.store_id) p
+		ON s.id = p.store_id LEFT JOIN (SELECT sr.id as rebate_id,sr.rebate as rebate,sr.seller_id
+		AS seller_id FROM store_rebate sr WHERE sr.`status` = 1) rs ON
+		rs.seller_id = s.seller_id
+		WHERE 1 = 1
+		<if test="locationId != null">
+			AND s.location_id = #{locationId}
+		</if>
+		AND p.product_num >0
+		
+		order by s.level 
+	</select>
+</mapper>

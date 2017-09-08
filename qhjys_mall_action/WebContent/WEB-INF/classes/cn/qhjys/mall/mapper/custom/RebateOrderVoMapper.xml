@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.RebateOrderVoMapper" >
+	<resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.RebateOrder" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="rebate_id" property="rebateId" jdbcType="BIGINT" />
+    <result column="coupon_id" property="couponId" jdbcType="BIGINT" />
+    <result column="integral" property="integral" jdbcType="DECIMAL" />
+    <result column="pay_type" property="payType" jdbcType="TINYINT" />
+    <result column="need_pay" property="needPay" jdbcType="DECIMAL" />
+    <result column="real_pay" property="realPay" jdbcType="DECIMAL" />
+    <result column="totamt" property="totamt" jdbcType="DECIMAL" />
+    <result column="no_discount" property="noDiscount" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="headimgurl" property="headimgurl" jdbcType="VARCHAR" />
+    <result column="weixin_order_no" property="weixinOrderNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="RebateOrderVoMap" type="cn.qhjys.mall.vo.RebateOrderVo" extends="BaseResultMap" >
+     	 <result column="store_id" property="storeId" jdbcType="BIGINT" />
+	    <result column="rebate_name" property="rebateName" jdbcType="VARCHAR" />
+	    <result column="rebate" property="rebate" jdbcType="DECIMAL" />
+	    <result column="orther_rebate" property="ortherRebate" jdbcType="DECIMAL" />
+	     <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+	    <result column="store_logo" property="storeLogo" jdbcType="VARCHAR" />
+	    <result column="seller_id" property="sellerId" jdbcType="BIGINT" />
+	    <result column="bank_type" property="bankType" jdbcType="INTEGER" />
+	    <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="order_rate" property="orderRate" jdbcType="DECIMAL" />
+        <result column="rate_fee" property="rateFee" jdbcType="DECIMAL" />
+        <result column="is_cash" property="isCash" jdbcType="INTEGER" />
+        <result column="pay_num" property="payNum" jdbcType="INTEGER" />
+  </resultMap>
+	<select id="queryRebateOrderVo" parameterType="java.util.Map" resultMap="RebateOrderVoMap">
+		select sr.store_id AS store_id , sr.rebate_name AS rebate_name , sr.rebate AS rebate , sr.orther_rebate AS orther_rebate ,
+		si.name AS store_name,si.logo AS store_logo,si.seller_id AS seller_id,
+		ro.* FROM rebate_order ro LEFT JOIN store_rebate sr ON ro.rebate_id = sr.id 
+		LEFT JOIN store_info si ON sr.store_id = si.id
+		WHERE 1=1 
+		<if test="sellerId != null">
+			AND si.seller_id=#{sellerId,jdbcType=BIGINT}
+			</if>
+		<if test="orderNo != null">
+		 	 AND ro.order_no like CONCAT('%',#{orderNo},'%')
+		 </if>
+		<if test="storeName != null">
+		 	 AND si.name like CONCAT('%',#{storeName},'%')
+		 </if>
+		<if test="rebateName != null">
+		 	 AND ro.rebate_name like CONCAT('%',#{rebateName},'%')
+		 </if>
+		<if test="openId != null">
+		 	 AND ro.open_id like CONCAT('%',#{openId,jdbcType=VARCHAR},'%')
+		 </if>
+		<if test="nickname != null">
+		 	 AND ro.nickname like CONCAT('%',#{nickname,jdbcType=VARCHAR},'%')
+		 </if>
+		  <if test="startTime != null">
+		 	 AND ro.create_time &gt;= #{startTime,jdbcType=DATE}
+		 </if>
+		 <if test="endTime != null">
+		 	 AND ro.create_time &lt; #{endTime,jdbcType=DATE}
+		 </if>
+		  <if test="pstartTime != null">
+		 	 AND ro.pay_time &gt;= #{pstartTime,jdbcType=DATE}
+		 </if>
+		 <if test="pendTime != null">
+		 	 AND ro.pay_time &lt;= #{pendTime,jdbcType=DATE}
+		 </if>
+		 <if test="status != null">
+		 	 AND ro.status = #{status}
+		 </if>
+		 ORDER BY ro.create_time desc
+	</select>
+	<select id="queryRebateOrderVoByThird" parameterType="java.util.Map" resultMap="RebateOrderVoMap">
+		SELECT 
+		t.id AS id,
+		t.order_no AS order_no,
+		t.open_id AS open_id,
+		t.user_id AS user_id,
+		t.totamt AS totamt,
+		t.money AS real_pay,
+		COALESCE(t.order_rate,0.00) AS order_rate,
+		COALESCE(t.rate_fee,0.00) AS rate_fee,
+		t.bank_type AS bank_type,
+		t.pay_time AS pay_time,
+		t.type AS type,
+		t.sort AS sort,
+		s.id AS store_id,
+		s.`name`  AS store_name,
+		t.seller_id AS seller_id,
+		0 AS coupon_id,
+		0 AS integral,
+		0 AS no_discount,
+		t.is_cash AS is_cash,
+		t.pay_num AS pay_num
+		FROM fq_third_pay t 
+		LEFT JOIN store_info s ON t.seller_id = s.seller_id 
+		WHERE 1=1 
+		<if test="storeId != null">
+			AND s.id=#{storeId,jdbcType=BIGINT}
+		</if>
+		<if test="isCash != null">
+			AND t.is_cash=#{isCash,jdbcType=INTEGER}
+		</if>
+		<if test="payNum != null">
+			AND t.pay_num &gt;=#{payNum,jdbcType=INTEGER}
+		</if>
+		<if test="sellerId != null">
+			AND t.seller_id=#{sellerId,jdbcType=BIGINT}
+		</if>
+		<if test="orderNo != null">
+		 	 AND t.order_no like CONCAT('%',#{orderNo},'%')
+		 </if>
+		<if test="storeName != null">
+		 	 AND s.name like CONCAT('%',#{storeName},'%')
+		 </if>
+		
+		<if test="openId != null">
+		 	 AND t.open_id like CONCAT('%',#{openId,jdbcType=VARCHAR},'%')
+		 </if>
+		
+		  <if test="startTime != null">
+		 	 AND t.pay_time &gt;= #{startTime,jdbcType=DATE}
+		 </if>
+		 <if test="endTime != null">
+		 	 AND t.pay_time &lt; #{endTime,jdbcType=DATE}
+		 </if>
+		  <if test="pstartTime != null">
+		 	 AND t.pay_time &gt;= #{pstartTime,jdbcType=DATE}
+		 </if>
+		 <if test="pendTime != null">
+		 	 AND t.pay_time &lt;= #{pendTime,jdbcType=DATE}
+		 </if>
+		 <if test="bankType != null">
+		 	 AND t.bank_type = #{bankType,jdbcType=INTEGER}
+		 </if>
+		  <if test="type!= null and type.size() > 0">
+		       		AND t.type IN
+		       		<foreach collection="type" item="item" open="(" close=")" separator="," >#{item}</foreach>
+		       </if>
+		 <if test="sort != null">
+		 	 AND t.sort &lt;= #{sort,jdbcType=INTEGER}
+		 </if>
+		
+		 ORDER BY t.pay_time desc
+	</select>
+	<select id="queryStoreCountVo" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.StoreCountVo">
+		SELECT 
+			si.create_time AS createTime,
+			ft.branch_name AS branchName,
+			fc.team_name AS teamName,
+			fc.clerk AS clerk,
+			si.id AS storeId,
+			si.`name` AS storeName,
+			si.category_details AS categoryDetails,
+			fsr.rate_name AS rateName,
+			ftp.seller_id AS sellerId,
+			COUNT(1) AS totalNum,
+			SUM(IF(ftp.is_cash = 1,1,0)) AS cashNum,
+			SUM(ftp.money) AS totalMoney,
+			SUM(IF(ftp.is_cash = 1,money,0)) AS cashMoney,
+			SUM(ftp.rate_fee) AS totalRate,
+			SUM(ftp.totamt) AS totalTotamt,
+			MIN(ftp.pay_time) AS firstTime,
+			MAX(ftp.pay_time) AS lastTime,
+			si.is_effective AS isEffective,
+			si.effective_date AS effectiveDate
+			 FROM
+			fq_third_pay ftp
+			LEFT JOIN store_info si ON ftp.seller_id=si.seller_id
+			LEFT JOIN fq_store_rate fsr ON si.rate_id = fsr.id
+			LEFT JOIN fq_clerk fc ON si.clerk_id = fc.id
+			LEFT JOIN fq_team ft ON fc.team_id = ft.id
+			WHERE 1=1 
+			<if test="storeId != null">
+				AND si.id = #{storeId,jdbcType=BIGINT}
+			</if>
+			<if test="startTime != null">
+		 	 AND si.create_time &gt;= #{startTime,jdbcType=DATE}
+			 </if>
+			 <if test="endTime != null">
+			 	 AND si.create_time &lt; #{endTime,jdbcType=DATE}
+			 </if>
+			<if test="branchName != null">
+				AND ft.branch_name =  #{branchName,jdbcType=VARCHAR}
+			</if>
+			<if test="teamName != null">
+				AND fc.team_name =  #{teamName,jdbcType=VARCHAR}
+			</if>
+			<if test="clerk != null">
+				AND fc.clerk = #{clerk,jdbcType=VARCHAR}
+
+			</if>
+			<if test="storeName != null">
+		 	 AND si.name like CONCAT('%',#{storeName},'%')
+		    </if>
+			<if test="categoryid != null">
+				AND si.category_id = #{categoryid,jdbcType=BIGINT}
+			</if>
+			<if test="isEffective != null">
+		 	 AND si.is_effective =  #{isEffective,jdbcType=INTEGER}
+		  </if>
+			GROUP BY ftp.seller_id
+	</select>
+	<insert id="insertFqClerkCount" parameterType="java.util.Map"  >
+	    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+	      SELECT LAST_INSERT_ID()
+	    </selectKey>
+	   INSERT INTO fq_clerk_count(
+			count_date,	province_id,province_name,city_id,city_name,branch_id,branch_name,team_id,
+			team_name,clerk_id,clerk_name,store_id,store_name,total_money,cash_money,total_num,ten_num,status,
+			seller_id)
+			(SELECT 
+			#{beginTime} AS countdate,
+			fb.province_id AS provinceId,
+			fb.province_name AS provinceName,
+			fb.city_id AS cityId,
+			fb.city_name AS cityName,
+			ft.branch_id AS branchId,
+			ft.branch_name AS branchName,
+			fc.team_id AS teamId,
+			fc.team_name AS teamName,
+			si.clerk_id AS clerkId,
+			fc.clerk AS clerkName,
+			si.id  AS storeId,
+			si.`name` AS storeName,
+			COALESCE(SUM(ftp.money),0) AS totalMoney,
+			COALESCE(SUM(IF(ftp.is_cash = 1,ftp.money,0)),0) AS cashMoney,
+			COUNT(ftp.id) AS totalNum,
+			COALESCE(SUM(IF(ftp.money >= 10,1,0)),0) AS tenNum,
+			1 AS status,
+			si.seller_id AS sellerId
+			FROM store_info si 
+			LEFT JOIN fq_clerk fc ON si.clerk_id = fc.id
+			LEFT JOIN fq_team ft ON fc.team_id=ft.id
+			LEFT JOIN fq_branch fb ON ft.branch_id = fb.id
+			LEFT JOIN fq_third_pay ftp ON ftp.seller_id = si.seller_id 
+			WHERE si.clerk_id>0 AND ftp.pay_time BETWEEN #{beginTime} AND #{endTime}
+			GROUP BY si.id
+			)
+  </insert>
+  <select id="queryFqClerkCountBySeller" parameterType="java.util.Map" resultType="cn.qhjys.mall.entity.FqClerkCount">
+		SELECT 
+				count_date AS countDate,
+				province_name AS provinceName,
+				city_name AS cityName,
+				branch_name AS branchName,
+				team_name AS teamName,
+				clerk_name AS clerkName,
+				store_id AS storeId,
+				store_name AS storeName,
+				SUM(total_money) AS totalMoney,
+				SUM(cash_money) AS cashMoney,
+				SUM(total_num) AS totalNum,
+				SUM(ten_num) AS tenNum,
+				seller_id AS sellerId
+				FROM fq_clerk_count
+				<where>
+					status=1
+					 
+						<if test="startDate != null">
+							AND count_date &gt;= #{startDate}
+						</if>
+						<if test="branchId != null">
+							AND branch_id = #{branchId}
+						</if>
+						<if test="teamId != null">
+							AND team_id = #{teamId}
+						</if>
+						<if test="clerkId != null">
+							AND clerk_id = #{clerkId}
+						</if>
+					</where>
+			GROUP BY store_id
+	</select>
+	
+	<select id="countFqClerkMonth" parameterType="java.util.Map" resultType="cn.qhjys.mall.entity.FqClerkMonth">
+		SELECT 
+				province_id AS provinceId,
+				province_name AS provinceName,
+				city_id AS cityId,
+				city_name AS cityName,
+				branch_id AS branchId,
+				branch_name AS branchName,
+				team_id AS teamId,
+				team_name AS teamName,
+				clerk_id AS clerkId,
+				clerk_name AS clerkName,
+				SUM(total_money) AS totalMoney,
+				SUM(cash_money) AS cashMoney
+				FROM fq_clerk_count 
+				WHERE count_date BETWEEN #{beginDate} AND #{endDate}
+				 AND clerk_id = #{clerkId} AND status = 1 
+				
+	</select>
+</mapper>

@@ -1,0 +1,1 @@
+function delet(c){if(confirm("确定取消关注吗?")){var b="id="+c;var a="/managermall/account/preordain/deletePrordain.do";$.ajax({type:"post",url:a,data:b,success:function(d){if(d=="success"){alert("取消关注成功");window.location.href="/managermall/account/preordain/list.do"}if(d=="error"){alert("取消关注失败")}},error:function(){}})}else{}};

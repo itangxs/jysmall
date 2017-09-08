@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.StoreRebateMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.StoreRebate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="seller_id" property="sellerId" jdbcType="BIGINT" />
+    <result column="rebate_name" property="rebateName" jdbcType="VARCHAR" />
+    <result column="rebate" property="rebate" jdbcType="DECIMAL" />
+    <result column="orther_rebate" property="ortherRebate" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="zexplain" property="zexplain" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, store_id, seller_id, rebate_name, rebate, orther_rebate, status, begin_date, 
+    end_date, level, create_time, zexplain
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.StoreRebateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from store_rebate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from store_rebate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from store_rebate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.StoreRebateExample" >
+    delete from store_rebate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.StoreRebate" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into store_rebate (store_id, seller_id, rebate_name, 
+      rebate, orther_rebate, status, 
+      begin_date, end_date, level, 
+      create_time, zexplain)
+    values (#{storeId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, #{rebateName,jdbcType=VARCHAR}, 
+      #{rebate,jdbcType=DECIMAL}, #{ortherRebate,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, 
+      #{beginDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{level,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{zexplain,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.StoreRebate" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into store_rebate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="sellerId != null" >
+        seller_id,
+      </if>
+      <if test="rebateName != null" >
+        rebate_name,
+      </if>
+      <if test="rebate != null" >
+        rebate,
+      </if>
+      <if test="ortherRebate != null" >
+        orther_rebate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="beginDate != null" >
+        begin_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="zexplain != null" >
+        zexplain,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerId != null" >
+        #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="rebateName != null" >
+        #{rebateName,jdbcType=VARCHAR},
+      </if>
+      <if test="rebate != null" >
+        #{rebate,jdbcType=DECIMAL},
+      </if>
+      <if test="ortherRebate != null" >
+        #{ortherRebate,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="beginDate != null" >
+        #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zexplain != null" >
+        #{zexplain,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.StoreRebateExample" resultType="java.lang.Integer" >
+    select count(*) from store_rebate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update store_rebate
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.storeId != null" >
+        store_id = #{record.storeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sellerId != null" >
+        seller_id = #{record.sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.rebateName != null" >
+        rebate_name = #{record.rebateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rebate != null" >
+        rebate = #{record.rebate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ortherRebate != null" >
+        orther_rebate = #{record.ortherRebate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.beginDate != null" >
+        begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zexplain != null" >
+        zexplain = #{record.zexplain,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update store_rebate
+    set id = #{record.id,jdbcType=BIGINT},
+      store_id = #{record.storeId,jdbcType=BIGINT},
+      seller_id = #{record.sellerId,jdbcType=BIGINT},
+      rebate_name = #{record.rebateName,jdbcType=VARCHAR},
+      rebate = #{record.rebate,jdbcType=DECIMAL},
+      orther_rebate = #{record.ortherRebate,jdbcType=DECIMAL},
+      status = #{record.status,jdbcType=TINYINT},
+      begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      level = #{record.level,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      zexplain = #{record.zexplain,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.StoreRebate" >
+    update store_rebate
+    <set >
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="rebateName != null" >
+        rebate_name = #{rebateName,jdbcType=VARCHAR},
+      </if>
+      <if test="rebate != null" >
+        rebate = #{rebate,jdbcType=DECIMAL},
+      </if>
+      <if test="ortherRebate != null" >
+        orther_rebate = #{ortherRebate,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="beginDate != null" >
+        begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zexplain != null" >
+        zexplain = #{zexplain,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.StoreRebate" >
+    update store_rebate
+    set store_id = #{storeId,jdbcType=BIGINT},
+      seller_id = #{sellerId,jdbcType=BIGINT},
+      rebate_name = #{rebateName,jdbcType=VARCHAR},
+      rebate = #{rebate,jdbcType=DECIMAL},
+      orther_rebate = #{ortherRebate,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      level = #{level,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      zexplain = #{zexplain,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+     <resultMap id="RebateDetailMap" type="java.util.Map" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="seller_id" property="sellerId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="zexplain" property="zexplain" jdbcType="VARCHAR" />
+    <result column="rebate" property="rebate" jdbcType="DECIMAL" />
+    <result column="channel_validation" property="channelValidation" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectRebateStoreList" resultType="cn.qhjys.mall.vo.RebateStoreVo" parameterType="java.util.Map" >
+    select sr.id as rebateId,si.name as name,ai.name as area,si.logo as logo,si.address as address,
+    sr.rebate as rebate
+    from store_rebate sr,store_info si,area_info ai
+    where sr.store_id = si.id and ai.id= si.area 
+    and DATE_FORMAT(#{currentTime,jdbcType=TIMESTAMP},'%Y-%m-%d %H:%i:%s') <![CDATA[ >]]> sr.begin_date and  DATE_FORMAT(#{currentTime,jdbcType=TIMESTAMP},'%Y-%m-%d %H:%i:%s')<![CDATA[ <]]>sr.end_date
+    AND sr.status = 1
+    order by sr.level DESC
+  </select>
+  
+  <select id="selectRebateDetailById" resultMap="RebateDetailMap" parameterType="java.util.Map" >
+    select sr.id,sr.store_id,si.seller_id,si.name,si.city,si.channel_validation,sr.rebate,sr.zexplain
+    from store_rebate sr,store_info si
+    where sr.store_id = si.id and sr.id = #{id,jdbcType=BIGINT} 
+  </select>
+</mapper>

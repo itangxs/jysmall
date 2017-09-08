@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.DaliyCreditMapper" >
+	<select id="queryFqOrderSum"  resultType="java.math.BigDecimal" parameterType="java.util.Map">
+		SELECT COALESCE(SUM(pay_amount),0) FROM fq_order 
+		WHERE store_id = #{storeId} AND `status` = 2 AND create_time BETWEEN #{beginTime} AND #{endTime}
+	</select>
+	<select id="queryRebateOrderSum"  resultType="java.math.BigDecimal" parameterType="java.util.Map">
+		SELECT COALESCE(SUM(ro.real_pay),0) 
+		FROM rebate_order ro LEFT JOIN store_rebate sr 
+		ON ro.rebate_id = sr.id 
+		WHERE sr.seller_id=#{sellerId} AND ro.status = 2 AND ro.create_time BETWEEN #{beginTime} AND #{endTime}
+	</select>
+	<select id="queryMaxDaliyCount"  resultType="java.math.BigDecimal" parameterType="java.lang.Long">
+		SELECT COALESCE(SUM(totamt),0) AS total
+		FROM fq_third_pay WHERE seller_id = #{sellerId} GROUP BY DATE_FORMAT( pay_time, '%Y-%m-%d' )
+		ORDER BY total DESC LIMIT 0,1
+	</select>
+	<select id="countOrderNum"  resultType="java.lang.Integer" parameterType="java.lang.Long">
+		SELECT count(1) 
+		FROM fq_third_pay WHERE seller_id = #{sellerId} 
+	</select>
+</mapper>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link href="css/jiedai-style2.css" rel="stylesheet" type="text/css">
+<title>飞券个人消费贷款</title>
+</head>
+
+<body>
+<div class="bg_jiekuan">
+	<div class="dilixi">
+    	<img src="images/xiaofei-jiedai.jpg">
+    </div>
+      
+ <!--我要贷款-->
+   		<a class="daikuan_button" href="javascript:void(0)" onclick = "document.getElementById('jiedai_tanc').style.display='block';document.getElementById('fade').style.display='block'"></a>
+
+</div>
+
+
+<!--无法借贷弹窗-->
+<div id="jiedai_tanc" class="white_content">
+	<img src="images/jiedai_tanc.png">
+ 
+ <!--右上角关闭窗口-->
+ <div class="close_tanc" onclick = "document.getElementById('jiedai_tanc').style.display='none';document.getElementById('fade').style.display='none'">
+ </div>
+    
+ <!--确认-->
+    <a class="queren" href=""></a>
+</div>
+
+<!--弹出幕布-->
+<div id="fade" class="black_overlay03"></div>
+
+</body>
+</html>

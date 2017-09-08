@@ -1,0 +1,1 @@
+function activeEnabled(c){var b="/managermall/systemmall/active/updateEnable.do";var a="activeId="+c;$.ajax({type:"post",url:b,data:a,success:function(d){if(d=="success"){alert("修改成功");window.location.href=window.location.href}else{alert("修改失败");window.location.href=window.location.href}},error:function(){alert("服务器忙")}})};

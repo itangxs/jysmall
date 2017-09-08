@@ -1,0 +1,166 @@
+/*--------------------详细top------------*/
+.prodetail_top{ width:1190px; margin:0 auto; padding:20px 0;}
+.prodetail_top .title{ padding:0 660px 0 0;}
+.prodetail_top .title h1{ font-size:24px; line-height:35px;}
+.prodetail_top .title h2{ font-size:16px; font-weight:normal; margin-bottom:20px;}
+
+/*详细左边图片*/
+.pronr{}
+.pronr_left{ float:left; width:530px;}
+.pronr_left .bigpic{ width:530px; height:353px;}
+
+.smallpic ul li{ float:left; width:86px; margin:10px 10px 0 0;}
+.smallpic ul li a img{ width:80px; height:53px; padding:2px; border:1px solid #eee;}
+.smallpic ul li a:hover img{border:1px solid #ff8c00;}
+.smallpic ul li .a-current{border:1px solid #ff8c00;width:80px; height:53px; padding:2px;}
+
+/*详细右边参数*/
+.pronr_right{ float:left; width:610px; margin-left:50px;}
+.pronr_right .tuangoujia{ border-bottom:1px solid #eee; line-height:40px; padding:20px 0; position:relative;}
+.pronr_right .tuangoujia h1{ font-size:14px; font-weight:normal;}
+.pronr_right .tuangoujia em{ display:inline-block; width:80px;}
+.pronr_right .tuangoujia i{ text-decoration:line-through; margin:0 10px;}
+.pronr_right .tuangoujia b{ color:#ff8c00;}
+.pronr_right .tuangoujia strong{ font-size:36px;color:#ff8c00;}
+.pronr_right .tuangoujia strong span{ font-size:18px;}
+.pronr_right .tuangoujia p{ display:inline-block; background:#ff8c00; color:#fff; height:25px; line-height:25px; padding:0 10px;}
+.goumaishuliang{ display:inline-block;}
+.goumaishuliang input{ width:30px; height:33px; font-size:22px; font-weight:bold; line-height:20px; border:1px solid #ccc; padding:0; margin:0; vertical-align:middle; background:#eeede5;}
+.goumaishuliang .input1{ width:50px; height:31px; font-size:14px;line-height:31px; text-align:center; font-weight:normal; border-top:1px solid #ccc;border-bottom:1px solid #ccc; border-left:1px solid #ccc;border-right:0px solid #ccc; margin-left:-5px; background:#fff;}
+.goumaishuliang .input2{margin-left:-5px;}
+
+.goumaigou{display:inline-block; margin-top:20px; }
+.goumaigou a.qiang,
+.goumaigou a.jiaru,
+.goumaigou a.yuyue{ display:inline-block; font-size:18px; line-height:25px;  margin-right:10px; border-radius:3px;}
+.goumaigou a.qiang{border:1px solid #ff801a; background: url(../images/ico-jt.png) no-repeat 16px -403px #ff8c00; color:#fff;padding:10px 15px 10px 40px;}
+.goumaigou a.qiang:hover{ background:url(../images/ico-jt.png) no-repeat 16px -403px #ff801a;}
+.goumaigou a.jiaru{ border:1px solid #e3e2da; background:url(../images/ico-jt.png) no-repeat 16px -459px #f3f2e9; color:#666662;padding:10px 15px 10px 40px;}
+.goumaigou a.jiaru:hover{ background:url(../images/ico-jt.png) no-repeat 16px -459px #efeee6;}
+.goumaigou a.yuyue{border:1px solid #e3e2da; padding:10px 15px; background:#f3f2e9; color:#666662;}
+.goumaigou a.yuyue:hover{ background:#efeee6;}
+
+
+.pingjiafentop{ position:absolute; right:0; top:0;  width:235px; height:108px; text-align:center;}
+.pingjiafentop h1{ font-size:36px; color:#ff8c00; padding:15px 0;}
+.pingjiafentop h1 b{float:left; padding-left:25px; font-size:36px; vertical-align:middle; margin-top:-10px;}
+.pingjiafentop h1 span{ position:relative; float:left; display:block; width:94px; height:17px; margin:0 0 6px 15px; background:url(../images/ico-jt.png) no-repeat left -200px;}
+.pingjiafentop h1 span em{ position:absolute; left:0; top:0; height:17px; background:url(../images/ico-jt.png) no-repeat left -223px;}
+
+/*收藏分享*/
+.shoucang-fenxiang{ display:inline-block; }
+.shoucang-fenxiang a.shoucang{ display:inline-block; background: url(../images/ico-jt.png) no-repeat 0 -523px; margin-right:10px; padding-left:20px;}
+.shoucang-fenxiang a.shoucang:hover{ background:url(../images/ico-jt.png) no-repeat 0 -563px;}
+.shoucang-fenxiang .yishoucang{margin-right:10px; padding-left:20px; background:url(../images/ico-jt.png) no-repeat 0 -573px; color:#ff8c00;}
+
+.shoucang-fenxiang a.fenxiang{ display:inline-block; background:url(../images/ico-jt.png) no-repeat 0 -605px;padding-left:20px;}
+.shoucang-fenxiang a.fenxiang:hover{ background:url(../images/ico-jt.png) no-repeat 0 -645px;}
+
+/*服务承诺*/
+.fuwuchengnuo{ line-height:50px;}
+.fuwuchengnuo a{ margin-right:20px;}
+.fuwuchengnuo .fwcnbg1,.fuwuchengnuo .fwcnbg2,.fuwuchengnuo .fwcnbg3,.fuwuchengnuo .fwcnbg4{ display:inline-block; width:20px; height:25px; line-height:25px; background:url(../images/ico-jt.png) no-repeat; margin-left:15px;}
+.fuwuchengnuo .fwcnbg1{ background-position:0 -247px;}
+.fuwuchengnuo .fwcnbg3{ background-position:0 -281px;}
+.fuwuchengnuo .fwcnbg2{ background-position:0 -315px;}
+.fuwuchengnuo .fwcnbg4{ background-position:0 -349px;}
+
+
+
+/*---------其他产品----------*/
+.otherpro{ margin-bottom:20px;}
+.otherpro ul li{ border-bottom:1px solid #eee; height:35px; line-height:35px;}
+.otherpro h1,.otherpro h2,.otherpro h3{ float:left; font-size:14px; font-weight:normal;}
+.otherpro h1{ width:690px;}
+.otherpro h2{ width:120px; text-align:center; font-weight:800; font-size:18px; color:#ff8c00;}
+.otherpro h3{ width:120px; text-align:center;}
+.otherpro .title{ height:40px; line-height:40px; border-bottom:2px solid #ccc; margin-bottom:10px;}
+.otherpro h4{ font-size:18px; float:left;width:690px;}
+.otherpro h5{ font-size:16px; float:left;width:120px;text-align:center;}
+
+/*-------------商家详细title------------*/
+.detail_alltitle{ border:1px solid #e5e4dc;}
+.detail_alltitle a{display:inline-block; background:#faf9f0; height:45px; line-height:45px; padding:0 30px; border-right:1px solid #e5e4dc; font-size:16px; color:#333;}
+.detail_alltitle a:hover{ background:#ff8c00; color:#fff;}
+.detail_alltitle .current{background:#ff8c00; color:#fff;}
+.detail_alltitle_title{ border-bottom:2px solid #ccc; height:35px; line-height:35px; font-weight:bold; font-size:18px; margin:10px 0;}
+.detail_goumaixuzhi table{ background:#eee;}
+.detail_goumaixuzhi table td{line-height:25px; padding:5px 5px;}
+.detail_goumaixuzhi .td20{ width:15%; background:#f9f8ef; font-weight:bold; }
+.detail_goumaixuzhi .td80{ width:85%; background:#fffef5;}
+
+/*商家位置*/
+.detail_shangjiaweizhi{}
+.detail_shangjiaweizhi .mapimg{ float:left; width:600px; height:500px; border:1px solid #eee; margin-right:20px;}
+.detail_shangjiaweizhi .mapimg img{width:600px; height:500px;}
+.detail_shangjiaweizhi h1{ font-size:16px; color:#ff6e0e; padding-top:20px;}
+.detail_shangjiaweizhi h2{ font-size:14px; color:#ff6e0e;}
+.detail_shangjiaweizhi h2 span{ font-weight: normal; color:#333;}
+.detail_shangjiaweizhi h3{ display:inline-block; padding-left:40px; font-size:14px;}
+.detail_shangjiaweizhi h3 a{ margin-right:10px;}
+
+/*--------------------消费评价-----------------*/
+.detail_xiaofeipingjia{}
+.pingjia_top{padding:15px 0 10px 0; border-bottom:1px solid #ddd;}
+
+/*消费评价分数*/
+.pingjiafen{ float:left; width:235px; height:108px; border-right:1px solid #ddd; text-align:center;}
+.pingjiafen h1{ font-size:36px; color:#ff8c00; padding:15px 0;}
+.pingjiafen h1 b{float:left; padding-left:25px;}
+.pingjiafen h1 span{ position:relative; float:left; display:block; width:94px; height:17px; margin:0 0 6px 15px; background:url(../images/ico-jt.png) no-repeat left -200px;}
+.pingjiafen h1 span em{ position:absolute; left:0; top:0; height:17px; background:url(../images/ico-jt.png) no-repeat left -223px;}
+
+
+
+/*好中差评价*/
+.haozhongchaping{ float:left; width:280px; height:88px; border-right:1px solid #ddd; padding:10px 20px;}
+.haozhongchaping p{ margin-bottom:5px;}
+.haozhongchaping em{ float:left; padding-right:15px;}
+.haozhongchaping i{  float:left;}
+.pingjia_jindu{ float:left; position: relative; width:160px; height:9px; margin:8px 10px 0 0;}
+.pingjia_jindu h1{ background:#fff3de; width:160px; height:9px;}
+.pingjia_jindu h2{ position:absolute; left:0; top:0; background:#ff8c00; height:9px;}
+/*我要评价*/
+.woyaopingjia{ float:left; width:300px; height:108px; text-align:center;}
+.woyaopingjia p{ line-height:50px;}
+.woyaopingjia a{ display:inline-block; padding:8px 20px;  font-size:16px; background:#ff8c00; border-radius:3px; color:#fff;}
+.woyaopingjia a:hover{ background:#ff801a;}
+
+/*------------评价内容---------------*/
+/*评价细分title*/
+.pingjia_nr .title{ background:#f9f8ef; height:35px; line-height:35px; margin:20px 0; padding:0 15px;}
+.pingjia_nr .title input{ width:25px; vertical-align: middle;}
+.pingjia_nr .title a.linkcurrent{ color:#ff8c00;}
+
+/*评价内容*/
+.pingjia_nr ul li{ border-bottom:1px solid #ddd; padding:0 0 20px; margin-bottom:20px;}
+.pingjia_nr .pingjianr_people{ float:left; width:85px;}
+.pingjia_nr .pingjianr_people img{ width:70px; height:70px;}
+.pingjianr_nr{ float:left; width:845px;}
+.pingjianr_nr h1{ font-size:14px; color:#999; font-weight:normal;}
+.pingjiapic img{ width:70px; height:70px; margin:10px 10px 0 0;}
+.pingjianr_nr{ position:relative;}
+.pingjianr_reply{ border-top:1px dashed #ddd; margin:10px 0 0 0; padding:6px 0 0 0; color:#af874d;}
+
+/*评价五星*/
+.pingjianr_nr .wuxing{ position:absolute; right:0;  top:5px;}
+.pingjianr_nr .wuxing span{ position:relative; float:left; display:block; width:94px; height:17px; margin:0 0 6px 15px; background:url(../images/ico-jt.png) no-repeat left -144px;}
+.pingjianr_nr .wuxing span em{ position:absolute; left:0; top:0; height:17px; background:url(../images/ico-jt.png) no-repeat left -161px;}
+/*感兴趣的商品*/
+.ganxingqu{ border:1px solid #ddd; padding:15px 0 10px 15px;}
+.ganxingqu h3{ padding:0 0 0 10px; font-size:18px; font-weight:normal; color:#000;}
+.ganxingqu ul li{ float:left; width:160px; margin:10px;}
+.ganxingqu ul li img{ width:160px; height:107px; margin-bottom:10px;}
+.ganxingqu ul li p{ height:40px; line-height:20px; overflow:hidden; margin-bottom:10px;}
+.ganxingqu ul li h2{ font-size:16px; font-weight:normal; color:#ff8c00; }
+
+/*加入购物车*/
+.jiarugouwuche{ background:#fff; border:1px solid #ddd; padding:10px 20px; margin-bottom:20px; position:relative;}
+.jiarugouwuche ul li{ float:left; border-right:1px solid #ddd; width:140px; height:55px; text-align:center;}
+.jiarugouwuche ul li p span{text-decoration:line-through; }
+.jiarugouwuche .jiage{ display:inline-block; font-size:30px; color:#ff8c00; padding-top:10px;}
+.jiarugouwuche .jiage em{ font-size:14px;}
+.jiarugouwuche .qianggou{ position:absolute; right:20px; top:10px;}
+.jiarugouwuche .qianggou a{ display:inline-block; padding:15px 30px; font-size:24px; background:#ff8c00; border-radius:3px; color:#fff;}
+.jiarugouwuche .qianggou a:hover{ background:#ff801a;}
+

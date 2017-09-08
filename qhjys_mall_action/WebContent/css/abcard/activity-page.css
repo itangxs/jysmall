@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0;font-family:"微软雅黑",'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+body{background-color:#f96574;}
+
+.banner{ position:relative;}
+.banner img{ width:100%;}
+a{ text-decoration:none;}
+
+.blue-coupon{width:50%; float:left; position:absolute; left:0;top:50%;}
+.blue-coupon img{width:100%;}
+.blue-coupon .blue-btn a{ width:40%; position:absolute; right:10%; top:38.2%; height:20%;}
+
+
+.yellow-coupon{width:50%; float:right;position:absolute; top:50%; right:0;}
+.yellow-coupon img{width:100%;}
+.yellow-coupon .yellow-btn a{position:absolute; right:24%; top:14%; line-height:34px;width:10%; height:58%;}
+
+
+.red-packet{width:100%; float:right;position:absolute; top:68%; right:0;}
+.red-packet img{width:100%;}
+.red-packet .red-btn a{position:absolute; right:46.8%; top:20.4%; line-height:34px;width:8%; height:26%;}
+
+
+
+
+
+

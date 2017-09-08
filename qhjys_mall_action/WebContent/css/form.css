@@ -1,0 +1,70 @@
+fieldset { 
+				border: 0; 
+			}
+			label { 
+				display: inline-block; 
+				cursor: pointer; 
+				line-height: 20px; 
+			}
+			.checkboxes{ margin:0 0 0 -15px;}
+			.radios { margin:-40px -18px 0 0 ;
+			}	
+			
+			.label_check input { 
+				margin-right: 5px; 
+			}		
+			.has-js .label_check { 
+				padding-left: 0px; 
+			}
+			.has-js .label_radio { 
+				padding-left: 25px; 
+			} 
+			.has-js .label_check{ 
+				width: 25px; height: 25px;
+				background-image: url(../images/gou2.png);
+				background-repeat: no-repeat;
+				background-position: 0 0;
+				-webkit-background-size:25px 25px;
+				-moz-background-size:25px 25px;
+				-o-background-size:25px 25px;
+				background-size:25px 25px;
+				margin: 10px 5px 0 0; 
+			}
+			.has-js label.c_on { 
+				background-image: url(../images/gou1.png);
+				width: 25px; height: 25px;
+				background-repeat: no-repeat;
+				background-position: 0 0;
+				-webkit-background-size:25px 25px;
+				-moz-background-size:25px 25px;
+				-o-background-size:25px 25px;
+				background-size:25px 25px;
+				margin: 10px 5px 0 0; 
+			}
+			.has-js .label_radio { 
+				width: 30px; height: 20px;
+				background-image: url(../images/gou3.png);
+				background-repeat: no-repeat;
+				background-position: 0 0;
+				-webkit-background-size:20px 20px;
+				-moz-background-size:20px 20px;
+				-o-background-size:20px 20px;
+				background-size:20px 20px;
+				margin: 10px 5px 0 0;
+			}
+			.has-js label.r_on { 
+				width: 30px; height: 20px;
+				background-image: url(../images/gou2.png);
+				background-repeat: no-repeat;
+				background-position: 0 0;
+				-webkit-background-size:20px 20px;
+				-moz-background-size:20px 20px;
+				-o-background-size:20px 20px;
+				background-size:20px 20px;
+				margin: 10px 5px 0 0;
+			}
+			.has-js .label_check input,
+			.has-js .label_radio input { 
+				position: absolute; 
+				left: -9999px; 
+			} 

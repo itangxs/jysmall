@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>map</title>
+
+</head>
+<body>
+						<input type="hidden" id="longitude" value="${store.longitude }" />
+						<input type="hidden" id="latitude" value="${store.latitude }" />
+						<input type="hidden" id="stitle" value="${store.address }" />
+						<input type="hidden" id="scontent" value="${store.name}" />
+					<script type="text/javascript" charset="utf-8" >
+							function GetQueryString(name)
+							{
+							     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+							     var r = window.location.search.substr(1).match(reg);
+							     if(r!=null)return  decodeURI(r[2]); return null;
+							}
+							 document.getElementById("longitude").value=GetQueryString("longitude");
+							 document.getElementById("latitude").value=GetQueryString("latitude");
+							 var p =  document.getElementById("stitle").value=GetQueryString("stitle");
+							document.getElementById("scontent").value=GetQueryString("scontent");
+					 </script>
+						<script type="text/javascript"  src="http://api.map.baidu.com/api?key=&amp;v=1.1&amp;services=true"></script>
+							<div style="WIDTH: 500px; HEIGHT: 350px;" id="dituContent"></div>
+						<script type="text/javascript" src="/js/account/map.js"></script>
+</body>
+</html>

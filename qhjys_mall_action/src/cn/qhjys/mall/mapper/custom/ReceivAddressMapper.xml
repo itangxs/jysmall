@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.ReceivAddressMapper">
+
+	<select id="queryDeliveryAddr" resultType="java.util.Map">
+		SELECT d.id AS id,
+			d.user_id AS userId,
+			d.recipient AS recipient,
+			d.province AS provId,
+			p.name AS provName,
+			d.city AS cityId,
+			c.name AS cityName,
+			d.area AS areaId,
+			a.name AS areaName,
+			d.address AS address,
+			d.phone AS phone,
+			d.zip AS zip,
+			CAST(d.isdefault AS SIGNED) AS isdefault
+		FROM delivery_addr d
+			JOIN province_info p
+			ON d.province = p.id
+			JOIN city_info c
+			ON d.city = c.id
+			JOIN area_info a
+			ON d.area = a.id
+		WHERE d.enabled = 1 AND p.enabled = 1
+		AND c.enabled = 1 AND a.enabled = 1
+		<if test="userId != null">
+			AND d.user_id = #{userId,jdbcType=BIGINT}
+		</if>
+	</select>
+
+</mapper>

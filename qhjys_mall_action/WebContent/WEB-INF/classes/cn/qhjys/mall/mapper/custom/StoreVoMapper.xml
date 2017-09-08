@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.StoreVoMapper">
+
+	<select id="getStoreById" resultType="cn.qhjys.mall.vo.StoreVo">
+		SELECT 
+			   s.id               AS id,
+		       s.name             AS name,
+		       s.logo             AS logo,
+		       s.seller_id        AS sellerId,
+		       s.contact_name     AS contactName,
+		       s.contact_tel      AS contactTel,
+		       s.contact_phone    AS contactPhone,
+		       p.name             AS province,
+		       c.name             AS city,
+		       s.area             AS areaId,
+		       a.name             AS areaName,
+		       s.address          AS address,
+		       s.longitude        AS lngtd,
+		       s.latitude         AS lattd,
+		       s.images           AS imageUrl,
+		       s.labels           AS labels,
+		       s.category_id      AS categoryId,
+		       s.category_details AS categoryDetails,
+		       s.store_detail     AS storeDetail,
+		       s.create_time      AS createDate,
+		       s.enabled          AS enabled,
+		       (SELECT Avg(r.score_avg)
+		        FROM   product_info r
+		        WHERE  r.store_id = s.id) AS avgScore
+		FROM   store_info s
+		       LEFT JOIN province_info p
+		              ON s.province = p.id
+		       LEFT JOIN city_info c
+		              ON s.city = c.id
+		       LEFT JOIN area_info a
+		              ON s.area = a.id
+		WHERE  s.id=#{storeId,jdbcType=BIGINT}
+	</select>
+
+	<select id="getStoreByProdId" resultType="cn.qhjys.mall.vo.StoreVo">
+		SELECT s.id               AS id,
+		       s.name             AS name,
+		       s.logo             AS logo,
+		       s.seller_id        AS sellerId,
+		       s.contact_name     AS contactName,
+		       s.contact_tel      AS contactTel,
+		       s.contact_phone    AS contactPhone,
+		       p.name             AS province,
+		       c.name             AS city,
+		       s.area             AS areaId,
+		       a.name             AS areaName,
+		       s.address          AS address,
+		       s.longitude        AS lngtd,
+		       s.latitude         AS lattd,
+		       s.images           AS imageUrl,
+		       s.labels           AS labels,
+		       s.category_id      AS categoryId,
+		       s.category_details AS categoryDetails,
+		       s.store_detail     AS storeDetail,
+		       s.create_time      AS createDate,
+		       s.enabled          AS enabled
+		FROM   store_info s
+		       LEFT JOIN product_info pro
+		              ON pro.store_id = s.id
+		       LEFT JOIN province_info p
+		              ON s.province = p.id
+		       LEFT JOIN city_info c
+		              ON s.city = c.id
+		       LEFT JOIN area_info a
+		              ON s.area = a.id
+		WHERE  pro.id=#{prodId,jdbcType=BIGINT}
+	</select>
+
+	<select id="searchStoreByKeyword" resultType="cn.qhjys.mall.vo.StoreVo">
+		SELECT (SELECT Count(*)
+		        FROM   reviews_log l
+		        WHERE  l.store_id = s.id) AS countNum,
+		       (SELECT Avg(r.score)
+		        FROM   reviews_log r
+		        WHERE  r.store_id = s.id) AS avgScore,
+		       (SELECT Sum(p.sales_num)
+		        FROM   product_info p
+		        WHERE  p.store_id = s.id) AS salesNum,
+		       s.id                       AS id,
+		       s.name                     AS name,
+		       s.logo                     AS logo,
+		       s.seller_id                AS sellerId,
+		       s.contact_name             AS contactName,
+		       s.contact_tel              AS contactTel,
+		       s.contact_phone            AS contactPhone,
+		       p.name                     AS province,
+		       c.name                     AS city,
+		       s.area                     AS areaId,
+		       a.name                     AS areaName,
+		       s.address                  AS address,
+		       s.longitude                AS lngtd,
+		       s.latitude                 AS lattd,
+		       s.images                   AS imageUrl,
+		       s.labels                   AS labels,
+		       s.category_id              AS categoryId,
+		       s.category_details         AS categoryDetails,
+		       s.store_detail             AS storeDetail,
+		       s.create_time              AS createDate, 
+		       s.enabled                  AS enabled
+		FROM   store_info s
+		       LEFT JOIN province_info p
+		              ON s.province = p.id
+		       LEFT JOIN city_info c
+		              ON s.city = c.id
+		       LEFT JOIN area_info a
+		              ON s.area = a.id
+		WHERE s.status = 2
+		<if test="keywork != null and keywork != ''">
+			AND (s.name like CONCAT('%',#{keywork},'%') or s.keywork like CONCAT('%',#{keywork},'%'))
+		</if>
+		<if test="category != null">
+			AND s.category_id = #{category,jdbcType=BIGINT}
+		</if>
+		<if test="cityId != null">
+			AND s.city = #{cityId,jdbcType=BIGINT}
+		</if>
+		<if test="areaId != null">
+			AND s.area = #{areaId,jdbcType=BIGINT}
+		</if>
+		<if test="column != null and column != ''">
+			ORDER BY ${column}
+		</if>
+	</select>
+	<select id="searchStoreAndSeller" resultType="cn.qhjys.mall.vo.StoreVo">
+	<![CDATA[
+		SELECT 
+			   s.id               AS id,
+		       s.name             AS name,
+		       s.logo             AS logo,
+		       s.seller_id        AS sellerId,
+		       s.contact_name     AS contactName,
+		       s.contact_tel      AS contactTel,
+		       s.contact_phone    AS contactPhone,
+		       se.username        AS sellerName,
+		       s.area             AS areaId,
+		       s.address          AS address,
+		       s.longitude        AS lngtd,
+		       s.latitude         AS lattd,
+		       s.images           AS imageUrl,
+		       s.labels           AS labels,
+		       s.category_id      AS categoryId,
+		       s.category_details AS categoryDetails,
+		       s.store_detail     AS storeDetail,
+		       s.create_time      AS createDate,
+		       s.status     	  AS status,
+		       s.enabled          AS enabled,
+		       s.scope            AS scope,
+		       s.open_cashier     AS openCashier,
+		       s.open_order       AS openOrder,
+		       s.rate_id		  AS rateId,
+		       s.statement_period  AS statementPeriod,
+		       se.invite 		  AS invite,
+		       fsr.rate_name      AS rateName,
+		       s.clerk_id         AS clerkId,
+		       fc.clerk			  AS clerkName,
+		       s.wx_auth_state	  AS wxAuthState,
+		       s.zfb_auth_state	  AS zfbAuthState,
+		       s.channel_validation  AS channelValidation
+		FROM   store_info s
+		       LEFT JOIN seller_info se
+		              ON s.seller_id = se.id
+		       LEFT JOIN fq_store_rate fsr
+		       		  ON s.rate_id = fsr.id
+		       LEFT JOIN fq_clerk fc
+		       		  ON s.clerk_id = fc.id
+		       LEFT JOIN category_info ce 
+		       		  ON s.category_id = ce.id
+		 ]]> <where>
+			 <trim prefixOverrides="and" >
+				<if test="username != null and '' != username">
+					AND se.username like CONCAT('%',#{username},'%')
+				</if>
+				<if test="status != null and '' != status">
+					AND s.status = #{status}
+				</if>
+				<if test="storeName != null and '' != storeName">
+					AND s.name  like CONCAT('%',#{storeName},'%')
+				</if>
+				<if test="storeId != null and '' != storeId">
+					AND s.id = #{storeId}
+				</if>
+				<if test="yewuyuan != null and '' != yewuyuan">
+					AND fc.clerk like CONCAT('%',#{yewuyuan},'%') 
+				</if>
+				<if test="provinceId != null and '' != provinceId">
+					AND s.province = #{provinceId}
+				</if>
+				<if test="cityId != null and '' != cityId">
+					AND s.city = #{cityId}
+				</if>
+				<if test="areaId != null and '' != areaId">
+					AND s.area = #{areaId}
+				</if>
+				<if test="begindate != null and '' != begindate">
+					AND DATE_FORMAT(s.create_time,'%Y-%m-%d') &gt;= #{begindate}
+				</if>
+				<if test="enddate != null and '' != enddate">
+					AND DATE_FORMAT(s.create_time,'%Y-%m-%d') &lt;= #{enddate}
+				</if>
+				<if test="cashierStatus != null and '' != cashierStatus">
+					AND s.open_cashier = #{cashierStatus}
+				</if>
+				<if test="orderStatus != null and '' != orderStatus">
+					AND s.open_order = #{orderStatus}
+				</if>
+				<if test="rateStatus != null and '' != rateStatus">
+					AND fsr.id = #{rateStatus}
+				</if>
+				<if test="wxAuthState != null and '' != wxAuthState">
+					AND s.wx_auth_state = #{wxAuthState}
+				</if>
+				<if test="zfbAuthState != null and '' != zfbAuthState">
+					AND s.zfb_auth_state = #{zfbAuthState}
+				</if>
+				<if test="hangyeType != null and '' != hangyeType">
+					AND s.category_id = #{hangyeType}
+				</if>
+				<if test="hangyeType2 != null and '' != hangyeType2">
+					AND ce.parent_id = #{hangyeType2}
+				</if>	
+			</trim></where>
+		order by s.id desc
+	</select>
+	
+	<select id="searchStoreExporte" resultType="cn.qhjys.mall.vo.StorExporteVo">
+	<![CDATA[
+		SELECT 
+			   se.username        AS userName,
+		       s.name             AS name,
+		       s.contact_name     AS contactName,
+		       s.contact_tel    AS contactTel,
+		       concat((SELECT name FROM province_info WHERE id = s.province),
+		       '省',(SELECT name FROM city_info WHERE id = s.city),
+		       (SELECT name FROM area_info WHERE id = s.area))  AS area,
+		       s.address          AS address,
+		       (SELECT name FROM company_info WHERE id = se.company_id)	AS companyName,
+		       (SELECT license_number FROM company_info WHERE id = se.company_id) AS licenseNumber,
+		       concat((SELECT name FROM bank_info WHERE seller_id = s.seller_id GROUP BY seller_id),' | ',
+		       (SELECT branch FROM bank_info WHERE seller_id = s.seller_id GROUP BY seller_id)) AS bankName,
+		       
+		       (SELECT cardholder FROM bank_info WHERE seller_id = s.seller_id GROUP BY seller_id) AS cardholder,
+		       (SELECT cark_num FROM bank_info WHERE seller_id = s.seller_id GROUP BY seller_id) AS carkNum,
+		       (SELECT phone FROM bank_info WHERE seller_id = s.seller_id GROUP BY seller_id) AS phone,
+		       (SELECT corpn_id FROM company_info WHERE id = se.company_id) AS corpnId,
+		       concat((SELECT name FROM category_info WHERE id = ce.parent_id),' | ',ce.name) AS categoryName,
+		       concat((SELECT rate_name FROM fq_store_rate WHERE id = s.rate_id),' | ', concat('T+',s.statement_period)) AS rateName,
+		       fc.clerk			  AS clerkName,
+		        s.wx_auth_state	  AS wxAuthState,
+		       s.zfb_auth_state	  AS zfbAuthState
+		       
+		FROM   store_info s
+		       LEFT JOIN seller_info se
+		              ON s.seller_id = se.id           
+		       LEFT JOIN fq_store_rate fsr
+		       		  ON s.rate_id = fsr.id
+		       LEFT JOIN fq_clerk fc
+		       		  ON s.clerk_id = fc.id
+		       LEFT JOIN category_info ce 
+		       		  ON s.category_id = ce.id
+		 ]]> <where>
+			 <trim prefixOverrides="and" >
+				<if test="username != null and '' != username">
+					AND se.username like CONCAT('%',#{username},'%')
+				</if>
+				<if test="storeName != null and '' != storeName">
+					AND s.name  like CONCAT('%',#{storeName},'%')
+				</if>
+				<if test="storeId != null and '' != storeId">
+					AND s.id = #{storeId}
+				</if>
+				<if test="yewuyuan != null and '' != yewuyuan">
+					AND fc.clerk like CONCAT('%',#{yewuyuan},'%') 
+				</if>
+				<if test="provinceId != null and '' != provinceId">
+					AND s.province = #{provinceId}
+				</if>
+				<if test="cityId != null and '' != cityId">
+					AND s.city = #{cityId}
+				</if>
+				<if test="areaId != null and '' != areaId">
+					AND s.area = #{areaId}
+				</if>
+				<if test="begindate != null and '' != begindate">
+					AND DATE_FORMAT(s.create_time,'%Y-%m-%d') &gt;= #{begindate}
+				</if>
+				<if test="enddate != null and '' != enddate">
+					AND DATE_FORMAT(s.create_time,'%Y-%m-%d') &lt;= #{enddate}
+				</if>
+				<if test="status != null and '' != status">
+					AND s.status = #{status}
+				</if>
+				<if test="cashierStatus != null and '' != cashierStatus">
+					AND s.open_cashier = #{cashierStatus}
+				</if>
+				<if test="orderStatus != null and '' != orderStatus">
+					AND s.open_order = #{orderStatus}
+				</if>
+				<if test="rateStatus != null and '' != rateStatus">
+					AND fsr.id = #{rateStatus}
+				</if>
+				<if test="wxAuthState != null and '' != wxAuthState">
+					AND s.wx_auth_state = #{wxAuthState}
+				</if>
+				<if test="zfbAuthState != null and '' != zfbAuthState">
+					AND s.zfb_auth_state = #{zfbAuthState}
+				</if>
+				<if test="hangyeType != null and '' != hangyeType">
+					AND s.category_id = #{hangyeType}
+				</if>
+				<if test="hangyeType2 != null and '' != hangyeType2">
+					AND ce.parent_id = #{hangyeType2}
+				</if>	
+			</trim></where>
+	</select>
+	
+</mapper>

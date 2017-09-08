@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0;font-family:"微软雅黑",'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+html{font-size:62.5%; /* 10÷16=62.5% */} 
+body{ background-color:white;font-size:12px;font-size:1.2rem ;}
+img{ display:block; margin:0}
+
+
+
+/*4种兑换券背景*/
+.card-detail01{ width:100%;background:url(../images/card-detail-bg1.png) no-repeat bottom left; background-size:100%; background-color:#93cfe7;border-top:1px #93cfe7 solid; border-bottom:1px white solid;}
+.card-detail02{ width:100%;background:url(../images/card-detail-bg2.png) no-repeat bottom left; background-size:100%; background-color:#fea7b7;border-top:1px #fea7b7 solid; border-bottom:1px white solid;}
+.card-detail03{ width:100%;background:url(../images/card-detail-bg3.png) no-repeat bottom left; background-size:100%; background-color:#f2c866;border-top:1px #f2c866 solid; border-bottom:1px white solid;}
+.card-detail04{ width:100%;background:url(../images/card-detail-bg4.png) no-repeat bottom left; background-size:100%; background-color:#e99de8;border-top:1px #e99de8 solid; border-bottom:1px white solid;}
+
+/*兑换券图片*/
+.card-detail01 img{ width:20%; margin:4% auto 2%;}
+.card-detail02 img{ width:20%; margin:4% auto 2%;}
+.card-detail03 img{ width:20%; margin:4% auto 2%;}
+.card-detail04 img{ width:20%; margin:4% auto 2%;}
+
+/*兑换券描述*/
+.coupon-description{width:100%; text-align:center;font-size:7.2rem; color:white;}
+
+/*有效期限以及字体颜色*/
+.coupon-deadline{width:100%; text-align:center;font-size:3.6rem; margin:6% 0 5%;}
+.add-type1{ color:#cff1ff;}
+.add-type2{ color:#ffcfd7;}
+.add-type3{ color:#fff0cf;}
+.add-type4{ color:#ffcffe;}
+
+/*商家二维码*/
+.code img{ width:60%; margin:10% 0 10% 20%;}
+
+/*兑换券使用规则*/
+.use-rules{ margin:0 6% 10%;}
+.use-rules h1{ font-size:3.2rem;color:#4d4d4d; margin-bottom:2%; font-weight:normal;}
+.use-rules p{ font-size:2.4rem;color:#8c8c8c;}
+
+
+@media (max-width:854px){
+		.coupon-description{font-size:6rem;}
+		.coupon-deadline{font-size:3rem;}
+	}
+	
+@media (max-width:750px){
+		.coupon-description{font-size:5.4rem;}
+		.coupon-deadline{font-size:2.8rem;}
+		.use-rules h1{ font-size:2.8rem;}
+		.use-rules p{ font-size:2rem;}
+	}
+	
+@media (max-width:640px){
+		.coupon-description{font-size:4.8rem;}
+		.coupon-deadline{font-size:2.4rem;}
+		.use-rules h1{ font-size:2.6rem;}
+		.use-rules p{ font-size:2rem;}
+	}
+	
+@media (max-width:540px){
+		.coupon-description{font-size:4rem;}
+		.coupon-deadline{font-size:2rem;}
+		.use-rules h1{ font-size:2.4rem;}
+		.use-rules p{ font-size:1.8rem;}
+	}
+		
+@media (max-width:440px){
+		.coupon-description{font-size:3.2rem;}
+		.coupon-deadline{font-size:1.6rem;}
+		.use-rules h1{ font-size:2.2rem;}
+		.use-rules p{ font-size:1.6rem;}
+	}
+
+@media (max-width:320px){
+		.coupon-description{font-size:2.6rem;}
+		.coupon-deadline{font-size:1.2rem;}
+		.use-rules h1{ font-size:1.8rem;}
+		.use-rules p{ font-size:1.4rem;}
+	}

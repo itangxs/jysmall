@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.ChongzhiManageMapper">
+
+	<select id="queryChongzhiList" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.system.ChongzhiVo">
+		SELECT ci.id AS id,
+			ci.name AS name,
+			ci.content AS content,
+			ci.parent_id AS parentId,
+			ci.create_time AS createTime,
+			ci.enabled AS enabled,
+			cc.name AS fatherName
+		FROM cms_info ci
+			JOIN cms_category cc
+			ON ci.parent_id = cc.id
+			
+		<where>
+			1=1
+			<if test="parentId != null">
+				AND ci.parent_id = #{parentId}
+			</if>
+			<if test="name != null and name != ''">
+				AND ci.name = #{name}
+			</if>
+			<if test="enabled != null">
+				AND ci.enabled = #{enabled,jdbcType=TINYINT}
+			</if>
+			
+		</where>
+		ORDER BY ci.id DESC
+	</select>
+	<select id="queryUserAccountRecordPage" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.system.CashLogVo">
+		SELECT 
+		u.username AS userName,
+		c.create_time AS createDate,
+		c.amount AS amount,
+		c.pay_type AS payType
+		FROM cash_log c,user_info u
+		<where>
+			c.pay_type IN(1,2,5,6) AND (u.id = c.send_id OR u.id = c.review_id) 
+			<if test="payType != null and payType !=''">
+				AND c.pay_type = #{payType}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND u.username = #{userName}
+			</if>
+			<if test="beginTime != null and beginTime != ''">
+				AND c.create_time >= #{beginTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND #{endTime} >= c.create_time
+			</if>
+			<if test="userId != null and userId != ''">
+				AND u.id = #{userId}
+			</if>
+		</where>
+		GROUP BY c.id desc
+	</select>
+		<select id="querySellerAccountRecordPage" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.system.CashLogVo">
+		SELECT 
+		s.username AS sellerName,
+		c.create_time AS createDate,
+		c.amount AS amount,
+		c.pay_type AS payType
+		FROM cash_log c,seller_info s
+		<where>
+			c.pay_type IN(3,4) AND (s.id = c.send_id OR s.id = c.review_id) 
+			<if test="payType != null and payType !=''">
+				AND c.pay_type = #{payType}
+			</if>
+			<if test="sellerName != null and sellerName != ''">
+				AND s.username = #{sellerName}
+			</if>
+			<if test="beginTime != null and beginTime != ''">
+				AND c.create_time >= #{beginTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND #{endTime} >= c.create_time
+			</if>
+		</where>
+		GROUP BY c.id desc
+	</select>
+	<select id="userWithdrawsRecord" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.system.WithdrawsVo">
+		SELECT c.id AS id,u.username AS userName,
+		c.create_date AS createDate,c.money AS money,c.`status` AS status
+		FROM cash_save_withdraw c,user_info u,cash_account ca
+		<where>
+			c.cash_id = ca.id AND ca.account_id = u.id 
+			AND ca.account_type = 0 AND c.oper_type = 1 
+			<if test="userName != null and userName !=''">
+				AND u.username = #{userName}
+			</if>
+			<if test="beginTime != null and beginTime != ''">
+				AND c.create_date >= #{beginTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND #{endTime} >= c.create_date
+			</if>
+			<if test="status != null">
+				AND c.`status` = #{status}
+			</if>
+		</where>
+		GROUP BY c.id
+	</select>
+	<select id="sellerWithdrawsRecord" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.system.WithdrawsVo">
+
+		SELECT cc.*,b.cardholder AS bankUserName,
+		b.cark_num AS carkNum,b.name AS bankName,b.branch AS branch FROM (SELECT c.id AS id,s.name AS storeName,
+		c.create_date AS createDate,c.money AS money,c.`status`  AS status ,
+	  s.id AS storeId,c.account_id AS sellerId,
+		c.bank_id AS bankId
+		FROM cash_save_withdraw c,store_info s,cash_account ca
+		<where>
+			c.cash_id = ca.id  AND c.account_id = s.seller_id
+			AND ca.account_type = 1 AND c.oper_type = 1 
+			<if test="storeName != null and storeName !=''">
+				AND s.`name` LIKE CONCAT('%',#{storeName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="beginTime != null and beginTime != ''">
+				AND c.create_date >= #{beginTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND #{endTime,jdbcType=TIMESTAMP} >= c.create_date
+			</if>
+			<if test="status != null">
+				AND c.`status` = #{status}
+			</if>
+			</where> ) cc LEFT JOIN bank_info b
+		ON cc.bankId = b.id
+		
+		GROUP BY cc.id desc
+	</select>
+	
+	<!-- <select id="sellerWithdrawsRecord" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.system.WithdrawsVo">
+
+		SELECT cc.*,b.cardholder AS bankUserName,
+		b.cark_num AS carkNum,b.name AS bankName,b.branch AS branch FROM (SELECT c.id AS id,s.username AS sellerName,
+		c.create_date AS createDate,c.money AS money,c.`status`  AS status ,
+	  s.id AS sellerId,
+		c.bank_id AS bankId
+		FROM cash_save_withdraw c,seller_info s,cash_account ca
+		<where>
+			c.cash_id = ca.id AND ca.account_id = s.id 
+			AND ca.account_type = 1 AND c.oper_type = 1 
+			<if test="sellerName != null and sellerName !=''">
+				AND s.username LIKE CONCAT('%',#{sellerName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="beginTime != null and beginTime != ''">
+				AND c.create_date >= #{beginTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND #{endTime,jdbcType=TIMESTAMP} >= c.create_date
+			</if>
+			<if test="status != null">
+				AND c.`status` = #{status}
+			</if>
+			</where> ) cc LEFT JOIN bank_info b
+		ON cc.bankId = b.id
+		
+		GROUP BY cc.id desc
+	</select> -->
+</mapper>

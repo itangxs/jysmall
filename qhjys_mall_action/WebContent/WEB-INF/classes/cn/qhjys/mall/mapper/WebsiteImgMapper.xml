@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.WebsiteImgMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.WebsiteImg" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pc_banner" property="pcBanner" jdbcType="VARCHAR" />
+    <result column="pc_menu_meis" property="pcMenuMeis" jdbcType="VARCHAR" />
+    <result column="pc_menu_diany" property="pcMenuDiany" jdbcType="VARCHAR" />
+    <result column="pc_menu_gouw" property="pcMenuGouw" jdbcType="VARCHAR" />
+    <result column="pc_menu_lvyou" property="pcMenuLvyou" jdbcType="VARCHAR" />
+    <result column="pc_menu_xiux" property="pcMenuXiux" jdbcType="VARCHAR" />
+    <result column="pc_menu_liren" property="pcMenuLiren" jdbcType="VARCHAR" />
+    <result column="pc_menu_shengh" property="pcMenuShengh" jdbcType="VARCHAR" />
+    <result column="pc_menu_licai" property="pcMenuLicai" jdbcType="VARCHAR" />
+    <result column="pc_menu_other1" property="pcMenuOther1" jdbcType="VARCHAR" />
+    <result column="pc_menu_other2" property="pcMenuOther2" jdbcType="VARCHAR" />
+    <result column="app_banner1" property="appBanner1" jdbcType="VARCHAR" />
+    <result column="app_banner2" property="appBanner2" jdbcType="VARCHAR" />
+    <result column="app_banner3" property="appBanner3" jdbcType="VARCHAR" />
+    <result column="app_banner4" property="appBanner4" jdbcType="VARCHAR" />
+    <result column="app_banner5" property="appBanner5" jdbcType="VARCHAR" />
+    <result column="app_banner6" property="appBanner6" jdbcType="VARCHAR" />
+    <result column="app_banner7" property="appBanner7" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pc_banner, pc_menu_meis, pc_menu_diany, pc_menu_gouw, pc_menu_lvyou, pc_menu_xiux, 
+    pc_menu_liren, pc_menu_shengh, pc_menu_licai, pc_menu_other1, pc_menu_other2, app_banner1, 
+    app_banner2, app_banner3, app_banner4, app_banner5, app_banner6, app_banner7, create_date, 
+    admin_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.WebsiteImgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from website_img
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from website_img
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.WebsiteImgExample" >
+    delete from website_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.WebsiteImg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into website_img (pc_banner, pc_menu_meis, pc_menu_diany, 
+      pc_menu_gouw, pc_menu_lvyou, pc_menu_xiux, 
+      pc_menu_liren, pc_menu_shengh, pc_menu_licai, 
+      pc_menu_other1, pc_menu_other2, app_banner1, 
+      app_banner2, app_banner3, app_banner4, 
+      app_banner5, app_banner6, app_banner7, 
+      create_date, admin_id)
+    values (#{pcBanner,jdbcType=VARCHAR}, #{pcMenuMeis,jdbcType=VARCHAR}, #{pcMenuDiany,jdbcType=VARCHAR}, 
+      #{pcMenuGouw,jdbcType=VARCHAR}, #{pcMenuLvyou,jdbcType=VARCHAR}, #{pcMenuXiux,jdbcType=VARCHAR}, 
+      #{pcMenuLiren,jdbcType=VARCHAR}, #{pcMenuShengh,jdbcType=VARCHAR}, #{pcMenuLicai,jdbcType=VARCHAR}, 
+      #{pcMenuOther1,jdbcType=VARCHAR}, #{pcMenuOther2,jdbcType=VARCHAR}, #{appBanner1,jdbcType=VARCHAR}, 
+      #{appBanner2,jdbcType=VARCHAR}, #{appBanner3,jdbcType=VARCHAR}, #{appBanner4,jdbcType=VARCHAR}, 
+      #{appBanner5,jdbcType=VARCHAR}, #{appBanner6,jdbcType=VARCHAR}, #{appBanner7,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{adminId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.WebsiteImg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into website_img
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pcBanner != null" >
+        pc_banner,
+      </if>
+      <if test="pcMenuMeis != null" >
+        pc_menu_meis,
+      </if>
+      <if test="pcMenuDiany != null" >
+        pc_menu_diany,
+      </if>
+      <if test="pcMenuGouw != null" >
+        pc_menu_gouw,
+      </if>
+      <if test="pcMenuLvyou != null" >
+        pc_menu_lvyou,
+      </if>
+      <if test="pcMenuXiux != null" >
+        pc_menu_xiux,
+      </if>
+      <if test="pcMenuLiren != null" >
+        pc_menu_liren,
+      </if>
+      <if test="pcMenuShengh != null" >
+        pc_menu_shengh,
+      </if>
+      <if test="pcMenuLicai != null" >
+        pc_menu_licai,
+      </if>
+      <if test="pcMenuOther1 != null" >
+        pc_menu_other1,
+      </if>
+      <if test="pcMenuOther2 != null" >
+        pc_menu_other2,
+      </if>
+      <if test="appBanner1 != null" >
+        app_banner1,
+      </if>
+      <if test="appBanner2 != null" >
+        app_banner2,
+      </if>
+      <if test="appBanner3 != null" >
+        app_banner3,
+      </if>
+      <if test="appBanner4 != null" >
+        app_banner4,
+      </if>
+      <if test="appBanner5 != null" >
+        app_banner5,
+      </if>
+      <if test="appBanner6 != null" >
+        app_banner6,
+      </if>
+      <if test="appBanner7 != null" >
+        app_banner7,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pcBanner != null" >
+        #{pcBanner,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuMeis != null" >
+        #{pcMenuMeis,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuDiany != null" >
+        #{pcMenuDiany,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuGouw != null" >
+        #{pcMenuGouw,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuLvyou != null" >
+        #{pcMenuLvyou,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuXiux != null" >
+        #{pcMenuXiux,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuLiren != null" >
+        #{pcMenuLiren,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuShengh != null" >
+        #{pcMenuShengh,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuLicai != null" >
+        #{pcMenuLicai,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuOther1 != null" >
+        #{pcMenuOther1,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuOther2 != null" >
+        #{pcMenuOther2,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner1 != null" >
+        #{appBanner1,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner2 != null" >
+        #{appBanner2,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner3 != null" >
+        #{appBanner3,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner4 != null" >
+        #{appBanner4,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner5 != null" >
+        #{appBanner5,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner6 != null" >
+        #{appBanner6,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner7 != null" >
+        #{appBanner7,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.WebsiteImgExample" resultType="java.lang.Integer" >
+    select count(*) from website_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website_img
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.pcBanner != null" >
+        pc_banner = #{record.pcBanner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuMeis != null" >
+        pc_menu_meis = #{record.pcMenuMeis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuDiany != null" >
+        pc_menu_diany = #{record.pcMenuDiany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuGouw != null" >
+        pc_menu_gouw = #{record.pcMenuGouw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuLvyou != null" >
+        pc_menu_lvyou = #{record.pcMenuLvyou,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuXiux != null" >
+        pc_menu_xiux = #{record.pcMenuXiux,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuLiren != null" >
+        pc_menu_liren = #{record.pcMenuLiren,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuShengh != null" >
+        pc_menu_shengh = #{record.pcMenuShengh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuLicai != null" >
+        pc_menu_licai = #{record.pcMenuLicai,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuOther1 != null" >
+        pc_menu_other1 = #{record.pcMenuOther1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcMenuOther2 != null" >
+        pc_menu_other2 = #{record.pcMenuOther2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appBanner1 != null" >
+        app_banner1 = #{record.appBanner1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appBanner2 != null" >
+        app_banner2 = #{record.appBanner2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appBanner3 != null" >
+        app_banner3 = #{record.appBanner3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appBanner4 != null" >
+        app_banner4 = #{record.appBanner4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appBanner5 != null" >
+        app_banner5 = #{record.appBanner5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appBanner6 != null" >
+        app_banner6 = #{record.appBanner6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appBanner7 != null" >
+        app_banner7 = #{record.appBanner7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website_img
+    set id = #{record.id,jdbcType=BIGINT},
+      pc_banner = #{record.pcBanner,jdbcType=VARCHAR},
+      pc_menu_meis = #{record.pcMenuMeis,jdbcType=VARCHAR},
+      pc_menu_diany = #{record.pcMenuDiany,jdbcType=VARCHAR},
+      pc_menu_gouw = #{record.pcMenuGouw,jdbcType=VARCHAR},
+      pc_menu_lvyou = #{record.pcMenuLvyou,jdbcType=VARCHAR},
+      pc_menu_xiux = #{record.pcMenuXiux,jdbcType=VARCHAR},
+      pc_menu_liren = #{record.pcMenuLiren,jdbcType=VARCHAR},
+      pc_menu_shengh = #{record.pcMenuShengh,jdbcType=VARCHAR},
+      pc_menu_licai = #{record.pcMenuLicai,jdbcType=VARCHAR},
+      pc_menu_other1 = #{record.pcMenuOther1,jdbcType=VARCHAR},
+      pc_menu_other2 = #{record.pcMenuOther2,jdbcType=VARCHAR},
+      app_banner1 = #{record.appBanner1,jdbcType=VARCHAR},
+      app_banner2 = #{record.appBanner2,jdbcType=VARCHAR},
+      app_banner3 = #{record.appBanner3,jdbcType=VARCHAR},
+      app_banner4 = #{record.appBanner4,jdbcType=VARCHAR},
+      app_banner5 = #{record.appBanner5,jdbcType=VARCHAR},
+      app_banner6 = #{record.appBanner6,jdbcType=VARCHAR},
+      app_banner7 = #{record.appBanner7,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      admin_id = #{record.adminId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.WebsiteImg" >
+    update website_img
+    <set >
+      <if test="pcBanner != null" >
+        pc_banner = #{pcBanner,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuMeis != null" >
+        pc_menu_meis = #{pcMenuMeis,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuDiany != null" >
+        pc_menu_diany = #{pcMenuDiany,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuGouw != null" >
+        pc_menu_gouw = #{pcMenuGouw,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuLvyou != null" >
+        pc_menu_lvyou = #{pcMenuLvyou,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuXiux != null" >
+        pc_menu_xiux = #{pcMenuXiux,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuLiren != null" >
+        pc_menu_liren = #{pcMenuLiren,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuShengh != null" >
+        pc_menu_shengh = #{pcMenuShengh,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuLicai != null" >
+        pc_menu_licai = #{pcMenuLicai,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuOther1 != null" >
+        pc_menu_other1 = #{pcMenuOther1,jdbcType=VARCHAR},
+      </if>
+      <if test="pcMenuOther2 != null" >
+        pc_menu_other2 = #{pcMenuOther2,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner1 != null" >
+        app_banner1 = #{appBanner1,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner2 != null" >
+        app_banner2 = #{appBanner2,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner3 != null" >
+        app_banner3 = #{appBanner3,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner4 != null" >
+        app_banner4 = #{appBanner4,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner5 != null" >
+        app_banner5 = #{appBanner5,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner6 != null" >
+        app_banner6 = #{appBanner6,jdbcType=VARCHAR},
+      </if>
+      <if test="appBanner7 != null" >
+        app_banner7 = #{appBanner7,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.WebsiteImg" >
+    update website_img
+    set pc_banner = #{pcBanner,jdbcType=VARCHAR},
+      pc_menu_meis = #{pcMenuMeis,jdbcType=VARCHAR},
+      pc_menu_diany = #{pcMenuDiany,jdbcType=VARCHAR},
+      pc_menu_gouw = #{pcMenuGouw,jdbcType=VARCHAR},
+      pc_menu_lvyou = #{pcMenuLvyou,jdbcType=VARCHAR},
+      pc_menu_xiux = #{pcMenuXiux,jdbcType=VARCHAR},
+      pc_menu_liren = #{pcMenuLiren,jdbcType=VARCHAR},
+      pc_menu_shengh = #{pcMenuShengh,jdbcType=VARCHAR},
+      pc_menu_licai = #{pcMenuLicai,jdbcType=VARCHAR},
+      pc_menu_other1 = #{pcMenuOther1,jdbcType=VARCHAR},
+      pc_menu_other2 = #{pcMenuOther2,jdbcType=VARCHAR},
+      app_banner1 = #{appBanner1,jdbcType=VARCHAR},
+      app_banner2 = #{appBanner2,jdbcType=VARCHAR},
+      app_banner3 = #{appBanner3,jdbcType=VARCHAR},
+      app_banner4 = #{appBanner4,jdbcType=VARCHAR},
+      app_banner5 = #{appBanner5,jdbcType=VARCHAR},
+      app_banner6 = #{appBanner6,jdbcType=VARCHAR},
+      app_banner7 = #{appBanner7,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      admin_id = #{adminId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

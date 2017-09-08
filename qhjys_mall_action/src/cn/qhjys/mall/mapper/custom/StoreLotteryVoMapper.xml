@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.StoreLotteryVoMapper">
+	<resultMap id="BaseResultMap" type="cn.qhjys.mall.vo.system.StoreLotteryVo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="store_id" property="storeId" jdbcType="BIGINT" />
+		<result column="lottery_name" property="lotteryName" jdbcType="VARCHAR" />
+		<result column="storeName" property="storeName" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="lottery_content" property="lotteryContent"
+			jdbcType="VARCHAR" />
+		<result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+		<result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<select id="selectByStoreLotteryVoByStatus" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		lo.id as id,
+		lo.store_id as store_id,
+		sin.name as storeName,
+		lo.lottery_name as lottery_name,
+		lo.lottery_content as lottery_content,
+		lo.start_date as start_date,
+		lo.end_date as end_date,
+		lo.status as status,
+		lo.create_date as create_date,
+
+		CONCAT( pin.`name`,cin.`name`,ain.`name`,sin.address) as address
+
+		from
+		store_lottery as lo,
+		store_info as sin ,
+		province_info as pin,
+		city_info as cin,
+		area_info as ain
+		where 1=1
+		and pin.id = sin.province
+		and cin.id = sin.city
+		and ain.id = sin.area
+		and lo.store_id =sin.id and lo.status = ${lstatus}
+
+		order by lo.id desc;
+	</select>
+
+</mapper>

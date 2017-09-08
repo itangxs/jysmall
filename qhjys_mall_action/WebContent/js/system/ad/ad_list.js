@@ -1,0 +1,1 @@
+function deletead(c){if(confirm("确认删除此条广告?")){var b="/managermall/systemmall/ad/deleteAd.do";var a="id="+c;$.ajax({async:false,type:"post",url:b,data:a,success:function(d){if(d=="success"){alert("删除成功");window.location.href=window.location.href}else{alert("删除失败")}},error:function(){alert("服务器忙")}})}else{}};

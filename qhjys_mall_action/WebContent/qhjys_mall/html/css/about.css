@@ -1,0 +1,36 @@
+.aboutus{ width:1190px; margin:0 auto; padding:20px 0;}
+.aboutus .title{ color:#ff8c00; font-size:24px; line-height:50px;}
+.aboutus .title1{ color:#ff8c00; font-size:24px; line-height:50px; border-bottom:1px solid #ddd; margin-bottom:20px;}
+.aboutus .title1 span{ border-bottom:2px solid #ff8c00; margin-bottom:-1px; line-height:50px; display:inline-block; padding:0 5px;}
+.aboutdetail p{ text-indent:2em; font-size:15px; padding-bottom:20px; line-height:28px;}
+.aboutus-profile{ height:240px;}
+.aboutus-profile img{ float:left; padding:20px 40px 20px 0;}
+
+.links{ padding:0 0 50px 0;}
+.links h1{ font-size:18px;}
+.links ul{ padding:0 0 30px 70px;}
+.links ul li{ line-height:35px; float:left; width:224px;}
+.links ul li a{ color:#0b72a4;}
+.links ul li a:hover{ text-decoration:underline; color:#ff8c00;}
+
+#faq { font-size: 14px;}
+#faq li { margin: 0 0 10px;}
+#faq dl { margin: 0; padding:0; display:inline;}
+#faq dt {
+ font-weight:bold; cursor:pointer;
+ line-height: 20px; border-bottom:1px #ccc dotted;
+ font-size:15px; color:#333; padding: 5px 0 5px 20px;
+ background: url(../images/ico-jt.png) no-repeat 1170px -1253px;
+}
+#faq dd {display: none;	margin: 0;	padding: 5px 0 5px 20px;}
+
+/*aboutus*/
+.aboutbox{ width:100%; margin:0 auto; padding:0;}
+.aboutbox ul li{ text-align:center;list-style:none;}
+.aboutboxbg1{ background:#7bd1fd; height:673px; padding:27px 0 0 0;}
+.aboutboxbg2{ background:#fff074; height:759px;}
+.aboutboxbg3{ background:#8be074; height:759px;}
+.aboutboxbg4{ background: url(../images/about4.jpg) no-repeat center center #f89a5b; height:759px;}
+.aboutboxbg5{ background:#b97ef5; height:760px;}
+.aboutboxbg6{ background:#ff9999; height:759px;}
+.aboutboxbg7{ background: url(../images/about7.jpg) no-repeat center center #47d0d9; height:330px; padding:430px 0 0 0;}

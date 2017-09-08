@@ -1,0 +1,14 @@
+@charset "utf-8";
+.renwutitle{ background:#eeeeee; border-radius:5px; padding:0 0 0 22px; margin-bottom:20px; line-height:42px; height:42px;}
+.textw100{ width:120px; display:inline-block;}
+.renwuanniubox{ margin:0 auto; margin-top:30px; text-align:center;}
+.renwuanniubox1{ text-align:right; margin-top:-50px; margin-bottom:20px; }
+.renwuanniubox3{ text-align:right;  margin-bottom:20px; }
+.renwuanniubox2{ margin:0 auto; margin-top:30px; text-align:left;margin-left:125px;}
+.renwuanniublue{ padding:0 30px; height:35px; line-height:35px; background:#64a1ce; border:1px solid #ccc; color:#fff; margin-right:20px;}
+.renwuanniured{ padding:0 30px; height:35px; line-height:35px; background:#f87273; border:1px solid #ccc; color:#fff; margin-right:20px;}
+.renwuanniugray{ padding:0 10px; height:30px; line-height:30px; background:#e2e2e2; border:1px solid #ccc; color:#333; margin-left:10px;}
+
+.textareawidth{ display:inline-block; vertical-align:top;}
+.textareabox{padding:0 0 0 125px; margin-top:-20px;}
+

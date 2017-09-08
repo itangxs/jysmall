@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.ProductScheduleMapper">
+
+	<select id="queryProductSchedule" resultType="cn.qhjys.mall.vo.ProdSchedule">
+		SELECT sch.id AS id,
+			sch.user_id AS userId,
+			us.realname AS userName,
+			sch.prod_id AS prodId,
+			pro.name AS prodName,
+			Substring_index(pro.images, "|", 1) AS prodImg,
+			sch.reser_man AS reserMan,
+			sch.reser_phone AS reserPhone,
+			sch.reser_time AS reserTime,
+			sch.reser_num AS reserNum,
+			sch.status AS status,
+			sch.create_time AS createTime
+		FROM schedule_info sch
+			JOIN user_info us
+			ON sch.user_id = us.id
+			JOIN product_info pro
+			ON sch.prod_id = pro.id
+		WHERE 1=1
+			<if test="userId != null">
+				AND sch.user_id = #{userId,jdbcType=BIGINT}
+			</if>
+			<if test="status != null">
+				AND sch.status = #{status,jdbcType=TINYINT}
+			</if>
+	</select>
+</mapper>

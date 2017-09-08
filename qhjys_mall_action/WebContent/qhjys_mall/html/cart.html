@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>金钥匙商城</title>
+<link href="css/public.css" rel="stylesheet" type="text/css" />
+<link href="css/cart.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+<!-------------------top---------------------------------------------------------------------->
+<div class="topmenu">	
+    <div class="topmenu1">
+		<h1>
+            您好，欢迎来金钥匙商城！ 
+            <span><a href="login.html">登陆</a></span> 
+            <a href="registration.html">注册</a>
+        </h1>
+        <h2>
+            <a href="member-order.html">我的订单</a>|
+            <a href="cart.html">购物车</a>|            
+            <a href="service.html">服务中心</a>|
+            <a href="#">微信公众号</a>
+        </h2>
+	</div>
+</div>
+<!----------------------购物车-------------------------->
+<div class="topcart">
+	<span><a href="#">随时退</a><a href="#">支持代金券</a><a href="#">过期退</a></span>
+	<a href="index.html"><img src="images/logo.png" /></a>
+</div>
+	
+<div class="cart">
+	<h5><img src="images/pay_liucheng1.jpg" /></h5>
+	<div class="title"><h1>我的购物车 <span><i>0</i>/20</span></h1>现在 <a href="login.html" class="fontred">登录</a> ，你的商品将被保存到购物车</div>
+    <!---购物车空的--->
+    <div class="cartkong">
+    	<h1>您的购物车还是空的</h1>
+        点击购物车可以快速添加，您可以：<br />
+        去<a href="index.html" class="fontred">首页</a>购买喜欢的产品 
+  </div>
+    <!---购物车有购物--->
+    <div class="cartgouwu">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th>项目</th>
+            <th class="td100">单价</th>
+            <th class="td100">数量</th>
+            <th class="td100">总价</th>
+            <th class="td100">操作</th>
+          </tr>
+          <tr>
+            <td><a href="listdetail.html">【深圳】蜀都自助火锅城</a></td>
+            <td class="td100">¥79</td>
+            <td class="td100">
+            	<form id="form1" name="form1" method="post" action="" class="goumaishuliang">
+                    <input type="submit" name="button" id="button" value="-" />
+                    <input class="input1" name="textfield" type="text" id="textfield" value="1" />
+                    <input class="input2" type="submit" name="button2" id="button2" value="+" />
+                </form>
+            </td>
+            <td class="td100">¥79</td>
+            <td class="td100"><a href="#">删除</a></td>
+          </tr>
+          <tr>
+            <td><a href="listdetail.html">【深圳】蜀都自助火锅城</a></td>
+            <td class="td100">¥79</td>
+            <td class="td100">
+            	<form id="form1" name="form1" method="post" action="" class="goumaishuliang">
+                    <input type="submit" name="button" id="button" value="-" />
+                    <input class="input1" name="textfield" type="text" id="textfield" value="1" />
+                    <input class="input2" type="submit" name="button2" id="button2" value="+" />
+                </form>
+            </td>
+            <td class="td100">¥79</td>
+            <td class="td100"><a href="#">删除</a></td>
+          </tr>
+          <tr>
+            <td colspan="5" class="tdright1">
+            	使用积分：
+            	<input name="input" class="input1" type="text" />点 -¥<strong class="fontred">0.00</strong>
+            	<p><i>100积分抵1元，现有积分377点</i></p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5" class="tdright"><strong>实付款：¥</strong><em class="fontred">158</em>&nbsp;&nbsp;积分抵用：0元</td>
+          </tr>
+        </table>
+        
+    </div>
+    <div class="goumaitishi">
+    	<h1>收货地址<span><a href="member-setaddress.html">管理</a></span></h1>
+        <div class="tishinr">
+       	  <form action="" method="get">
+            	<ul>
+                	<li class="licurrent"><input name="" type="radio" value="" checked="checked" />
+            	  小小，北京 北京 朝阳区 北京市朝阳区富华路13号，85645689</li>
+                  	<li><input name="" type="radio" value="" />
+            	  小小，北京 北 朝阳区 北京市朝阳区富华路13号，85645689</li>
+                  	<li><input name="" type="radio" value="" />
+            	  使用其它地址
+                  		<div class="member_setaddaddress">
+                            <ul>
+                                <li><span><i>*</i>所在地区：</span>
+                                    <select name="">
+                                      <option>-省份-</option>
+                                    </select>
+                                    <select name="">
+                                      <option>-城市-</option>
+                                    </select>
+                                    <select name="">
+                                      <option>-市区-</option>
+                                    </select>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span><i>*</i>街道地址：</span>
+                                    <input class="input500" name="" type="text" />
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span><i>*</i>邮政编码：</span>
+                                    <input  class="input200" name="" type="text" />
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span><i>*</i>收货人姓名：</span>
+                                    <input class="input200" name="" type="text" />
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span><i>*</i>电话号码：</span>
+                                    <input class="input200" name="" type="text" />
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span></span>
+                                    <input class="button_red" type="submit" name="button" id="button" value="保存" />
+                                    <input class="button_hui" type="reset" name="button2" id="button2" value="取消" />
+                                    <div class="clear"></div>
+                                </li>
+                            </ul>
+                    	</div>
+                  	</li>
+                </ul>            	
+   	      
+        		<b>希望送货的时间</b>
+                
+            	<ul>
+                	<li>
+                    	<input name="" type="radio" value="" />
+            	  		只工作日送货(双休日、假日不用送，写字楼/商用地址客户请选择)
+                  	</li>
+                  	<li>
+                    	<input name="" type="radio" value="" />
+            	  		只双休日、假日送货(工作日不用送)
+                    </li>
+                  	<li>
+                    	<input name="" type="radio" value="" />
+            	  		学校地址/地址白天没人，请尽量安排其它时间送货 (特别安排可能会超出预计送货天数)
+                    </li>
+                    <li>
+                    	<input name="" type="radio" value="" />
+            	  		工作日、双休日与假日均可送货
+                    </li>
+                </ul> 
+       	  		<p>配送说明（快递公司由商家根据情况选择，请不要指定。其他要求会尽量协调）</p>
+            	<input class="input150" name="" type="text" />
+            </form>
+        </div>        
+    </div>
+    <div class="goumaitishi">
+    	<h1>大额单购买提示</h1>
+        <div class="tishinr">
+        	<p>* 本单总价超过500元，已超出工行口令卡、招行大众版等的单次支付限额。查看<a href="#" class="fontred">更多银行支付限额详情</a></p>
+       	  	<p>* 您也可以先<a href="#" class="fontred">为账户充值</a>，方便您的购买。</p>
+        </div>        
+    </div>
+<div class="goumaitishi">
+    	<h1>您的手机</h1>
+        <div class="tishinr">
+        	<p>首次购买请先验证手机号（购买成功后美团券密码将发送到您的手机，凭美团券密码去商家消费）。</p>
+       	  	<p><em>手机号</em><input class="input1" name="" type="text" /></p>
+            <p><em></em><input name="" type="submit" class="button_hui" value=" 获取手机动态码 " /></p>
+            <p><em>动态码</em><input class="input1" name="" type="text" /></p>
+        </div>        
+    </div>
+    <div class="carttijiao"><input name="" type="submit" class="button_red" value=" 提交订单 " /></div>
+</div>
+<div class="ganxingqu-big">
+        	<h3>你可能感兴趣的商品</h3>
+        	<ul>
+            	<li>
+                	<a href="listdetail.html"><img src="images/pro_index.jpg"/></a>
+                  <p><a href="listdetail.html">大福人家价值27元的酸菜卤肉饭元的酸菜卤肉饭...</a></p>
+                    <h2>￥15</h2>
+                </li>
+                <li>
+                	<a href="listdetail.html"><img src="images/pro_index.jpg"/></a>
+                  <p><a href="#">大福人家价值27元的酸菜卤肉饭</a></p>
+                    <h2>￥15</h2>
+                </li>
+                <li>
+                	<a href="#"><img src="images/pro_index.jpg"/></a>
+                    <p><a href="#">大福人家价值27元的酸菜卤肉饭</a></p>
+                    <h2>￥15</h2>
+                </li>
+                <li>
+                	<a href="#"><img src="images/pro_index.jpg"/></a>
+                    <p><a href="#">大福人家价值27元的酸菜卤肉饭</a></p>
+                    <h2>￥15</h2>
+                </li>
+                <li>
+                	<a href="#"><img src="images/pro_index.jpg"/></a>
+                    <p><a href="#">大福人家价值27元的酸菜卤肉饭</a></p>
+                    <h2>￥15</h2>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+
+<!------------------------------底部---------------------------------------------->
+<div class="footer">
+	<div class="bottom1">
+        <ul>
+            <li>
+              <h1 class="bottom_navbg1">购物指南</h1>
+              <p><a href="#">购物流程</a></p>
+              <p><a href="#">商城规则</a></p>
+              <p><a href="#">会员介绍</a></p>
+              <p><a href="#">常见问题</a></p>
+            </li>
+            <li>
+              <h1 class="bottom_navbg2">付款方式</h1>
+              <p><a href="#">支付平台</a></p>
+              <p><a href="#">换购抵用</a></p>
+            </li>
+            <li>
+              <h1 class="bottom_navbg3"><a href="#">物流配送</a></h1>
+              <h1 class="bottom_navbg4"><a href="#">售后服务</a></h1>
+              <h1 class="bottom_navbg5"><a href="#">法律声明</a></h1>
+            </li>
+            <li>
+              <h1 class="bottom_navbg6">关于我们</h1>
+              <p><a href="#">公司简介</a></p>
+              <p><a href="#">企业文化</a></p>
+              <p><a href="#">企业历程</a></p>
+              <p><a href="#">广告服务</a></p>
+              <p><a href="#">联系我们</a></p>
+            </li> 
+            <div class="bottom_service">
+            	<h3>客服热线</h3>
+                <h2>400-888-0683</h2>
+                <p>E-mail: service@jysp2p.com</p>
+                <p>(周一至周五，09:00-18:00)</p>
+            </div>    
+            <div class="clear"></div>       
+        </ul>        
+    </div>    
+</div>
+<div class="bottom">
+    <h1>
+    	<span>
+        	<a href="#">关于我们</a>|
+            <a href="#">联系我们</a>|
+            <a href="#">诚聘英才</a>|
+            <a href="#">供应商入驻</a>|
+            <a href="#">友情链接</a>|
+            <a href="#">法律申明</a>
+        </span>
+        <a href="#">首页</a>
+<!--<a href="#">换购</a>
+        <a href="#">VIP专区</a>
+        <a href="#">理财</a>-->
+    </h1>
+    <h2>粤ICP备14023008号-1 版权所有©2013-2015 深圳市前海金钥匙电子商务有限公司 <a href="#">站长统计</a></h2>
+    <ul>
+        <li><img src="images/bottom1.jpg" /></li>
+        <li><img src="images/bottom1.jpg" /></li>
+        <li><img src="images/bottom1.jpg" /></li>
+        <li><img src="images/bottom1.jpg" /></li>
+        <li><img src="images/bottom1.jpg" /></li>
+        <li><img src="images/bottom1.jpg" /></li>
+        <li><img src="images/bottom1.jpg" /></li>
+        <div class="clear"></div>
+    </ul>
+</div>
+<!--底部-e-->
+
+</body>
+</html>

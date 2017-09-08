@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0;font-family:"微软雅黑"; font-size:14px;}
+ul{ list-style-type:none;}
+
+a{ text-decoration:none;}
+body{ background-color:rgba(0,0,0,0.6);}
+.center{ width:482px; height:656px; background:url(/images/phone.png) no-repeat top left;position:relative; margin-top:60px; margin-left:140px;}
+.right-part{ float:right;}
+dl{width:120px; height:84px;margin-top:80px;float:right;}
+.main_body{  background-color:#46b54a; border-radius:2px;color:white;}
+dl a{ display:block;width:136px; height:46px;text-decoration:none;color:#000; text-align:center; line-height:46px;}
+.close{margin-top:288px;}
+.close textarea{ width:284px; height:156px; max-width:284px; max-height:156px; border-radius:2px; text-indent:10px; color:#333}
+.close-tc{ margin:10px 0;}
+.send-phone{ margin-bottom:10px}
+.close a{border-radius:2px;display:block;width:136px; height:46px;text-decoration:none;color:#fff; text-align:center; line-height:46px; background-color:#46b54a; }
+
+.phone_content{ width:287px; height:509px; position:absolute; left:17px; top:77px; background-color:#f3f3f3;}
+.top_nav{height:40px; background-color:#323232; text-align:center; line-height:40px; color:white;}
+.content{width:256px; height:438px; border:1px #e8e8eb solid; margin:15px auto; background-color:white;}
+.content1{width:256px; height:438px; border:1px #e8e8eb solid; margin:15px auto; background-color:white;}
+.content ul{ margin-bottom:50px;}
+.content li{ margin-bottom:10px; margin-left:10px; margin-top:5px;}
+.content1 ul{ margin-bottom:50px;}
+.content1 li{ margin-bottom:10px; margin-left:10px; margin-top:5px;}
+.time{color:#959595; font-size:12px; }
+.time span{ color:#4c6bab;font-size:12px;}
+.text{color:#4e4f4e;}
+.title{color:#4e4f4e;}
+.line{ width:238px; height:1px ; background-color:#e8e8eb;}
+.next{ height:38px; width:238px; background:url(/images/change.png) no-repeat right 5px;}
+.next a{ color:#1d221d;}

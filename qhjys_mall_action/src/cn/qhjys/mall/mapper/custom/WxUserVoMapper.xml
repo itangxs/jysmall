@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.WxUserVoMapper" >
+	<select id="querySellerWxUserVo" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.WxUserVo">
+		select DISTINCT ro.open_id AS openId,ro.headimgurl AS headimgurl,ro.nickname AS nickname FROM rebate_order ro LEFT JOIN store_rebate sr ON ro.rebate_id = sr.id 
+		LEFT JOIN store_info si ON sr.store_id = si.id WHERE si.seller_id=#{sellerId} AND ro.`status` = 2
+		UNION  
+		SELECT DISTINCT fu.open_id AS openId,fu.portrait AS headimgurl,fu.nick_name AS nickname  
+		FROM fq_user_info fu LEFT JOIN fq_order fo ON fu.id = fo.user_id 
+		LEFT JOIN fq_store fs ON fo.store_id = fs.id WHERE fo.status >0 AND fs.seller_id=#{sellerId}
+	</select>
+	<select id="querySellerWxUserOpenId" parameterType="java.lang.Long" resultType="java.lang.String">
+		select DISTINCT ro.open_id AS openId FROM rebate_order ro LEFT JOIN store_rebate sr ON ro.rebate_id = sr.id 
+		LEFT JOIN store_info si ON sr.store_id = si.id WHERE si.seller_id=#{sellerId} AND ro.`status` = 2 AND ro.open_id IS NOT NULL AND ro.open_id != ''
+		UNION  
+		SELECT DISTINCT fu.open_id AS openId
+		FROM fq_user_info fu LEFT JOIN fq_order fo ON fu.id = fo.user_id 
+		LEFT JOIN fq_store fs ON fo.store_id = fs.id WHERE fo.status >0 AND fs.seller_id=#{sellerId} AND fu.open_id IS NOT NULL AND fu.open_id !=''
+	</select>
+</mapper>

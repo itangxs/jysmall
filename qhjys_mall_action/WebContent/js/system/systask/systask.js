@@ -1,0 +1,1 @@
+function changeno(b,a){$.ajax({async:true,type:"POST",data:{id1:b,id2:a},url:"/managermall/systemmall/taskQuestion/changeNo.do",success:function(c){if(c=="success"){window.location.href=window.location.href}}})};

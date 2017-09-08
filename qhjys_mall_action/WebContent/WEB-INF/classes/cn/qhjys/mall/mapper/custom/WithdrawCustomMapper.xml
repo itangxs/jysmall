@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.WithdrawCustomMapper" >
+	<resultMap id="BaseResultMap" type="cn.qhjys.mall.vo.MonthWithdrawMoney" >
+		<result column="sumMoney" property="sumMoney" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<select id="queryMonthWithdrawMoney" resultMap="BaseResultMap">
+		SELECT  SUM(csw.money)			AS sumMoney
+		 FROM   cash_save_withdraw csw
+		 
+	    WHERE   1=1 AND csw.oper_type = 1 AND (csw.status = 1 or csw.status = 3)
+	   			<if test="sellerId != null">
+		 	 		AND csw.account_id = #{sellerId,jdbcType=BIGINT}
+		 		</if>
+		 		<if test="startTime != null">
+		 	 		AND csw.create_date &gt;= #{startTime,jdbcType=TIMESTAMP}
+		 		</if>
+		 		<if test="endTime != null">
+		 	 		AND csw.create_date &lt;= #{endTime,jdbcType=TIMESTAMP}
+		 		</if>
+	</select>
+	
+</mapper>

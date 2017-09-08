@@ -1,0 +1,130 @@
+.taskjindubox{ width:100%; height:680px; padding:60px 0 0 0; margin:0 auto; background: url(../images/jindubg.jpg) no-repeat top center ;}
+.taskjindubox1{ width:428px; margin:0 auto;}
+.taskjindutop{width:428px; height:11px; margin:0 auto; background:url(../images/jindubg1.png) no-repeat top center;}
+.taskjindubottom{ width:428px; height:14px; margin:0 auto; background:url(../images/jindubg2.png) no-repeat bottom;}
+.taskjindunr{background:#fff; padding:35px;}
+.nextanniu{ display:block; background:#f6696a; margin:0 auto; width:260px; height:46px; line-height:46px; text-align:center; color:#fff; border:none; border-radius:5px; margin-top:35px; font-size:16px;}
+.nextanniu:hover{ background:#ee5a5b;}
+
+.inputbox{ background:#f8f8f8; height:22px; border:1px solid #d6d6d6; padding:0 5px; width:222px; color:#666;}
+.namebox{ width:90px; display:inline-block; text-align:right; margin-right:10px;}
+.marginbottom30{ margin-bottom:22px; display:block;}
+.marginbottom10{ margin:0 6px 0 50px; display:block; color:#999; font-size:14px;}
+
+.xuanbox{ border:1px solid #e5e5e5; padding:15px; font-size:16px; position:relative;}
+.xuanbox ul li{ float:left; width:50%;}
+.xuanbox ul li input{ vertical-align:middle; margin-right:8px;}
+
+.inputchengshi{ width:278px; height:25px; line-height:25px; padding:0 10px; margin:15px 0 0 20px; border:1px solid #d6d6d6; border-radius:15px; color:#999;}
+.qqimg{ position:absolute; left:30px; top:25px;}
+.qqtext{ padding:25px 0 0 120px; height:80px;}
+.gray{ color:#999;}
+
+/*jindu*/
+.text40{ font-size:40px; color:#666;}
+.text25{ font-size:25px; color:#666;}
+.jindu{ display:block; width:168px; height:168px; line-height:168px; text-align:center; background-image:url(../images/jindu.png); background-repeat:no-repeat; margin:0 0 30px 100px;}
+.jd0{ background-position:0 0;}
+.jd1{ background-position:-196px 0;}
+.jd2{ background-position:-392px 0;}
+.jd3{ background-position:-588px 0;}
+.jd4{ background-position:-784px 0;}
+.jd5{ background-position:-980px 0;}
+.jd6{ background-position:-1176px 0;}
+.jd7{ background-position:-1372px 0;}
+.jd8{ background-position:-1568px 0;}
+.jd9{ background-position:-1764px 0;}
+.jd10{ background-position:-1960px 0;}
+.jd11{ background-position:-2156px 0;}
+.jd12{ background-position:-2352px 0;}
+.jd13{ background-position:-2548px 0;}
+.jd14{ background-position:-2744px 0;}
+.jd15{ background-position:-2940px 0;}
+.jd16{ background-position:-3136px 0;}
+.jd17{ background-position:-3332px 0;}
+.jd18{ background-position:-3528px 0;}
+.jd19{ background-position:-3724px 0;}
+.jd20{ background-position:-3920px 0;}
+.jd21{ background-position:-4116px 0;}
+.jd22{ background-position:-4312px 0;}
+.jd23{ background-position:-4508px 0;}
+.jd24{ background-position:-4704px 0;}
+.jd25{ background-position:-4900px 0;}
+
+.jd26{ background-position:-5096px 0;}
+.jd27{ background-position:-5292px 0;}
+.jd28{ background-position:-5488px 0;}
+.jd29{ background-position:-5684px 0;}
+.jd30{ background-position:-5880px 0;}
+.jd31{ background-position:-6076px 0;}
+.jd32{ background-position:-6272px 0;}
+.jd33{ background-position:-6468px 0;}
+.jd34{ background-position:-6664px 0;}
+.jd35{ background-position:-6860px 0;}
+.jd36{ background-position:-7056px 0;}
+.jd37{ background-position:-7252px 0;}
+.jd38{ background-position:-7448px 0;}
+.jd39{ background-position:-7644px 0;}
+.jd40{ background-position:-7840px 0;}
+.jd41{ background-position:-8036px 0;}
+.jd42{ background-position:-8232px 0;}
+.jd43{ background-position:-8428px 0;}
+.jd44{ background-position:-8624px 0;}
+.jd45{ background-position:-8820px 0;}
+.jd46{ background-position:-9016px 0;}
+.jd47{ background-position:-9212px 0;}
+.jd48{ background-position:-9408px 0;}
+.jd49{ background-position:-9604px 0;}
+.jd50{ background-position:-9800px 0;}
+
+.jd51{ background-position:-9996px 0;}
+.jd52{ background-position:-10192px 0;}
+.jd53{ background-position:-10388px 0;}
+.jd54{ background-position:-10584px 0;}
+.jd55{ background-position:-10780px 0;}
+.jd56{ background-position:-10976px 0;}
+.jd57{ background-position:-11172px 0;}
+.jd58{ background-position:-11368px 0;}
+.jd59{ background-position:-11564px 0;}
+.jd60{ background-position:-11760px 0;}
+.jd61{ background-position:-11956px 0;}
+.jd62{ background-position:-12152px 0;}
+.jd63{ background-position:-12348px 0;}
+.jd64{ background-position:-12544px 0;}
+.jd65{ background-position:-12740px 0;}
+.jd66{ background-position:-12936px 0;}
+.jd67{ background-position:-13132px 0;}
+.jd68{ background-position:-13328px 0;}
+.jd69{ background-position:-13524px 0;}
+.jd70{ background-position:-13720px 0;}
+.jd71{ background-position:-13916px 0;}
+.jd72{ background-position:-14112px 0;}
+.jd73{ background-position:-14308px 0;}
+.jd74{ background-position:-14504px 0;}
+.jd75{ background-position:-14700px 0;}
+
+.jd76{ background-position:-14896px 0;}
+.jd77{ background-position:-15092px 0;}
+.jd78{ background-position:-15288px 0;}
+.jd79{ background-position:-15484px 0;}
+.jd80{ background-position:-15680px 0;}
+.jd81{ background-position:-15876px 0;}
+.jd82{ background-position:-16072px 0;}
+.jd83{ background-position:-16268px 0;}
+.jd84{ background-position:-16464px 0;}
+.jd85{ background-position:-16660px 0;}
+.jd86{ background-position:-16856px 0;}
+.jd87{ background-position:-17052px 0;}
+.jd88{ background-position:-17248px 0;}
+.jd89{ background-position:-17444px 0;}
+.jd90{ background-position:-17640px 0;}
+.jd91{ background-position:-17836px 0;}
+.jd92{ background-position:-18032px 0;}
+.jd93{ background-position:-18228px 0;}
+.jd94{ background-position:-18424px 0;}
+.jd95{ background-position:-18620px 0;}
+.jd96{ background-position:-18816px 0;}
+.jd97{ background-position:-19012px 0;}
+.jd98{ background-position:-19208px 0;}
+.jd99{ background-position:-19404px 0;}
+.jd100{ background-position:-19600px 0;}

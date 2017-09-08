@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.MsWithdrawMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.MsWithdraw" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="seller_id" property="sellerId" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="pay_money" property="payMoney" jdbcType="DECIMAL" />
+    <result column="not_fee_money" property="notFeeMoney" jdbcType="DECIMAL" />
+    <result column="all_fee_money" property="allFeeMoney" jdbcType="DECIMAL" />
+    <result column="rate_fee" property="rateFee" jdbcType="DECIMAL" />
+    <result column="withdraw_moeny" property="withdrawMoeny" jdbcType="DECIMAL" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="examine_date" property="examineDate" jdbcType="TIMESTAMP" />
+    <result column="sett_date" property="settDate" jdbcType="TIMESTAMP" />
+    <result column="bank_card" property="bankCard" jdbcType="VARCHAR" />
+    <result column="request_no" property="requestNo" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="resp_code" property="respCode" jdbcType="VARCHAR" />
+    <result column="resp_desc" property="respDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, seller_id, store_id, store_name, pay_money, not_fee_money, all_fee_money, rate_fee, 
+    withdraw_moeny, state, create_date, examine_date, sett_date, bank_card
+  </sql>
+  
+   <!--   根据Id查询单个对象 -->
+  <select id="getMsWithdrawById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	SELECT 
+  		<include refid="Base_Column_List" />
+  	FROM ms_withdraw
+  	WHERE id = #{id}	
+  </select>
+  
+  <!--  统计前天23：00至昨天23：00民生的商户交易明细生成提现记录 -->
+  <insert id="addWithdrawByDealDetail" parameterType="map" >
+    INSERT INTO ms_withdraw (
+		seller_id,
+		store_id,
+		store_name,
+		pay_money,
+		not_fee_money,
+		all_fee_money,
+		rate_fee,
+		withdraw_moeny
+	)SELECT
+		third.seller_id								AS 'seller_id',
+		store.id									AS 'store_id',
+		store.`name`								AS 'store_name',
+		SUM(third.money) 							AS 'pay_money',
+		SUM(IF(third.rate_fee = 0,third.money,0)) 	AS "not_fee_money",
+		SUM(IF(third.rate_fee > 0,third.money,0))	AS "all_fee_money",
+	  	SUM(third.rate_fee)							AS 'rate_fee',
+		SUM(third.totamt)							AS 'withdraw_moeny'
+	FROM
+		fq_third_pay third , store_info store
+	WHERE 
+		third.seller_id = store.seller_id
+		AND third.sort = #{sort}
+		AND third.pay_time <![CDATA[ > ]]> #{startDate} 
+		AND third.pay_time <![CDATA[ <= ]]> #{endDate}
+	GROUP BY 
+		third.seller_id
+  </insert>
+  
+  <!--  条件关联 -->
+  <sql id="withdraw_column" >
+	<if test="startDate !=null and startDate != ''">
+    	AND withdraw.create_date <![CDATA[ >= ]]> #{startDate}
+    </if>
+    <if test="endDate !=null and endDate != ''">
+    	AND withdraw.create_date <![CDATA[ <= ]]> CONCAT(CONCAT('', #{endDate}), ' 23:59:59') 
+    </if>
+    <if test="storeId !=null and storeId != ''">
+    	AND withdraw.store_id = #{storeId}
+    </if>
+    <if test="storeName !=null and storeName != ''">
+    	AND withdraw.store_name LIKE CONCAT(CONCAT('%', #{storeName}), '%') 
+    </if>
+    <if test="state !=null and state != ''">
+    	AND withdraw.state = #{state}
+    </if>
+     <if test="sellerId !=null and sellerId != ''">
+    	AND withdraw.seller_id = #{sellerId}
+    </if>
+    <if test="orderNo !=null and orderNo != ''">
+    	AND withdraw.order_no = #{orderNo}
+    </if>
+  </sql>
+  
+  <!--  民生商户提现记录查询 -->
+  <select id="queryMsWithdrawPage" resultType="java.util.Map" parameterType="cn.qhjys.mall.vo.system.MsWithdrawParmVo">
+    SELECT 
+    	withdraw.id 			 	AS id,
+    	withdraw.store_id			AS storeId,
+    	withdraw.store_name		 	AS storeName,
+    	withdraw.pay_money    		AS payMoney,
+    	withdraw.not_fee_money		AS notFeeMoney,
+    	withdraw.all_fee_money		AS allFeeMoney,
+    	withdraw.rate_fee			AS rateFee,
+    	withdraw.withdraw_moeny		AS withdrawMoeny,
+    	withdraw.state				AS state,
+    	withdraw.create_date		AS createDate,
+    	bank.cardholder				AS cardholder,
+    	bank.`name`					AS bankName,
+		bank.cark_num				AS bankCard
+    FROM 
+    	ms_withdraw withdraw 
+	INNER JOIN  bank_info bank
+		on withdraw.seller_id = bank.seller_id
+	<trim prefix="WHERE" prefixOverrides="AND" >
+		<include refid="withdraw_column" />
+	</trim>
+	ORDER BY withdraw.id DESC
+  </select>
+  
+  <!--  民生商户提现记录导出 -->
+  <select id="queryMsWithdrawExport" resultType="cn.qhjys.mall.vo.system.MsWithdrawExportVo" parameterType="cn.qhjys.mall.vo.system.MsWithdrawParmVo">
+    SELECT 
+    	withdraw.order_no			AS orderNo,
+   		withdraw.create_date		AS createDate,
+    	withdraw.store_id			AS storeId,
+    	withdraw.store_name		 	AS storeName,
+    	withdraw.pay_money    		AS payMoney,
+    	withdraw.not_fee_money		AS notFeeMoney,
+    	withdraw.all_fee_money		AS allFeeMoney,
+    	withdraw.rate_fee			AS rateFee,
+    	withdraw.withdraw_moeny		AS withdrawMoeny,
+    	withdraw.state				AS state,
+    	bank.cardholder				AS cardholder,
+    	bank.`name`					AS bankName,
+		bank.cark_num				AS bankCard
+    FROM 
+    	ms_withdraw withdraw 
+	INNER JOIN  bank_info bank
+		on withdraw.seller_id = bank.seller_id
+	<trim prefix="WHERE" prefixOverrides="AND" >
+		<include refid="withdraw_column" />
+	</trim>
+	ORDER BY withdraw.id DESC
+  </select>
+  
+  <!-- 批量更新记录 -->
+  <update id="updateWithdraw" parameterType="java.util.Map" >
+    UPDATE ms_withdraw withdraw
+    <set>
+      <if test="setState != null" >
+        withdraw.state = #{setState},
+      </if>
+      <if test="examineDate != null" >
+        withdraw.examine_date = #{examineDate},
+      </if>
+      <if test="settDate != null" >
+        withdraw.sett_date = #{settDate},
+      </if>
+      <if test="bankCard != null" >
+        withdraw.bank_card = #{bankCard},
+      </if>
+      <if test="requestNo != null" >
+        withdraw.request_no = #{requestNo},
+      </if>
+      <if test="orderNo != null" >
+        withdraw.order_no = #{orderNo},
+      </if>
+      <if test="respCode != null" >
+        withdraw.resp_code = #{respCode},
+      </if>
+      <if test="respDesc != null" >
+        withdraw.resp_desc = #{respDesc},
+      </if>
+    </set>
+    <trim prefix="WHERE">
+    	<choose>
+	    	<when test="ids !=null and ids !=''">
+		    	withdraw.id in
+		    	<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+		           	#{item}
+		  		</foreach>
+	  		</when>
+	  		<otherwise>
+	  			withdraw.id = #{id}
+	  		</otherwise>
+  		</choose>
+	</trim>
+	<trim prefix="AND" prefixOverrides="AND|OR|(" suffixOverrides=")">
+  		<if test="state !=null and state !=''">
+  			( withdraw.state = #{state}
+  		</if>
+  		<if test="states !=null and states !=''">
+  			OR withdraw.state = #{states} )
+  		</if>
+  	</trim>
+  </update>
+  
+  <!--  根据商户ID查询提现记录 -->
+  <select id="queryMsWithdrawSellerPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT 
+    	withdraw.id,
+    	withdraw.withdraw_moeny,
+    	withdraw.state,
+    	withdraw.create_date
+    FROM 
+    	ms_withdraw withdraw 
+    <trim prefix="WHERE" prefixOverrides="AND" >
+		<include refid="withdraw_column" />
+	</trim>
+	ORDER BY withdraw.id DESC
+  </select>
+  
+</mapper>

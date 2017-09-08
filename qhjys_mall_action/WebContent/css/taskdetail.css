@@ -1,0 +1,78 @@
+
+/*reset*/
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea,select,label,article,aside,footer,header,menu,nav,section,time,audio,video {
+  margin:0;  padding:0;}
+article,aside,footer,header,hgroup,nav,section,audio,canvas,video,img {display: block;}
+body {font-size: 100%; font-family:arial,Helvetica,STHeiti,Droid Sans Fallback; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;   -webkit-tap-highlight-color:rgba(0,0,0,0);}
+textarea {resize: none;}
+iframe,img {border:0;}
+ul,ol {list-style:none;}
+input,select,textarea {outline: 0;-webkit-user-modify: read-write-plaintext-only;}
+input {/*-webkit-appearance: none;*/}
+a{text-decoration:none; color:#333333;}
+a:hover{color:#333333;}
+<!--a:visited{color:#333333;}-->
+body,.global{background: #fff;}
+.global{/*min-width: 320px;*/width: 100%; overflow: hidden;}
+.clear{clear:both;}
+.blue{ color: #2980b9;}
+.fontred{color:#f6696a;}
+.red{ color:#f6696a;}
+.module{width:96%; margin:0 auto; overflow: hidden;background: #fff;}
+
+
+/*------top-----**/
+.top{ width:100%; height:48px; color:#FFF; background-color:#f6696a; line-height:48px; overflow: hidden;}
+.top h1{ font-weight:normal; text-align:center; font-size:1.2em;}
+.top h1 span{ float:right; font-size:0.9em; padding-right:20px;}
+.top a{ color:#FFF; font-size:1em;}
+.top img{ float: left; margin:10px 0 0 20px;}
+
+.top1{ width:100%;}
+.top1 img{ width:100%; height:auto; margin:0 auto;}
+
+.task-xuzhi{ width: 100%; height:auto;
+    background-image: url(../images/task-wj02.jpg);
+    background-repeat: repeat-y;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;}
+.task-xuzhi .infobox{ width:85%; padding:20px 0; margin:0 auto; font-size:0.8em; line-height:1.8em;}
+.task-xuzhi .infobox h1{ font-size:1.2em; padding:0 0 5px 0; color:#f6696a; border-bottom:1px dashed #dbdbdb; margin-bottom:15px;}
+.answerbutton{ border:2px solid #e58a13; background:#fdad2f; width:200px; margin:0 auto; margin-top:30px; text-align:center;}
+.answerbutton a{ display:block;width:198px; color:#FFF; background:#fdad2f; border:1px solid #fdb932; height:45px; line-height:45px; font-size:1.4em;}
+
+/*taskdetail*/
+.detailtop{ padding:10px 0; height:101px; position:relative;}
+.detailtop .img1{ width:150px; height:101px;}
+.detailtoptext{ position:absolute; left:165px; top:8px; line-height:1.5em;}
+.detailtoptext .height100{ height:30px; font-size:0.8em; overflow:hidden; color:#666666;}
+.hui18{ color:#333; font-size:0.9em;}
+.red16{ font-size:1em; font-weight:bold; color:#f6696a}
+.hui14{ font-size:0.8em;}
+.lingqubutton{ margin-top:2px;}
+.lingqubutton a{ display:inline-block; border-radius:3px; color:#fff; font-size:1em;  padding:3px 10px; line-height:20px; text-align:center; background:#fdad2f; border:1px solid #fecd36;}
+.lingqubutton a:hover{ background:#ffa71d;}
+
+.liuchengbox{ padding:15px 0; text-align:center}
+.liuchengbox img{ width:100%; height:auto; margin:0 auto;}
+.lr100{ padding:0 15px; display:inline-block; color:#ccc;}
+
+.infobox1{ text-align:center;font-size:0.8em; line-height:1.5em; padding:15px 0; }
+.inputbk{ border:1px solid #ccc; border-radius:3px; height:30px; line-height:30px; padding:0 1px; color:#999; margin:0 2px;}
+.redbuttom{ background:#f6696a; border:none; border-radius:5px; color:#fff; padding:0 6px; height:30px; line-height:30px;}
+
+.detailtitle{ border-bottom:1px solid #bebebe; font-size:0.9em; padding:5px 0;}
+.detailtitle span{ display:inline-block; width:5px; height:20px; margin-right:5px; vertical-align:middle; background:#f6696a;}
+.infobox{ padding:15px 0; line-height:1.6em; font-size:0.8em; color:#666666;}
+.infobox ul{ margin-bottom:10px;}
+.infobox ul li{ float:left; width:50%;}
+.infobox table{ background:#ccc; line-height:25px;}
+.infobox table th{ background:#e1e1e1; padding:3px;}
+.infobox table td{ background:#eee; padding:3px;}
+.tdw15{ width:17%; text-align:center;}
+.tdw20{ width:23%; text-align:center;}
+.tdw60{ width:60%;}
+.infobox2{ padding:15px 0; line-height:1.6em; font-size:0.8em; color:#666666;}

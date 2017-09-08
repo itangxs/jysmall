@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.StoreLoanVoMapper">
+	<select id="queryStoreLoanVoHistory" resultType="cn.qhjys.mall.vo.system.StoreLoanVo">
+		SELECT
+			count(id)as historyNum,
+			sum(loan_total)as historyMoney,
+			sum(interest_total)as historyInterestTotal
+		FROM
+		fq_store_loan
+		WHERE 
+		`status` = 2
+	</select>
+	
+	
+	<select id="queryStoreLoanVoCurrent" resultType="cn.qhjys.mall.vo.system.StoreLoanVo">
+		SELECT
+			count(id)as currentNum,
+			sum(loan_total)as currentMoney,
+			sum(norepayment)as currentNorepayment
+		FROM
+		fq_store_loan
+		WHERE 
+		`status`=1
+	</select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.SellerScheduleVoMapper" >
+  
+  <select id="querySellerScheduleVoBySellerId" resultType="cn.qhjys.mall.vo.SellerScheduleVo" parameterType="java.util.Map">
+		SELECT si.id as id,pi.id as productId,od.id as orderId,pi.name as title,si.reser_man as name
+		,si.reser_man as name,si.reser_phone as phone,si.create_time as createDate,si.reser_time as reserTime
+		,si.reser_num as reserNum,si.content as content,si.status as status
+		FROM schedule_info si,order_detail od ,product_info pi 
+		<where>
+			od.id = si.detail_id and pi.id=od.prod_id
+			<if test="sellerId != null">
+				AND si.seller_id = #{sellerId}
+			</if>
+			<if test="status != null">
+				AND si.status =  #{status}
+			</if>
+			<if test="phone != null  and phone !=''">
+				AND si.reser_phone=#{phone}
+			</if>
+		</where> 
+		order by si.id desc;
+  </select>
+  
+    <select id="querySellerScheduleVoBySellerIdThan" resultType="cn.qhjys.mall.vo.SellerScheduleVo" parameterType="java.util.Map">
+		SELECT si.id as id,pi.id as productId,od.id as orderId,pi.name as title,si.reser_man as name
+		,si.reser_man as name,si.reser_phone as phone,si.create_time as createDate,si.reser_time as reserTime
+		,si.reser_num as reserNum,si.content as content,si.status as status
+		FROM schedule_info si,order_detail od ,product_info pi 
+		<where>
+			od.id = si.detail_id and pi.id=od.prod_id
+			<if test="sellerId != null">
+				AND si.seller_id = #{sellerId}
+			</if>			
+			<if test="status != null">
+				AND si.status>  #{status}
+			</if>
+			<if test="phone != null  and phone !=''">
+				AND si.reser_phone=#{phone}
+			</if>
+		</where> 
+		order by si.id desc  limit 0,50;
+  </select>
+</mapper>

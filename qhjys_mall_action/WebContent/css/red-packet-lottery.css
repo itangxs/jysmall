@@ -1,0 +1,182 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0;font-family:"微软雅黑",'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+body{font-size:12px;font-size:1.2rem; background-color:#feebd2;}
+img{ display:block;margin:0;} 
+a{ text-decoration:none}
+.clearfix{ clear:both;}
+
+/*整个背景*/
+#whole-bg{ width:100%; height:100%;}
+.cloud-bg{background:url(/images/cloud-bg.png) no-repeat top center;width:1000px; height:1760px; margin:0 auto; overflow:hidden;}
+
+/*抽奖机*/
+.lottery-machine{width:100%; position:relative;}
+.cloud-bg .lottery-machine-img{ width:1000px; position:absolute; left:50%;top:0; margin-left:-500px;}
+
+/*抽奖机显示器*/
+.num_box{ width:490px;position:absolute; left:261px; top:790px;}
+.num_box .num{ float:left; width:83px; height:126px;background-color:white;margin-left:9px;background:url(/images/num03.png) top center repeat-y; background-size:100%; background-color:white;}
+.num_box .num1{ margin-left:0;}
+.num_box .right-num{ float:right}
+.num_box .num4{ margin-left:0;}
+
+
+/*小数点*/
+.num_box .point{ float:left; width:40px; height:126px;position:relative;}
+.num_box .point img{width:30px; height:30px;position:absolute; bottom:0; left:8px;}
+
+/*抽奖次数及其规则*/
+.lottery-times{ position:absolute;top:1300px; left:184px;width:700px;}
+.lottery-times h1{ font-size:38px; color:#feee40; margin-bottom:20px; font-weight:normal; background:url(/images/trumpet.png) no-repeat left center; padding-left:60px; background-size:7%;}
+.lottery-times h1 span{color:white;}
+.lottery-times p{ font-size:32px; color:#7e3c01; line-height:46px;}
+
+/*抽奖按钮启动go*/
+.btn a{ width:190px; height:110px; position:absolute;top:260px; left:140px;cursor:pointer;clear:both;}
+
+/*温馨提示*/
+.tips{width:100%; margin-top:-190px;position:absolute;top:1780px; left:0;}
+.tips p{ color:#565656; font-size:24px; font-weight:normal; background:url(/images/tips.png) no-repeat 1.6% top ; padding-left:6.4%;background-size:4%; line-height:54px; margin-left:2%;}
+
+/*弹窗页面..........................*/
+.gray-bg{ width:100%;height:100%;position:absolute; left:0 ;top:0; background-color:rgba(0,0,0,0.6);z-index:100;}
+.tanchu-bg{position:absolute; left:10%;top:10%; width:80%;}
+.tanchu-bg img{ width:100%;}
+.gray-bg span{ color:#f06262;}
+
+/*已关注公众号抽奖情况*/
+.content{position:absolute; left:10%; top:38%; width:80%; height:60%;}
+.content h1{ font-size:42px;font-weight:normal; color:#333333; text-align:center;}
+.content .close-btn a{ width:32%; height:14%;position:absolute; left:34%; bottom:16%;}
+
+/*未关注公众号抽奖的情况*/
+.content2{position:absolute; left:10%; top:23.8%; width:80%; height:60%;}
+.content2 h1{ font-size:42px;font-weight:normal; color:#333333; text-align:center;}
+.content2 .close-btn2 a{ width:32%; height:10%;position:absolute; left:34%; bottom:-14%;}
+
+/*已经抽过奖的情况*/
+.content3{position:absolute; left:10%; top:38%; width:80%; height:60%; }
+.content3 h1{ font-size:42px;font-weight:normal; color:#333333; text-align:center;}
+.content3 .close-btn3 a{ width:32%; height:14%;position:absolute; left:34%; bottom:16%;}
+
+/*弹窗状态*/
+#light{display:none}
+#light2{display:none}
+#light3{display:none }
+
+
+@media (max-width:960px){
+		.cloud-bg{width:900px;}
+		.cloud-bg .lottery-machine-img{ width:900px; position:absolute; left:50%;top:0; margin-left:-450px;}
+		.num_box{ width:438px;position:absolute; left:231px; top:710px;}
+		.num_box .num{width:75px; height:113px;margin-left:5px;background-size:75px 1130px;}
+		.num_box .point{width:36px; height:114px;}	
+		.btn a{position:absolute;top:230px; left:140px;width:170px; height:100px;}
+		.lottery-times{ position:absolute;top:1160px; left:170px;width:700px;z-index:10;}
+		.lottery-times h1{ font-size:32px;background-size:6%;}
+		.lottery-times p{ font-size:28px;}
+		.tips{margin-top:-340px;position:absolute;top:1780px; left:0; z-index:1;}
+
+}
+
+@media (max-width:854px){
+		.cloud-bg{width:800px; height:2000px;}
+		.cloud-bg .lottery-machine-img{ width:800px;margin-left:-400px;}
+		.num_box{ width:390px;position:absolute; left:207px; top:632px;}
+		.num_box .num{width:67px; height:101px;margin-left:5px;background-size:67px 1010px;}
+		.num_box .point{width:24px; height:102px;}
+		.num_box .point img{width:22px; height:22px; position:absolute; bottom:0; left:5px;}
+		.btn a{ width:160px; height:80px; position:absolute;top:210px; left:114px;}
+		.lottery-times{ position:absolute;top:1030px; left:160px;width:700px;}
+		.lottery-times h1{ font-size:28px;padding-left:50px; background-size:5%}
+		.lottery-times p{ font-size:24px;}
+		.tips{margin-top:-500px;position:absolute;top:1780px; left:0; z-index:1;}	
+		.tips p{font-size:24px;background-size:4%; line-height:54px;}
+
+}
+
+@media (max-width:768px){
+		.cloud-bg{width:600px; height:1100px;}
+		.cloud-bg .lottery-machine-img{ width:600px;margin-left:-300px;}
+		.num_box{ width:286px;position:absolute; left:156px; top:466px;}
+		.num_box .num{width:50px; height:87px;margin-left:3px;background-size:58px 860px;}
+		.num_box .point{width:20px; height:87px;}
+		.num_box .point img{width:16px; height:16px; position:absolute; bottom:0; left:5px;}
+		.btn a{ width:120px; height:80px; position:absolute;top:160px; left:80px;}
+		.lottery-times{ position:absolute;top:760px; left:120px;width:700px;}
+		.lottery-times h1{ font-size:22px;padding-left:36px; background-size:4%}
+		.lottery-times p{ font-size:18px;}
+		
+		.tips{margin-top:-500px;position:absolute;top:1480px; left:0; z-index:1;}
+		.tips p{font-size:22px;background-size:4%;line-height:36px;}
+		.content h1{ font-size:36px}
+
+
+}
+
+@media (max-width:600px){
+		.cloud-bg{width:460px; height:1100px;}
+		.cloud-bg .lottery-machine-img{ width:460px;margin-left:-250px;}
+		.num_box{ width:220px;position:absolute; left:100px; top:356px;}
+		.num_box .num{width:39px; height:70px;margin-left:2px;background-size:39px 690px;}
+		.num_box .point{width:12px; height:70px;}
+		.num_box .point img{width:10px; height:10px; position:absolute; bottom:0; left:3px;}
+		.btn a{ width:80px; height:60px; position:absolute;top:130px; left:70px;}
+		.lottery-times{ position:absolute;top:590px; left:70px;width:700px;}
+		.lottery-times h1{ font-size:16px;padding-left:24px; background-size:3%;}
+		.lottery-times p{ font-size:14px;line-height:22px;}
+		
+		.tips{margin-top:-760px;position:absolute;top:1500px; left:0; z-index:1;}
+		.tips p{font-size:18px;background-size:4%;line-height:28px;}
+		
+		.content h1{ font-size:28px}
+
+}
+
+@media (max-width:414px){
+		.cloud-bg{width:414px; height:814px;margin-top:-80px;}
+		.cloud-bg .lottery-machine-img{margin-left:-240px;}
+		.num_box{position:absolute; left:88px; top:356px;}
+		.lottery-times{ position:absolute;top:590px; left:56px;}
+	}
+
+@media (max-width:400px){
+		.cloud-bg{width:360px; height:640px;margin-top:-60px;}
+		.cloud-bg .lottery-machine-img{ width:360px;margin-left:-190px;}
+		.num_box{ width:174px;position:absolute; left:83px; top:282px;}
+		.num_box .num{width:32px; height:50px;margin-left:1px;background-size:32px 490px;}
+		.num_box .point{width:8px; height:50px;}
+		.num_box .point img{width:6px; height:6px; position:absolute; bottom:0; left:2px;}
+		.btn a{ width:70px; height:40px; position:absolute;top:96px; left:50px;}
+		.lottery-times{ position:absolute;top:460px; left:53px;width:700px;}
+		.lottery-times h1{ font-size:14px;padding-left:18px; background-size:2%; margin-bottom:10px;}
+		.lottery-times p{ font-size:12px;line-height:16px;}		
+		.tips{margin-top:-760px;position:absolute;top:1340px; left:0; z-index:1;} 
+		.tips p{font-size:14px;background-size:4%;line-height:20px; margin-top:-10px}		
+		.content h1{ font-size:18px}
+
+}
+
+@media (max-width:320px){
+	.cloud-bg{width:320px; height:640px; margin-top:-66px;}
+	.cloud-bg .lottery-machine-img{margin-left:-190px;}
+	.num_box{position:absolute; left:63px; top:282px;}
+	.lottery-times{ position:absolute;top:460px; left:33px;}
+	.tips p{font-size:12px;}	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.SellerCenterMapper" >
+  <select id="querySellerBySellerId" resultType="cn.qhjys.mall.vo.seller.SellerCenterVo" parameterType="java.lang.Long">
+		SELECT st.name AS name,st.logo AS imageUrl,st.`level` AS vipLv,
+		c.`name` AS typeName
+		FROM store_info st,category_info c,seller_info se
+		<where>
+			c.id = st.category_id AND se.id = st.seller_id
+			AND se.id = #{sellerId}
+		</where>
+  </select>
+  <select id="queryStoreBySellerId" resultType="cn.qhjys.mall.vo.seller.SellerCenterVo" parameterType="java.lang.Long">
+  		SELECT COUNT(DISTINCT p.id) AS releaseGoods,
+		(SELECT COUNT(o.id) FROM order_detail o WHERE o.`status` = 2 AND o.seller_id = #{sellerId}) AS tradeOrder,
+		(SELECT COUNT(o.id) FROM order_detail o WHERE o.`status` = 5  AND o.seller_id = #{sellerId}) AS refundmentOrder 
+		FROM store_info st,seller_info se,order_detail oo,product_info p
+		<where>
+			st.seller_id = se.id AND st.id = p.store_id 
+			AND oo.seller_id = se.id AND p.store_id = st.id 
+			AND p.`status` = 2 AND se.id = #{sellerId}
+		</where> 
+  </select>
+  <select id="queryReviewBySellerId" resultType="cn.qhjys.mall.vo.seller.SellerCenterVo" parameterType="java.lang.Long" >
+		SELECT (SELECT COUNT(id) FROM reviews_log WHERE score = 1 AND date(create_time) = date(now())) AS toDayComment1,
+		(SELECT COUNT(id) FROM reviews_log WHERE score = 2 AND date(create_time) = date(now())) AS toDayComment2,
+		(SELECT COUNT(id) FROM reviews_log WHERE score = 3 AND date(create_time) = date(now())) AS toDayComment3,
+		(SELECT COUNT(id) FROM reviews_log WHERE score = 4 AND date(create_time) = date(now())) AS toDayComment4,
+		(SELECT COUNT(id) FROM reviews_log WHERE score = 5 AND date(create_time) = date(now())) AS toDayComment5,
+		(SELECT COUNT(id) FROM reviews_log WHERE score = 1 AND date(create_time) = date(now())-1) AS yesterDayComment1,
+		(SELECT COUNT(id) FROM reviews_log WHERE score = 2 AND date(create_time) = date(now())-1) AS yesterDayComment2,
+		(SELECT COUNT(id) FROM reviews_log WHERE score = 3 AND date(create_time) = date(now())-1) AS yesterDayComment3,
+		(SELECT COUNT(id) FROM reviews_log WHERE score = 4 AND date(create_time) = date(now())-1) AS yesterDayComment4,
+		(SELECT COUNT(id) FROM reviews_log WHERE score = 5 AND date(create_time) = date(now())-1) AS yesterDayComment5,
+		avg(r.score) AS mark 
+		FROM reviews_log r,store_info st,seller_info se
+		WHERE se.id = st.seller_id AND r.store_id = st.id 
+		AND se.id = #{sellerId} GROUP BY st.id
+  </select>
+  <select id="queryOrderBySellerId" resultType="cn.qhjys.mall.vo.seller.SellerCenterVo" parameterType="java.lang.Long">
+  		
+  </select>
+  <select id="querySellerAccoutOverviewVoBySid" resultType="cn.qhjys.mall.vo.seller.SellerAccoutOverviewVo" parameterType="java.util.Map">
+		SELECT ca.create_time   AS date,
+		       se.id            AS id,
+		       ca.amount        AS changeMoney,
+		       ca.send_befor    AS sendBefor,
+		       ca.send_after    AS sendAfter,
+		       ca.review_befor  AS reviewBefor,
+		       ca.review_after  AS reviewAfter,
+		       ca.business_name AS remarks,
+		       ca.pay_type      AS payType
+		FROM   cash_log ca,
+		       seller_info se
+		<where>
+			(se.id = ca.send_id OR se.id = ca.review_id) AND se.id = #{sellerId}
+			AND ca.business_code in ('004','005','008')
+			<if test="status != null">
+				AND ca.pay_type = #{status}
+			</if>
+			<if test="startTime != null and startTime !=''">
+				AND ca.create_time > #{startTime}
+			</if>
+			<if test="endTime != null and endTime !=''">
+				AND #{endTime} > ca.create_time
+			</if>
+		</where> 
+		ORDER BY ca.id DESC
+  </select>
+  <select id="queryOrderAmountBysellerId" resultType="java.math.BigDecimal" parameterType="java.util.Map">
+	  	SELECT 
+		DISTINCT (SELECT SUM(total_price) FROM order_detail 
+		WHERE seller_id = #{sellerId} AND date(create_time) = date(#{time}) 
+		AND (`status` = 3 OR `status` = 4)) 
+		FROM seller_info se,order_info o,order_detail de WHERE 
+		se.id = de.seller_id AND o.id = de.order_id
+  </select>
+  <select id="queryOrderIntegralBysellerId" resultType="java.math.BigDecimal" parameterType="java.util.Map">
+  	SELECT DISTINCT (SELECT SUM(pay_price)
+	                 FROM   order_detail
+	                 WHERE  seller_id = #{sellerId}
+	                        AND DATE(create_time) = DATE(#{time})
+	                        AND ( status = 3 OR status = 4 ))
+	FROM   seller_info se,
+	       order_info o,
+	       order_detail de
+	WHERE  se.id = de.seller_id
+	       AND o.id = de.order_id
+  </select>
+  <select id="queryOrderPersonNumBysellerId" resultType="java.lang.Integer" parameterType="java.util.Map">
+  		SELECT COUNT(DISTINCT user_id) FROM order_info 
+  		WHERE id in(SELECT order_id FROM order_detail 
+  		WHERE date(create_time) = date(#{time}) AND (`status` = 3 OR `status` = 4) 
+  		AND seller_id = #{sellerId});
+  </select>
+  <select id="queryRefundOrderNumBysellerId" resultType="java.lang.Integer" parameterType="java.util.Map">
+  		SELECT COUNT(id) FROM order_detail 
+  		WHERE `status` = 6 AND seller_id = #{sellerId} 
+  		AND date(create_time) = date(#{time})
+  </select>
+</mapper>

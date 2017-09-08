@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.qhjys.mall.mapper.custom.SellerUserMapper" >
+	<select id="querySellerUserCountVo" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.SellerUserCountVo">
+		SELECT
+		 COUNT(1) AS totalUser,
+		  SUM(IF(su.cishu=1,1,0)) AS onceUser,
+		 SUM(IF(su.cishu=2,1,0)) AS twiceUser,
+		 SUM(IF(su.cishu=3,1,0)) AS thirdUser,
+		 SUM(IF(su.cishu>3,1,0)) AS fourUser, 
+		 SUM(IF(su.pay_time>=CAST(CAST(SYSDATE()AS DATE)AS DATETIME),1,0))  AS newUser
+		 FROM
+					(SELECT COUNT(1) AS cishu, open_id AS open_id,pay_time AS pay_time 
+						FROM
+					 fq_third_pay WHERE seller_id = #{sellerId} AND open_id IS NOT NULL GROUP BY open_id) AS su 
+		
+	</select>
+	<select id="querySellerUserInfoVo" resultType="cn.qhjys.mall.vo.SellerUserInfoVo">
+		SELECT 
+			COUNT(1) AS conNum,
+			SUM(f.money) AS conMoney ,
+			u.nick_name AS nickName ,
+			u.portrait AS portrait ,
+			f.pay_time AS beTime, 
+			f.open_id AS openId 
+					FROM
+					 fq_third_pay f LEFT JOIN fq_user_info u 
+					 ON f.user_id = u.id WHERE f.seller_id=#{sellerId} AND f.open_id IS NOT NULL AND f.open_id != ''
+					 GROUP BY f.open_id  
+					 ORDER BY 
+					 <if test="orderBy == 'conMoney'">
+					 	conMoney
+					 </if>
+					 <if test="orderBy == 'beTime'">
+					 	beTime
+					 </if>
+					 <if test="order == 'ASC'">
+					 	ASC
+					 </if>
+					 <if test="order == 'DESC'">
+					 	DESC
+					 </if>
+	</select>
+	<select id="queryDayliyVo" resultType="cn.qhjys.mall.vo.SellerUserInfoVo">
+		SELECT 
+			COUNT(1) AS conNum,
+			COALESCE(SUM(f.money),0) AS conMoney
+					FROM
+					 fq_third_pay f 
+					 WHERE f.seller_id=#{sellerId}  
+					 AND pay_time BETWEEN #{startTime} AND #{endTime} 
+	</select>
+	<select id="queryJsDayliyVo" resultType="cn.qhjys.mall.vo.SellerUserInfoVo">
+		SELECT 
+			COUNT(1) AS conNum,
+			COALESCE(SUM(f.money),0) AS conMoney
+					FROM
+					 fq_third_pay f 
+					 WHERE f.seller_id=#{sellerId}  
+					 AND pay_time BETWEEN #{startTime} AND #{endTime} AND type &lt;14
+	</select>
+	<select id="querySellerVo" resultType="cn.qhjys.mall.vo.SellerUserInfoVo">
+		SELECT 
+			COUNT(1) AS conNum,
+			COALESCE(SUM(f.money),0) AS conMoney
+					FROM
+					 fq_third_pay f 
+					 WHERE f.seller_id=#{sellerId}  
+					 
+	</select>
+	
+	<select id="queryFeedbackVo" resultType="cn.qhjys.mall.vo.FeedbackVo">
+		SELECT f.id AS id,
+		f.seller_id AS sellerId,
+		f.title AS title,
+		f.feedback_time AS feedbackTime,
+		f.content AS content,
+		s.name storeName,
+		s.id AS storeId
+		FROM feedback f LEFT JOIN store_info s ON f.seller_id = s.seller_id
+		ORDER BY f.feedback_time DESC
+	</select>
+	
+	<select id="queryUserNum" resultType="java.lang.Integer">
+		SELECT count(DISTINCT open_id) FROM fq_third_pay WHERE seller_id=#{sellerId}
+	</select>
+</mapper>

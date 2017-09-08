@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.SellerBankVoMapper" >
+ 		
+	
+ 	<select id="getSellerBankVoPage" resultType="cn.qhjys.mall.vo.seller.SellerBankVo">
+		 select
+		    b.id as id,
+		    b.name as bankName, 
+		    b.seller_id as sellerId, 
+		    b.cardholder as realName, 
+		    b.cark_num as bankNumber, 
+		    b.isdefault as defaultStaus
+	    From 
+	    	bank_info b
+	     <where>
+			b.seller_id = #{sellerId,jdbcType=BIGINT}
+		</where> 
+	    order by isdefault desc
+	</select>
+	
+	<update id="updateByDefaullOff" parameterType="Long">
+		 update  bank_info b
+    <set >
+      	 b.isdefault = 0
+    </set>
+    <where>
+    	b.seller_id = #{sellerId,jdbcType=BIGINT}
+    	 AND b.isdefault = 1 
+    </where>
+		
+	</update>
+	
+	
+	<update id="updateByDefaullOn" parameterType="Map">
+		 update  bank_info b
+    <set >
+      	 b.isdefault = 1
+    </set>
+    <where>
+    	b.seller_id = #{sellerId,jdbcType=BIGINT}
+    	AND  b.id = #{id,jdbcType=BIGINT}
+    </where>
+		
+	</update>
+	
+
+</mapper>

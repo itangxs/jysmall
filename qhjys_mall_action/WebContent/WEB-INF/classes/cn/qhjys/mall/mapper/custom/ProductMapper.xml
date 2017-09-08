@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.ProductMapper">
+	<resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.ProductInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="no" property="no" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="store_id" property="storeId" jdbcType="BIGINT" />
+		<result column="store_name" property="storeName" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="prod_type" property="prodType" jdbcType="BIT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="images" property="images" jdbcType="VARCHAR" />
+		<result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+		<result column="orig_price" property="origPrice" jdbcType="DECIMAL" />
+		<result column="prod_stock" property="prodStock" jdbcType="INTEGER" />
+		<result column="max_pay" property="maxPay" jdbcType="INTEGER" />
+		<result column="max_use" property="maxUse" jdbcType="INTEGER" />
+		<result column="activity_id" property="activityId" jdbcType="BIGINT" />
+		<result column="sales_num" property="salesNum" jdbcType="INTEGER" />
+		<result column="score_avg" property="scoreAvg" jdbcType="REAL" />
+		<result column="mark_num" property="markNum" jdbcType="INTEGER" />
+		<result column="star_date" property="starDate" jdbcType="TIMESTAMP" />
+		<result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="promise" property="promise" jdbcType="VARCHAR" />
+		<result column="scheduleer" property="scheduleer" jdbcType="INTEGER" />
+		<result column="schedule_type" property="scheduleType" jdbcType="BIT" />
+		<result column="haoping" property="haoping" jdbcType="INTEGER" />
+		<result column="zhongping" property="zhongping" jdbcType="INTEGER" />
+		<result column="chaping" property="chaping" jdbcType="INTEGER" />
+		<result column="on_shelf" property="onShelf" jdbcType="TIMESTAMP" />
+		<result column="off_shelf" property="offShelf" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="BIT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="enabled" property="enabled" jdbcType="BIT" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="cn.qhjys.mall.entity.ProductInfo" extends="BaseResultMap">
+		<result column="prod_detail" property="prodDetail" jdbcType="LONGVARCHAR" />
+		<result column="buying_tips" property="buyingTips" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<select id="selectProductInfoByRand"  parameterType="java.lang.Long" resultMap="BaseResultMap">
+		SELECT p.* FROM product_info p JOIN store_info s ON p.store_id = s.id
+		<where>
+			p.status=2 AND p.enabled=1 <![CDATA[AND(p.off_shelf IS NULL OR p.off_shelf >= NOW())]]> AND s.city = #{cityId,jdbcType=BIGINT}
+		</where>
+		ORDER BY Rand()
+	</select>
+	
+	<select id="searchProductByCategory" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT p.* FROM product_info p JOIN store_info s ON p.store_id = s.id
+		<where>
+			p.status=2 AND p.enabled=1 <![CDATA[AND(p.off_shelf IS NULL OR p.off_shelf >= NOW())]]>
+			<if test="category != null">
+				AND p.category_id IN (
+					SELECT c.id FROM category_info c
+					WHERE (c.id=#{category,jdbcType=BIGINT} OR c.parent_id=#{category,jdbcType=BIGINT}) AND c.enabled = 1
+				)
+			</if>
+			<if test="cityId != null">
+				AND s.city = #{cityId,jdbcType=BIGINT}
+			</if>
+			<if test="area != null">
+				AND s.area = #{area,jdbcType=BIGINT}
+			</if>
+			<if test="maxUse != null">
+				AND p.max_use = #{maxUse,jdbcType=INTEGER}
+			</if>
+			<if test="priceRange !=null"><choose>
+				<when test="priceRange == 1">
+					<![CDATA[AND P.unit_price < 20]]>
+				</when>
+				<when test="priceRange == 2">
+					<![CDATA[AND 20 <= p.unit_price AND p.unit_price < 50]]>
+				</when>
+				<when test="priceRange == 3">
+					<![CDATA[AND 50 <= p.unit_price AND p.unit_price < 100]]>
+				</when>
+				<when test="priceRange == 4">
+					<![CDATA[AND 100 <= p.unit_price AND p.unit_price < 300]]>
+				</when>
+				<when test="priceRange == 5">
+					<![CDATA[AND 300 <= p.unit_price AND p.unit_price < 500]]>
+				</when>
+				<when test="priceRange == 6">
+					<![CDATA[AND 500 <= p.unit_price AND p.unit_price < 1000]]>
+				</when>
+				<when test="priceRange == 7">
+					<![CDATA[AND 1000 <= p.unit_price]]>
+				</when>
+				<otherwise></otherwise>
+			</choose></if>
+		</where>
+		ORDER BY ${clause}
+	</select>
+
+	<select id="searchProductByKeyWord" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT p.* FROM   product_info p
+		JOIN store_info s ON p.store_id = s.id
+		<where>
+			p.status=2 AND p.enabled=1 <![CDATA[AND(p.off_shelf IS NULL OR p.off_shelf >= NOW())]]>
+			<if test="keywork != null">
+				and (p.name like CONCAT('%',#{keywork,jdbcType=VARCHAR},'%') or
+				p.title like
+				CONCAT('%',#{keywork,jdbcType=VARCHAR},'%'))
+			</if>
+			<if test="category != null">
+				and p.category_id = #{category,jdbcType=BIGINT}
+			</if>
+			<if test="cityId != null">
+				AND s.city = #{cityId,jdbcType=BIGINT}
+			</if>
+			<if test="area != null">
+				and s.area = #{area,jdbcType=BIGINT}
+			</if>
+			<if test="maxUse != null">
+				and p.max_use = #{maxUse,jdbcType=INTEGER}
+			</if>
+			<if test="store != null">
+				and p.store_id = #{store,jdbcType=BIGINT}
+			</if>
+		</where>
+		ORDER BY ${clause}
+	</select>
+
+	<delete id="deleteProductById" parameterType="java.util.Map">
+		DELETE FROM product_info WHERE
+		store_id = (SELECT s.id FROM store_info s WHERE s.seller_id = #{sellerId})
+		AND id = #{productId}
+	</delete>
+
+	<update id="updateProduct" parameterType="java.util.Map">
+		UPDATE product_info
+		<set>
+			<if test="record.no != null">
+				no = #{record.no,jdbcType=VARCHAR},
+			</if>
+			<if test="record.name != null">
+				name = #{record.name,jdbcType=VARCHAR},
+			</if>
+			<if test="record.storeId != null">
+				store_id = #{record.storeId,jdbcType=BIGINT},
+			</if>
+			<if test="record.categoryId != null">
+				category_id = #{record.categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="record.prodType != null">
+				prod_type = #{record.prodType,jdbcType=BIT},
+			</if>
+			<if test="record.images != null">
+				images = #{record.images,jdbcType=VARCHAR},
+			</if>
+			<if test="record.unitPrice != null">
+				unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="record.origPrice != null">
+				orig_price = #{record.origPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="record.prodStock != null">
+				prod_stock = #{record.prodStock,jdbcType=BIGINT},
+			</if>
+			<if test="record.maxPay != null">
+				max_pay = #{record.maxPay,jdbcType=INTEGER},
+			</if>
+			<if test="record.maxUse != null">
+				max_use = #{record.maxUse,jdbcType=INTEGER},
+			</if>
+			<if test="record.activityId != null">
+				activity_id = #{record.activityId,jdbcType=BIGINT},
+			</if>
+			<if test="record.salesNum != null">
+				sales_num = #{record.salesNum,jdbcType=INTEGER},
+			</if>
+			<if test="record.scoreAvg != null">
+				score_avg = #{record.scoreAvg,jdbcType=TINYINT},
+			</if>
+			<if test="record.markNum != null">
+				mark_num = #{record.markNum,jdbcType=INTEGER},
+			</if>
+			<if test="record.starDate != null">
+				star_date = #{record.starDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.endDate != null">
+				end_date = #{record.endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.offShelf != null">
+				off_shelf = #{record.offShelf,jdbcType=DATE},
+			</if>
+			<if test="record.promise != null">
+				promise = #{record.promise,jdbcType=TINYINT},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=BIT},
+			</if>
+			<if test="record.enabled != null">
+				enabled = #{record.enabled,jdbcType=BIT},
+			</if>
+			<if test="record.prodDetail != null">
+				prod_detail = #{record.prodDetail,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="record.buyingTips != null">
+				buying_tips = #{record.buyingTips,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="record.title != null">
+				title = #{record.title,jdbcType=VARCHAR},
+			</if>
+		</set>
+		
+		WHERE id = #{record.id}
+	</update>
+
+	<select id="selectBrowsedProduct" resultType="cn.qhjys.mall.vo.AppProdVo">
+		SELECT b.user_id AS userId,
+			b.prod_id AS prodId,
+			p.name AS prodName,
+			Substring_index(p.images, "|", 1) AS imageUrl,
+			s.area AS areaId,
+			a.name AS areaName,
+			p.title AS title,
+			p.category_id AS category,
+			p.prod_type AS prodType,
+			p.unit_price AS unitPrice,
+			p.orig_price AS dePrice,
+			p.sales_num AS saleNum,
+			p.store_id AS storeId
+		FROM user_browsed b
+			JOIN product_info p
+			ON b.prod_id = p.id
+			JOIN store_info s
+			ON p.store_id = s.id
+			JOIN area_info a
+			ON s.area = a.id
+		WHERE p.status = 2
+			AND p.enabled = 1
+			AND s.enabled = 1
+			<![CDATA[AND(p.off_shelf IS NULL OR p.off_shelf >= NOW())]]>
+			AND b.user_id = #{userId,jdbcType=BIGINT}
+		ORDER BY b.create_time DESC
+	</select>
+
+	<select id="selectStore" resultType="map">
+		SELECT s.id,s.name
+		FROM   store_info s
+		JOIN product_info p
+		ON s.id = p.store_id
+		JOIN category_info c
+		ON p.category_id = c.id
+		WHERE  s.status=2 AND s.enabled=1
+		<if test="city != null">
+		AND s.city=#{city,jdbcType=BIGINT}
+		</if>
+		<if test="category != null">
+		AND (c.id=#{category,jdbcType=BIGINT} OR c.parent_id=#{category,jdbcType=BIGINT})
+		</if>
+		GROUP BY s.id
+		ORDER BY s.points DESC
+	</select>
+
+	<select id="selectNearbyStore" resultType="map">
+		SELECT t.* FROM (
+			SELECT s.id,s.name,Sqrt(
+					(
+						( ( #{lngtd,jdbcType=DOUBLE} - s.longitude ) * Pi() * 12656 * Cos(( ( #{lattd,jdbcType=DOUBLE} + s.latitude ) / 2 ) * Pi() / 180) / 180 ) *
+						( ( #{lngtd,jdbcType=DOUBLE} - s.longitude ) * Pi() * 12656 * Cos(( ( #{lattd,jdbcType=DOUBLE} + s.latitude ) / 2 ) * Pi() / 180) / 180 ) 
+					) +
+					( ( ( #{lattd,jdbcType=DOUBLE} - s.latitude ) * Pi() * 12656 / 180 ) * ( ( #{lattd,jdbcType=DOUBLE} - s.latitude ) * Pi() * 12656 / 180 ) )
+				) AS distance
+			FROM store_info s
+			JOIN product_info p
+			ON s.id = p.store_id
+			JOIN category_info c
+			ON p.category_id = c.id
+			WHERE s.status = 2 AND s.enabled = 1
+			<![CDATA[
+				AND s.longitude < s.longitude + 2
+				AND s.longitude > s.longitude - 2
+				AND s.latitude < s.latitude + 2
+				AND s.latitude > s.latitude - 2
+			]]>
+			<if test="category != null">
+			AND s.category_id=#{category,jdbcType=BIGINT}
+			</if>
+			<if test="category != null">
+			AND (c.id=#{category,jdbcType=BIGINT} OR c.parent_id=#{category,jdbcType=BIGINT})
+			</if>
+			GROUP BY s.id
+		) t WHERE 1=1
+		<if test="range != null">
+			AND<![CDATA[ t.distance < #{range,jdbcType=BIGINT} ]]>
+		</if>
+		ORDER BY t.distance ASC
+	</select>
+
+	<select id="selectStoreProduct" resultType="cn.qhjys.mall.vo.AppProdVo">
+		SELECT p.id AS prodId,
+			p.name AS prodName,
+			Substring_index(p.images, "|", 1) AS imageUrl,
+			s.id AS storeId,
+			s.name AS storeName,
+			s.area AS areaId,
+			a.name AS areaName,
+			p.title AS title,
+			p.category_id AS category,
+			p.prod_type AS prodType,
+			p.unit_price AS unitPrice,
+			p.orig_price AS dePrice,
+			p.sales_num AS saleNum
+		FROM product_info p
+			JOIN store_info s
+			ON p.store_id = s.id
+			JOIN area_info a
+			ON s.area = a.id
+			JOIN category_info c
+			ON p.category_id = c.id
+		WHERE p.status = 2 AND p.enabled=1 <![CDATA[AND(p.off_shelf IS NULL OR p.off_shelf >= NOW())]]>
+		<if test="storeId != null">
+			AND p.store_id = #{storeId,jdbcType=BIGINT}
+		</if>
+		<if test="category != null">
+			AND (c.id=#{category,jdbcType=BIGINT} OR c.parent_id=#{category,jdbcType=BIGINT})
+		</if>
+		<if test="city != null">
+			AND s.city=#{city,jdbcType=BIGINT}
+		</if>
+		<if test="column != null and column != ''">
+			ORDER BY ${column}
+		</if>
+	</select>
+
+	<select id="searchAppProduct" resultType="cn.qhjys.mall.vo.AppProdVo">
+		SELECT t.* FROM (
+			SELECT p.id AS prodId,
+					p.name AS prodName,
+					p.title AS title,
+					p.unit_price AS unitPrice,
+					p.orig_price AS dePrice,
+					p.sales_num AS saleNum,
+					p.category_id AS category,
+					p.prod_type AS prodType,
+					Substring_index(p.images, "|", 1) AS imageUrl,
+					p.score_avg AS avgScore,
+					p.level AS level,
+					s.id AS storeId,
+					s.name AS storeName,
+					s.area AS areaId,
+					a.name AS areaName
+			FROM   store_info s
+					JOIN product_info p
+					ON s.id = p.store_id
+					JOIN category_info c
+					ON p.category_id = c.id
+					JOIN area_info a
+					ON s.area = a.id
+			WHERE p.status = 2 AND p.enabled = 1
+			<if test="keyword != null and keyword != ''">
+				AND (p.name like CONCAT('%',#{keyword},'%') or p.title like CONCAT('%',#{keyword},'%'))
+			</if>
+			<if test="cityId != null">
+				AND s.city=#{cityId,jdbcType=BIGINT}
+			</if>
+			<if test="areaId != null">
+				AND s.area = #{areaId,jdbcType=BIGINT}
+			</if>
+			<if test="category != null">
+				AND (c.id=#{category,jdbcType=BIGINT} OR c.parent_id=#{category,jdbcType=BIGINT})
+			</if>
+		) t WHERE 1=1
+		<if test="column != null and column != ''">
+			ORDER BY ${column}
+		</if>
+	</select>
+
+	<select id="selectNearbyProduct" resultType="cn.qhjys.mall.vo.AppProdVo">
+		SELECT t.* FROM (
+			SELECT p.id AS prodId,
+				p.name AS prodName,
+				p.title AS title,
+				p.unit_price AS unitPrice,
+				p.orig_price AS dePrice,
+				p.sales_num AS saleNum,
+				p.category_id AS category,
+				p.prod_type AS prodType,
+				p.level AS level,
+				Substring_index(p.images, "|", 1) AS imageUrl,
+				p.score_avg AS avgScore,
+				s.id AS storeId,
+				s.name AS storeName,
+				s.city AS cityId,
+				s.area AS areaId,
+				a.name AS areaName,
+				sqrt((
+					((#{lngtd,jdbcType=DOUBLE}-s.longitude)*PI()*12656*cos(((#{lattd,jdbcType=DOUBLE}+s.latitude)/2)*PI()/180)/180)*
+					((#{lngtd,jdbcType=DOUBLE}-s.longitude)*PI()*12656*cos (((#{lattd,jdbcType=DOUBLE}+s.latitude)/2)*PI()/180)/180)
+				)+
+				(((#{lattd,jdbcType=DOUBLE}-s.latitude)*PI()*12656/180)*((#{lattd,jdbcType=DOUBLE}-s.latitude)*PI()*12656/180))) AS distance
+			FROM   store_info s
+				JOIN product_info p
+				ON s.id = p.store_id
+				JOIN area_info a
+				ON s.area = a.id
+				JOIN category_info c
+				ON p.category_id = c.id
+			WHERE p.status = 2
+				AND p.enabled = 1
+			<![CDATA[AND(p.off_shelf IS NULL OR p.off_shelf >= NOW())]]>
+				AND s.status = 2
+				AND s.enabled = 1
+			<![CDATA[ AND s.longitude < s.longitude + 2
+				AND s.longitude > s.longitude - 2
+				AND s.latitude < s.latitude + 2
+				AND s.latitude > s.latitude - 2
+			]]>
+			<if test="category != null">
+				AND (c.id=#{category,jdbcType=BIGINT} OR c.parent_id=#{category,jdbcType=BIGINT})
+			</if>
+			) t WHERE 1=1
+		<if test="range != null">
+			AND <![CDATA[ t.distance < #{range,jdbcType=BIGINT} ]]>
+		</if>
+		<if test="keyword != null and keyword != ''">
+			AND (t.prodName like CONCAT('%',#{keyword},'%') or t.title like CONCAT('%',#{keyword},'%'))
+		</if>
+		<if test="cityId != null">
+			AND t.cityId=#{cityId,jdbcType=BIGINT}
+		</if>
+		<if test="areaId != null">
+			AND t.areaId = #{areaId,jdbcType=BIGINT}
+		</if>
+		<if test="column != null and column != ''">
+			ORDER BY ${column}
+		</if>
+	</select>
+
+	<select id="getProductInfoById" resultType="cn.qhjys.mall.vo.AppProdVo">
+		SELECT p.id AS prodId,
+			p.name AS prodName,
+			p.title AS title,
+			Substring_index(p.images, "|", 1) AS imageUrl,
+			p.unit_price AS unitPrice,
+			p.orig_price AS dePrice,
+			p.sales_num AS saleNum,
+			p.category_id AS category,
+			p.prod_type AS prodType,
+			s.id AS storeId,
+			s.name AS storeName,
+			s.seller_id AS sellerId
+		FROM product_info p
+			JOIN store_info s
+			ON p.store_id = s.id
+		WHERE p.status=2 AND p.enabled=1 AND s.enabled=1
+			<![CDATA[AND(p.off_shelf IS NULL OR p.off_shelf >= NOW())
+			AND p.prod_stock>=#{prodNum,jdbcType=BIGINT}
+			AND (p.max_pay IS NULL OR p.max_pay>=#{prodNum,jdbcType=BIGINT})]]>
+			AND p.id=#{prodId,jdbcType=BIGINT}
+	</select>
+
+	<select id="queryProdByBought" resultType="cn.qhjys.mall.vo.AppProdVo">
+		SELECT DISTINCT( p.id ),
+			o.user_id AS userId,
+			p.id AS prodId,
+			p.name AS prodName,
+			p.title AS title,
+			Substring_index(p.images, "|", 1) AS imageUrl,
+			p.unit_price AS unitPrice,
+			p.orig_price AS dePrice,
+			p.sales_num AS saleNum,
+			p.category_id AS category,
+			p.prod_type AS prodType,
+			s.id AS storeId,
+			s.name AS storeName,
+			s.seller_id AS sellerId,
+			s.area AS areaId
+		FROM order_detail d
+			JOIN product_info p
+			ON d.prod_id = p.id
+			JOIN store_info s
+			ON p.store_id = s.id
+			JOIN order_info o
+			ON d.order_id = o.id
+		WHERE p.status = 2 AND p.enabled = 1 AND s.enabled = 1
+		<if test="userId != null">
+			AND o.user_id=#{userId,jdbcType=BIGINT}
+		</if>
+	</select>
+
+	<select id="queryManageProductList" resultType="cn.qhjys.mall.vo.system.ProductManageVo" parameterType="java.util.Map">
+		SELECT p.id         AS productId,
+		       p.name       AS productName,
+		       st.name      AS storeName,
+		       p.score_avg  AS score,
+		       p.unit_price AS unitPrice,
+		       p.orig_price AS origPrice,
+		       p.sales_num  AS quantity,
+		       p.end_date   AS endDate,
+		       p.off_shelf  AS offDate,
+		       p.enabled    AS enabled,
+		       p.level    AS level
+		FROM   product_info p,
+		       store_info st
+		<where>
+			p.store_id = st.id AND p.`status` = 2
+			<if test="productName != null and productName != ''">
+			 	AND (p.`name` like CONCAT('%',#{productName},'%'))
+			 </if>
+			 <if test="storeName != null and storeName != ''">
+				AND  (st.name like CONCAT('%',#{storeName},'%'))
+			 </if>
+			 <if test="startPrice != null">
+			 	AND　p.unit_price >= #{startPrice}
+			 </if>
+			 <if test="endPrice != null">
+			 	AND #{endPrice} >= p.unit_price
+			 </if>
+ 			 <if test="startTime != null and startTime != ''">
+			 	AND DATE_FORMAT(p.create_time,'%Y-%m-%d') >= #{startTime}
+			 </if>
+ 			 <if test="endTime != null and endTime != ''">
+				AND #{endTime} >= DATE_FORMAT(p.create_time,'%Y-%m-%d')
+			</if>
+			<if test="enabled != null">
+				AND
+				<foreach collection="enabled" open="(" close=")" index="i" item="item">
+					<if test="i != 0">OR </if>p.enabled=#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+	<update id="updateAutoShelfProduct">
+		UPDATE product_info p
+		SET    p.status = 3
+		WHERE  p.status = 2
+	       AND p.off_shelf IS NOT NULL
+	       <![CDATA[AND p.off_shelf <= NOW()]]>
+	</update>
+
+</mapper>

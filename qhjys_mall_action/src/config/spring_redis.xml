@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="blockWhenExhausted" value="false"></property>
+		<property name="maxIdle" value="8"></property>
+		<property name="maxTotal" value="32"></property>
+		<property name="maxWaitMillis" value="2000"></property>
+	</bean>
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		destroy-method="destroy">
+		<property name="poolConfig" ref="jedisPoolConfig"></property>
+		<property name="hostName" value="192.168.1.9"></property>
+		<property name="port" value="6379"></property>
+		<!-- <property name="password" value="0123456"></property> -->
+		<property name="timeout" value="15000"></property>
+		<property name="usePool" value="true"></property>
+	</bean>
+
+	<!-- redis template definition -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connectionFactory-ref="jedisConnectionFactory" />
+
+	<bean id="serialization"
+		class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+
+	<!-- <bean id="messageListener" class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter"> 
+		<property name="delegate" ref="createHtmlListener" /> <property name="serializer" 
+		ref="serialization" /> </bean> -->
+
+	<!-- <bean id="redisContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer"> 
+		<property name="connectionFactory" ref="jedisConnectionFactory"/> <property 
+		name="messageListeners"> <map> <entry key-ref="messageListener"> <bean class="org.springframework.data.redis.listener.ChannelTopic"> 
+		topic队列的名称 <constructor-arg value="${topic.createhtml}" /> </bean> </entry> 
+		</map> </property> </bean> -->
+</beans>

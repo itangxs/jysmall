@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.CashLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.CashLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_no" property="recordNo" jdbcType="VARCHAR" />
+    <result column="send_id" property="sendId" jdbcType="BIGINT" />
+    <result column="review_id" property="reviewId" jdbcType="BIGINT" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="pay_type" property="payType" jdbcType="BIT" />
+    <result column="pay_way" property="payWay" jdbcType="BIT" />
+    <result column="bankNo" property="bankno" jdbcType="VARCHAR" />
+    <result column="business_code" property="businessCode" jdbcType="VARCHAR" />
+    <result column="business_name" property="businessName" jdbcType="VARCHAR" />
+    <result column="send_befor" property="sendBefor" jdbcType="DECIMAL" />
+    <result column="send_after" property="sendAfter" jdbcType="DECIMAL" />
+    <result column="review_befor" property="reviewBefor" jdbcType="DECIMAL" />
+    <result column="review_after" property="reviewAfter" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_no, send_id, review_id, amount, pay_type, pay_way, bankNo, business_code, 
+    business_name, send_befor, send_after, review_befor, review_after, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.CashLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cash_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cash_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cash_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.CashLogExample" >
+    delete from cash_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.CashLog" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cash_log (record_no, send_id, review_id, 
+      amount, pay_type, pay_way, bankNo, 
+      business_code, business_name, send_befor, 
+      send_after, review_befor, review_after, 
+      create_time)
+    values (#{recordNo,jdbcType=VARCHAR}, #{sendId,jdbcType=BIGINT}, #{reviewId,jdbcType=BIGINT}, 
+      #{amount,jdbcType=DECIMAL}, #{payType,jdbcType=BIT}, #{payWay,jdbcType=BIT}, #{bankno,jdbcType=VARCHAR}, 
+      #{businessCode,jdbcType=VARCHAR}, #{businessName,jdbcType=VARCHAR}, #{sendBefor,jdbcType=DECIMAL}, 
+      #{sendAfter,jdbcType=DECIMAL}, #{reviewBefor,jdbcType=DECIMAL}, #{reviewAfter,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.CashLog" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cash_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordNo != null" >
+        record_no,
+      </if>
+      <if test="sendId != null" >
+        send_id,
+      </if>
+      <if test="reviewId != null" >
+        review_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="payWay != null" >
+        pay_way,
+      </if>
+      <if test="bankno != null" >
+        bankNo,
+      </if>
+      <if test="businessCode != null" >
+        business_code,
+      </if>
+      <if test="businessName != null" >
+        business_name,
+      </if>
+      <if test="sendBefor != null" >
+        send_befor,
+      </if>
+      <if test="sendAfter != null" >
+        send_after,
+      </if>
+      <if test="reviewBefor != null" >
+        review_befor,
+      </if>
+      <if test="reviewAfter != null" >
+        review_after,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordNo != null" >
+        #{recordNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sendId != null" >
+        #{sendId,jdbcType=BIGINT},
+      </if>
+      <if test="reviewId != null" >
+        #{reviewId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=BIT},
+      </if>
+      <if test="payWay != null" >
+        #{payWay,jdbcType=BIT},
+      </if>
+      <if test="bankno != null" >
+        #{bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCode != null" >
+        #{businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null" >
+        #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendBefor != null" >
+        #{sendBefor,jdbcType=DECIMAL},
+      </if>
+      <if test="sendAfter != null" >
+        #{sendAfter,jdbcType=DECIMAL},
+      </if>
+      <if test="reviewBefor != null" >
+        #{reviewBefor,jdbcType=DECIMAL},
+      </if>
+      <if test="reviewAfter != null" >
+        #{reviewAfter,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.CashLogExample" resultType="java.lang.Integer" >
+    select count(*) from cash_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cash_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordNo != null" >
+        record_no = #{record.recordNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendId != null" >
+        send_id = #{record.sendId,jdbcType=BIGINT},
+      </if>
+      <if test="record.reviewId != null" >
+        review_id = #{record.reviewId,jdbcType=BIGINT},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payType != null" >
+        pay_type = #{record.payType,jdbcType=BIT},
+      </if>
+      <if test="record.payWay != null" >
+        pay_way = #{record.payWay,jdbcType=BIT},
+      </if>
+      <if test="record.bankno != null" >
+        bankNo = #{record.bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessCode != null" >
+        business_code = #{record.businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessName != null" >
+        business_name = #{record.businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendBefor != null" >
+        send_befor = #{record.sendBefor,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendAfter != null" >
+        send_after = #{record.sendAfter,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reviewBefor != null" >
+        review_befor = #{record.reviewBefor,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reviewAfter != null" >
+        review_after = #{record.reviewAfter,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cash_log
+    set id = #{record.id,jdbcType=BIGINT},
+      record_no = #{record.recordNo,jdbcType=VARCHAR},
+      send_id = #{record.sendId,jdbcType=BIGINT},
+      review_id = #{record.reviewId,jdbcType=BIGINT},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      pay_type = #{record.payType,jdbcType=BIT},
+      pay_way = #{record.payWay,jdbcType=BIT},
+      bankNo = #{record.bankno,jdbcType=VARCHAR},
+      business_code = #{record.businessCode,jdbcType=VARCHAR},
+      business_name = #{record.businessName,jdbcType=VARCHAR},
+      send_befor = #{record.sendBefor,jdbcType=DECIMAL},
+      send_after = #{record.sendAfter,jdbcType=DECIMAL},
+      review_befor = #{record.reviewBefor,jdbcType=DECIMAL},
+      review_after = #{record.reviewAfter,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.CashLog" >
+    update cash_log
+    <set >
+      <if test="recordNo != null" >
+        record_no = #{recordNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sendId != null" >
+        send_id = #{sendId,jdbcType=BIGINT},
+      </if>
+      <if test="reviewId != null" >
+        review_id = #{reviewId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=BIT},
+      </if>
+      <if test="payWay != null" >
+        pay_way = #{payWay,jdbcType=BIT},
+      </if>
+      <if test="bankno != null" >
+        bankNo = #{bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCode != null" >
+        business_code = #{businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null" >
+        business_name = #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendBefor != null" >
+        send_befor = #{sendBefor,jdbcType=DECIMAL},
+      </if>
+      <if test="sendAfter != null" >
+        send_after = #{sendAfter,jdbcType=DECIMAL},
+      </if>
+      <if test="reviewBefor != null" >
+        review_befor = #{reviewBefor,jdbcType=DECIMAL},
+      </if>
+      <if test="reviewAfter != null" >
+        review_after = #{reviewAfter,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.CashLog" >
+    update cash_log
+    set record_no = #{recordNo,jdbcType=VARCHAR},
+      send_id = #{sendId,jdbcType=BIGINT},
+      review_id = #{reviewId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      pay_type = #{payType,jdbcType=BIT},
+      pay_way = #{payWay,jdbcType=BIT},
+      bankNo = #{bankno,jdbcType=VARCHAR},
+      business_code = #{businessCode,jdbcType=VARCHAR},
+      business_name = #{businessName,jdbcType=VARCHAR},
+      send_befor = #{sendBefor,jdbcType=DECIMAL},
+      send_after = #{sendAfter,jdbcType=DECIMAL},
+      review_befor = #{reviewBefor,jdbcType=DECIMAL},
+      review_after = #{reviewAfter,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

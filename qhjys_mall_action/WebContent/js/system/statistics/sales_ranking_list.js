@@ -1,0 +1,1 @@
+function Excel(){var b=$("#from").serialize();var a="/managermall/systemmall/statistics/salesRankingListExcel.do?"+b;window.open(a)};

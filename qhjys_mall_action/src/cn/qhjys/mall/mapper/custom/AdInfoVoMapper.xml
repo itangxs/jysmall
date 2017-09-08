@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.AdInfoVoMapper" >
+	<select id="queryAdInfoVoList" parameterType="cn.qhjys.mall.vo.AdInfoVo" resultType="cn.qhjys.mall.vo.AdInfoVo">
+		SELECT ad.id AS id,ad.`name` AS name,ad.link AS link,
+		ad.`code` AS code,ad.media_type AS mediaType,ad.start_time AS startTime,
+		ad.end_time AS endTime,ad.click_count AS clickCount,ad.enabled AS enabled,
+		p.id AS positionId,p.`name` AS positionName,
+		p.width AS width,p.hight AS hight,p.`desc` AS `desc`,
+		p.style AS style,p.enabled AS positionEnabled  
+		FROM ad_info ad,ad_position p WHERE ad.position_id = p.id 
+		<where>
+			<if test="positionId != null">
+				positionId =#{positionId,jdbcType=BIGINT}
+			</if>
+		</where>
+		ORDER BY ad.id DESC
+	</select>
+	
+	<select id="queryAdVoList" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.AdVo">
+		SELECT
+		 link AS link,
+		  image AS image
+		 FROM ad_info WHERE position_id = #{positionId,jdbcType=BIGINT}
+		 ORDER BY id DESC
+	</select>
+</mapper>

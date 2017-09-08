@@ -1,0 +1,398 @@
+/*
+ * By jasonshan@tencent.com
+ * date 2013.9.18
+ * v  1.0
+ * 适配首页样式
+ */
+/*reset*/
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea,select,label,article,aside,footer,header,menu,nav,section,time,audio,video {
+	margin: 0;
+	padding: 0;
+	alignment-adjust: middle;
+}
+article,aside,footer,header,hgroup,nav,section,audio,canvas,video,img {display: block;}
+body {font-size: 100%; font-family:arial,Helvetica,STHeiti,Droid Sans Fallback; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;   -webkit-tap-highlight-color:rgba(0,0,0,0);}
+iframe,img {border:0;}
+ul,ol {
+	list-style: none;
+
+}
+input,select,textarea {outline: 0;-webkit-user-modify: read-write-plaintext-only;}
+input {/*-webkit-appearance: none;*/}
+a{text-decoration: none; color:#525252;}
+.clear{clear:both;}
+.blue{ color: #2980b9;}
+.red{ color:#ff6666;}
+*html body{ height:100%}
+input[type="button"], input[type="submit"], input[type="reset"] {
+-webkit-appearance: none;outline:none;}
+textarea {-webkit-appearance: none;resize: none;} 
+.img100{ width:100%;}
+.img50{ width:50%; margin:0 auto;}
+.img30{ width:30px;}
+.img35{ width:35%; margin:0 auto;}
+.wrapper{
+	width: 100%;
+	margin: -25% auto;
+	color: #333333;
+}
+
+.a_zhuanpanbg{
+    width: 100%; height:auto;
+    background-image: url(/images/weixin/cardcoupon/a-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;
+	background-color:#dfbb29;
+}
+.b_zhuanpanbg{
+    width: 100%; height:auto;
+    background-image: url(/images/weixin/cardcoupon/get-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;
+	background-color:#FF8D37;
+}
+.sharebg{
+    width: 100%; height:auto;
+    background-image: url(/images/weixin/cardcoupon/get-bg1.jpg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;
+	background-color:#dfbb29;
+}
+.b_sharebg{
+    width: 100%; height:auto;
+    background-image: url(/images/weixin/cardcoupon/get-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;
+	background-color:#f0d874;
+}
+.jiangpinlist{ padding:0 10px 10px 10px; margin:0 auto;}
+.a_rafflebg{ background:##FF8D37;}
+.b_rafflebg{ background:#FF8D37;}
+.duihuanbox{ padding:8px; background:#eeeeee; margin:0 6px 6px 0; border-radius:3px;}
+.duihuanbox .leftbox{ float:left; width:38%; font-size:0.9375em; height:80px; text-align:center;}
+.duihuanbox .leftbox h1{
+	font-size: 1.0625em;font-family:Microsoft YaHei;
+	color: #0099FF;
+	margin: 3px 0;
+	height: 20px;
+	overflow: hidden;
+}
+
+.duihuanbox .leftbox .bg{ background:#eeeeee; height:70px; padding:8px 0 0 0; border:1px solid #f6efbe; border-radius:3px; line-height:20px;}
+.duihuanbox .centerbox{ float:left; width:42%; max-height:80px; overflow:hidden; text-align:left; margin:0 0 0 0%;}
+.duihuanbox .centerbox ul{ text-align:center; margin:0 0 0 0px; width:100%;}
+.duihuanbox .centerbox ul li{ float:left; width:30%;}
+.duihuanbox .centerbox ul li img{ width:auto; height:35px; margin:2px 0px 0px 0px}
+.duihuanbox .rightbox{ float:right; width:20%; text-align:right; height:80px; line-height:40px; vertical-align:middle; display:table; color:#f6696a;  text-align:right;}
+.duihuanbox .rightbox a{ color:#eeeeee; font-size:1.0625em;}
+.duihuanbox .rightbox p img{ width:98%; float:left;margin:0 0 0 -1%}
+.duihuanbox .rightbox p{vertical-align:middle; display:table-cell;}
+.friendlist{ float:left; width:62%; max-height:80px; overflow:hidden; text-align:center; margin:0 auto;}
+.friendlist ul{ text-align:center; margin:0 auto; width:95%;}
+.friendlist ul li{ float:left; width:20%;}
+.friendlist ul li img{ width:98%; height:38px; margin:0 2px 2px 2px}
+/*zhuanpan*/
+.ly-plate{position:relative;width:300px;height:300px;margin: 0 auto;
+margin-top:120px;	margin-bottom:10px;	}
+.rotate-jp{position:absolute;top:45px;left:45px;margin:0 auto; width:210px; height:210px;}
+.rotate-jp ul li{ width:105px; height:105px; float:left; text-align:center; position:relative;}
+.rotate-jp .picbox{ position:absolute; left:50%; top:50%; margin-top:-40px; margin-left:-40px;}
+.rotate-jp img{ width:80px; height:80px;}
+.rotate-bg{
+	width:300px;
+	height:300px;
+	position:absolute;
+	top:0;left:0;margin:0 auto;
+	background-image: url(/images/weixin/cardcoupon/get-zhuanpanbg.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:300px 300px;
+    -moz-background-size:300px 300px;
+    -o-background-size:300px 300px;
+    background-size:300px 300px;	
+	}
+.ly-plate div.lottery-star{	width:100px;height:100px;position:absolute;top:100px;left:100px;outline:none;	}
+.ly-plate div.lottery-star img{ width:100px; height:100px;}
+.ly-plate div.lottery-star #lotteryBtn{cursor: pointer;position: absolute;top:0;left:0;}
+@media screen and (min-width:320px) and (max-width:480px){
+.ly-plate{position:relative;width:300px;height:300px;margin: 0 auto;
+margin-top:120px;	margin-bottom:10px;	}
+.rotate-jp{position:absolute;top:45px;left:45px;margin:0 auto; width:210px; height:210px;}
+.rotate-jp ul li{ width:105px; height:105px; float:left; text-align:center; position:relative;}
+.rotate-jp .picbox{ position:absolute; left:50%; top:50%; margin-top:-40px; margin-left:-40px;}
+.rotate-jp img{ width:80px; height:80px;}
+.rotate-bg{
+	width:300px;
+	height:300px;
+	position:absolute;
+	top:0;left:0;margin:0 auto;
+	background-image: url(/images/weixin/cardcoupon/get-zhuanpanbg.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:300px 300px;
+    -moz-background-size:300px 300px;
+    -o-background-size:300px 300px;
+    background-size:300px 300px;	
+	}
+.ly-plate div.lottery-star{	width:100px;height:100px;position:absolute;top:100px;left:100px;outline:none;	}
+.ly-plate div.lottery-star img{ width:100px; height:100px;}
+.ly-plate div.lottery-star #lotteryBtn{cursor: pointer;position: absolute;top:0;left:0;}
+}
+@media screen and (min-width:480px) and (max-width:960px){
+.b_sharebg{
+    width: 100%; height:auto;
+    background-image: url(/images/weixin/cardcoupon/get-bg.jpg);
+    background-repeat: no-repeat;
+    background-position:0 -35px;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;
+	background-color:#f0d874;
+}
+.ly-plate{position:relative;width:400px;height:400px;margin: 0 auto;
+margin-top:120px;	margin-bottom:10px;	}
+.rotate-jp{position:absolute;top:45px;left:45px;margin:0 auto; width:310px; height:310px;}
+.rotate-jp ul li{ width:155px; height:155px; float:left; text-align:center; position:relative;}
+.rotate-jp .picbox{ position:absolute; left:50%; top:50%; margin-top:-40px; margin-left:-40px;}
+.rotate-jp img{
+	width: 80px;
+	height: auto;
+}
+.rotate-bg{
+	width:400px;
+	height:400px;
+	position:absolute;
+	top:0;left:0;margin:0 auto;
+	background-image: url(/images/weixin/cardcoupon/get-zhuanpanbg.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:400px 400px;
+    -moz-background-size:400px 400px;
+    -o-background-size:400px 400px;
+    background-size:400px 400px;	
+	}
+.ly-plate div.lottery-star{	width:120px;height:120px;position:absolute;top:140px;left:140px;outline:none;	}
+.ly-plate div.lottery-star img{ width:120px; height:120px;}
+.ly-plate div.lottery-star #lotteryBtn{cursor: pointer;position: absolute;top:0;left:0;}
+}
+/*弹出层*/
+.black_overlay{display:none;position: fixed;top:0%;left:0%;width:100%;height:100%;background-color:black;z-index:1001;-moz-opacity:0.6;opacity:.60;filter:alpha(opacity=60);}
+.white_content{display:none;position:fixed;top:0px;left:7%;width:86%;z-index:1002;}
+.tanchubox{ height:100%; margin:0 auto; text-align:center; margin-top:30px;}
+.tanchu_content{ padding:10px 15px 30px 15px; background:#fff;border-radius:0 0 5px 5px; margin-bottom:-5px;}
+
+.help_button{ margin-top:-25px;}
+.help_button img{ width:100%;}
+.tc_dhq{ width:100%; padding:10px 0;
+	height:auto; margin:0 auto;
+	background-image: url(/images/weixin/cardcoupon/get-quanbg.jpg);
+    background-repeat: repeat-y;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;}
+.tc_dhq .left{ width:33%; height:90px; float:left; display:table;}
+.tc_dhq .left span{display: table-cell; vertical-align:middle; padding:0 3px;}
+.tc_dhq .left img{ width:85%; margin:0 auto; }
+.tc_dhq .right{ width:67%; height:90px; float:left;}
+.tc_dhq .right .title{ color:#fff; width:100%; height:50px; font-size:1.125em; overflow:hidden; display:table; position:relative; text-align:left;}
+.tc_dhq .right .title span{ line-height:25px; display:table-cell; vertical-align:middle; width:70%;}
+.tc_dhq .right .title img{ height:50px; position: absolute; top:0; right:10px;}
+.tc_dhq .right .title i{ height:50px;}
+.tc_dhq .right h2{ background:#feeb32; height:30px; line-height:30px; margin:10px 0 0 0; font-size:0.9375em; color:#f6696a; margin-right:10px;}
+.buttonred100{ display:block; width:100%; height:45px; line-height:45px; text-align:center; font-size:1.0625em; background:#f6696a; color:#fff;border:0px; border-radius:3px; margin:10px 0;}
+.buttonbkbox{ height:42px;}
+.button60k{ border:1px solid #ccc; border-radius:3px; width:58%; height:42px; line-height:42px; text-align:center; font-size:1.0625em; color:#f6696a; margin:10px 0; background:#fff; display:inline-block; float:left;}
+.button40k{ border:1px solid #ccc; border-radius:3px; width:40%; height:42px; line-height:42px; text-align:center; font-size:1.0625em; color:#f6696a; margin:10px 0; background:#fff; display:inline-block; float:right;}
+.zhongjiangbox p,.weiguanzhubox p{ font-size:0.9375em; line-height:25px;}
+.zhongjiangbox h1{ color:#f6696a; font-size:1.0625em;}
+.zhongjiangbox h2,.weiguanzhubox h2{ color:#999; text-align:left; font-size:0.9375em; line-height:1.5em; font-weight:normal;}
+.weiguanzhubox{}
+.weiguanzhubox .nr{ background:#eee; padding:10px; margin-bottom:10px;}
+.weiguanzhubox .nr img{ width:60%; margin:0 auto; margin-top:5px;}
+.help-title{ width:90%; text-align:center; color:#fff; margin:10px auto;}
+.help-title .bg{ width:100%; line-height:40px;
+	height:55px; margin:0 auto;
+	background-image: url(/images/weixin/cardcoupon/a-help-titlebg.png);
+    background-repeat: repeat-y;
+    background-position: 0 0;
+    -webkit-background-size:100% 55px;
+    -moz-background-size:100% 55px;
+    -o-background-size:100% 55px;
+    background-size:100% 55px;}
+.help-title .bg1{ width:100%; line-height:40px;
+	height:55px; margin:0 auto;
+	background-image: url(/images/weixin/cardcoupon/a-help-titlebg1.png);
+    background-repeat: repeat-y;
+    background-position: 0 0;
+    -webkit-background-size:100% 55px;
+    -moz-background-size:100% 55px;
+    -o-background-size:100% 55px;
+    background-size:100% 55px;}
+.rules_text{line-height:1.5em; padding:10px 15px; color:#fff;  margin-top:5px; position:relative; z-index:0;}
+.rules_text_a{border:3px solid #fc8b8c;border-top:3px solid #fc8b8c; border-radius:0 0 15px 15px;}
+.rules_text_b{border:3px solid #a3a0f7;border-top:3px solid #a3a0f7; border-radius:0 0 15px 15px;}
+
+.rulesbox h1{padding-left:10px;height:40px;line-height:40px; border-radius:3px; color:#535353; background:#fff;font-weight:normal; font-size:1.0625em; position:relative; z-index:1;}
+.rulesbox h1 span{ position:absolute; top:15px; right:10px;}
+.rulesbox span img{ width:16px;}
+.rulesbox{position:relative; padding:5px 0 10px 0;}
+
+.rules_text1{line-height:1.5em; padding:0 5px 10px 5px; color:#777; border:3px solid #fff; border-top:3px solid #fff; border-radius:0 0 15px 15px; margin-top:5px; background:; position:relative; z-index:0;}
+.rulesbox1 h1{padding-left:10px;height:40px;line-height:40px; border-radius:3px; color:#535353; background:#ededed;font-weight:normal; font-size:1.0625em; position:relative; z-index:1;}
+.rulesbox1 h1 span{ position:absolute; top:15px; right:10px;}
+.rulesbox1 span img{ width:16px;}
+.rulesbox1{position:relative; width:100%;}
+.rulesbox2{padding:5px 10px 10px 10px;}
+
+.more a{
+	display: block;
+	text-align: center;
+	padding-left: 10px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #111;
+	border-radius: 3px;
+	color: #333;
+	background: none;
+	font-weight: normal;
+	font-size: 1.0625em;
+}
+/*B-list*/
+.b_quanlist{
+	padding: 0 10px 10px 10px;
+	color: #FF0;
+	background-color: #34AEE1;
+}
+.b_quanlist ul li{ height:40px; padding:12px 70px 12px 0; position:relative; border-bottom:1px solid #c8c8c8; font-size:0.9375em;}
+.b_quanlist .button_cj{ position:absolute; right:0; top:12px; width:65px; height:40px; background:#fc6c6c; text-align:center; line-height:40px; color:#fff; border-radius:3px; border:0; font-size:0.9375em;}
+.b_quanlist p{ height:40px; line-height:40px; overflow:hidden;}
+.b_quanlist .icon1{ display:inline-block; vertical-align:middle;
+    width:18px; height:18px; margin:0 auto; margin-right:5px;
+	background-image: url(/images/weixin/cardcoupon/get-ico.png);
+    background-repeat: repeat-y;
+    background-position: 0 0;
+    -webkit-background-size:18px 18px;
+    -moz-background-size:18px 18px;
+    -o-background-size:18px 18px;
+    background-size:18px 18px;
+}
+.text1{
+	text-align: center;
+	padding-top: 5%;font-size: 1.5625em;font-family:Microsoft YaHei;
+	color: #011199F;
+	margin: auto 0;
+	height: auto;
+	overflow: hidden;
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+  font-size: 1em;
+}
+全部显示
+.image {
+  display: block;
+  float: left;
+  height: auto;
+  overflow: hidden;
+}
+
+.image-1 {
+  position: relative;
+  z-index: 0;
+  width: auto;width: 100%; height: auto;
+    background-image: url(../images/logo.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;
+}
+
+.image-2 {
+	position: relative;
+	clear: both;
+	z-index: 1;
+	width: 100%;
+	height: auto;
+	background-image: url(../images/logo.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	-webkit-background-size: 100% auto;
+	-moz-background-size: 100% auto;
+	-o-background-size: 100% auto;
+	background-size: auto;
+}
+
+.image-3 {
+  position: relative;
+  clear: both;
+  z-index: 2;
+  width: auto
+}
+
+.image-4 {
+  position: relative;
+  clear: both;
+  z-index: 5;
+  width: 50%;
+  margin: -110% 20% 0 25%;
+}
+
+.image-5 {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+}
+
+.image-6 {
+  position: relative;
+  clear: both;
+  z-index: 6;
+  width: 50%;
+  margin: -75% 1% 25% 0;
+}
+
+.image-7 {
+  position: relative;
+  z-index: 7;
+  width: 50%;
+  margin: -75% -50% 0 0;
+}
+.image7 {
+  position: relative;
+  clear: both;
+  z-index: 7;
+  width: 45%;
+  margin: -47% 0 0 50%;
+}
+.image-8 {
+  margin: 10% 0 0 0;
+  width: 100%;
+}
+
+strong{ color:red;font-size:24px}
+.toptext{position:absolute;margin:3% 0 0 5%;color:#311;text-align:left;font-size:1.2rem;line-height:28px;font-family:microsoft yahei;float:left;z-index:20}
+.toppic{width: 100%;
+  margin: 0 auto;}
+

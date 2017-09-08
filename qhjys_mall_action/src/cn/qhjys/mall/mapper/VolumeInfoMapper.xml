@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.VolumeInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.VolumeInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="detail_id" property="detailId" jdbcType="BIGINT" />
+    <result column="volume_code" property="volumeCode" jdbcType="VARCHAR" />
+    <result column="expiration" property="expiration" jdbcType="TIMESTAMP" />
+    <result column="use_date" property="useDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, detail_id, volume_code, expiration, use_date, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.VolumeInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from volume_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from volume_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from volume_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.VolumeInfoExample" >
+    delete from volume_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.VolumeInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into volume_info (detail_id, volume_code, expiration, 
+      use_date, status)
+    values (#{detailId,jdbcType=BIGINT}, #{volumeCode,jdbcType=VARCHAR}, #{expiration,jdbcType=TIMESTAMP}, 
+      #{useDate,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.VolumeInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into volume_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="detailId != null" >
+        detail_id,
+      </if>
+      <if test="volumeCode != null" >
+        volume_code,
+      </if>
+      <if test="expiration != null" >
+        expiration,
+      </if>
+      <if test="useDate != null" >
+        use_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="detailId != null" >
+        #{detailId,jdbcType=BIGINT},
+      </if>
+      <if test="volumeCode != null" >
+        #{volumeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expiration != null" >
+        #{expiration,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useDate != null" >
+        #{useDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.VolumeInfoExample" resultType="java.lang.Integer" >
+    select count(*) from volume_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update volume_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.detailId != null" >
+        detail_id = #{record.detailId,jdbcType=BIGINT},
+      </if>
+      <if test="record.volumeCode != null" >
+        volume_code = #{record.volumeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expiration != null" >
+        expiration = #{record.expiration,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.useDate != null" >
+        use_date = #{record.useDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update volume_info
+    set id = #{record.id,jdbcType=BIGINT},
+      detail_id = #{record.detailId,jdbcType=BIGINT},
+      volume_code = #{record.volumeCode,jdbcType=VARCHAR},
+      expiration = #{record.expiration,jdbcType=TIMESTAMP},
+      use_date = #{record.useDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.VolumeInfo" >
+    update volume_info
+    <set >
+      <if test="detailId != null" >
+        detail_id = #{detailId,jdbcType=BIGINT},
+      </if>
+      <if test="volumeCode != null" >
+        volume_code = #{volumeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expiration != null" >
+        expiration = #{expiration,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useDate != null" >
+        use_date = #{useDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.VolumeInfo" >
+    update volume_info
+    set detail_id = #{detailId,jdbcType=BIGINT},
+      volume_code = #{volumeCode,jdbcType=VARCHAR},
+      expiration = #{expiration,jdbcType=TIMESTAMP},
+      use_date = #{useDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

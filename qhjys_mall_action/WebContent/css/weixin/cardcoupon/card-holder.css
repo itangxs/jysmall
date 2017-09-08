@@ -1,0 +1,209 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0;font-family:"思源黑体 CN Regular","微软雅黑",'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;}
+html{font-size:62.5%; /* 10÷16=62.5% */} 
+body{background-color:#f3f3f3;font-size:12px;font-size:1.2rem ;}
+ul,li{ margin:0; padding:0; list-style-type:none;}
+img{ display:block; margin:0; width:100%;}
+a{ text-decoration:none;}
+.clearfix{ clear:both;}
+
+
+
+
+.kabao-nav{background-color:#e6e6e6;}
+.kabao-nav li{ float:left; padding:1.6% 2% 3%;margin-top:1.6%; font-size:42px; border-radius:16% 16% 0 0;}
+.kabao-nav li a{ color:#7b7b7b;}
+.kabao-all{ margin-left:8%;}
+.nav-bg{background-color:#f3f3f3;}
+.kabao-nav .kabao-all a{color:#434242;}
+
+/*已领取卡券数量*/
+.kabao-nav .kaquan-surplus{ float:right; font-size:28px;border:none; margin-right:3%; padding:0; margin-top:4.4%;color:#bebebe;}
+
+/*卡包-卡券类型及状态*/
+.card{ width:82%;margin:4% auto;border-radius:10px; position:relative; overflow:hidden;}
+.card p,a{ color:white; }
+.kq_ygq{ position:absolute; left:50%; top:0; height:100%; width:auto; margin-left:-14%;}
+.kq_ysy{ position:absolute; left:50%; top:0; height:100%; width:auto; margin-left:-14%;}
+
+/*卡包-卡券名字*/ 
+.coupon-name{width:60%;position:absolute; left:50%; top:42%; margin-left:-22%;}
+.coupon-name p{font-size:62px; text-align:center;}
+
+/*卡包-商家名字*/
+.store-name{ position:absolute; right:10%; top:12%; font-size:38px;text-align:center; width:62%;}
+
+/*卡包-有效期*/
+.deadline{ height:25%;font-size:28px; color:white;position:absolute; right:4%; bottom:2%; width:38%;}
+.deadline .right-float{margin-right:4%}
+
+
+/*卡券详情*/
+.card-detail{ position:relative;}
+.lpq_detail{ width:80%;position:absolute; top:19%;left:50%; margin-left:-40%;}
+.zkq_detail{ width:80%;position:absolute; top:19%;left:50%; margin-left:-40%;}
+.djq_detail{ width:80%;position:absolute; top:19%;left:50%; margin-left:-40%;}
+.add-type01{ margin-top:-2%; color:white;}
+.add-type01 p{font-size:54px;}
+.add-type02{  color:white; font-size:34px; margin-top:-1%}
+.add-type03{ margin-top:-6%; color:white; font-size:24px;}
+
+/*商家二维码*/
+.code img{ width:36%; margin:8% 0 2% 32%;}
+.renzheng-num{ font-size:48px; text-align:center; color:#4d4d4d;}
+
+/*使用说明*/
+.use_production{ width:64%; margin:10% auto;}
+.use_production h1{font-size:42px; color:#5c5c5c;padding-bottom:4%; margin-bottom:4%; border-bottom:2px white solid; font-weight:normal;}
+.use_production p{font-size:28px; color:#969696;}
+
+/*卡包无卡券状态*/
+.no_care_tips img{ width:30%; margin-left:35%; margin-top:40%;}
+
+@media (max-width:1080px){
+		.kabao-nav li{ font-size:38px;}
+		.kabao-nav .kaquan-surplus{ font-size:24px; margin-top:4.6%}
+		 
+	}
+
+@media (max-width:960px){
+		 .kabao-nav li{ font-size:34px;}
+		 .kabao-nav .kaquan-surplus{ font-size:22px; margin-top:4.8%}
+		 .coupon-name p{font-size:48px;}
+		 .store-name{ font-size:32px;}
+		 .deadline{font-size:24px;}
+		 
+		 .renzheng-num{ font-size:38px;}
+		 .use_production h1{font-size:32px;}
+		 .use_production p{font-size:22px;}
+		 
+	}
+
+@media (max-width:854px){
+		 .kabao-nav li{ font-size:30px;}
+		 .kabao-nav .kaquan-surplus{ font-size:20px; margin-top:4.8%}
+		 .coupon-name p{font-size:42px;}
+		 .store-name{ font-size:28px;}
+		 .deadline{font-size:22px;position:absolute; right:6%; bottom:2%; width:38%;}
+		 
+		 .renzheng-num{ font-size:34px;}
+		 .use_production h1{font-size:28px;}
+		 .use_production p{font-size:20px;}
+	}
+
+@media (max-width:768px){
+		.kabao-nav li{ font-size:28px;padding:1.4% 1.8% 2.6%; margin-top:1.2%;}
+		.kabao-nav .kaquan-surplus{ font-size:18px; margin-top:4.4%; margin-right:2.8%}
+	   	.coupon-name p{font-size:36px;}
+		 .store-name{ font-size:24px;}
+		 .deadline{font-size:20px;position:absolute; right:6%; bottom:2%; width:38%;}
+		 
+		 .add-type01 p{font-size:32px;}
+		 .add-type02{font-size:24px;}
+		 .add-type03{font-size:20px;}
+		 .renzheng-num{ font-size:30px;}
+		 .use_production h1{font-size:24px;}
+		 .use_production p{font-size:18px;}
+	
+
+}
+
+@media (max-width:750px){
+		.kabao-nav li{ font-size:26px;padding:1.8% 2.8% 3.6%; margin-top:1.2%;}
+		.kabao-nav .kaquan-surplus{ font-size:18px; margin-top:4.2%; margin-right:3%}
+
+}
+
+
+@media (max-width:680px){
+		.kabao-nav li{padding:1.8% 2% 3.2%;}
+		.kabao-nav .kaquan-surplus{ font-size:18px; margin-top:4.2%; margin-right:3%}
+
+}
+
+@media (max-width:640px){
+		.kabao-nav li{ font-size:22px;padding:1.8% 2.2% 3.4%;}
+		.kabao-nav .kaquan-surplus{ font-size:16px; margin-top:4%; margin-right:3%;}
+	   	.coupon-name p{font-size:32px;}
+		 .store-name{ font-size:20px;}
+		 .deadline{font-size:16px;position:absolute; right:8%; bottom:2%; width:40%;}
+		 
+		 .add-type01 p{font-size:28px;}
+		 .add-type02{font-size:20px;}
+		 .add-type03{font-size:16px;}
+		 .renzheng-num{ font-size:28px;}
+		 .use_production h1{font-size:22px;}
+		 .use_production p{font-size:16px;}
+	
+}
+
+@media (max-width:540px){
+		
+		.kabao-nav li{ font-size:20px;padding:1.4% 1.8% 2.8%;}
+		.kabao-nav .kaquan-surplus{ font-size:14px; margin-top:3.8%; margin-right:3%}
+		.coupon-name{position:absolute; left:50%; top:38%;}
+	   	.coupon-name p{font-size:26px;}
+		 .store-name{ font-size:16px;}
+		 .deadline{font-size:14px;position:absolute; right:2%; bottom:4%; width:48%;}
+		 
+		 .renzheng-num{ font-size:24px;}
+		 .use_production h1{font-size:20px;}
+		 .use_production p{font-size:14px;}
+	
+
+}
+
+@media (max-width:480px){
+		.kabao-nav li{ font-size:18px;padding:1.6% 2% 3.2%;}
+		.kabao-nav .kaquan-surplus{ font-size:12px; margin-top:4.6%; margin-right:3%}
+	}
+
+@media (max-width:440px){
+	    .kabao-nav li{ font-size:18px;padding:2.2% 1.6% 3.6%;}
+		.kabao-nav .kaquan-surplus{ font-size:12px; margin-top:4.8%; margin-right:3%}
+		.coupon-name{position:absolute; left:50%; top:38%;}
+	   	.coupon-name p{font-size:22px;}
+		 .store-name{ font-size:14px;}
+		 .deadline{font-size:14px;position:absolute; right:2%; bottom:4%; width:48%;}
+		 
+		 .renzheng-num{ font-size:20px;}
+		 .use_production h1{font-size:16px;border-bottom:1px white solid;}
+		 .use_production p{font-size:14px;}
+		 
+		
+	}
+	
+@media (max-width:400px){
+	 	.kabao-nav li{ font-size:16px;padding:2.2% 1.4% 3.6%;}
+		.kabao-nav .kaquan-surplus{margin-top:4.4%; font-size:12px;}
+		.coupon-name{position:absolute; left:50%; top:38%;}
+	   	.coupon-name p{font-size:20px;}
+		 .store-name{ font-size:12px;}
+		 .deadline{font-size:12px;position:absolute; right:4%; bottom:4%; width:48%;}
+		 
+		 .add-type03{font-size:14px;}
+		 .renzheng-num{ font-size:18px;}
+		 .use_production h1{font-size:14px;}
+		 .use_production p{font-size:12px;}	
+}
+@media (max-width:368px){
+		
+		.kabao-all{ margin-left:3%;}
+		.kabao-nav li{ font-size:14px;padding:1.8% 2% 3.2%;}
+		.kabao-nav .kaquan-surplus{margin-top:3.4%; font-size:12px;}
+	}
+
+
+@media (max-width:330px){
+		.kabao-nav li{ font-size:14px;padding:2.2% 1.6% 3.4%;}
+		.kabao-nav .kaquan-surplus{margin-top:3.8%;}
+		.coupon-name{position:absolute; left:50%; top:38%;}
+	   	.coupon-name p{font-size:18px;}
+		 .store-name{ font-size:12px;}
+		 .deadline{font-size:12px;position:absolute; right:4%; bottom:4%; width:50%;}
+		 
+		 .add-type03{font-size:12px;}
+		 .renzheng-num{ font-size:16px;}
+		 
+	}

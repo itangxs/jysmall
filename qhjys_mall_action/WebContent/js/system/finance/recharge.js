@@ -1,0 +1,1 @@
+$(function(){$("#form1").submit(function(){$.ajax({async:false,type:"POST",url:"/managermall/systemmall/finance/recharge.do",data:$(this).serialize(),success:function(a){if(a=="充值成功"){alert(a);window.location.href="/managermall/systemmall/finance/userList.do"}else{alert(a)}},error:function(a){alert("error");return false}});return false})});

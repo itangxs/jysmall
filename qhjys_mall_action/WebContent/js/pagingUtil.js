@@ -1,0 +1,1 @@
+function previousPage(c,b,a){document.getElementById(a).value=c;document.getElementById(b).submit()};

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.FqCommissionRoleVoMapper" >
+   
+   <select id="queryFqCommissionRole" resultType="cn.qhjys.mall.vo.system.FqCommissionRoleVo">
+   		SELECT 
+   			fcr.id  AS id,
+   			fcr.admin_id  AS adminId,
+    		au.username  AS createName,
+    		fcr.role_name  AS roleName,
+    		fcr.team_proportion  AS teamProportion,
+    		fcr.clerk_proportion  AS clerkProportion,
+    		fcr.create_time  AS createTime
+   			FROM 
+   				fq_commission_role fcr
+   			LEFT JOIN
+   				admin_user au
+   			ON
+   				fcr.admin_id=au.id
+   		 <where>
+			 <trim prefixOverrides="and" >
+				 <if test="roleName != null">
+				 	 AND fcr.role_name = #{roleName}
+				 </if>
+				 <if test="createName != null">
+				 	 AND au.username = #{createName}
+				 </if>
+				 <if test="beginTime != null">
+				 	 AND fcr.create_time &gt;= #{beginTime}
+				 </if>
+				 <if test="endTime != null">
+				 	 AND fcr.create_time &lt;= #{endTime}
+				 </if>
+			 </trim>
+		 </where>
+		 order by fcr.id
+   </select>
+</mapper>

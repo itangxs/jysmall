@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+.hot-line{width:1000px; margin:0 auto; height:300px;}
+.hot-line .no-margin{ margin:0;}
+.hot-line h1{ font-size:24px;color:#828282; font-weight:normal;text-align:center;background:url(../images/line-bg.png) no-repeat center; margin:62px 0 42px;}
+.nine-type{ position:relative;}
+.nine-type ul li{height:0px;float:left;text-align:center; padding-top:62px; font-size:16px; color:#828282;margin-bottom:50px;}
+.type01{ width:26%; background:url(../images/cloud.png) no-repeat top center;}
+.type02{width:48%; background:url(../images/1-1.png) no-repeat top center;}
+.type03{width:26%; background:url(../images/scheme.png) no-repeat top center;}
+.type04{width:26%; background:url(../images/pc-group.png) no-repeat top center;}
+.type05{width:48%; background:url(../images/12h.png) no-repeat top center;}
+.type06{width:26%; background:url(../images/speaker.png) no-repeat top center;}
+.type07{width:26%; background:url(../images/24h.png) no-repeat top center;}
+.type08{width:48%; background:url(../images/recommend.png) no-repeat top center;}
+.type09{width:26%; background:url(../images/design.png) no-repeat top center;}
+
+.vertical-text{ width:450px; position:absolute; left:50%; top:0px; margin-left:-226px;}
+.vertical-text .safety{ float:left;}
+.vertical-text .customer-service{ float:right;}
+
+.footer{ height:320px; background-color:#f7f7f7;}
+.footer-box{ width:1000px; margin:50px auto;padding-top:10px;}
+.footer-box ul{ width:428px;text-align:center; margin:0 auto; font-size:15px; color:#828282;}
+.fq-gzh{ float:left;}
+.fq-app{ float:right;}
+
+.footertxt{ width:428px; margin:40px auto;}
+.footertxt p{ font-size:15px; color:#828282; line-height:30px;}
+.footertxt p a{ color:#828282; padding-bottom:0px; border-bottom:1px #828282 dotted;}
+.footertxt p a:hover{ border:none; color:#e4484a;}
+.footertxt .address{ font-size:15px;}
+
+/* fbg */
+.fbg { }
+.fbg_resize { margin:0 auto; padding:24px 40px; width:890px; }
+.fbg  h2 {color:#e4484a;font-weight: normal;padding:10px 0px 10px 0;}
+.fbg img { padding:24px;  background-color:#fff;}
+.fbg .col { margin:0; float:left;}
+.fbg .c1 {text-align:center;font-size:14px;padding:0 50px 0 0; width:145px;}
+.fbg .c2 { line-height: 25px;text-align:center;font-size:14px;padding:0 32px; width:100px;}
+.fbg .c3 {font-size:14px; padding:0 0 0 30px; width:300px;}
+.fbg .c1 img {float:left;}
+.fbg ul li { width:100px;border-bottom:1px solid #efefef;}

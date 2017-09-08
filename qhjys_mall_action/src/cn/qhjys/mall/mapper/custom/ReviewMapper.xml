@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.ReviewMapper" >
+	<select id="searchReviewByProdId" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.ReviewVo">
+		SELECT <![CDATA[
+			COUNT(prod_id) AS personNum,
+			AVG(score) AS avgScore,
+			SUM(CASE WHEN score<2 THEN 1 ELSE 0 END ) AS badNum,
+			SUM(CASE WHEN score>1 AND score<4 THEN 1 ELSE 0 END) AS generalNum,
+			SUM(CASE WHEN score>3 THEN 1 ELSE 0 END ) AS praiseNum ]]>
+		FROM reviews_log
+			WHERE enabled=1 AND prod_id=#{prodId}
+	</select>
+
+	<select id="searchReviewByStoreId" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.ReviewVo">
+		SELECT <![CDATA[
+			COUNT(prod_id) AS personNum,
+			AVG(score) AS avgScore,
+			SUM(CASE WHEN score<2 THEN 1 ELSE 0 END ) AS badNum,
+			SUM(CASE WHEN score>1 AND score<4 THEN 1 ELSE 0 END) AS generalNum,
+			SUM(CASE WHEN score>3 THEN 1 ELSE 0 END ) AS praiseNum ]]>
+		FROM reviews_log
+			WHERE enabled=1 AND store_id=#{storeId}
+	</select>
+
+	<select id="selectProductReviewByLevel" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.EvaluateVo">
+		SELECT
+			r.reply_id AS userId,
+			u.nickname AS nickname,
+			u.avatar AS userAvatar,
+			r.score AS score,
+			r.reviews AS reviews,
+			r.images AS reviewImg,
+			r.create_time AS revDate,
+			r.anonymous AS anonymous,
+			r.ip AS ip,
+			seller_reply_time AS replyTime,
+			seller_reply_content AS replyContent
+		FROM reviews_log r,user_info u
+		<where>
+			r.reply_id = u.id AND r.enabled=1 AND r.prod_id = #{productId}
+			<if test="reviewImg !=null and reviewImg!=''">
+				AND r.images != ''
+			</if>
+			<if test="startScore !=null and endScore !=null">
+				AND (r.score BETWEEN #{startScore} AND #{endScore})
+			</if>
+		</where>
+		ORDER BY r.create_time DESC
+	</select>
+
+	<select id="selectStoreReviewByLevel" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.EvaluateVo">
+		SELECT r.reply_id           AS userId,
+		       u.nickname           AS nickname,
+		       u.avatar             AS userAvatar,
+		       r.score              AS score,
+		       r.reviews            AS reviews,
+		       r.images             AS reviewImg,
+		       r.create_time        AS revDate,
+		       r.anonymous          AS anonymous,
+		       r.ip                 AS ip,
+		       seller_reply_time    AS replyTime,
+		       seller_reply_content AS replyContent
+		FROM   reviews_log r
+		       JOIN user_info u
+		         ON r.reply_id = u.id
+		WHERE  r.enabled = 1
+			<if test="reviewImg !=null and reviewImg!=''">
+				AND r.images != '' AND r.images IS NOT NULL
+			</if>
+			<if test="startScore !=null and endScore !=null">
+				AND (r.score BETWEEN #{startScore} AND #{endScore})
+			</if>
+		       AND r.store_id=#{storeId}
+		ORDER  BY r.create_time DESC
+	</select>
+
+	<select id="queryEvaluateListByName" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.EvaluateVo">
+		SELECT r.id AS id,left(u.username,3) AS userAccount,p.id AS prodId,
+		p.`name` AS prodName,r.score AS score,r.reviews AS reviews,
+		DATE_FORMAT(r.create_time,'%Y-%m-%d %H:%i:%s') AS revDate,
+		r.seller_reply_content AS sellerReplyContent, r.seller_reply_time AS sellerReplyTime 
+		FROM reviews_log r,product_info p,user_info u,store_info st,seller_info s 
+		<where>
+			u.id = r.reply_id
+			AND p.id = r.prod_id AND p.store_id = st.id 
+			AND st.seller_id = s.id AND p.store_id = r.store_id
+			<if test="productName != null and productName != ''">
+				AND p.`name` like CONCAT('%',#{productName},'%') 
+			</if>
+			<if test="sellerId != null">
+				AND s.id = #{sellerId}
+			</if>
+			<if test="reviewId != null">
+				AND r.id = #{reviewId}
+			</if>
+		</where> 
+	</select>
+
+	<select id="findEvaluateBySaUoSId" parameterType="java.util.Map" resultType="cn.qhjys.mall.vo.EvaluateVo">
+		SELECT r.id as id
+		FROM 
+		reviews_log r
+		<where>
+	  		 r.prod_id = #{proId} AND r.reply_id = #{userId} AND r.detail_id = #{detailId}
+		</where> 
+	</select>
+	<select id="countReviewsLogByUserAndTime" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT count(1)
+		FROM 
+		reviews_log r LEFT JOIN  store_info s on s.id = r.store_id 
+		WHERE 
+	  		  r.reply_id = #{userId} AND s.seller_id=#{sellerId} AND r.create_time between #{date} AND NOW()
+	</select>
+</mapper>

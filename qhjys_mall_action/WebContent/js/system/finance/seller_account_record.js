@@ -1,0 +1,1 @@
+function Excel(){var b=$("#from").serialize();var a="/managermall/systemmall/finance/sellerAccountRecordListExcel.do?"+b;window.open(a)};

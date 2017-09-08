@@ -1,0 +1,44 @@
+
+body{background: url("../images/push-bankground.png") no-repeat;background-size:100% 92%;}
+.push-feiquan{width:100%;height:auto;}
+.push-pic{height:440px;background: url(../images/banner-pic.png) center center no-repeat;}
+.push-details{width: 1000px;margin: 55px auto 20px;}
+.push-effect{}
+.push-effect h3,.push-scene h3,.push-step h3,.push-rule h3{text-align: center;color:#666666;margin-bottom:30px;}
+.push-scene{height:750px;padding: 0px 17px; margin: 70px 0 0;}
+.push-scene ul{clear:both;padding:10px;}
+.push-scene ul>li{float: left;margin:10px;}
+.push-scene ul>li .sence-button{height:30px;background-color: #09406E;text-align: center;margin:11px 48px;color:#FDFF4C;line-height:30px;border-radius:15px;}
+
+.push-step{position: relative;margin-top:40px;}
+.push-flows{height:2830px;clear: both;margin:30px 0 0;}
+.push-flow{float:right;margin-bottom: 0px;}
+.push-flow h3{color:#45AEFF;text-align: left;margin:60px 30px 3px;}
+.push-flow p{margin-left:30px;color:#35B5EC;margin-top: 10px;}
+.push-flow span{display:inline-block;margin:7px 0 0 30px;}
+.flow-last{padding-right:32px;}
+.flow-last h3{margin: 55px 0px 10px;}
+
+.main-line img{position:absolute;top:45px;left:258px;}
+.main-line .step1{position:absolute;top:30px;left:0px;}
+.main-line .step2{position:absolute;top:500px;left:0px;}
+.main-line .step3{position:absolute;top:975px;left:0px;}
+.main-line .step4{position:absolute;top:2290px;left:0px;}
+
+
+.push-rule{padding: 0 80px 56px;  position: relative; border-bottom: 1px solid #ccc;}
+.push-rule p{height:40px;}
+.push-rule p .number1{background: url(../images/btn1.png) no-repeat;width:30px;height:30px;display: inline-block;}
+.push-rule p .number2{background: url(../images/btn2.png) no-repeat;width:30px;height:30px;display: inline-block;}
+.push-rule p .number3{background: url(../images/btn3.png) no-repeat;width:30px;height:30px;display: inline-block;}
+.push-rule p .number4{background: url(../images/btn4.png) no-repeat;width:30px;height:30px;display: inline-block;}
+.push-rule p span{display: block;margin: -35px 40px;line-height: 40px;}
+.push-rule span{margin-top:5px; line-height:20px;}
+
+.push-contact{font-size:22px;color:#35B5EC;text-align: center;margin:30px 0 15px;}
+.push-contact span{font-size:26px;margin:0 8px;font-weight:800;}
+.content-a,.content-b,.content-c{margin-bottom: 11px;}
+.rule-pic{position: absolute;top:15px;right:100px;}
+.rule-pic img{width:180px;}
+.push-feiquan{background: url("../images/bottom-bc.png")no-repeat;background-size:100% 470px;background-position:bottom;}
+.push-content{padding: 0 0 10px;}

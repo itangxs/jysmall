@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+	http://www.springframework.org/schema/tx   
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd   
+	http://www.springframework.org/schema/context   
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd   
+	http://www.springframework.org/schema/util    
+	http://www.springframework.org/schema/util/spring-util-3.0.xsd   
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/cache    
+	http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+	<!-- 启用Spring注解 -->
+	<context:annotation-config />
+
+	<!-- 设置使用注解的类,扫描包 -->
+	<context:component-scan base-package="cn.qhjys.mall.service.*" />
+
+	<!-- 加载数据源配置文件 -->
+	<context:property-placeholder location="classpath:config/jdbc.properties" />
+
+	<bean id="configBean" class="cn.qhjys.mall.util.ConstantsConfigurer">
+		<property name="location" value="classpath:config/constant.properties" />
+	</bean>
+
+	<!-- 数据源配置,使用应用内的JDBC数据库连接池 
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" /> 
+	</bean>
+	-->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> 
+              <property name="driverClassName"> 
+                     <value>${jdbc.driver}</value> 
+              </property> 
+              <property name="url"> 
+                     <value>${jdbc.url}</value> 
+              </property> 
+              <property name="username"> 
+                     <value>${jdbc.username}</value> 
+              </property> 
+              <property name="password"> 
+                     <value>${jdbc.password}</value> 
+              </property> 
+             <!--maxActive: 最大连接数量-->    
+		        <property name="maxActive" value="66"/>  
+		        <!--minIdle: 最小空闲连接-->    
+		        <property name="minIdle" value="5"/>  
+		        <!--maxIdle: 最大空闲连接-->    
+		        <property name="maxIdle" value="10"/>  
+		        <!--initialSize: 初始化连接-->    
+		        <property name="initialSize" value="15"/>  
+		        <!-- 连接被泄露时是否打印 -->  
+		        <property name="logAbandoned" value="true"/>  
+		        <!--removeAbandoned: 是否自动回收超时连接-->    
+		        <property name="removeAbandoned"  value="true"/>  
+		        <!--removeAbandonedTimeout: 超时时间(以秒数为单位)-->    
+		        <property name="removeAbandonedTimeout" value="15"/>  
+		        <!--maxWait: 超时等待时间以毫秒为单位 1000等于1秒-->  
+		        <property name="maxWait" value="1000"/>  
+		        <property name="validationQuery" value="SELECT 1"/>  
+       </bean> 
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 配置Advice（配置事务的传播特性） -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="remove*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="order*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 配置哪些类的哪些方法使用事务（配置事务边界） -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="allManagerMethod" expression="execution(* cn.qhjys.mall.service..impl.*.*(..))" />
+		<aop:advisor pointcut-ref="allManagerMethod" advice-ref="txAdvice" />
+	</aop:config>
+
+	<!--启用Spring事务注解 -->
+	<tx:annotation-driven />
+
+	<!-- 集成myBaits框架,配置sqlSessionFatory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="cn.qhjys.mall.entity" />
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=mysql
+							reasonable=true
+							pageSizeZero=true
+							offsetAsPageNum=true
+							rowBoundsWithCount=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+	<!-- 配置sqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- Mybatis自动扫描包下的mapper -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.qhjys.mall.mapper" />
+	</bean>
+
+     <!-- spring线程池配置 -->           
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 核心线程数 -->
+        <property name="corePoolSize" value="5" />
+        <!-- 最大线程数，默认为Integer.MAX_VALUE -->
+        <property name="maxPoolSize" value="50" />
+        <!-- 线程池维护线程所允许的空闲时间，默认为60s -->
+        <property name="keepAliveSeconds" value="200" />
+        <!-- 缓存队列 -->
+        <property name="queueCapacity" value="1000" />
+        <!-- 对拒绝task的处理策略 -->
+        <property name="rejectedExecutionHandler">
+          		 <!-- AbortPolicy:直接抛出java.util.concurrent.RejectedExecutionException异常 -->
+	            <!-- CallerRunsPolicy:主线程直接执行该任务，执行完之后尝试添加下一个任务到线程池中，可以有效降低向线程池内添加任务的速度 -->
+	            <!-- DiscardOldestPolicy:抛弃旧的任务、暂不支持；会导致被丢弃的任务无法再次被执行 -->
+	            <!-- DiscardPolicy:抛弃当前任务、暂不支持；会导致被丢弃的任务无法再次被执行 -->
+	            <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+         </property>
+     </bean>
+     
+	<!-- Quartz-2.x的配置 -->
+	<!-- 启动触发器的配置开始 -->
+	<bean name="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="autoRefundTrigger" />
+				<ref bean="overtimeOrderTrigger" />
+				<ref bean="userLeveTrigger" />
+				<ref bean="autoShelfProductTrigger" />
+				<ref bean="monthPointsTrigger" />
+				<ref bean="thirdDayUpdateTrigger" />
+				<ref bean="verifTaskBycTrigger" />
+				<ref bean="sysUserTaskTimingTrigger" />
+				<ref bean="wenjuanTaskTimingTrigger" /> 
+				<ref bean="deleteNoPayOrderTrigger" />
+				<ref bean="sendWxMessageTrigger" />
+				<ref bean="verifDaliyCreditTrigger" />
+				<ref bean="statementToCashCreditTrigger" />
+				<ref bean="sendRedpackTrigger" />
+				<ref bean="updateAllSellerDeliveryPushNumTrigger" />
+				<ref bean="statementToCashCreditTrigger" />
+				<ref bean="updateTimeOutRevateTrigger" />
+				<ref bean="updateMicroOrderTrigger" />
+				<ref bean="updateSellerRepaymentTrigger" />
+				<ref bean="updateWPosOrderTrigger" />
+				<ref bean="updateSellerStatementByQuartzTrigger" />
+				<ref bean="updateCardCouponDataQuartzTrigger" />
+				<ref bean="pushCardQuartzTrigger" />
+				<ref bean="sendPreviewWxMessageTrigger" />
+				<ref bean="updateWxSendMessageTrigger" />
+				<ref bean="updateWxContentTrigger" />
+				<ref bean="saveMsWithdrawTrigger" />
+				<ref bean="authenValidTaskTrigger" />
+				<ref bean="msStatementTrigger" />-->
+				<ref bean="msStatementVeriTrigger" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 工作的bean -->
+	<bean id="mallJob" class="cn.qhjys.mall.quartz.QuartzService" />
+
+	<!-- 民生相关任务 -->
+	<bean id="msBankTaskJob" class="cn.qhjys.mall.quartz.MsBankTask" />
+	
+	<!-- 民生的商户结算-->
+	<bean id="msStatementTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="msStatement" />
+		<property name="cronExpression">
+			<value>0 05 23 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 民生的商户结算 -->
+	<bean id="msStatement" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="msBankTaskJob" />
+		<property name="targetMethod" value="msStatement" />
+	</bean>
+	
+	<!-- 民生结算验证-->
+	<bean id="msStatementVeriTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="msStatementVeri" />
+		<property name="cronExpression">
+			<value>0 01 23 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 民生结算验证 -->
+	<bean id="msStatementVeri" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="msBankTaskJob" />
+		<property name="targetMethod" value="msStatementVeri" />
+	</bean>
+	
+	<!-- 民生的商户交易明细生成提现记录-->
+	<bean id="saveMsWithdrawTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="saveMsWithdraw" />
+		<property name="cronExpression">
+			<value>0 30 9 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 民生的商户交易明细生成提现记录 -->
+	<bean id="saveMsWithdraw" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="msBankTaskJob" />
+		<property name="targetMethod" value="addMsWithdraw" />
+	</bean>
+	
+	<!-- 进件信息查询结果 Task-->
+	<bean id="authenValidTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="authenValidTask" />
+		<property name="cronExpression">
+			<value>0 */1 * * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 进件信息查询结果 Task -->
+	<bean id="authenValidTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="msBankTaskJob" />
+		<property name="targetMethod" value="authenValidTask" />
+	</bean>
+	
+	<!-- 发送预览微信消息-->
+	<bean id="sendPreviewWxMessageTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="sendPreviewWxMessage" />
+		<property name="cronExpression">
+			<value>0 0/2 * * * ? </value>
+		</property>
+	</bean>
+
+	<!-- 发送预览微信消息  -->
+	<bean id="sendPreviewWxMessage" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="sendPreviewWxMessage" />
+	</bean>
+	
+	<!-- 发送微信消息-->
+	<bean id="updateWxSendMessageTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateWxSendMessage" />
+		<property name="cronExpression">
+			<value>0 0/5 * * * ? </value>
+		</property>
+	</bean>
+
+	<!-- 发送微信消息  -->
+	<bean id="updateWxSendMessage" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateWxSendMessage" />
+	</bean>
+	
+	<!-- 上传微信-->
+	<bean id="updateWxContentTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateWxContent" />
+		<property name="cronExpression">
+			<value>0 0/5 * * * ? </value>
+		</property>
+	</bean>
+
+	<!-- 上传微信  -->
+	<bean id="updateWxContent" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateWxContent" />
+	</bean>
+	
+	
+	<!-- 公众号投放-->
+	<bean id="pushCardQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="pushCardQuartz" />
+		<property name="cronExpression">
+			<value>0 0/3 * * * ? </value>
+		</property>
+	</bean>
+
+	<!-- 公众号投放  -->
+	<bean id="pushCardQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="pushCardQuartz" />
+	</bean>
+	
+	<!-- 每日卡券数据统计  每日凌晨 00:20分执行-->
+	<bean id="updateCardCouponDataQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateCardCouponDataQuartz" />
+		<property name="cronExpression">
+			<value>0 20 0 * * ? </value>
+		</property>
+	</bean>
+
+	<!-- 每日卡券数据统计  -->
+	<bean id="updateCardCouponDataQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateCardCouponDataQuartz" />
+	</bean>
+	
+	<!-- 结算验证 -->
+	<bean id="updateSellerStatementByQuartzTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateSellerStatementByQuartz" />
+		<property name="cronExpression">
+			<value>0 0/9 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 * * ? </value>
+		</property>
+	</bean>
+
+	<!-- 结算验证 -->
+	<bean id="updateSellerStatementByQuartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateSellerStatementByQuartz" />
+	</bean>
+	<!-- 结算验证 -->
+	<bean id="updateSellerStatementHasPeriodTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateSellerStatementHasPeriod" />
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 结算验证 -->
+	<bean id="updateSellerStatementHasPeriod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateSellerStatementHasPeriod" />
+	</bean>
+	
+	
+	<!-- 定时还款 -->
+	<bean id="updateSellerRepaymentTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateSellerRepayment" />
+		<property name="cronExpression">
+			<value>0 0/1 * * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 定时还款 -->
+	<bean id="updateSellerRepayment" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateSellerRepayment" />
+	</bean>
+	<!-- 扫码补单任务 -->
+	<bean id="updateMicroOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateSellerRepayment" />
+		<property name="cronExpression">
+			<value>0 0/1 * * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 扫码补单任务 -->
+	<bean id="updateMicroOrder" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateMicroOrder" />
+	</bean>
+
+	<!-- 旺pos机 定时补单任务 每5分钟执行一次 -->
+	<bean id="updateWPosOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateWPosOrder" />
+		<property name="cronExpression">
+			<value>0 0/5 * * * ?</value>
+		</property>
+	</bean>
+
+
+	<!-- 旺pos机 定时补单任务 每5分钟执行一次 -->
+	<bean id="updateWPosOrder" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateWPosOrder" />
+	</bean>
+	
+	<!-- 折扣定时任务 -->
+	<bean id="updateTimeOutRevateTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateTimeOutRevate" />
+		<property name="cronExpression">
+			<value>0 50 1 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 折扣定时任务 -->
+	<bean id="updateTimeOutRevate" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateTimeOutRevate" />
+	</bean>
+	
+	<!-- 商户公众号直接投放定时任务  每个月的最后一天的23点59分-->
+	<bean id="updateAllSellerDeliveryPushNumTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="updateAllSellerDeliveryPushNum" />
+		<property name="cronExpression">
+		<value>0 59 23 L * ?</value>
+		</property>
+	</bean>
+	<bean id="updateAllSellerDeliveryPushNum" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="updateAllSellerDeliveryPushNum" />
+	</bean>
+	
+	
+	<!-- 发红包定时任务 -->
+	<bean id="sendRedpackTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="sendRedpack" />
+		<property name="cronExpression">
+			<value>0 0/2 * * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 发红包定时任务 -->
+	<bean id="sendRedpack" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="sendRedpack" />
+	</bean>
+	
+	<bean id="statementToCashCreditTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="statementToCashCredit" />
+		<property name="cronExpression">
+			<value>00 22 10 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 借贷信息定时任务 -->
+	<bean id="statementToCashCredit" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="statementToCashCredit" />
+	</bean>
+	
+	
+	<bean id="verifDaliyCreditTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="verifDaliyCredit" />
+		<property name="cronExpression">
+			<value>0 01 22 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 借贷信息定时任务 -->
+	<bean id="verifStoreCredit" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="verifStoreCredit" />
+	</bean>
+	<!-- 店铺每日额度统计 -->
+	<bean id="verifStoreCreditTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="verifStoreCredit" />
+		<property name="cronExpression">
+			<value>0 15 22 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 店铺每日额度统计 -->
+	<bean id="verifDaliyCredit" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="verifDaliyCredit" />
+	</bean>
+	<!-- 虚拟物品自动退款触发配置 -->
+	<bean id="autoRefundTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoRefund" />
+		<property name="cronExpression">
+			<value>0 30 2 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 虚拟物品自动退款 -->
+	<bean id="autoRefund" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="autoRefund" />
+	</bean>
+
+	<!-- 未付款订单自动删除触发配置 -->
+	<bean id="overtimeOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="overtimeOrder" />
+		<property name="cronExpression">
+			<value>0 0 3 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 未付款订单自动删除 -->
+	<bean id="overtimeOrder" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="overtimeOrder" />
+	</bean>
+
+	<!-- 商品自动下架触发配置 -->
+	<bean id="autoShelfProductTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="autoShelfProduct" />
+		<property name="cronExpression">
+			<value>0 0 2 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 商品自动下架 -->
+	<bean id="autoShelfProduct" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="autoShelfProduct" />
+	</bean>
+
+	<!-- 自动更新会员等级触发配置 -->
+	<bean id="userLeveTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="userLeve" />
+		<property name="cronExpression">
+			<value>0 30 1 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 自动更新会员等级 -->
+	<bean id="userLeve" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="userLeve" />
+	</bean>
+	
+	<!-- 自动创建会员积分过期记录触发配置 -->
+	<bean id="monthPointsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="monthPoints" />
+		<property name="cronExpression">
+			<value>0 2 0 1 * ?</value>
+		</property>
+	</bean>
+
+	<!-- 自动创建会员积分过期记录-->
+	<bean id="monthPoints" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="monthPoints" />
+	</bean>
+	<!-- 每日更新绑定账号次数触发配置 -->
+	<bean id="thirdDayUpdateTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="thirdDayUpdate" />
+		<property name="cronExpression">
+			<value>0 1 0 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 每日更新绑定账号次数-->
+	<bean id="thirdDayUpdate" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="thirdDayUpdate" />
+	</bean>
+	
+	<!-- 每日任务审核 -->
+	<bean id="verifTaskBycTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="verifTaskByc" />
+		<property name="cronExpression">
+			<value>0 20 1 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 日任务审核 -->
+	<bean id="verifTaskByc" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="verifTaskByc" />
+	</bean>
+	
+	
+	<!-- 自动关注任务审核配置 -->
+	<bean id="sysUserTaskTimingTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="sysUserTaskTiming" />
+		<property name="cronExpression">
+			<value> 0 20 23 * * ? </value>
+		</property>
+	</bean>  
+
+	<!-- 自动关注任务审核 -->
+	<bean id="sysUserTaskTiming" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="sysUserTaskTiming" />
+	</bean>
+	
+	<!-- 每日商家任务审核 -->
+	<bean id="wenjuanTaskTimingTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="wenjuanTaskTiming" />
+		<property name="cronExpression">
+			<value>0 20 1 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 日商家任务审核 -->
+	<bean id="wenjuanTaskTiming" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="wenjuanTaskTiming" />
+	</bean> 
+	<!-- 未支付订单自动删除 -->
+	<bean id="deleteNoPayOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="deleteNoPayOrder" />
+		<property name="cronExpression">
+			<value>0 11 1 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 未支付订单自动删除 -->
+	<bean id="deleteNoPayOrder" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="deleteNoPayOrder" />
+	</bean>
+	<!-- 发送图文消息 -->
+	<bean id="sendWxMessageTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="sendWxMessage" />
+		<property name="cronExpression">
+			<value>0 0/10 * * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 未支付订单自动删除 -->
+	<bean id="sendWxMessage" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mallJob" />
+		<property name="targetMethod" value="sendWxMessage" />
+	</bean>
+</beans>

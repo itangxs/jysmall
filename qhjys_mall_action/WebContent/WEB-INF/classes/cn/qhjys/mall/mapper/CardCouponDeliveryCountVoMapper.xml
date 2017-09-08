@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.CardCouponDeliveryCountVoMapper" >
+
+	<select id="queryCardDeliveryCount" resultType="cn.qhjys.mall.vo.seller.SellerCardCouponTemplateVo">
+		SELECT 
+			 ct.store_id             AS storeId,
+			 ct.store_name           AS storeName,
+			 ct.coupon_cfg           AS couponCfg,
+			 ct.name,
+			 cd.deliver_type         AS deliverType,
+			SUM(cd.card_receive_true)    AS cardReceiveTrue,
+			 SUM(cd.card_receive_display) AS cardReceiveDisplay,
+			
+			  cd.count_date AS countDate,
+			  SUM(cd.write_off) AS writeOff
+			FROM
+			card_delivery_count cd
+			LEFT JOIN  
+			 card_coupon_template ct 
+			ON 
+			 cd.card_template_id=ct.id
+			
+		 <where>
+			 <trim prefixOverrides="and" >
+				 <if test="sellerId != null">
+				 	 AND ct.seller_id = #{sellerId}
+				 </if>
+				 <if test="couponCfg != null">
+				 	 AND ct.coupon_cfg = #{couponCfg}
+				 </if>
+				 <if test="startTime != null">
+				 	 AND cd.count_date &gt;= str_to_date(#{startTime},'%Y-%m-%d')
+				 </if>
+				 <if test="endTime != null">
+				 	 AND cd.count_date &lt;= str_to_date(#{endTime},'%Y-%m-%d')
+				 </if>
+			 </trim>
+		 </where>
+		 GROUP BY cd.card_template_id
+		 ORDER BY cd.card_template_id desc
+	</select>
+	
+	<select id="queryDeliveryData" resultType="cn.qhjys.mall.vo.seller.SellerCardCouponTemplateVo">
+		select
+		 cd.deliver_type as getWay,  
+		 cd.card_push_display as cardPushDisplay,
+		 SUM(cd.card_receive_display) as cardReceiveDisplay,
+		 cd.card_share_display as cardShareDisplay,
+		 SUM(cd.card_share_receive_display) as cardShareReceiveDisplay,
+		 cd.count_date as countDate
+		 FROM
+		 card_delivery_count cd 
+		 LEFT JOIN 
+		 store_info si
+		 ON 
+		 cd.seller_id=si.seller_id
+		 WHERE 1=1
+				 <if test="sellerId != null">
+				 	 AND cd.seller_id = #{sellerId}
+				 </if>
+				 <if test="getWay != null">
+				 	 AND cd.deliver_type = #{getWay}
+				 </if>
+				 <if test="startTime != null and startTime != ''">
+			 AND DATE_FORMAT(cd.count_date,'%Y-%m-%d') &gt;= #{startTime}
+			</if>
+ 			<if test="endTime != null and endTime != ''">
+			 AND DATE_FORMAT(cd.count_date,'%Y-%m-%d') &lt;=#{endTime}
+		</if>
+		
+		  GROUP BY cd.deliver_type,cd.seller_id
+		 ORDER BY cd.count_date desc
+	</select>
+	<select id="queryValidateData" resultType="cn.qhjys.mall.vo.seller.SellerCardCouponTemplateVo">
+		SELECT 
+			cc.template_coupon_cfg   AS couponCfg,
+			cc.store_name    		 AS storeName,
+			cc.store_id      		 AS storeId,
+			cc.template_coupon_name  AS name,
+			cc.code          		 AS code,
+			cc.validate_date 		 AS validateDate,
+		  	ui.nick_name      		 AS nickName,
+		  	cc.open_id               AS openId
+		   FROM 
+			card_coupon cc
+		   LEFT JOIN 
+		    fq_user_info ui 
+		   ON 
+		    cc.user_id=ui.id
+		<where>
+			<trim prefixOverrides="and" >
+				<if test="sellerId != null">
+					 AND cc.seller_id = #{sellerId}
+				</if>
+				<if test="couponCfg != null">
+					 AND cc.template_coupon_cfg = #{couponCfg}
+				</if>
+				<if test="startTime != null">
+					 AND cc.validate_date &gt;= str_to_date(#{startTime},'%Y-%m-%d')
+				</if>
+				<if test="endTime != null">
+					 AND cc.validate_date &lt;= str_to_date(#{endTime},'%Y-%m-%d')
+				</if>
+				AND cc.status_cfg=1
+			</trim>
+		</where>
+		 ORDER BY cc.id desc
+	</select>
+	
+	<select id="queryCountBytype" resultType="cn.qhjys.mall.vo.seller.SellerCardCouponTemplateVo">
+		SELECT 
+			 COALESCE(SUM(card_push_display),0) AS cardPushDisplay,
+			 COALESCE(SUM(card_receive_display),0) AS cardReceiveDisplay,
+			 COALESCE(SUM(write_off),0) AS writeOff
+			FROM
+			card_delivery_count 
+			WHERE seller_id = #{sellerId}
+			AND deliver_type = #{deliverType}
+			<if test="countDate != null">
+			 AND count_date = str_to_date(#{countDate},'%Y-%m-%d')
+			</if>
+	</select>
+	
+	<select id="queryCountByCoupon" resultType="java.lang.Integer">
+		SELECT 
+			 COUNT(1)
+			FROM
+			card_coupon 
+			WHERE seller_id = #{sellerId}
+			<if test=" getWay != null">
+			 AND  get_way = #{getWay}
+			</if>
+			<if test="statusCfg != null">
+			 AND  status_cfg = #{statusCfg}
+			</if>
+			<if test="receiveDate != null">
+			 AND receive_date LIKE CONCAT(#{receiveDate},'%')
+			</if>
+			<if test="validateDate != null">
+			 AND validate_date LIKE CONCAT(#{validateDate},'%')
+			</if>
+	</select>
+</mapper>

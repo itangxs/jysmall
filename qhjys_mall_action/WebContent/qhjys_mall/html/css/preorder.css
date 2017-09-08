@@ -1,0 +1,12 @@
+/**/
+.preorder{ width:1190px; margin:0 auto;font-size:15px;}
+.preorder .title{ border-bottom:2px solid #ddd; margin:20px 0; font-size:18px; line-height:35px; color:#333;}
+.confirm-account{ width:1088px; border:1px solid #ddd; margin:0 auto; padding:50px; margin-top:30px;}
+.confirm-account label{ width:100px; text-align:right; display:inline-block; color:#333; margin-right:15px; font-size:15px;}
+.form-field{ position:relative; padding:8px 0 8px 250px;}
+.form-field .f-text{border:1px solid #ccc; height:24px; line-height:24px; padding:5px; border-radius:3px;}
+.form-field .account{ width:200px;}
+.form-field .verify-code{ width:100px;}
+.form-field select{ padding:5px; border:1px solid #ccc; width:212px;}
+.form-field textarea{padding:5px; border:1px solid #ccc; vertical-align:middle; width:500px;}
+.signup-captcha-img{ height:36px; vertical-align:middle; margin-left:5px;cursor:pointer;}

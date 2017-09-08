@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.SystemOperateVoMapper" >
+
+  <select id="querySalesofGoodsList" resultType="cn.qhjys.mall.vo.system.SalesofGoodsVo" parameterType="java.util.Map">
+		select 
+		 p.`name` as productName,  
+		s.`name` as storeName,p.sales_num as statisticsCount,
+		(SELECT SUM(total_price) FROM order_detail WHERE (`status` =3 OR `status` =4) AND seller_id =s.seller_id)  as salesVolume 
+		
+		from product_info p,store_info s, order_detail o
+		 <where>
+		 	 (o.`status` =3 OR o.`status` =4) 
+			AND o.seller_id = s.seller_id AND p.store_id = s.id
+			<if test="proName != null">
+					And p.`name` = #{proName}
+			</if>
+			<if test="storName != null">
+					And s.`name` = #{storName}
+			</if>
+		</where> 
+  			group by s.id
+  			ORDER BY o.create_time desc
+  </select>
+  
+  
+  <select id="querySalesDetailList" resultType="cn.qhjys.mall.vo.system.SalesDetailVo" parameterType="java.util.Map">
+  
+  	select 
+		o.detail_no as orderNo,
+		s.`name` as storeName,
+		o.seller_id as sellerId,
+		p.`name` as productName,
+		o.total_price as tradingMoeny,
+		o.create_time as tradingDate
+		from order_detail o,store_info s,product_info p
+		where (o.`status` =3 OR o.`status` =4) 
+		<if test="orderNo != null">
+			 And	o.detail_no = #{orderNo} 
+		</if>
+  		
+  		<if test="productName != null">
+  			 And	p.`name` = #{productName} 
+  		</if>
+  		
+  		<if test="storeName != null">
+  			 And	s.`name` = #{storeName} 
+  		</if>
+  		
+  		<if test="startDate != null">
+  			 And	o.create_time  &gt;  #{startDate} 
+  		</if>
+  
+  		<if test="endDate != null">
+  			 And  o.create_time &lt;  #{endDate} 
+  		</if>
+  			AND o.seller_id = s.seller_id AND p.store_id = s.id
+  			group by o.id
+  			ORDER BY o.create_time desc
+  			
+  </select>
+  
+  <select id="queryShopAreaList" resultType="cn.qhjys.mall.vo.system.ShopAreaVo" parameterType="java.util.Map">
+			  		SELECT
+					c.`name` AS cityName,
+					a.`name` AS area,
+					Count(s.id) AS sellerCount,
+					 SUM(de.total_price) AS tradingMoney
+					from store_info s, area_info a, city_info c,order_detail de,seller_info se
+					WHERE s.area = a.id and a.city_id=c.id AND se.id = s.seller_id AND se.id = de.seller_id AND (de.`status` =3 OR de.`status` =4) 
+					<if test="city != null">
+						AND c.id = #{city}
+					</if>
+					<if test="area != null">
+						AND a.id = #{area}
+					</if>
+					<if test="startDate != null">
+					    AND  de.create_time &gt; #{startDate}
+							
+					</if>
+					<if test="endDate != null">
+						 AND  de.create_time  &lt;   #{endDate}
+					</if>
+					GROUP BY s.area
+
+  </select>
+  
+  <select id="queryShopSalesList" resultType="cn.qhjys.mall.vo.system.ShopSalesVo" parameterType="java.util.Map">
+  					SELECT
+					s.id as sellerId,
+					st.`name` as storeName,
+					SUM(o.total_price) as salesVolume
+					
+					
+					from seller_info s,store_info st,order_detail o
+					
+					<where>
+						 o.seller_id = st.seller_id AND st.seller_id = s.id and (o.`status`=3 OR o.`status` = 4)
+						 <if test="sellerId != null">
+						 		AND	s.id = #{sellerId}
+						 </if>
+						 
+						  <if test="storeName != null">
+						 		AND	st.`name` = #{storeName} 
+						 </if>
+					
+					</where>
+				
+					
+					GROUP BY s.id
+  					
+  </select>
+  
+  <select id="queryShopDaySalesList" resultType="cn.qhjys.mall.vo.system.ShopSalesVo" parameterType="java.util.Map">
+  					SELECT
+					s.id as sellerId,
+					st.`name` as storeName,
+					o.create_time as date,
+					SUM(o.total_price) as salesVolume
+					
+					
+					from seller_info s,store_info st,order_detail o
+					
+					<where>
+						 o.seller_id = st.seller_id AND st.seller_id = s.id and (o.`status`=3 OR o.`status` = 4) 
+						 <if test="sellerId != null">
+						 		AND	s.id = #{sellerId}
+						 </if>
+						 
+						  <if test="storeName != null">
+						 		AND	st.`name` = #{storeName} 
+						 </if>
+						 
+						 <if test="start != null">
+						  		AND	o.create_time &gt; #{start} AND o.create_time &lt; #{end}
+						 </if>
+						
+					</where>
+				
+					
+					GROUP BY  o.seller_id
+  					
+  </select>
+  <!-- month(create_time) = month(parm) -->
+  <select id="queryShopMonthSalesList" resultType="cn.qhjys.mall.vo.system.ShopSalesVo" parameterType="java.util.Map">
+  					SELECT
+					s.id as sellerId,
+					st.`name` as storeName,
+					o.create_time as date,
+					SUM(o.total_price) as salesVolume
+					
+					
+					from seller_info s,store_info st,order_detail o
+					
+					<where>
+						 o.seller_id = st.seller_id AND st.seller_id = s.id and (o.`status`=3 OR o.`status` = 4) 
+						 <if test="sellerId != null">
+						 		AND	s.id = #{sellerId}
+						 </if>
+						 
+						  <if test="storeName != null">
+						 		AND	st.`name` = #{storeName} 
+						 </if>
+						 
+						 <if test="start != null">
+						  		AND	o.create_time &gt; #{start} AND o.create_time &lt; #{end}
+						 </if>
+						 <if test="date != null">
+						 		AND month(o.create_time) = month(#{date})
+						 </if>
+						
+					</where>
+					GROUP BY  o.seller_id
+  </select>
+</mapper>

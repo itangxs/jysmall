@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.UserInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="phone_area" property="phoneArea" jdbcType="VARCHAR" />
+    <result column="phone_isp" property="phoneIsp" jdbcType="VARCHAR" />
+    <result column="default_city" property="defaultCity" jdbcType="BIGINT" />
+    <result column="regist_time" property="registTime" jdbcType="TIMESTAMP" />
+    <result column="reqist_source" property="reqistSource" jdbcType="VARCHAR" />
+    <result column="question" property="question" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="last_ip" property="lastIp" jdbcType="VARCHAR" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="enabled" property="enabled" jdbcType="BIT" />
+    <result column="third_day" property="thirdDay" jdbcType="INTEGER" />
+    <result column="qq_open_id" property="qqOpenId" jdbcType="VARCHAR" />
+    <result column="recom_id" property="recomId" jdbcType="BIGINT" />
+    <result column="invite" property="invite" jdbcType="INTEGER" />
+    <result column="invite_code" property="inviteCode" jdbcType="INTEGER" />
+    <result column="notice" property="notice" jdbcType="TINYINT" />
+    <result column="notice_time" property="noticeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, password, nickname, realname, avatar, level, card_id, email, phone_num, 
+    phone_area, phone_isp, default_city, regist_time, reqist_source, question, answer, 
+    last_ip, last_time, status, enabled, third_day, qq_open_id, recom_id, invite, invite_code, 
+    notice, notice_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.UserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.UserInfoExample" >
+    delete from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.UserInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info (username, password, nickname, 
+      realname, avatar, level, 
+      card_id, email, phone_num, 
+      phone_area, phone_isp, default_city, 
+      regist_time, reqist_source, question, 
+      answer, last_ip, last_time, 
+      status, enabled, third_day, 
+      qq_open_id, recom_id, invite, 
+      invite_code, notice, notice_time
+      )
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{level,jdbcType=TINYINT}, 
+      #{cardId,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, 
+      #{phoneArea,jdbcType=VARCHAR}, #{phoneIsp,jdbcType=VARCHAR}, #{defaultCity,jdbcType=BIGINT}, 
+      #{registTime,jdbcType=TIMESTAMP}, #{reqistSource,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{lastIp,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=BIT}, #{enabled,jdbcType=BIT}, #{thirdDay,jdbcType=INTEGER}, 
+      #{qqOpenId,jdbcType=VARCHAR}, #{recomId,jdbcType=BIGINT}, #{invite,jdbcType=INTEGER}, 
+      #{inviteCode,jdbcType=INTEGER}, #{notice,jdbcType=TINYINT}, #{noticeTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.UserInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phoneNum != null" >
+        phone_num,
+      </if>
+      <if test="phoneArea != null" >
+        phone_area,
+      </if>
+      <if test="phoneIsp != null" >
+        phone_isp,
+      </if>
+      <if test="defaultCity != null" >
+        default_city,
+      </if>
+      <if test="registTime != null" >
+        regist_time,
+      </if>
+      <if test="reqistSource != null" >
+        reqist_source,
+      </if>
+      <if test="question != null" >
+        question,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="lastIp != null" >
+        last_ip,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="thirdDay != null" >
+        third_day,
+      </if>
+      <if test="qqOpenId != null" >
+        qq_open_id,
+      </if>
+      <if test="recomId != null" >
+        recom_id,
+      </if>
+      <if test="invite != null" >
+        invite,
+      </if>
+      <if test="inviteCode != null" >
+        invite_code,
+      </if>
+      <if test="notice != null" >
+        notice,
+      </if>
+      <if test="noticeTime != null" >
+        notice_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneArea != null" >
+        #{phoneArea,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneIsp != null" >
+        #{phoneIsp,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultCity != null" >
+        #{defaultCity,jdbcType=BIGINT},
+      </if>
+      <if test="registTime != null" >
+        #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqistSource != null" >
+        #{reqistSource,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="lastIp != null" >
+        #{lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="thirdDay != null" >
+        #{thirdDay,jdbcType=INTEGER},
+      </if>
+      <if test="qqOpenId != null" >
+        #{qqOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="recomId != null" >
+        #{recomId,jdbcType=BIGINT},
+      </if>
+      <if test="invite != null" >
+        #{invite,jdbcType=INTEGER},
+      </if>
+      <if test="inviteCode != null" >
+        #{inviteCode,jdbcType=INTEGER},
+      </if>
+      <if test="notice != null" >
+        #{notice,jdbcType=TINYINT},
+      </if>
+      <if test="noticeTime != null" >
+        #{noticeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.UserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null" >
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avatar != null" >
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=TINYINT},
+      </if>
+      <if test="record.cardId != null" >
+        card_id = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNum != null" >
+        phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneArea != null" >
+        phone_area = #{record.phoneArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneIsp != null" >
+        phone_isp = #{record.phoneIsp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultCity != null" >
+        default_city = #{record.defaultCity,jdbcType=BIGINT},
+      </if>
+      <if test="record.registTime != null" >
+        regist_time = #{record.registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reqistSource != null" >
+        reqist_source = #{record.reqistSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question != null" >
+        question = #{record.question,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastIp != null" >
+        last_ip = #{record.lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastTime != null" >
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.enabled != null" >
+        enabled = #{record.enabled,jdbcType=BIT},
+      </if>
+      <if test="record.thirdDay != null" >
+        third_day = #{record.thirdDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.qqOpenId != null" >
+        qq_open_id = #{record.qqOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recomId != null" >
+        recom_id = #{record.recomId,jdbcType=BIGINT},
+      </if>
+      <if test="record.invite != null" >
+        invite = #{record.invite,jdbcType=INTEGER},
+      </if>
+      <if test="record.inviteCode != null" >
+        invite_code = #{record.inviteCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.notice != null" >
+        notice = #{record.notice,jdbcType=TINYINT},
+      </if>
+      <if test="record.noticeTime != null" >
+        notice_time = #{record.noticeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_info
+    set id = #{record.id,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=TINYINT},
+      card_id = #{record.cardId,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      phone_area = #{record.phoneArea,jdbcType=VARCHAR},
+      phone_isp = #{record.phoneIsp,jdbcType=VARCHAR},
+      default_city = #{record.defaultCity,jdbcType=BIGINT},
+      regist_time = #{record.registTime,jdbcType=TIMESTAMP},
+      reqist_source = #{record.reqistSource,jdbcType=VARCHAR},
+      question = #{record.question,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      last_ip = #{record.lastIp,jdbcType=VARCHAR},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=BIT},
+      enabled = #{record.enabled,jdbcType=BIT},
+      third_day = #{record.thirdDay,jdbcType=INTEGER},
+      qq_open_id = #{record.qqOpenId,jdbcType=VARCHAR},
+      recom_id = #{record.recomId,jdbcType=BIGINT},
+      invite = #{record.invite,jdbcType=INTEGER},
+      invite_code = #{record.inviteCode,jdbcType=INTEGER},
+      notice = #{record.notice,jdbcType=TINYINT},
+      notice_time = #{record.noticeTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.UserInfo" >
+    update user_info
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="cardId != null" >
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneArea != null" >
+        phone_area = #{phoneArea,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneIsp != null" >
+        phone_isp = #{phoneIsp,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultCity != null" >
+        default_city = #{defaultCity,jdbcType=BIGINT},
+      </if>
+      <if test="registTime != null" >
+        regist_time = #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqistSource != null" >
+        reqist_source = #{reqistSource,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="lastIp != null" >
+        last_ip = #{lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="thirdDay != null" >
+        third_day = #{thirdDay,jdbcType=INTEGER},
+      </if>
+      <if test="qqOpenId != null" >
+        qq_open_id = #{qqOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="recomId != null" >
+        recom_id = #{recomId,jdbcType=BIGINT},
+      </if>
+      <if test="invite != null" >
+        invite = #{invite,jdbcType=INTEGER},
+      </if>
+      <if test="inviteCode != null" >
+        invite_code = #{inviteCode,jdbcType=INTEGER},
+      </if>
+      <if test="notice != null" >
+        notice = #{notice,jdbcType=TINYINT},
+      </if>
+      <if test="noticeTime != null" >
+        notice_time = #{noticeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.UserInfo" >
+    update user_info
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      level = #{level,jdbcType=TINYINT},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      phone_area = #{phoneArea,jdbcType=VARCHAR},
+      phone_isp = #{phoneIsp,jdbcType=VARCHAR},
+      default_city = #{defaultCity,jdbcType=BIGINT},
+      regist_time = #{registTime,jdbcType=TIMESTAMP},
+      reqist_source = #{reqistSource,jdbcType=VARCHAR},
+      question = #{question,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      last_ip = #{lastIp,jdbcType=VARCHAR},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      enabled = #{enabled,jdbcType=BIT},
+      third_day = #{thirdDay,jdbcType=INTEGER},
+      qq_open_id = #{qqOpenId,jdbcType=VARCHAR},
+      recom_id = #{recomId,jdbcType=BIGINT},
+      invite = #{invite,jdbcType=INTEGER},
+      invite_code = #{inviteCode,jdbcType=INTEGER},
+      notice = #{notice,jdbcType=TINYINT},
+      notice_time = #{noticeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

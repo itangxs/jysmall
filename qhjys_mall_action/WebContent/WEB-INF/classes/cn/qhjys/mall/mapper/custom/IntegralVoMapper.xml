@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.IntegralVoMapper">
+	<select id="queryIntegralLog" resultType="cn.qhjys.mall.entity.IntegralLog">
+		SELECT i.id            AS id,
+		       i.send_id       AS sendId,
+		       i.review_id     AS reviewId,
+		       i.type          AS type,
+		       i.business_code AS businessCode,
+		       i.business_name AS businessName,
+		       i.integral      AS integral,
+		       i.send_befor    AS sendBefor,
+		       i.send_after    AS sendAfter,
+		       i.review_befor  AS reviewBefor,
+		       i.review_after  AS reviewAfter,
+		       i.remark        AS remark,
+		       i.create_time   AS createTime
+		FROM   integral_log i
+		WHERE  1 = 1
+		<if test="code != null">
+			AND
+			<foreach collection="code" open="(" close=")" index="i" item="item">
+				<if test="i != 0">OR</if> i.business_code=#{item}
+			</foreach>
+			AND (i.review_id = #{userId,jdbcType=BIGINT} OR i.send_id = #{userId,jdbcType=BIGINT})
+		</if>
+		<if test="start != null and start != ''">
+			<![CDATA[ AND i.create_time >= #{start} ]]>
+		</if>
+		<if test="end != null and end != ''">
+			<![CDATA[ AND i.create_time <= #{end} ]]>
+		</if>
+	</select>
+
+	<select id="queryCahsLog" resultType="cn.qhjys.mall.entity.CashLog">
+		SELECT c.id            AS id,
+		       c.record_no     AS recordNo,
+		       c.send_id       AS sendId,
+		       c.review_id     AS reviewId,
+		       c.amount        AS amount,
+		       c.pay_type      AS payType,
+		       c.pay_way       AS payWay,
+		       c.bankNo        AS bankno,
+		       c.business_code AS businessCode,
+		       c.business_name AS businessName,
+		       c.send_befor    AS sendBefor,
+		       c.send_after    AS sendAfter,
+		       c.review_befor  AS reviewBefor,
+		       c.review_after  AS reviewAfter,
+		       c.create_time   AS createTime
+		FROM   cash_log c
+		WHERE  1 = 1
+		<if test="code != null">
+			AND
+			<foreach collection="code" open="(" close=")" index="i" item="item">
+				<if test="i != 0">OR</if> c.business_code=#{item}
+			</foreach>
+			AND (c.review_id = #{userId,jdbcType=BIGINT} OR c.send_id = #{userId,jdbcType=BIGINT})
+		</if>
+		<if test="start != null and start != ''">
+			<![CDATA[ AND c.create_time >= #{start} ]]>
+		</if>
+		<if test="end != null and end != ''">
+			<![CDATA[ AND c.create_time <= #{end} ]]>
+		</if>
+	</select>
+</mapper>

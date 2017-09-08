@@ -1,0 +1,144 @@
+/*
+ * By jasonshan@tencent.com
+ * date 2013.9.18
+ * v  1.0
+ * 适配首页样式
+ */
+/*reset*/
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea,select,label,article,aside,footer,header,menu,nav,section,time,audio,video {
+  margin:0;  padding:0;}
+article,aside,footer,header,hgroup,nav,section,audio,canvas,video,img {display: block;}
+body {font-size: 100%; font-family:arial,Helvetica,STHeiti,Droid Sans Fallback; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;   -webkit-tap-highlight-color:rgba(0,0,0,0); background:#fff;}
+textarea {resize: none;}
+iframe,img {border:0;}
+ul,ol {list-style:none;}
+input,select,textarea {outline: 0;-webkit-user-modify: read-write-plaintext-only;}
+input {/*-webkit-appearance: none;*/}
+a{text-decoration: none; color:#333;}
+.clear{clear:both;}
+.blue{ color: #2980b9;}
+.red{ color:#ff6666;}
+*html body{ height:100%}
+
+.wrapper{ width:100%; margin:0 auto;}
+.index_img img{max-width:100%; height:auto; margin:0px auto;}
+.index_img11 img{max-width:100%; height:280px; margin:0px auto;}
+/*.probox{ padding:10px; margin:0 auto;}
+.probox ul li{ width:100%; height:auto; min-height:65px; border-bottom:1px solid #ddd; position:relative; padding:10px 0;}
+.probox .proimg{ float:left; width:27%;}
+.probox .proimg img{ width:100%; border-radius:3px;}
+.probox .proimg img{ width:100%;}
+.probox .centerinfo{ float:left; width:55%;}
+.probox .zhekoutext{ position:absolute; right:19%; top:13px; color:#f6696a; font-size:1.0625em;}
+.probox .zhekoutext b{ font-size:1.5em;}
+.probox .centerinfo h1{ font-size:1.0625em; width:70%; height:1.4em; line-height:1.4em; overflow:hidden; margin:5px 5px 0 5px; color:#525252;}
+.probox .centerinfo h2{ position:absolute; bottom:10px; font-size:1.0625em; font-weight:normal; color:#999; margin:0 5px; height:2.4em; line-height:1.2em; overflow:hidden;}
+
+.probox .orderbutton{ float:left; width:18%;}
+.probox .orderbutton a{color:#fff; border-radius:3px; background:#f6696a; padding:8px 0; text-align:center; font-size:0.85em; display:block;}
+*/
+
+.probox{ padding:10px; margin:0 auto;}
+.probox ul li{ width:100%; height:100%; border-bottom:1px solid #ddd; padding:10px 0;}
+.probox .proimg{ float:left; width:30%; height:100%;}
+.probox .proimg img{ width:100%; height:80px; border-radius:3px;}
+.probox .centerinfo{ float:left; width:70%; position:relative; min-height:80px;}
+.probox .centerinfo .zhekoutext{ position:absolute; right:5px; top:5px; color:#f6696a; text-align:right;}
+.probox .centerinfo .zhekoutext b{ font-size:1.0625em;font-weight:normal;}
+.probox .centerinfo .zhekoutext a.orderbuttonbox {color:#fff; border-radius:3px; background:#f6696a; height:35px; line-height:35px; text-align:center; font-size:0.9375em; margin:-6px 0 0 2px;  display:inline-block; vertical-align:middle; width:60px;}
+.probox .centerinfo h1{ font-size:1.0625em; width:55%; height:22px; line-height:22px; overflow:hidden; margin:5px 5px 3px 5px; color:#525252; overflow:hidden;font-weight:normal;}
+.probox .centerinfo h2{  font-size:0.9375em; font-weight:normal; color:#999; margin:0 5px; height:54px; line-height:18px;overflow:hidden;}
+
+
+.loadbox{ width:100%; margin:0 auto; text-align:center; background:#eee; height:40px; line-height:40px; color:#999; font-size:1.0625em;}
+.loadbox a{ color:#999; display:block;}
+
+.orderdetail{ padding:10px; margin:0 auto;}
+.orderbox{padding:10px 0;margin:0 auto;}
+.orderdetailbox{ background:#fff; border:1px solid #f1f1f1; border-bottom:none;}
+.orderdetailbox ul li{ padding:10px 8px; color:#aaa; line-height:35px; border-bottom:1px solid #f1f1f1; font-size:1.0625em; position:relative;}
+.orderdetailbox ul li .right{ position:absolute; right:8px; display:inline-block;}
+.orderdetailbox .left{ display:inline-block;}
+.orderdetailbox .left img{ display:inline-block; margin-right:8px; vertical-align:middle; width:54px; height:50px;}
+.orderdetailbox .leftfont{ display:inline-block; vertical-align:middle; line-height:1.5em;}
+.orderdetailbox .font18{ font-size:1.2em; color:#555;}
+.orderdetailbox .font14{ font-size:1.0625em;}
+.orderdetailbox .img30{ height:22px; margin-right:5px; display:inline-block; vertical-align:middle;}
+.orderdetailbox .fontline{ display:inline-block; vertical-align:middle; text-decoration:line-through; font-style:normal; color:#aaa;}
+
+.orderbuttonbox{ position:relative; height:45px; width:100%; margin:10px 0;}
+.orderbuttonbox .button1{ position:absolute; left:0; width:48%;}
+.orderbuttonbox .button2{ position:absolute; right:0; width:48%;}
+.orderbuttonbox .button1 a,.orderbuttonbox .button2 a{ background: url(/images/gou33.png) no-repeat center 10px #fff;border:1px solid #ddd; border-radius:3px; display:inline-block; width:100%; text-indent:2em; text-align:center; height:45px; line-height:45px; font-size:1.0625em; color:#777;}
+.orderbuttonbox .button1 a.current,.orderbuttonbox .button2 a.current{ background: url(/images/gou44.png) no-repeat center 15px #fff;color:#525252;}
+
+.orderbuttonbox i{ position:absolute; right:0; top:-6px;}
+.orderbuttonbox i img{ width:25px;}
+.hongbaoadv{padding:15px 0 0 0; line-height:20px; color:#999; font-size:0.9em;}
+.hongbaoadv img{ width:100%; margin-bottom:5px;}
+
+.payinputbox{ width:100%; height:45px; line-height:40px; border-radius:3px; border:1px solid #ddd; background:#fff; margin:5px 0 10px 0; position:relative;}
+.payinputbox .left{ position:absolute; left:10px; line-height:45px; font-size:1.0625em;}
+.payinputbox .input1{ position:absolute; right:0px;height:45px; line-height:45px; border:none; background:none; text-align:right; color:#999; font-size:1.0625em; width:96%; padding:0 2%;}
+.payinputbox .input1_on{ position:absolute; right:0px;height:45px; line-height:45px; border:none; background:none; text-align:right; color:#ff6666; font-size:1.0625em; width:96%; padding:0 2%;}
+
+.paybox{ color:#525252;padding:0 10px;}
+.paybox .centerbox{ text-align:center; line-height:50px; height:50px;}
+.graybox{ background:#fff; height:45px; line-height:45px; border-bottom:1px solid #ddd; padding:0 10px;}
+.graybox .right{ float:right; color:#ff6666;}
+
+.paybutton a{ display:block; background:#ff6666; border-radius:3px; height:45px; line-height:45px; color:#fff; text-align:center;}
+
+
+/*订单详情*/
+.orderover{ background:#fff;  font-family:"微软雅黑";}
+.orderover_succ{background: url(/images/weixin/gou_green.png) no-repeat 20px center #f0eff5; padding:20px 20px 20px 50px; font-size:1.0625em;}
+.orderover .jyxq{ padding:20px; font-size:0.9375em;}
+.orderover .jyxq h1{ border-bottom:1px dashed #ccc; padding:0 0 20px 0; margin-bottom:20px; font-size:2.0625em; line-height:1.8em; font-weight:normal; text-align:center;}
+.orderover .jyxq li{ height:35px; line-height:35px;text-align:left; color:#a8a8a8;}
+.orderover .jyxq li span{ float:right;}
+.orderover_adv { padding:20px; background:#f0eff5; }
+.orderover_adv h2{ border-bottom:1px dashed #b9b9b9; position:relative; height:20px;font-size:1.0625em; margin-bottom:20px; font-weight:normal;}
+.orderover_adv h2 span{ position: absolute; right:20px; top:10px;  display:inline-block; background:#f0eff5; padding:0 5px; line-height:0.85em; color:#b9b9b9;}
+.orderover .wxbottom{ z-index:999; position:fixed; bottom:25px; left:50%; margin-left:-100px; width:100%;}
+.orderover .wxbottom img{ width:200px;}
+@media only screen and (max-width:320px){
+.orderover .wxbottom{ z-index:999; position:fixed; bottom:25px; left:50%; margin-left:-75px; width:100%;}
+.orderover .wxbottom img{ width:150px;}
+}
+
+
+.orderover1 .jyxq{ padding:15px 20px; font-size:0.9625em;font-family:"微软雅黑"; border-bottom:10px solid #eee;}
+.orderover1 .jyxq h1{ border-bottom:1px dashed #ccc; padding:0 0 10px 0; margin-bottom:10px; font-size:2em; line-height:1.8em; font-weight:normal; text-align:center;}
+.orderover1 .jyxq li{ height:35px; line-height:35px;text-align:left; color:#a8a8a8;}
+.orderover1 .jyxq li span{ float:right;}
+.orderover_adv1 { padding:10px 20px 10px 20px; background:#fff; border-bottom:10px solid #eee; }
+.orderover_adv1 h2{ border-bottom:1px dashed #b9b9b9; position:relative; height:20px;font-size:1.0625em; margin-bottom:20px; font-weight:normal;}
+.orderover_adv1 h2 span{ position: absolute; right:20px; top:10px;  display:inline-block; background:#fff; padding:0 5px; line-height:0.85em; color:#b9b9b9;}
+
+/*支付*/
+.paymentbox{ padding:0 10px 15px 10px; margin:15px 20px; background:#fff; border-radius:3px;}
+.alljine{ position:relative; height:60px; line-height:60px;}
+.alljine span{ position:absolute; left:0; top:0px;height:60px; line-height:60px;}
+.alljine input{ width:100%; border:0; border-bottom:1px solid #e8e8e8; height:59px; line-height:59px; text-align:right; font-size:2.5em;}
+/*quan*/
+.quandiv{ padding:5px 0;}
+.quandiv1{width:100%; height:50px; line-height:50px;margin-right:10px; position:relative;cursor: pointer; border-bottom:1px solid #e8e8e8;background:url(/images/weixin/gou_hui.png) no-repeat right center #fff;}
+.quandiv1 p{ background:#fff; text-align:center;}
+.quandiv1 p em{ color:#f66400;}
+.quandiv1 img{ display:inline-block; vertical-align:middle;}
+.quancurrent{ position:absolute; right:0; top:0px; }
+.quancurrent1{ position:absolute; right:0; top:0px;   display:none;}
+.quancurrent span,.quancurrent1 span{background:url(/images/weixin/gou_green.png) no-repeat right center; height:20px; width:20px; display:inline-block;vertical-align: middle;}
+
+/*paynew*/
+.paymentallbox{ margin:20px 10px; padding:0 10px; color:#353535;position:relative;}
+.paytitle{ text-align:center; height:60px; line-height:60px; margin:0 0 20px 0;font-size:1em;}
+.paytitle img{ height:60px; margin-right:10px; display:inline-block; vertical-align:middle;}
+.payinput{ position:relative; width:100%; margin-right:10px;border-radius:3px;border:1px solid #f6696a; background:#fff;}
+.payinput span{ position:absolute; left:10px; top:0; z-index:2; font-size:1em;line-height:60px;}
+.payinput input{width:98%; height:60px; line-height:60px; border:0; text-align:right; font-size:1.2em;}
+.payadv{  position:absolute; bottom:252px;width:100%;margin:0 auto; color:#a9a5a7; font-size:1.1em; text-align:center; font-family:"微软雅黑"; line-height:1.1em;}
+.payadv .bg{background:url(/images/weixin/payline.png) repeat-x; width:95%;margin:0 auto;}
+.payadv img{  margin:0 auto; height:20px; display:inline-block; vertical-align:middle;}
+.payadv span{ display:inline-block; background:#f7f7f7; padding:0 10px;}

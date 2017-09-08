@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.ProviceCityAreaCodeMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.ProviceCityAreaCode" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="area_parent_id" property="areaParentId" jdbcType="VARCHAR" />
+    <result column="area_type" property="areaType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, area_code, area_name, area_parent_id, area_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from provice_city_area_code
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="findByProviceNameAndCode" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from provice_city_area_code
+    where area_name = #{areaName} and area_parent_id = ${areaParentId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from provice_city_area_code
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.ProviceCityAreaCode" >
+    insert into provice_city_area_code (id, area_code, area_name, 
+      area_parent_id, area_type)
+    values (#{id,jdbcType=BIGINT}, #{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
+      #{areaParentId,jdbcType=VARCHAR}, #{areaType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.ProviceCityAreaCode" >
+    insert into provice_city_area_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="areaCode != null" >
+        area_code,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="areaParentId != null" >
+        area_parent_id,
+      </if>
+      <if test="areaType != null" >
+        area_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaParentId != null" >
+        #{areaParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaType != null" >
+        #{areaType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.ProviceCityAreaCode" >
+    update provice_city_area_code
+    <set >
+      <if test="areaCode != null" >
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaParentId != null" >
+        area_parent_id = #{areaParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaType != null" >
+        area_type = #{areaType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.ProviceCityAreaCode" >
+    update provice_city_area_code
+    set area_code = #{areaCode,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_parent_id = #{areaParentId,jdbcType=VARCHAR},
+      area_type = #{areaType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

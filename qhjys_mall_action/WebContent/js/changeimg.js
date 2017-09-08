@@ -1,0 +1,1 @@
+function changeImg(h,b,g){try{document.getElementById(h).src=g+"/valiCode.do?time="+new Date().getTime()}catch(e){}};

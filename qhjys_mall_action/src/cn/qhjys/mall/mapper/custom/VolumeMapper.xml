@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.VolumeMapper">
+	<select id="getVolumeByCodeAndSeller" resultType="cn.qhjys.mall.vo.VolumeVo">
+		SELECT v.id AS id,
+			v.detail_id AS detailId,
+			p.name AS prodName,
+			v.volume_code AS volumeCode,
+			v.expiration AS expiration,
+			v.use_date AS useDate,
+			v.status AS status,
+			d.total_price AS price,
+			s.name AS storeName
+		FROM volume_info v
+			JOIN order_detail d
+			ON v.detail_id = d.id
+			LEFT JOIN product_info p
+			ON d.prod_id = p.id
+			LEFT JOIN store_info s 
+			ON  d.store_id = s.id
+		<where>
+			1 = 1
+			<if test="vCode != null and vCode != ''">
+				AND v.volume_code = #{vCode}
+			</if>
+			<if test="status != null">
+				AND v.status = #{status}
+			</if>
+			AND d.seller_id=#{sellerId,jdbcType=BIGINT}
+		</where>
+		 order by use_date desc
+	</select>
+
+	<select id="queryExpiredVolumeOrder" resultType="cn.qhjys.mall.vo.ExpiredOrderVo">
+		SELECT o.id                           AS orderId,
+		       o.order_no                     AS orderNo,
+		       d.id                           AS detailId,
+		       d.detail_no                    AS detailNo,
+		       o.user_id                      AS userId,
+		       d.prod_id                      AS prodId,
+		       d.seller_id                    AS sellerId,
+		       d.dis_price                    AS unitPric,
+		       COUNT(v.id)                    AS quantity,
+		       d.dis_price * COUNT(v.id)      AS totalPric,
+		       d.integral_price				  AS integral
+		FROM   volume_info v
+		       JOIN order_detail d
+		         ON v.detail_id = d.id
+		       JOIN order_info o
+		         ON d.order_id = o.id
+		WHERE  v.status = 1 <![CDATA[AND v.expiration < NOW()]]>
+		GROUP BY detailId
+	</select>
+
+	<select id="updateOvertimeOrder" resultType="cn.qhjys.mall.vo.ExpiredOrderVo">
+		SELECT o.id             AS orderId,
+		       o.order_no       AS orderNo,
+		       d.id             AS detailId,
+		       d.detail_no      AS detailNo,
+		       o.user_id        AS userId,
+		       d.prod_id        AS prodId,
+		       d.seller_id      AS sellerId,
+		       d.dis_price      AS unitPric,
+		       d.quantity       AS quantity,
+		       d.total_price    AS totalPric
+		FROM   order_detail d
+		       JOIN order_info o
+		         ON d.order_id = o.id
+		WHERE  d.status = 5 <![CDATA[AND TIMESTAMPDIFF(HOUR, d.apply_time, Now()) > 5 * 24]]>
+	</select>
+</mapper>

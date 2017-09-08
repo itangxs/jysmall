@@ -1,0 +1,9 @@
+ul{list-style-type:none;}
+#star{position:relative;width:600px;}
+#star ul,#star span{float:left;display:inline;height:19px;line-height:19px;}
+#star ul{margin:0 10px;}
+#star li{float:left;width:24px;height:20px;cursor:pointer;text-indent:-9999px;background:url(/images/account/evaluate/2.png) no-repeat;}
+#star strong{color:#f60;padding-left:10px;}
+#star li.on{background:url(/images/account/evaluate/1.png) no-repeat;}
+#star div{position:absolute;top:20px;width:159px;display:none;padding:6px 10px 0;background-color:#fff;border:1px solid #e5d9c1;}
+#star div em{padding-left:23px;color:#f60;display:block;font-style:normal;background:url(/images/account/evaluate/1.png) no-repeat #fff;}

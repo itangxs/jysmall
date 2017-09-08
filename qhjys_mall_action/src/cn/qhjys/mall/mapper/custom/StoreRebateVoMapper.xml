@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.StoreRebateVoMapper" >
+	 <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.StoreRebate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="rebate_name" property="rebateName" jdbcType="VARCHAR" />
+    <result column="rebate" property="rebate" jdbcType="DECIMAL" />
+    <result column="orther_rebate" property="ortherRebate" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="StoreRebateVoMap" type="cn.qhjys.mall.vo.StoreRebateVo" extends="BaseResultMap" >
+  	<id column="uid" property="uid" jdbcType="BIGINT" />
+     	<result column="name" property="storeName" jdbcType="VARCHAR" />
+	    <result column="logo" property="storeLogo" jdbcType="VARCHAR" />
+  </resultMap>
+	<select id="queryStoreRebateVo" parameterType="java.util.Map" resultMap="StoreRebateVoMap">
+		select si.name AS name ,si.logo AS logo,
+		sr.* FROM store_rebate sr LEFT JOIN store_info si ON sr.store_id = si.id WHERE  1 = 1
+		<if test="storeName != null">
+		 	 AND si.name like CONCAT('%',#{storeName},'%')
+		 </if>
+		<if test="rebateName != null">
+		 	 AND sr.rebate_name like CONCAT('%',#{rebateName},'%')
+		 </if>
+		  <if test="beginTime != null">
+		 	 AND sr.begin_date &gt;= #{beginTime,jdbcType=DATE}
+		 </if>
+		 <if test="endTime != null">
+		 	 AND sr.begin_date &lt;= #{endTime,jdbcType=DATE}
+		 </if>
+		 <if test="status != null">
+		 	AND sr.status = #{status,jdbcType=INTEGER}
+		 </if>
+		 ORDER BY sr.create_time desc
+	</select>
+	<update id="updateTimeOutRebate">
+    	<![CDATA[ UPDATE store_rebate SET `status`=0 WHERE `status`=1 AND end_date < NOW()]]>
+  </update>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.MessageVoMapper">
+
+	<select id="queryOrderList" resultType="cn.qhjys.mall.vo.MessageVo">
+		SELECT 
+			msg.id as id,
+			msg.type as status,
+			msg.sendee as userId,
+			msg.title as title,
+			msg.create_date as createDate,
+			msg.content  as msg
+		FROM 
+		   message_info msg 
+		<where>
+			<if test="userId !=null">
+			msg.user_id = #{userId,jdbcType=BIGINT}
+			</if>
+			<if test="status != null">
+			AND msg.type = #{status,jdbcType=TINYINT}
+			</if> 
+		
+		</where>
+			GROUP BY msg.id
+	</select>
+	
+
+</mapper>

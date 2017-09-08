@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.ThirdPayMapper" >
+	<select id="queryThirdPaySum"  resultType="java.math.BigDecimal" parameterType="java.util.Map">
+		SELECT COALESCE(SUM(money),0) FROM fq_third_pay 
+		WHERE seller_id = #{sellerId} AND pay_time BETWEEN #{beginTime} AND #{endTime}
+	</select>
+	<update id="updateThirdPayByOpenid" parameterType="java.util.Map" >
+   UPDATE fq_third_pay f , fq_user_info u 
+   SET f.user_id = u.id 
+   WHERE f.open_id=u.open_id AND f.id BETWEEN #{beginNum} AND #{endNum} 
+   AND f.open_id IS NOT NULL AND f.user_id IS  NULL;
+  </update>
+   <select id="querySellerThirdPaySum"  resultType="java.math.BigDecimal" parameterType="java.lang.Long">
+		SELECT COALESCE(SUM(money),0) FROM fq_third_pay 
+		WHERE seller_id = #{sellerId}
+	</select>
+	
+  	<select id="querySellerByRegis" resultType="java.lang.Integer" parameterType="java.lang.Long">
+		SELECT count(1) FROM seller_info 
+		WHERE id = #{sellerId} AND regis_time &lt; date_sub(curdate(),interval 56 day)
+	</select>
+  	<select id="queryOrderCountVo" resultType="cn.qhjys.mall.vo.OrderCountVo" parameterType="java.util.Map">
+		SELECT 
+		 count(DISTINCT t.seller_id) AS storeNum,
+		 count(DISTINCT t.open_id) AS userNum,
+		 count(1) AS orderNum,
+		 COALESCE(SUM(t.money),0) AS payTotal,
+		 COALESCE(SUM(t.rate_fee),0) AS rateTotal,
+		 COALESCE(SUM(t.totamt),0) AS totamtTotal
+			FROM fq_third_pay t 
+		LEFT JOIN store_info s ON t.seller_id = s.seller_id 
+		WHERE 1=1 
+		<if test="sellerId != null">
+			AND t.seller_id=#{sellerId,jdbcType=BIGINT}
+			</if>
+		<if test="orderNo != null">
+		 	 AND t.order_no like CONCAT('%',#{orderNo},'%')
+		 </if>
+		<if test="storeName != null">
+		 	 AND s.name like CONCAT('%',#{storeName},'%')
+		 </if>
+		
+		<if test="openId != null">
+		 	 AND t.open_id like CONCAT('%',#{openId,jdbcType=VARCHAR},'%')
+		 </if>
+		
+		  <if test="startTime != null">
+		 	 AND t.pay_time &gt;= #{startTime,jdbcType=DATE}
+		 </if>
+		 <if test="endTime != null">
+		 	 AND t.pay_time &lt; #{endTime,jdbcType=DATE}
+		 </if>
+		  <if test="pstartTime != null">
+		 	 AND t.pay_time &gt;= #{pstartTime,jdbcType=DATE}
+		 </if>
+		 <if test="pendTime != null">
+		 	 AND t.pay_time &lt;= #{pendTime,jdbcType=DATE}
+		 </if>
+		 <if test="bankType != null">
+		 	 AND t.bank_type &lt;= #{bankType,jdbcType=INTEGER}
+		 </if>
+		  <if test="type.size() > 0">
+		       		AND t.type IN
+		       		<foreach collection="type" item="item" open="(" close=")" separator="," >#{item}</foreach>
+		       </if>
+		 <if test="sort != null">
+		 	 AND t.sort &lt;= #{sort,jdbcType=INTEGER}
+		 </if>
+	</select>
+</mapper>

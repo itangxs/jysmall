@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.OrderInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="pay_id" property="payId" jdbcType="BIGINT" />
+    <result column="coupon_id" property="couponId" jdbcType="BIGINT" />
+    <result column="integral" property="integral" jdbcType="DECIMAL" />
+    <result column="totamt" property="totamt" jdbcType="DECIMAL" />
+    <result column="deliv_id" property="delivId" jdbcType="BIGINT" />
+    <result column="deliv_date" property="delivDate" jdbcType="TIMESTAMP" />
+    <result column="expfare" property="expfare" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="enabled" property="enabled" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_no, user_id, pay_id, coupon_id, integral, totamt, deliv_id, deliv_date, 
+    expfare, create_time, enabled
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.OrderInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from order_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.OrderInfoExample" >
+    delete from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.OrderInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_info (order_no, user_id, pay_id, 
+      coupon_id, integral, totamt, 
+      deliv_id, deliv_date, expfare, 
+      create_time, enabled)
+    values (#{orderNo,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{payId,jdbcType=BIGINT}, 
+      #{couponId,jdbcType=BIGINT}, #{integral,jdbcType=DECIMAL}, #{totamt,jdbcType=DECIMAL}, 
+      #{delivId,jdbcType=BIGINT}, #{delivDate,jdbcType=TIMESTAMP}, #{expfare,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.OrderInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="integral != null" >
+        integral,
+      </if>
+      <if test="totamt != null" >
+        totamt,
+      </if>
+      <if test="delivId != null" >
+        deliv_id,
+      </if>
+      <if test="delivDate != null" >
+        deliv_date,
+      </if>
+      <if test="expfare != null" >
+        expfare,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="totamt != null" >
+        #{totamt,jdbcType=DECIMAL},
+      </if>
+      <if test="delivId != null" >
+        #{delivId,jdbcType=BIGINT},
+      </if>
+      <if test="delivDate != null" >
+        #{delivDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expfare != null" >
+        #{expfare,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.OrderInfoExample" resultType="java.lang.Integer" >
+    select count(*) from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.payId != null" >
+        pay_id = #{record.payId,jdbcType=BIGINT},
+      </if>
+      <if test="record.couponId != null" >
+        coupon_id = #{record.couponId,jdbcType=BIGINT},
+      </if>
+      <if test="record.integral != null" >
+        integral = #{record.integral,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totamt != null" >
+        totamt = #{record.totamt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.delivId != null" >
+        deliv_id = #{record.delivId,jdbcType=BIGINT},
+      </if>
+      <if test="record.delivDate != null" >
+        deliv_date = #{record.delivDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expfare != null" >
+        expfare = #{record.expfare,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enabled != null" >
+        enabled = #{record.enabled,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_info
+    set id = #{record.id,jdbcType=BIGINT},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      pay_id = #{record.payId,jdbcType=BIGINT},
+      coupon_id = #{record.couponId,jdbcType=BIGINT},
+      integral = #{record.integral,jdbcType=DECIMAL},
+      totamt = #{record.totamt,jdbcType=DECIMAL},
+      deliv_id = #{record.delivId,jdbcType=BIGINT},
+      deliv_date = #{record.delivDate,jdbcType=TIMESTAMP},
+      expfare = #{record.expfare,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      enabled = #{record.enabled,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.OrderInfo" >
+    update order_info
+    <set >
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="payId != null" >
+        pay_id = #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="totamt != null" >
+        totamt = #{totamt,jdbcType=DECIMAL},
+      </if>
+      <if test="delivId != null" >
+        deliv_id = #{delivId,jdbcType=BIGINT},
+      </if>
+      <if test="delivDate != null" >
+        deliv_date = #{delivDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expfare != null" >
+        expfare = #{expfare,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.OrderInfo" >
+    update order_info
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      pay_id = #{payId,jdbcType=BIGINT},
+      coupon_id = #{couponId,jdbcType=BIGINT},
+      integral = #{integral,jdbcType=DECIMAL},
+      totamt = #{totamt,jdbcType=DECIMAL},
+      deliv_id = #{delivId,jdbcType=BIGINT},
+      deliv_date = #{delivDate,jdbcType=TIMESTAMP},
+      expfare = #{expfare,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      enabled = #{enabled,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

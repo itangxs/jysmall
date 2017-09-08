@@ -1,0 +1,72 @@
+
+/*reset*/
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea,select,label,article,aside,footer,header,menu,nav,section,time,audio,video {
+  margin:0;  padding:0;}
+article,aside,footer,header,hgroup,nav,section,audio,canvas,video,img {display: block;}
+body {font-size: 100%; font-family:arial,Helvetica,STHeiti,Droid Sans Fallback; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;   -webkit-tap-highlight-color:rgba(0,0,0,0);}
+textarea {resize: none;}
+iframe,img {border:0;}
+ul,ol {list-style:none;}
+input,select,textarea {outline: 0;-webkit-user-modify: read-write-plaintext-only;}
+input {/*-webkit-appearance: none;*/}
+a{text-decoration:none; color:#333333;}
+a:hover{color:#333333;}
+<!--a:visited{color:#333333;}-->
+body,.global{background: #f1f1f1;}
+.global{/*min-width: 320px;*/width: 100%; overflow: hidden;}
+.clear{clear:both;}
+.blue{ color: #2980b9;}
+.red{ color:#ff720c}
+.module{width:100%; overflow: hidden; background:#fff; border-bottom:1px solid #e7e7e7;}
+
+#canvas{ }
+
+
+.login{ margin:0 20px;}
+lable {cursor: default;}
+.loginbk{ display:inline-block; width:100%; height:40px; line-height:40px; border-bottom:1px solid #e7e7e7; padding:10px 0; position:relative;}
+
+.loginbk1{ display:inline-block; width:100%; height:40px; line-height:40px; border-bottom:none; padding:10px 0; position:relative;}
+.loginbk input,.loginbk1 input{width:100%; height:40px; line-height:40px; border:none; outline:none; word-wrap:normal; font-size:1em;}
+.loginbk .inputtext,.loginbk1 .inputtext{ text-indent:2.5em;}
+.loginbk b{ position:absolute; font-weight:normal; right:0; color:#595959; border:1px solid #ccc; padding:0 15px;}
+.loginbk a{ color:#595959;}
+.loginbutton{ padding:0 0 0 0; background:#2980b9; color:#FFF; width:100%; font-size:1.1em;border-radius:5px;text-align:center;text-indent:0;}
+.loginbutton1{ padding:0 0 0 0; background:#f6696a; color:#FFF; width:100%; font-size:1.2em;border-radius:5px; font-weight:bold; text-align:center;text-indent:0em; height:50px; line-height:50px; border:0;margin:20px 0 0 0;}
+.loginbutton2{ padding:0 0 0 0; background:#bababa; color:#FFF; width:100%; font-size:1.1em;border-radius:5px;text-align:center;text-indent:0; }
+.loginbk select{ font-size:1em; line-height:40px; border:none;}
+
+.login h3{ font-size:1em; font-weight:normal; padding-bottom:10px; color:#F60}
+.loginbk h2{ font-weight:normal; color:#333;  font-size:1em; text-indent:2.5rem;}
+
+
+.zhaohui{ height:50px; line-height:50px;}
+.zhaohui i{ float:right; font-style:normal;}
+.zhaohui a{ color: #2980b9;}
+
+.inputname{ background:url(/images/wap/images/ico03.png) no-repeat left center;background-size:30px 30px;color:#999;}
+.inputpassword{ background:url(/images/wap/images/ico04.png) no-repeat left center;background-size:30px 30px;color:#999;}
+.inputphone{ background:url(/images/wap/images/ico01.png) no-repeat left center;background-size:30px 30px;color:#999;}
+.inputyanzheng{ background:url(/images/wap/images/ico02.png) no-repeat left center;background-size:30px 30px;color:#999;}
+.inputmoney{ background:url(/images/wap/images/ico05.png) no-repeat left center;background-size:30px 30px;color:#999;}
+.inputyinhangka{ background:url(/images/wap/images/ico05.png) no-repeat left center;background-size:30px 30px;color:#999;}
+
+.bottomanniu{margin:0 20px; background:#f1f1f1; height:120px;}
+.xieyineirong{ padding:30px; text-indent:2em; line-height:30px; font-size:0.9em;}
+.xieyineirong p{ padding-bottom:15px;}
+.xieyititle{ position:relative; height:50px; line-height:50px; background:#e3e3e3; text-align:center; font-size:1.1em; color:#f6696a;}
+.xieyititle a{ position:absolute; left:10px; top:10px; width:30px; height:30px; background:url(/images/wap/images/icoback.png) no-repeat left center;background-size:25px 25px;color:#999;}
+
+.downbg{ background:#f6696a;}
+.downtop img{ width:100%; height:auto; margin-bottom:30px;}
+.downanniu{ margin:0 auto; text-align:center; width:100%;}
+.downanniu img{ width:50%;margin:0 auto;}
+
+
+.tabs{ border-bottom:3px solid #999; margin-bottom:15px; background:#fff;}
+.tabs a { float:left; width:50%; display:inline; border-bottom:3px solid #eeede5; font-size:16px; height:55px; line-height:55px; text-align:center; text-decoration:none; margin-bottom:-3px;}
+.tabs a:hover {border-bottom:3px solid #f6696a;  color:#f6696a;}
+.tabs a.tabaction{color:#f6696a; border-bottom:3px solid #f6696a;}
+
+
+

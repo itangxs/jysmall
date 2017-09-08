@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.RedpackRecordVoMapper" >
+	<resultMap id="BaseResultMap" type="cn.qhjys.mall.vo.system.RedpackRecordVo" >
+		<id column="countNum" property="countNum" jdbcType="INTEGER" />
+		<result column="countMoney" property="countMoney" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<select id="queryRedpackRecordVoByRedpackId" resultMap="BaseResultMap">
+		SELECT  COUNT(frr.id) 			AS countNum,
+			    SUM(frr.redpack_money)  AS countMoney
+		 FROM   fq_redpack_record frr
+		 
+	    WHERE   1=1
+	   			<if test="redpackId != null">
+		 	 		AND frr.redpack_id = #{redpackId,jdbcType=BIGINT}
+		 		</if>
+		 		<if test="status != null">
+		 	 		AND frr.status = #{status,jdbcType=INTEGER}
+		 		</if>
+	</select>
+
+</mapper>

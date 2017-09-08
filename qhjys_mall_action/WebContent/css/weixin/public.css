@@ -1,0 +1,218 @@
+/*
+ * By jasonshan@tencent.com
+ * date 2013.9.18
+ * v  1.0
+ * 适配首页样式
+ */
+/*reset*/
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea,select,label,article,aside,footer,header,menu,nav,section,time,audio,video {
+  margin:0;  padding:0;}
+article,aside,footer,header,hgroup,nav,section,audio,canvas,video,img {display: block;}
+body {font-size: 100%; font-family:arial,Helvetica,STHeiti,Droid Sans Fallback; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;   -webkit-tap-highlight-color:rgba(0,0,0,0); background:#f6696a;}
+textarea {resize: none;}
+iframe,img {border:0;}
+ul,ol {list-style:none;}
+input,select,textarea {outline: 0;-webkit-user-modify: read-write-plaintext-only;}
+input {/*-webkit-appearance: none;*/}
+a{text-decoration: none; color:#525252;}
+.clear{clear:both;}
+.blue{ color: #2980b9;}
+.red{ color:#ff6666;}
+*html body{ height:100%}
+
+.wrapper{ width:100%; margin:0 auto; color:#525252;}
+.index_img img{max-width:100%; height:auto; margin:0px auto;}
+
+.probox{ padding:10px; margin:0 auto;}
+.probox ul li{ border-bottom:1px solid #ddd; padding:10px;border-radius:5px; background:#fff;  border-bottom:2px solid #f6696a;}
+.probox .proimg{ float:left; width:10%; height:100%;}
+.probox .proimg .img1{ width:90%;}
+.probox .leftinfo{ float:left; height:100%; width:90%;position:relative; }
+.probox .leftinfo h1{ font-size:14px; width:60%; height:20px; line-height:20px; overflow:hidden; margin:0 0 10px 0; color:#525252; overflow:hidden;}
+.probox .leftinfo h2{  font-size:12px; font-weight:normal; color:#999; line-height:15px; overflow:hidden;}
+.icon{display: inline-block; vertical-align:middle; text-indent:-9999em;
+    width: 20px; height: 20px;
+    background-image: url(/images/weixin/ico-01.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:20px 20px;
+    -moz-background-size:20px 20px;
+    -o-background-size:20px 20px;
+    background-size:20px 20px;
+    margin: 0 5px 0 0;
+}
+.button100 a{ display:block; background:#ffea3d; margin-top:10px; border-radius:3px; height:40px; line-height:40px; color:#cf192b; text-align:center;}
+
+.jiangdh{ padding:10px 10px 20px 10px; margin:0 auto; background:#f6696a;}
+.duihuanbox{ padding:0 7px 12px 7px; background:#FFF;}
+.duihuanbox .leftbox{ float:left; width:35%; font-size:0.8em; height:70px;}
+.duihuanbox .leftbox h1{ font-size:1.2em; color:#f6696a; margin:3px 0;}
+.duihuanbox .leftbox .bg{ background:#fef5ac; height:62px; margin-right:10px; padding:3px; border:1px solid #ffde5a; border-radius:5px; }
+.duihuanbox .centerbox{ float:left; width:42%; min-height:70px; overflow:hidden;}
+.duihuanbox .centerbox ul li{ float:left;}
+.duihuanbox .centerbox ul li img{ width:33px; height:33px; margin:0 2px 2px 0;}
+.duihuanbox .rightbox{ float:left; width:23%; text-align:right; height:70px;}
+.duihuanbox .rightbox .buttonimg{ width:100%; margin-top:12px;}
+
+.rafflebox{ position:relative;}
+.raffleboxbg{ position:absolute; left:0; top:0; width:100%; z-index:-1;}
+.buttontop{ padding:10px;}
+.buttontop ul li{ float:left; width:49%; margin-right:1%;}
+.buttontop .buttonleft{ min-height:70px; 
+    width:100%; height: auto;
+    background-image: url(/images/weixin/buttonbg1.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;
+	color:#fff; font-size:0.9em; text-align:center; padding:6px 0 0 0;
+	}
+.buttontop .buttonright{ width:90%;}
+.buttonbox{ background:#f6696a; padding:10px 10px 0 10px;}
+.buttonbox ul li{ float:left; width:50%;}
+.buttonbox .img90{ width:95%; margin-bottom:10px;}
+.buttonbox .mtop{ margin-top:-20px;}
+
+.zhuanpan{ position:relative; width:100%; margin:0 auto; text-align:center; margin-top:-20px;}
+.zhuanpan img{width: 100%; margin:0 auto; z-index:0;}
+.zhizhen{ position:absolute; left:0; top:0; width:100%; margin:0 auto; text-align:center; z-index:1;}
+
+.fenxiangbox{ }
+.fenxiangbg{ width:100%; height:100%; background:#000;filter:alpha(opacity=70);  
+      -moz-opacity:0.7;  
+      -khtml-opacity: 0.7;  
+      opacity: 0.7; position:fixed; top:0; left:0; z-index:1;}
+.fenxiangtanchu{ width:100%; margin-top:15px; border-radius:0 0 3px 3px; text-align:left; position:fixed; top:0; z-index:2; }	 
+.tanchutitlebg{ width:100%; height:2.5em; line-height:1.6em;
+    background-image: url(/images/weixin/tanchutitlebg.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;
+	color:#fff; font-size:1em; text-align:center; padding:6px 0 0 0;position: relative; z-index:2;}
+.tanchuinfo{ position: relative; z-index:1; width:85%; margin:0 auto; margin-top:-20px; background:#fff; padding:30px 10px 20px 10px; font-size:0.9em; line-height:1.8em;}
+.guanbibutton{ position:absolute; right:30px; top:4px; background:none; border:none; color:#fff; font-size:1.6em;}
+
+.caipin{ width:90%; margin:0 auto; margin-bottom:10px; background:#ff8500;}
+.bgbkleft{ float:left;  display:inline-block; background: url(/images/weixin/bgbk.jpg) repeat-y left top; width:2%;  height:130px;}
+.bgbkright{ float:left; display:inline-block; background: url(/images/weixin/bgbkr.jpg) repeat-y right top; width:2%; height:130px; }
+.bgbkimg{ float:left; width:16%; display:inline-block; height:130px;}
+.bgbkimg img{ height:130px; }
+.caipinimg{ float:left; width:80%; margin:0 auto; text-align:center; color:#fff; height:110px; padding:10px 0; background:#ff8400;}
+.caipinimg img{ height:90px; text-align:center;}
+.jiangtebg{width:100%; 
+    background-image: url(/images/weixin/jiangte.jpg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;}
+.jiangerbg{width:100%; 
+    background-image: url(/images/weixin/jiang-san.jpg);
+    background-repeat: repeat-y;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;}
+.caipin ul li{ float:left; width:50%; text-align:center; height:150px; color:#fff;}
+.caipin ul li img{ width:80%; margin-top:10px;}
+
+.shiyongguizebox{ padding:10px; margin:0 auto; margin-top:40px;}
+.shiyongguize{ border:1px solid #000; border-radius:5px; background:#fffe9f; padding:20px 10px 10px 10px; font-size:0.9em; line-height:1.8em;}
+.shiyongguize img{ width:70%; margin:0 auto; margin-top:-50px;}
+
+.imgbottom{ position:relative; width:100%; }
+.imgbottom h2{position:relative; top:0; z-index:0;}
+.imgbottom h2 img{ width:100%; height:auto;}
+.imgbottom .ewm{/*position: absolute; z-index:1;  top:12px;*/ padding:12px 0 0 0; width:100%;}
+.imgbottom .ewmimg{ margin:0 auto; width:36%;}
+/*.imgbottom .ewm img{ width:36%;}*/
+.imgbottom .textdh{position: absolute; z-index:1; width:100%; font-size:1em; line-height:1.3em;}
+.imgbottombg{width:100%;
+	padding:0 0 12px 0;
+	background-image: url(/images/weixin/duihuan04.jpg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:100% auto;
+    -moz-background-size:100% auto;
+    -o-background-size:100% auto;
+    background-size:100% auto;}
+.imgbottom .leftarr{ position:absolute; z-index:2; left:30px; top:50px; display:inline-block; vertical-align:middle; width:30px; height:30px;
+    background-image: url(/images/weixin/left113.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:30px 30px;
+    -moz-background-size:30px 30px;
+    -o-background-size:30px 30px;
+    background-size:30px 30px;}
+.imgbottom .rightarr{position:absolute; z-index:2; right:30px; top:50px; display:inline-block; vertical-align:middle; width:30px; height:30px;
+    background-image: url(/images/weixin/right113.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:30px 30px;
+    -moz-background-size:30px 30px;
+    -o-background-size:30px 30px;
+    background-size:30px 30px;}
+
+/*tanchu*/
+.tanchubox{width:75%; margin:0 auto; margin-top:20px; position:relative; text-align:center; z-index:10;}
+.tanchu{width:100%; background:#fff; border-radius:3px;  position:absolute; top:-230px; text-align:center; font-size:0.9em;  border:1px solid #e0e0e0;}
+.ico-cuo img{ width:20px; height:auto; display:inline-block; vertical-align:middle; margin-right:5px;}
+.tishitext{ padding:15px 10px; font-size:0.85em; text-align:center; color:#666; line-height:1.7em;}
+.tanchu .title{ text-align:left; padding:0 10px; height:35px; line-height:35px; background:#f3f3f3; color:#777;}
+.tanchu .title span{ float:right; font-size:1.8em;}
+.img11{ width:70%; margin:0 auto; padding:0 0 10px 0; text-align:center;}
+
+.tishitext .left{ text-align:left;}
+.tishitext .right{ text-align:right;}
+.tishitext .right a{ color:#06C;}
+
+/*zhuanpan*/
+.ly-plate{
+		position:relative;
+		width:320px;
+		height:320px;
+		margin: 0 auto;
+		margin-top:-35px;
+		margin-bottom:10px;
+	}
+	.rotate-bg{
+		width:320px;
+		height:320px;
+		position:absolute;
+		top:0;
+		left:0;
+		 background-image: url(/images/weixin/zhuanpanbg.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size:320px 320px;
+    -moz-background-size:320px 320px;
+    -o-background-size:320px 320px;
+    background-size:320px 320px;
+	margin:0 auto;
+	}
+	.ly-plate div.lottery-star{
+		width:120px;
+		height:120px;
+		position:absolute;
+		top:100px;
+		left:100px;
+		/*text-indent:-999em;
+		overflow:hidden;
+		background:url(rotate-static.png);
+		-webkit-transform:rotate(0deg);*/
+		outline:none
+	}
+	.ly-plate div.lottery-star img{ width:120px; height:120px;}
+	.ly-plate div.lottery-star #lotteryBtn{
+		cursor: pointer;
+		position: absolute;
+		top:0;
+		left:0;
+	}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.CollectVoMapper">
+	<select id="selectStoreCollectByUser" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.CollectVo">
+		SELECT c.id        AS id,
+		       c.user_id   AS userId,
+		       c.store_id  AS storeId,
+		       s.name      AS storeName,
+		       s.logo      AS storeImg,
+		       c.mark_tag  AS markTag,
+		       c.mark_time AS markDate,
+		       c.remark    AS markRemark
+		FROM   collect_info c
+		       JOIN user_info u
+		         ON c.user_id = u.id
+		       JOIN store_info s
+		         ON c.store_id = s.id
+		WHERE  1 = 1
+		       AND ( c.prod_id IS NULL OR c.prod_id = '' )
+		       AND c.user_id = #{userId,jdbcType=BIGINT}
+	</select>
+
+	<select id="selectProductCollectByUser" parameterType="java.lang.Long" resultType="cn.qhjys.mall.vo.CollectVo">
+		SELECT c.id                              AS id,
+		       c.user_id                         AS userId,
+		       c.store_id                        AS storeId,
+		       s.name                            AS storeName,
+		       s.logo                            AS storeImg,
+		       c.prod_id                         AS prodId,
+		       p.name                            AS prodName,
+		       Substring_index(p.images, "|", 1) AS prodImg,
+		       s.area                            AS areaId,
+		       a.name                            AS areaName,
+		       p.title                           AS title,
+		       p.category_id                     AS category,
+		       p.unit_price                      AS price,
+		       p.orig_price                      AS dePrice,
+		       p.sales_num                       AS saleNum,
+		       c.mark_tag                        AS markTag,
+		       c.mark_time                       AS markDate,
+		       c.remark                          AS markRemark
+		FROM   collect_info c
+		       JOIN product_info p
+		         ON c.prod_id = p.id
+		       JOIN store_info s
+		         ON p.store_id = s.id
+		       JOIN area_info a
+		         ON s.area = a.id
+		WHERE  p.status = 2
+		       AND p.enabled = 1 AND s.enabled = 1
+			AND<![CDATA[(p.off_shelf IS NULL OR p.off_shelf >= NOW())]]>
+			AND c.user_id=#{userId,jdbcType=BIGINT}
+		ORDER BY c.mark_time DESC
+	</select>
+</mapper>

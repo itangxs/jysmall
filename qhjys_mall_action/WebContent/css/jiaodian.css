@@ -1,0 +1,99 @@
+
+/* 焦点图 */
+.idx-focus{
+    float: left;
+}
+.idx-focus,
+.focus-pic li{
+    width: 530px;
+    height: 430px;   /*整体大小*/
+    position: relative;
+    overflow: hidden;
+}
+.idx-foc-tmp{
+    height: 360px;/*小图往下*/
+}
+.focus-pic{
+    height: 353px;
+}
+.focus-pic li{
+    float: left;
+    height: 353px;  /*大图撑大*/
+}
+.focus-pic li img{
+    width: 530px;
+    height: 353px; /*图片大小*/
+}
+.focus-pic .bg{
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #000;
+    opacity: .6;
+    filter:Alpha(opacity=60);
+    z-index: 1;
+}
+.focus-pic .txt{
+    height: 30px;
+    position: absolute;
+    width: 100%;
+    line-height: 30px;
+    text-indent: 10px;
+    overflow: hidden;
+    z-index: 2;
+    left: 0;
+    bottom: 0;
+}
+.idx-focus .xtaber-tabs{
+    height: 53px;
+    margin-top:0px;  /*小图框往下*/
+	background-color:none;
+    /*background-color:rgba(0,0,0,0.3);*/
+}
+.idx-focus .xtaber-tabs li{
+    float: left;
+    padding: 2px;
+    margin-right: 5px;
+    position: relative;
+    cursor: pointer;
+	height:53px;
+    z-index: 3;
+}
+.idx-focus .xtaber-tabs img{
+    width: 80px;
+    height: 53px;
+}
+.idx-focus .xtaber-tabs .current{
+    background: #f6696a;
+}
+.idx-focus .xtaber-tabs .current i{
+    width: 7px;
+    height: 4px;
+    position: absolute;
+    left: 50%;
+    margin-left: 5px;
+    top: 0px;
+    overflow: hidden;
+    /*background-position: -46px -28px;*/
+}
+.idx-focus .btn-prev,
+.idx-focus .btn-next{
+    background: url(/images/foc_btn.png) no-repeat;
+    _background: url(/images/foc_btn_8.png) no-repeat;
+    width: 31px;
+    height: 50px;
+    position: absolute;
+    z-index: 4;
+    top: 135px;
+    _filter:Alpha(opacity=70);
+}
+.idx-focus .btn-prev{
+    background-position: 0 0;
+    left: 10px;
+}
+.idx-focus .btn-next{
+    background-position: -33px 0;
+    right: 10px;
+}

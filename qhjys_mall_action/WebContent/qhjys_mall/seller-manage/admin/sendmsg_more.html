@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>金钥匙商城平台管理中心</title>
+		<link href="../css/public.css" rel="stylesheet" type="text/css" />
+		<link href="../css/membernew.css" rel="stylesheet" type="text/css" />
+
+	</head>
+
+	<body>
+		<!-------------------top---------------------------------------------------------------------->
+		<!--top菜单-->
+		<div class="topmenu0">
+			<div class="topmenu2">
+				<h3>
+            您好，欢迎来金钥匙商城！ 
+            <span><a href="../login.html">登陆</a></span> 
+            <span><a href="../registration.html">注册</a></span>
+        </h3>
+			</div>
+		</div>
+		<div class="wrapper">
+			<!--top广告-->
+			<div class="top_center">
+				<h1><a href="../index.html"><img src="../images/logo.png" /></a></h1>
+
+			</div>
+		</div>
+		<!------------------------------主导航--条-------------------------------------------->
+		<div class="top_nav2">
+			<div class="wrapper">
+				<h3>
+        	<a href="web_set.html" >网站设置</a>
+            <a href="product_manage.html">商品管理</a>
+            <a href="order_manage.html">订单管理</a>
+            <a href="user_manage.html">会员管理</a>
+            <a href="shop_manage.html">店铺管理</a>
+            <a href="finance_manage.html">财务管理</a>
+            <a href="Contrive.html" class="top_nav_current2">营销推广</a>
+            <a href="statistics.html">运营统计</a>
+            <div class="clear"></div>
+        </h3>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!--------------------------我的账户-------------------------------------------------------->
+		<div class="membercontent">
+			<!----------------左侧----------------------->
+			<div class="memberleft">
+
+				<!--左侧菜单-->
+				<div class="membermenu">
+					<ul>
+						<li>
+							<h1>站内消息</h1>
+							<p><a href="contrive.html" class="menucurrent2"><span>·</span>发送消息</a>
+							</p>
+							<p><a href="msg_history.html"><span>·</span>消息发送历史</a>
+							</p>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<h1>短信系统</h1>
+							<p><a href="msg_moban.html"><span>·</span>短信模板</a>
+							</p>
+
+						</li>
+					</ul>
+
+				</div>
+
+			</div>
+			<!--------------右侧------------------>
+			<div class="memberright">
+				<h3 style="padding-left:10px; margin-bottom:25px;">站内消息——发送消息</h3>
+				<form id="form1" name="form1" class="zcform1">
+					<p class="clearfix">
+						<label class="one" for="con-email4">会员ID：</label>
+						<input class="con-email4" name="con-email4">
+						<input type="submit" value="查询" class="submit8">
+					</p>
+				</form>
+				<div class="member_myorder">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+
+							<td class="td160">可选会员</td>
+							<td class="td160"></td>
+							<td class="td160">已选会员</td>
+						</tr>
+						<tr>
+
+							<td class="td160" style="text-align:right;">
+								<select multiple size="25" name="list1" style="width:200px;">
+									<option value="huiyuan01">huiyuan01 </option>
+									<option value="huiyuan02"> huiyuan02</option>
+									<option value="huiyuan03"> huiyuan03</option>
+								</select>
+							</td>
+							<td class="td160">
+								<input type="button" value=" >> " onclick="move(this.form.list1,this.form.list2)" name="B1">
+								<input type="button" value=" << " onclick="move(this.form.list2,this.form.list1)" name="B2">
+							</td>
+							<td class="td160" style="text-align:left;">
+								<select multiple size="25" name="list2" style="width:200px;">
+									<option value="huiyuan04">huiyuan04</option>
+									<option value="huiyuan05">huiyuan05</option>
+									<option value="huiyuan06">huiyuan06</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+
+							<td class="td160"></td>
+							<td class="td160">
+								<input type="submit" value="确定" class="submit8">
+								<input type="submit" value="返回列表" class="submit9">
+							</td>
+							<td class="td160"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<!------------------------------底部---------------------------------------------->
+		<div class="footer">
+			<div class="bottom1">
+				<ul>
+					<li>
+						<h1 class="bottom_navbg1">购物指南</h1>
+						<p><a href="#">购物流程</a>
+						</p>
+						<p><a href="#">商城规则</a>
+						</p>
+						<p><a href="#">会员介绍</a>
+						</p>
+						<p><a href="#">常见问题</a>
+						</p>
+					</li>
+					<li>
+						<h1 class="bottom_navbg2">付款方式</h1>
+						<p><a href="#">支付平台</a>
+						</p>
+						<p><a href="#">换购抵用</a>
+						</p>
+					</li>
+					<li>
+						<h1 class="bottom_navbg3"><a href="#">物流配送</a></h1>
+						<h1 class="bottom_navbg4"><a href="#">售后服务</a></h1>
+						<h1 class="bottom_navbg5"><a href="#">法律声明</a></h1>
+					</li>
+					<li>
+						<h1 class="bottom_navbg6">关于我们</h1>
+						<p><a href="#">公司简介</a>
+						</p>
+						<p><a href="#">企业文化</a>
+						</p>
+						<p><a href="#">企业历程</a>
+						</p>
+						<p><a href="#">广告服务</a>
+						</p>
+						<p><a href="#">联系我们</a>
+						</p>
+					</li>
+					<div class="bottom_service">
+						<h3>客服热线</h3>
+						<h2>400-888-0683</h2>
+						<p>E-mail: service@jysp2p.com</p>
+						<p>(周一至周五，09:00-18:00)</p>
+					</div>
+					<div class="clear"></div>
+				</ul>
+			</div>
+		</div>
+		<div class="bottom2">
+
+			<h3>粤ICP备14023008号-1 版权所有©2013-2015 深圳市前海金钥匙电子商务有限公司 <a href="#"></a></h3>
+			<ul>
+				<li>
+					<img src="../images/bottom1.jpg" />
+				</li>
+				<li>
+					<img src="../images/bottom1.jpg" />
+				</li>
+				<li>
+					<img src="../images/bottom1.jpg" />
+				</li>
+				<li>
+					<img src="../images/bottom1.jpg" />
+				</li>
+				<li>
+					<img src="../images/bottom1.jpg" />
+				</li>
+				<li>
+					<img src="../images/bottom1.jpg" />
+				</li>
+				<div class="clear"></div>
+			</ul>
+		</div>
+		<!--底部-e-->
+	</body>
+
+</html>

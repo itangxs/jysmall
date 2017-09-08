@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.ReviewProductMapper">
+	<select id="queryReviewProductList" resultType="cn.qhjys.mall.vo.system.ReviewProductVo" parameterType="java.util.Map">
+		SELECT r.id,st.name AS storeName,p.id AS productId,
+		p.`name` AS productName,u.username AS userName,
+		r.create_time AS createTime
+		FROM reviews_log r,store_info st,product_info p,user_info u
+		<where>
+			r.store_id = st.id AND r.prod_id = p.id AND r.reply_id = u.id
+			<if test="productName != null and productName != ''">
+				AND (p.`name` like CONCAT('%',#{productName},'%'))
+			</if>
+			<if test="userName != null and userName != ''">
+				AND u.username = #{userName}
+			</if>
+			<if test="startTime != null and startTime != ''">
+				AND DATE_FORMAT(r.create_time,'%Y-%m-%d') >= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND #{endTime} >= DATE_FORMAT(r.create_time,'%Y-%m-%d')
+			</if>
+			<if test="storeName != null and storeName != ''">
+				AND st.name = #{storeName}
+			</if>
+		</where>
+		order by createTime desc
+	</select>
+	<delete id="deleteReviewProduct" parameterType="java.util.Map">
+		DELETE FROM reviews_log 
+		<where>
+			<foreach collection="ids" open="(" close=")" index="i" item="item">
+				<if test="i != 0">OR </if>id=#{item}
+			</foreach>
+		</where>
+	</delete>
+</mapper>

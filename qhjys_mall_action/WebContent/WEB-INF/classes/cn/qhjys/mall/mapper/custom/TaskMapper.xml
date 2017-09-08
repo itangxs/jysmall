@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.TaskMapper" >
+	<resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.TaskInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="task_type" property="taskType" jdbcType="TINYINT" />
+    <result column="task_from" property="taskFrom" jdbcType="VARCHAR" />
+    <result column="task_level" property="taskLevel" jdbcType="TINYINT" />
+    <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="off_shelf" property="offShelf" jdbcType="TIMESTAMP" />
+    <result column="task_total" property="taskTotal" jdbcType="DECIMAL" />
+    <result column="task_fulfil" property="taskFulfil" jdbcType="DECIMAL" />
+    <result column="plan_time" property="planTime" jdbcType="VARCHAR" />
+    <result column="fulfil_reward" property="fulfilReward" jdbcType="DECIMAL" />
+    <result column="unfulfil_reward" property="unfulfilReward" jdbcType="DECIMAL" />
+    <result column="images" property="images" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="project" property="project" jdbcType="VARCHAR" />
+    <result column="project_url" property="projectUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.qhjys.mall.entity.TaskInfo" extends="BaseResultMap" >
+    <result column="task_detail" property="taskDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="UserTaskVoMap" type="cn.qhjys.mall.vo.TaskVo" extends="BaseResultMap" >
+  	<id column="uid" property="uid" jdbcType="BIGINT" />
+     	<result column="user_id" property="userId" jdbcType="BIGINT" />
+	    <result column="task_id" property="taskId" jdbcType="BIGINT" />
+	    <result column="ustatus" property="ustatus" jdbcType="VARCHAR" />
+	    <result column="totamt" property="totamt" jdbcType="DECIMAL" />
+	    <result column="ucreate_time" property="ucreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+	<select id="selectTaskInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT t.* FROM task_info t
+		WHERE
+		 t.status = 2 AND <![CDATA[ t.task_fulfil < task_total]]>
+		 <![CDATA[AND t.begin_time <= NOW()]]>
+		 
+		 <![CDATA[AND (t.off_shelf IS NULL OR t.off_shelf >= NOW())]]>
+			AND task_type  &gt; -1
+		 <if test="taskType != null">
+		 	 AND task_type = #{taskType,jdbcType=INTEGER}
+		 </if>
+		 <if test="userLevel != null">
+		 	 AND  <![CDATA[t.task_level <= #{userLevel,jdbcType=INTEGER}]]>
+		 </if>
+		 <if test="userId != null">
+		 	 AND  NOT EXISTS (select u.id from user_task u where u.task_id = t.id AND user_id =#{userId,jdbcType=BIGINT})
+		 </if>
+		 ORDER BY t.create_time desc
+	</select>
+	<select id="countTaskInfo" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT count(1) FROM task_info t
+		WHERE
+		 t.status = 2 AND <![CDATA[ t.task_fulfil < task_total]]>
+		 <![CDATA[AND t.begin_time <= NOW()]]>
+		 
+		 <![CDATA[AND (t.off_shelf IS NULL OR t.off_shelf >= NOW())]]>
+		
+		 <if test="taskType != null">
+		 	 AND task_type = #{taskType,jdbcType=INTEGER}
+		 </if>
+		 <if test="userLevel != null">
+		 	 AND  <![CDATA[t.task_level <= #{userLevel,jdbcType=INTEGER}]]>
+		 </if>
+		 <if test="userId != null">
+		 	 AND  NOT EXISTS (select u.id from user_task u where u.task_id = t.id AND user_id =#{userId,jdbcType=BIGINT})
+		 </if>
+		 ORDER BY t.create_time desc
+	</select>
+	<select id="selectTaskInfoByUser" parameterType="java.util.Map" resultMap="UserTaskVoMap">
+		select u.id AS uid, u.user_id AS user_id ,u.task_id AS task_id,
+		u.status AS ustatus,u.totamt AS totamt,u.create_time AS ucreate_time,
+		t.* FROM user_task u LEFT JOIN task_info t ON u.task_id = t.id WHERE u.user_id = #{userId,jdbcType=BIGINT}
+		<if test="taskType != null">
+		 	 AND t.task_type = #{taskType,jdbcType=INTEGER}
+		 </if>
+		 <if test="status != null">AND
+			 <foreach collection="status" open="(" close=")" index="i" item="item">
+				<if test="i != 0">OR</if>  u.status = #{item,jdbcType=VARCHAR}
+			</foreach>
+		 </if>
+		 ORDER BY ucreate_time desc
+	</select>
+	<select id="selectTaskInfoByC" parameterType="java.util.Map" resultMap="UserTaskVoMap">
+		select u.id AS uid, u.user_id AS user_id ,u.task_id AS task_id,
+		u.status AS ustatus,u.totamt AS totamt,u.create_time AS ucreate_time,
+		t.* FROM user_task u LEFT JOIN task_info t ON u.task_id = t.id WHERE 1=1
+		<if test="taskType != null">
+		 	 AND t.task_type = #{taskType,jdbcType=INTEGER}
+		 </if>
+		 <if test="status != null">
+		 	 AND u.status = #{status,jdbcType=VARCHAR}
+		 </if>
+		 <if test="beginTime != null">
+		 	 AND u.create_time &gt;= #{beginTime,jdbcType=DATE}
+		 </if>
+		 <if test="endTime != null">
+		 	 AND u.create_time &lt; #{endTime,jdbcType=DATE}
+		 </if>
+		 ORDER BY ucreate_time desc
+	</select>
+	
+	<select id="selectTaskInfoByNewUser" parameterType="java.util.Map" resultMap="UserTaskVoMap">
+		select ut.*,t.* FROM task_info t LEFT JOIN 
+		(SELECT u.task_id AS task_id FROM user_task u  WHERE user_id = #{userId,jdbcType=BIGINT}) AS ut 
+		ON ut.task_id = t.id 
+		WHERE t.task_type=0
+		limit 0,5
+
+	</select>
+	
+	<select id="countMoney" parameterType="java.util.Map" resultType="Integer">
+		SELECT COALESCE(sum(money),0) FROM user_task
+		WHERE user_id = #{userId}
+		AND task_id = #{taskId}
+		AND status = 'cp'
+	</select>
+	<select id="selectTaskAll" parameterType="java.util.Map" resultMap="UserTaskVoMap">
+		select 
+		u.status AS ustatus,u.totamt AS totamt,u.create_time AS ucreateTime,t.fulfil_reward AS fulfilReward,t.unfulfil_reward AS unfulfilReward,
+		t.task_name AS taskName FROM user_task u LEFT JOIN task_info t ON u.task_id = t.id WHERE u.user_id = #{userId,jdbcType=BIGINT}
+		 <if test="status != null">AND
+			 <foreach collection="status" open="(" close=")" index="i" item="item">
+				<if test="i != 0">OR</if>  u.status = #{item,jdbcType=VARCHAR}
+			</foreach>
+		 </if>
+		 UNION ALL
+		select 
+		u.status AS ustatus,u.totamt AS totamt,u.create_time AS ucreateTime,t.fulfil_reward AS fulfilReward,t.unfulfil_reward AS unfulfilReward,
+		t.task_name AS taskName FROM sys_user_task u LEFT JOIN sys_task t ON u.task_id = t.id WHERE u.user_id =#{userId,jdbcType=BIGINT}
+		 <if test="status != null">AND
+			 <foreach collection="status1" open="(" close=")" index="i" item="item">
+				<if test="i != 0">OR</if>  u.status = #{item,jdbcType=VARCHAR}
+			</foreach></if>
+		 ORDER BY ucreateTime desc
+	</select>
+</mapper>

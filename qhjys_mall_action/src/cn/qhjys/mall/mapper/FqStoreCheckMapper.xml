@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.FqStoreCheckMapper" >
+  <resultMap id="BaseResultMap" type="cn.qhjys.mall.entity.FqStoreCheck" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="store_logo" property="storeLogo" jdbcType="VARCHAR" />
+    <result column="store_info" property="storeInfo" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="traffic_begin_time" property="trafficBeginTime" jdbcType="VARCHAR" />
+    <result column="traffic_end_time" property="trafficEndTime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="proportion" property="proportion" jdbcType="INTEGER" />
+    <result column="location_id" property="locationId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="store_image" property="storeImage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, store_id, store_name, store_logo, store_info, address, traffic_begin_time, traffic_end_time, 
+    status, phone_num, proportion, location_id, create_time, store_image
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qhjys.mall.entity.FqStoreCheckExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fq_store_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fq_store_check
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fq_store_check
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qhjys.mall.entity.FqStoreCheckExample" >
+    delete from fq_store_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qhjys.mall.entity.FqStoreCheck" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fq_store_check (store_id, store_name, store_logo, 
+      store_info, address, traffic_begin_time, 
+      traffic_end_time, status, phone_num, 
+      proportion, location_id, create_time, 
+      store_image)
+    values (#{storeId,jdbcType=BIGINT}, #{storeName,jdbcType=VARCHAR}, #{storeLogo,jdbcType=VARCHAR}, 
+      #{storeInfo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{trafficBeginTime,jdbcType=VARCHAR}, 
+      #{trafficEndTime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, 
+      #{proportion,jdbcType=INTEGER}, #{locationId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{storeImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qhjys.mall.entity.FqStoreCheck" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fq_store_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="storeName != null" >
+        store_name,
+      </if>
+      <if test="storeLogo != null" >
+        store_logo,
+      </if>
+      <if test="storeInfo != null" >
+        store_info,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="trafficBeginTime != null" >
+        traffic_begin_time,
+      </if>
+      <if test="trafficEndTime != null" >
+        traffic_end_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="phoneNum != null" >
+        phone_num,
+      </if>
+      <if test="proportion != null" >
+        proportion,
+      </if>
+      <if test="locationId != null" >
+        location_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="storeImage != null" >
+        store_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="storeName != null" >
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeLogo != null" >
+        #{storeLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="storeInfo != null" >
+        #{storeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficBeginTime != null" >
+        #{trafficBeginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficEndTime != null" >
+        #{trafficEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="proportion != null" >
+        #{proportion,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null" >
+        #{locationId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeImage != null" >
+        #{storeImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qhjys.mall.entity.FqStoreCheckExample" resultType="java.lang.Integer" >
+    select count(*) from fq_store_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fq_store_check
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.storeId != null" >
+        store_id = #{record.storeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.storeName != null" >
+        store_name = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeLogo != null" >
+        store_logo = #{record.storeLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeInfo != null" >
+        store_info = #{record.storeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trafficBeginTime != null" >
+        traffic_begin_time = #{record.trafficBeginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trafficEndTime != null" >
+        traffic_end_time = #{record.trafficEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.phoneNum != null" >
+        phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proportion != null" >
+        proportion = #{record.proportion,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationId != null" >
+        location_id = #{record.locationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.storeImage != null" >
+        store_image = #{record.storeImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fq_store_check
+    set id = #{record.id,jdbcType=BIGINT},
+      store_id = #{record.storeId,jdbcType=BIGINT},
+      store_name = #{record.storeName,jdbcType=VARCHAR},
+      store_logo = #{record.storeLogo,jdbcType=VARCHAR},
+      store_info = #{record.storeInfo,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      traffic_begin_time = #{record.trafficBeginTime,jdbcType=VARCHAR},
+      traffic_end_time = #{record.trafficEndTime,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      proportion = #{record.proportion,jdbcType=INTEGER},
+      location_id = #{record.locationId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      store_image = #{record.storeImage,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qhjys.mall.entity.FqStoreCheck" >
+    update fq_store_check
+    <set >
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="storeName != null" >
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeLogo != null" >
+        store_logo = #{storeLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="storeInfo != null" >
+        store_info = #{storeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficBeginTime != null" >
+        traffic_begin_time = #{trafficBeginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficEndTime != null" >
+        traffic_end_time = #{trafficEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNum != null" >
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="proportion != null" >
+        proportion = #{proportion,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null" >
+        location_id = #{locationId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeImage != null" >
+        store_image = #{storeImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qhjys.mall.entity.FqStoreCheck" >
+    update fq_store_check
+    set store_id = #{storeId,jdbcType=BIGINT},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      store_logo = #{storeLogo,jdbcType=VARCHAR},
+      store_info = #{storeInfo,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      traffic_begin_time = #{trafficBeginTime,jdbcType=VARCHAR},
+      traffic_end_time = #{trafficEndTime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      proportion = #{proportion,jdbcType=INTEGER},
+      location_id = #{locationId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      store_image = #{storeImage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

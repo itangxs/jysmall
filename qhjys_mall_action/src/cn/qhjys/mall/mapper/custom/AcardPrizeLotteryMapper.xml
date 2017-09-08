@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qhjys.mall.mapper.custom.AcardPrizeLotteryMapper" >
+	<resultMap id="BaseResultMap" type="cn.qhjys.mall.vo.AcardPrizeLotteryVo" >
+		<id column="prizeId" property="prizeId" jdbcType="BIGINT" />
+		<result column="prizeName" property="prizeName" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="selectAcardPrizeLotteryByRecordId" resultMap="BaseResultMap">
+		SELECT  faul.acard_prize_id 			AS prizeId,
+			    faul.acard_prize_name  	        AS prizeName
+		 FROM   fq_acard_user_lottery faul
+		 
+	    WHERE   1=1
+	   			<if test="recordId != null">
+		 	 		AND faul.acard_record_id = #{recordId,jdbcType=BIGINT}
+		 		</if>
+		GROUP BY prizeId,prizeName
+		ORDER BY create_time DESC
+	</select>
+	
+	<select id="selectLotteryUserInfo" resultType="cn.qhjys.mall.vo.AcardLotteryUserInfo">
+		SELECT  faul.user_id 			AS id,
+			    fui.portrait  	        AS portrait
+		 FROM   fq_acard_user_lottery faul
+		 JOIN   fq_user_info fui
+		   ON   faul.user_id = fui.id
+		 
+	    WHERE   1=1
+	   			<if test="recordId != null">
+		 	 		AND faul.acard_record_id = #{recordId,jdbcType=BIGINT}
+		 		</if>
+	   			<if test="prizeId != null">
+		 	 		AND faul.acard_prize_id = #{prizeId,jdbcType=BIGINT}
+		 		</if>
+	</select>
+
+</mapper>

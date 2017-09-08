@@ -1,0 +1,46 @@
+/*taskdetail*/
+.game-detailbox1{ position:absolute; top:300px; width:100%; padding:0 0 20px;}
+.game-detailbox{ width:1100px; margin:0 auto;}
+.gamedetailbanner{ height:445px;}
+.gametop{}
+.gametop .leftbox,.gametop .rightbox{background:url(../images/toumingbg.png) repeat; color:#fff; 
+	/*filter:alpha(opacity=50);  
+      -moz-opacity:0.5;  
+      -khtml-opacity: 0.5;  
+      opacity: 0.5;*/
+	}
+.gametop .leftbox{ float:left; width:680px; height:60px; line-height:60px;padding:0 20px; margin:85px 30px 1px 0;  }
+.gametop .leftbox span{ color:#ffec1d; display:inline-block; margin-right:30px;}
+.gametop .rightbox{float:left; width:310px; height:105px; padding:20px; text-align:center; line-height:45px;}
+.gamecontent{}
+.gamecontent .leftbox{float:left; width:240px; margin-right:15px;}
+.gamecontent .rightbox{float:left; width:845px;}
+
+.gametitle{ background:#33322e; height:36px; line-height:36px; font-size:16px; margin-top:15px; color:#fff; padding:0 15px; position:relative;}
+.gametitle .refresh{ position:absolute; left:140px; top:8px;}
+.gameleftbox1{ height:155px; background:#53524f; color:#fff; padding:20px; line-height:30px;}
+.gameleftbox2{background:#53524f; color:#fff; padding:10px; line-height:30px;}
+.gameleftbox2 table{ background:#989897; line-height:30px; height:30px;}
+.gameleftbox2 table th{ background:#33322e; color:#fff; text-align:center;}
+.gameleftbox2 table td{ background:#fff; color:#333; text-align:center;}
+.gameleftbox2 .tdw20{ width:20%; text-align:center;}
+.gameleftbox2 .tdw30{ width:30%; text-align:center; overflow:hidden;}
+.gameleftbox2 .tdw50{ width:50%; text-align:center; overflow:hidden;}
+
+.gamerightbox1{ height:185px; background:#53524f; color:#fff; padding:10px 20px 0px 20px; line-height:33px;}
+.gamerightbox1 table{ background:#989897; line-height:25px;}
+.gamerightbox1 table th{ background:#33322e; color:#fff; height:33px; line-height:33px; width:132px;}
+.gamerightbox1 table td{ background:#fff; color:#333; text-align:center; height:33px; line-height:33px; width:132px;}
+
+.gamerightbox2{ background:#53524f; color:#fff; padding:18px 20px; line-height:33px;}
+.gamerightbox2 table{ background:#989897; line-height:25px;}
+.gamerightbox2 table th{ background:#33322e; color:#fff; height:33px; line-height:33px;}
+.gamerightbox2 table td{ background:#fff; color:#333; text-align:center; height:33px; line-height:33px;}
+.gamerightbox2 .gametd50{ width:50%;}
+.gamerightbox2 .gametd20{ width:20%;}
+.gamerightbox2 .gametd33{ width:33%;}
+
+.gamerightbox1 .colorred, .gamerightbox2 .colorred{ font-size:14px; color:#ba0917; font-weight:800;}
+.gameorg{ color:#fded3f;}
+.gameorg1{ color:#fef597;}
+.game18{ font-size:18px; font-weight:bold; text-align:center; display:block; color:#fded3f;}
